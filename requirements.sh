@@ -15,3 +15,20 @@ sudo gcc --version || sudo apt install build-essential
 sudo clang --version || sudo apt install clang
 sudo git --version || sudo apt install git
 sudo nodejs --version || sudo apt install nodejs
+sudo go verison || sudo apt install golang
+sudo curl --version || sudo apt install curl
+
+# zsh section
+sudo zsh --version || sudo apt zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+# neovim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+sudo chmod u+x nvim.appimage
+
+# To expose nvim globally:
+sudo mkdir -p /opt/nvim
+sudo mv nvim.appimage /opt/nvim/nvim
+
+
