@@ -1,0 +1,3 @@
+[submodule "NerdFonts/nerd_fonts_installer"]
+	path = NerdFonts/nerd_fonts_installer
+	url = https://github.com/fam007e/nerd_fonts_installer.git
