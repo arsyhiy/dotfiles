@@ -32,6 +32,8 @@ nvim --version || curl -LO https://github.com/neovim/neovim/releases/latest/down
 	echo "end of nvim installation!" # Added echo operator to check if the "or" operator 
 					 # failed to execute provided that nvim has a version
 
+git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
+
 					 
 # oh my zsh plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
