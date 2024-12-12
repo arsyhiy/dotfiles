@@ -2,7 +2,6 @@
 
 
 ## installation:
-
 ### requirements:
 paste "sudo chmod +s requirements.sh" to make it executable and
 "./requirements.sh"  to run it
