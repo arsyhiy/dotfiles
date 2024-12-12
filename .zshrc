@@ -106,3 +106,7 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+
+
+# to make nvim executable from opt/nvim in any directory
+export PATH="$PATH:/opt/nvim/"
