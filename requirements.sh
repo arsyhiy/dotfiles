@@ -4,7 +4,7 @@
 sudo 
 
 # check updates before starting check other app
-#sudo apt update
+sudo apt update
 
 sudo python3 --version  || sudo apt install python3
 sudo apt install python3-venv # as i understand you can't check the version so it will just install 
@@ -24,11 +24,16 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 
 # neovim
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-sudo chmod u+x nvim.appimage
+nvim --version || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage |
+	sudo chmod u+x nvim.appimage |
+	# To expose nvim globally:
+	sudo mkdir -p /opt/nvim |
+	sudo mv nvim.appimage /opt/nvim/nvim |
+	echo "end of nvim installation!" # Added echo operator to check if the "or" operator 
+					 # failed to execute provided that nvim has a version
 
-# To expose nvim globally:
-sudo mkdir -p /opt/nvim
-sudo mv nvim.appimage /opt/nvim/nvim
+					 
+# oh my zsh plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 
