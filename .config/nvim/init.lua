@@ -5,4 +5,4 @@ require("plugins.telescope")
 require("plugins.colorscheme")
 
 require("mainDirectory")
-
+require("mainDirectory.options")
