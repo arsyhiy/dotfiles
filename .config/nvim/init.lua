@@ -1,6 +1,7 @@
+-- core 
+require("core.init")
 
-
---Plugins
+--plugins
 require("plugins.alpha")
 require("plugins.autopairs")
 require("plugins.cmp")
@@ -23,5 +24,3 @@ require("plugins.ts-comments")
 require("plugins.whichkey")
 
 
---Core
-require("core.init")
