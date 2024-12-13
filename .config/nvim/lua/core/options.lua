@@ -2,14 +2,15 @@ vim.cmd("let g:netrw_liststyle = 3")
 
 local opt = vim.opt
 
-opt.relativenumber = true
+-- numbers that is left from code
+opt.relativenumber = false -- i don't like relativenumber
 opt.number = true
 
 -- tabs & indentation
-opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
-opt.shiftwidth = 2 -- 2 spaces for indent width
+opt.tabstop = 4 -- 2 spaces for tabs (prettier default)
+opt.shiftwidth = 4 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
-opt.autoindent = true -- copy indent from current line when starting new one
+opt.autoindent = true -- copy indent from current line when starting new one 
 
 opt.wrap = false
 
