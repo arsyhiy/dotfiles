@@ -50,3 +50,4 @@ return{
     require("noice").setup(opts)
   end,
 }
+

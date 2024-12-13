@@ -17,3 +17,4 @@ return{{
     words = { enabled = true },
   },
 }}
+

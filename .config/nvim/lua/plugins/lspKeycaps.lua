@@ -11,3 +11,4 @@ return{
     keys[#keys + 1] = { "H", "<cmd>echo 'hello'<cr>" }
   end,
 }
+
