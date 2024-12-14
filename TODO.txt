@@ -1,1 +1,1 @@
-add tmux
+add tmux #NOTE: DONE !
