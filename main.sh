@@ -1,6 +1,8 @@
 #!/bin/bash
 #source utils/nerdfonts_installer.sh
 
+# function section
+
 packages(){
     # this file is meant to check all needed app in debian based linux distribution
 
@@ -54,6 +56,7 @@ packages(){
 	    sudo systemctl status docker
 }
 
+clear
 cat <<'.'
  ______   _______  _______  _______  ___   ___      _______  _______ 
 |      | |       ||       ||       ||   | |   |    |       ||       |
@@ -64,10 +67,11 @@ cat <<'.'
 |______| |_______|  |___|  |___|    |___| |_______||_______||_______|
 .
 printf "                                                      made by arsyhiy\n"
+printf "\n"
 printf "=======================================================================\n"
 
 while true; do
-    printf "install packages? (e.g yes or no )\n"
+    printf "install necessary packages? (e.g yes or no )\n"
     read -r choice
 
     if [ "$choice" == "yes" ]; then
@@ -79,7 +83,24 @@ while true; do
         printf "Programm is closing\n"
         break
     else
-        printf "type yes or no"
+        printf "type yes or no\n"
     fi
+
+
 done
 
+while true; do 
+    printf "install Fonts ? (e.g yes or no )\n"
+    read -r choice
+
+        if [ "$choice" == "yes" ]; then
+        source utils/nerdfonts_installer.sh 
+        break
+    elif [ "$choice" == "no" ]; then
+        printf "Programm is closing\n"
+        break
+    else
+        printf "type yes or no\n"
+    fi
+
+done
