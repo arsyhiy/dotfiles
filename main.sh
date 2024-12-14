@@ -5,7 +5,7 @@ packages(){
         read -r choice
 
         if [ "$choice" == "yes" ]; then
-            source utils.packages.sh
+            source utils.Packages.sh
             break
         elif [ "$choice" == "no" ]; then
 
@@ -26,7 +26,7 @@ fonts(){
         read -r choice
 
             if [ "$choice" == "yes" ]; then
-            source utils/nerdfonts_installer.sh 
+            source utils/NerdFontsInstaller.sh 
             break
         elif [ "$choice" == "no" ]; then
             printf "installing fonts is canceled\n"
