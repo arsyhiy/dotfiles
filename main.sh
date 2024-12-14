@@ -38,6 +38,24 @@ fonts(){
     done
 }
 
+copymove(){
+        while true; do 
+            printf "move all necessary files  ? (e.g yes or no )\n"
+            read -r choice
+
+                if [ "$choice" == "yes" ]; then
+                source utils/CopyMove.sh 
+                break
+            elif [ "$choice" == "no" ]; then
+                printf "installing fonts is canceled\n"
+                break
+            else
+                printf "type yes or no\n"
+            fi
+
+        done
+}
+
 
 clear
 cat <<'.'
@@ -66,5 +84,6 @@ driver (){
     
     fonts
 
+    copymove
 }
 driver
