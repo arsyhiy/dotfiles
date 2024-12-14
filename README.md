@@ -2,6 +2,8 @@
 
 
 ## installation:
-### requirements:
-paste "sudo chmod +s requirements.sh" to make it executable and
-"./requirements.sh"  to run it
+paste "sudo chmod +s main.sh" to make it executable and
+"./main.sh"  to run it
+
+## vscode
+to get vscode settings you need to log in and sync github
