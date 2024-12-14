@@ -1,4 +1,3 @@
-
 # this file is meant to check all needed app in debian based linux distribution
 
 # Function to detect the OS and set the package manager
@@ -29,6 +28,7 @@ detect_os_and_set_package_manager() {
     fi
 }
 
+
 # Function to check and install dependencies
 install_dependencies() {
     if ! command -v curl >/dev/null 2>&1; then
@@ -47,26 +47,27 @@ install_dependencies() {
     fi
 }
 
+
 # Detect OS and set package manager, and then check and install dependencies
 detect_os_and_set_package_manager
 install_dependencies
 
-
+# languages and utiliy to code 
 sudo python3 --version  || $PKG_MANAGER python3
 $PKG_MANAGER python3-venv # as i understand you can't check the version so it will just install 
-sudo htop --version || $PKG_MANAGER htop
-sudo neofetch --version || $PKG_MANAGER neofetch
-sudo firefox --version || $PKG_MANAGER firefox
 sudo gcc --version || $PKG_MANAGER build-essential
 sudo clang --version || $PKG_MANAGER clang
-sudo git --version || $PKG_MANAGER git
 sudo nodejs --version || $PKG_MANAGER nodejs
 sudo go verison || $PKG_MANAGER golang
-sudo curl --version || $PKG_MANAGER curl
 
-# zsh section
-sudo zsh --version || $PKG_MANAGER zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# apps
+sudo firefox --version || $PKG_MANAGER firefox
+
+# utiliy
+sudo curl --version || $PKG_MANAGER curl
+sudo git --version || $PKG_MANAGER git
+sudo neofetch --version || $PKG_MANAGER neofetch
+sudo htop --version || $PKG_MANAGER htop
 
 # neovim
 nvim --version || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage | \ 
@@ -81,8 +82,11 @@ nvim --version || curl -LO https://github.com/neovim/neovim/releases/latest/down
 git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
 
 
-# oh my zsh plugins
+# zsh and plugins
+sudo zsh --version || $PKG_MANAGER zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
 
 
 # docker section
