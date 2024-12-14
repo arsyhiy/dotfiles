@@ -89,3 +89,5 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
+# tmux 
+tmux --version || $PKG_MANAGER tmux # actually  it doesn't view version of tmux 
