@@ -1,11 +1,11 @@
 #!/bin/bash
 packages(){
     while true; do
-        printf "install necessary packages? (e.g yes or no )\n"
+        printf "install necessary packages? (e.g yes or no ):"
         read -r choice
 
         if [ "$choice" == "yes" ]; then
-            source utils.Packages.sh
+            source utils/Packages.sh
             break
         elif [ "$choice" == "no" ]; then
 
@@ -22,7 +22,7 @@ packages(){
 
 fonts(){
     while true; do 
-        printf "install Fonts ? (e.g yes or no )\n"
+        printf "install Fonts ? (e.g yes or no ):"
         read -r choice
 
             if [ "$choice" == "yes" ]; then
@@ -40,7 +40,7 @@ fonts(){
 
 copymove(){
         while true; do 
-            printf "move all necessary files  ? (e.g yes or no )\n"
+            printf "move all necessary files? (e.g yes or no ):"
             read -r choice
 
                 if [ "$choice" == "yes" ]; then
@@ -76,9 +76,25 @@ printf "=======================================================================\
 
 
 
-
 # driver 
 driver (){
+    while true;do 
+        printf "would you like to do all scrpits? (e.g yes or no):"
+        read -r choice
+
+        if [ "$choice" == "yes" ]; then
+            source utils/Packages.sh
+            source utils/NerdFontsInstaller.sh
+            source utils/CopyMove.sh 
+            break
+        elif [ "$choice" == "no" ]; then
+            printf "you will choice what to do\n"
+            break
+        else
+            printf "type yes or no\n"
+        fi
+
+        done
 
     packages
     

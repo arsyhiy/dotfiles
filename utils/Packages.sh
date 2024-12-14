@@ -1,4 +1,3 @@
-#!/bin/bash -e
 
 # this file is meant to check all needed app in debian based linux distribution
 

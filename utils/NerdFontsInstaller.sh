@@ -1,5 +1,3 @@
-#!/bin/bash -e
-
 # Function to detect the OS and set the package manager
 detect_os_and_set_package_manager() {
     if [ -f /etc/os-release ]; then
