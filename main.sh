@@ -56,6 +56,25 @@ copymove(){
         done
 }
 
+zsh(){
+    while true; do 
+        printf "would you like to install zsh? (e.g yes or no ):"
+        read -r choice
+
+        if [ "$choice" == "yes" ]; then
+            source utils/ZshInstall.sh 
+            break
+        elif [ "$choice" == "no" ]; then
+            printf "installing zsh is canceled\n"
+            break
+        else
+            printf "type yes or no\n"
+        fi
+
+    done
+
+}
+
 
 clear
 cat <<'.'
@@ -89,17 +108,15 @@ driver (){
             break
         elif [ "$choice" == "no" ]; then
             printf "you will choice what to do\n"
+             packages
+             fonts
+             copymove
+
             break
         else
             printf "type yes or no\n"
         fi
 
         done
-
-    packages
-    
-    fonts
-
-    copymove
 }
 driver

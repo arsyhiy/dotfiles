@@ -1,1 +1,2 @@
 add tmux #NOTE: DONE !
+add config to git
