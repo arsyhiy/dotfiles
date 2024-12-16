@@ -1,8 +1,9 @@
 printf "\n"
 printf "=======================================================================\n"
-printf "moving all from .config.\n"
+printf "moving neovim.\n"
 printf "=======================================================================\n"
-cp -rv .config  ~/
+cp -rv nvim/init.lua ~/config/nvim/
+cp -rv nvim/lua ~/.config/nvim
 
 printf "=======================================================================\n"
 printf "moving .tmux.conf .zshrc\n"
