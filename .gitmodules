@@ -1,6 +1,3 @@
-[submodule ".config/neovimconfig"]
-	path = .config/neovimconfig
-	url = https://github.com/arsyhiy/neovimconfig
 [submodule "nvim"]
 	path = nvim
 	url = https://github.com/arsyhiy/nvim
