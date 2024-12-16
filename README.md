@@ -6,5 +6,6 @@ before the start to clone this repo you need git
 paste "sudo chmod +s main.sh" to make it executable and
 "./main.sh"  to run it
 
-## vscode
-to get vscode settings you need to log in and sync github
+цели: 
+цели насчёт редакторов кода:
+nvim emacs чем проще конфигурация тем лучше
