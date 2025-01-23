@@ -5,3 +5,6 @@ before the start to clone this repo you need git
 ## installation:
 paste "sudo chmod +s main.sh" to make it executable and
 "./main.sh"  to run it
+
+# TODO:
+переделать все в docker контейнер
