@@ -8,3 +8,4 @@ paste "sudo chmod +s main.sh" to make it executable and
 
 # TODO:
 переделать все в docker контейнер
+в процессе
