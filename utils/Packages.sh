@@ -1,49 +1,21 @@
 # this file is meant to check all needed app in debian based linux distribution
 
-# Function to detect the OS and set the package manager
-detect_os_and_set_package_manager() {
-    if [ -f /etc/os-release ]; then
-        . /etc/os-release
-        case "$ID" in
-            ubuntu|debian)
-                PKG_MANAGER="sudo apt-get update && sudo apt-get install -y"
-                ;;
-            fedora)
-                PKG_MANAGER="sudo dnf install -y"
-                ;;
-            centos|rhel)
-                PKG_MANAGER="sudo yum install -y"
-                ;;
-            arch)
-                PKG_MANAGER="sudo pacman -Syu --noconfirm"
-                ;;
-            *)
-                printf "%b\n" '\033[0;31mUnsupported OS: '"$ID"'\033[0m'
-                exit 1
-                ;;
-        esac
-    else
-        printf "%b\n" '\033[0;31mOS detection failed. Please install curl, tar, and fontconfig manually.\033[0m'
-        exit 1
-    fi
-}
-
 
 # Function to check and install dependencies
 install_dependencies() {
     if ! command -v curl >/dev/null 2>&1; then
         printf "%b\n" '\033[0;33mcurl not found. Installing curl...\033[0m'
-        $PKG_MANAGER curl
+        sudo apt install curl
     fi
 
     if ! command -v unzip >/dev/null 2>&1; then
         printf "%b\n" '\033[0;33munzip not found. Installing unzip...\033[0m'
-        $PKG_MANAGER unzip
+        sudo apt install unzip
     fi
 
     if ! command -v fc-cache >/dev/null 2>&1; then
         printf "%b\n" '\033[0;33mfontconfig (fc-cache) not found. Installing fontconfig...\033[0m'
-        $PKG_MANAGER fontconfig
+        sudo apt install  fontconfig
     fi
 }
 
@@ -53,21 +25,21 @@ detect_os_and_set_package_manager
 install_dependencies
 
 # languages and utiliy to code 
-sudo python3 --version  || $PKG_MANAGER python3
-$PKG_MANAGER python3-venv # as i understand you can't check the version so it will just install 
-sudo gcc --version || $PKG_MANAGER build-essential
-sudo clang --version || $PKG_MANAGER clang
-sudo nodejs --version || $PKG_MANAGER nodejs
-sudo go verison || $PKG_MANAGER golang
+sudo python3 --version  || sudo apt install python3
+ sudo apt install python3-venv # as i understand you can't check the version so it will just install 
+sudo gcc --version || sudo apt install build-essential
+sudo clang --version || sudo apt install clang
+sudo nodejs --version || sudo apt install nodejs
+sudo go verison || sudo apt install golang
 
 # apps
-sudo firefox --version || $PKG_MANAGER firefox
+sudo firefox --version || sudo apt install firefox
 
 # utiliy
-sudo curl --version || $PKG_MANAGER curl
-sudo git --version || $PKG_MANAGER git
-sudo neofetch --version || $PKG_MANAGER neofetch
-sudo htop --version || $PKG_MANAGER htop
+sudo curl --version || sudo apt install curl
+sudo git --version || sudo apt install git
+sudo neofetch --version || sudo apt install neofetch
+sudo htop --version || sudo apt install htop
 
 # neovim
 nvim --version || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage | \ 
@@ -83,7 +55,7 @@ git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/star
 
 
 # zsh and plugins
-sudo zsh --version || $PKG_MANAGER zsh
+sudo zsh --version || sudo apt install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
@@ -94,4 +66,4 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
 # tmux 
-tmux --version || $PKG_MANAGER tmux # actually  it doesn't view version of tmux 
+tmux --version || sudo apt install tmux # actually  it doesn't view version of tmux 

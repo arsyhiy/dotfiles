@@ -1,46 +1,20 @@
-# Function to detect the OS and set the package manager
-detect_os_and_set_package_manager() {
-    if [ -f /etc/os-release ]; then
-        . /etc/os-release
-        case "$ID" in
-            ubuntu|debian)
-                PKG_MANAGER="sudo apt-get update && sudo apt-get install -y"
-                ;;
-            fedora)
-                PKG_MANAGER="sudo dnf install -y"
-                ;;
-            centos|rhel)
-                PKG_MANAGER="sudo yum install -y"
-                ;;
-            arch)
-                PKG_MANAGER="sudo pacman -Syu --noconfirm"
-                ;;
-            *)
-                printf "%b\n" '\033[0;31mUnsupported OS: '"$ID"'\033[0m'
-                exit 1
-                ;;
-        esac
-    else
-        printf "%b\n" '\033[0;31mOS detection failed. Please install curl, tar, and fontconfig manually.\033[0m'
-        exit 1
-    fi
-}
+
 
 # Function to check and install dependencies
 install_dependencies() {
     if ! command -v curl >/dev/null 2>&1; then
         printf "%b\n" '\033[0;33mcurl not found. Installing curl...\033[0m'
-        $PKG_MANAGER curl
+        sudo apt install curl
     fi
 
     if ! command -v unzip >/dev/null 2>&1; then
         printf "%b\n" '\033[0;33munzip not found. Installing unzip...\033[0m'
-        $PKG_MANAGER unzip
+        sudo apt install unzip
     fi
 
     if ! command -v fc-cache >/dev/null 2>&1; then
         printf "%b\n" '\033[0;33mfontconfig (fc-cache) not found. Installing fontconfig...\033[0m'
-        $PKG_MANAGER fontconfig
+        sudo apt install fontconfig
     fi
 }
 
