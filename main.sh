@@ -1,34 +1,7 @@
 #!/bin/bash
 
-ZSHINSTALL(){
-    sudo zsh --version || sudo apt install zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-}
 
 PACKAGES(){
-# Function to check and install dependencies
-install_dependencies() {
-    if ! command -v curl >/dev/null 2>&1; then
-        printf "%b\n" '\033[0;33mcurl not found. Installing curl...\033[0m'
-        sudo apt install curl
-    fi
-
-    if ! command -v unzip >/dev/null 2>&1; then
-        printf "%b\n" '\033[0;33munzip not found. Installing unzip...\033[0m'
-        sudo apt install unzip
-    fi
-
-    if ! command -v fc-cache >/dev/null 2>&1; then
-        printf "%b\n" '\033[0;33mfontconfig (fc-cache) not found. Installing fontconfig...\033[0m'
-        sudo apt install  fontconfig
-    fi
-}
-
-
-    # Detect OS and set package manager, and then check and install dependencies
-    detect_os_and_set_package_manager
-    install_dependencies
 
     # languages and utiliy to code 
     sudo python3 --version  || sudo apt install python3
@@ -37,15 +10,15 @@ install_dependencies() {
     sudo clang --version || sudo apt install clang
     sudo nodejs --version || sudo apt install nodejs
     sudo go verison || sudo apt install golang
+    sudo git --version || sudo apt install git # and if it was installed like a directory?
 
-    # apps
-    sudo firefox --version || sudo apt install firefox
 
     # utiliy
+    sudo unzip --version|| sudo apt install unzip
     sudo curl --version || sudo apt install curl
-    sudo git --version || sudo apt install git
     sudo neofetch --version || sudo apt install neofetch
     sudo htop --version || sudo apt install htop
+
 
     # neovim
     nvim --version || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage | \ 
@@ -55,7 +28,6 @@ install_dependencies() {
 	sudo mv nvim.appimage /opt/nvim/nvim |
 	echo "end of nvim installation!" # Added echo operator to check if the "or" operator 
 					                 # failed to execute provided that nvim has a version
-
     # installing nvim-lspconfig
     git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
 
@@ -66,14 +38,21 @@ install_dependencies() {
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 
-
     # docker section
     curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
+    sudo apt install docker-compose
+
 
     # tmux 
     tmux --version || sudo apt install tmux # actually  it doesn't view version of tmux 
+
+
+    # setup git config 
+    git config --global user.name "arsyhiy"
+    git config --global user.email arsyhiy32@gmail.com
 }
+
 
 COPYMOVE(){
     printf "\n"
@@ -92,6 +71,7 @@ COPYMOVE(){
 
 }
 
+
 packages(){
     while true; do
         printf "install necessary packages? (e.g yes or no ):"
@@ -101,35 +81,15 @@ packages(){
             PACKAGES
             break
         elif [ "$choice" == "no" ]; then
-
-
             printf "installing packages is canceled\n"
             break
         else
             printf "type yes or no\n"
         fi
 
-
     done
 }
 
-fonts(){
-    while true; do 
-        printf "install Fonts ? (e.g yes or no ):"
-        read -r choice
-
-            if [ "$choice" == "yes" ]; then
-                NERDFONTSINSTALLER
-            break
-        elif [ "$choice" == "no" ]; then
-            printf "installing fonts is canceled\n"
-            break
-        else
-            printf "type yes or no\n"
-        fi
-
-    done
-}
 
 copymove(){
         while true; do 
@@ -148,6 +108,7 @@ copymove(){
 
         done
 }
+
 
 zsh(){
     while true; do 
@@ -195,14 +156,13 @@ driver (){
         read -r choice
 
         if [ "$choice" == "yes" ]; then
-            source utils/Packages.sh
-            source utils/CopyMove.sh 
+            PACKAGES
+            COPYMOVE
             break
         elif [ "$choice" == "no" ]; then
             printf "you will choice what to do\n"
              packages
              copymove
-
             break
         else
             printf "type yes or no\n"
@@ -210,4 +170,4 @@ driver (){
 
         done
 }
-driver
+driver # NOTE: это для запуска driver
