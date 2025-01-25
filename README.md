@@ -6,3 +6,6 @@ before the start to clone this repo you need git
 paste "sudo chmod +s main.sh" to make it executable and
 "./main.sh"  to run it
 
+
+# главная цель этого репо:
+написан он специально raspberry pi как мой домашний сервер и как средство работы на линуксе 
