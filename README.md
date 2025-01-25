@@ -2,6 +2,10 @@
 # NOTE: all the instructions were written for the future me
 before the start to clone this repo you need git
 
+```bash
+git clone --recurse-submodules https://github.com/arsyhiy/dotfiles.git
+```
+
 ## installation:
 paste "sudo chmod +s main.sh" to make it executable and
 "./main.sh"  to run it
