@@ -30,3 +30,4 @@ docker compose up -d # to run in background
 - refactor installing packages into : sudo apt install -y
 - movin zsh section into the end
 - refactor nvim section. reason : AppImages require FUSE to run.
+- update nodejs section to install latest version
