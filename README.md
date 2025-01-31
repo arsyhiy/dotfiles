@@ -28,3 +28,5 @@ docker compose up -d # to run in background
 - adding pipx
 - adding poetry
 - refactor installing packages into : sudo apt install -y
+- movin zsh section into the end
+- refactor nvim section
