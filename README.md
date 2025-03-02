@@ -20,10 +20,6 @@ sudo apt install docker-compose #paste to make it executable and
 docker compose up -d # to run in background 
 ```
 
-# главная цель этого репо:
-написан он специально raspberry pi как мой домашний сервер и как средство работы на линуксе 
-
-
 # future ideas
 - adding pipx
 - adding poetry
