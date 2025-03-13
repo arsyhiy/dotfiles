@@ -4,38 +4,36 @@
 PACKAGES(){
 
     # languages and utiliy to code 
-    sudo python3 --version  || sudo apt install python3
-    sudo apt install python3-venv # as i understand you can't check the version so it will just install 
-    sudo gcc --version || sudo apt install build-essential
-    sudo clang --version || sudo apt install clang
-    sudo nodejs --version || sudo apt install nodejs
-    sudo go verison || sudo apt install golang
-    sudo git --version || sudo apt install git # and if it was installed like a directory?
+    sudo python3 --version  || sudo apt install -y python3
+    sudo apt install -y python3-venv # as i understand you can't check the version so it will just install 
+    sudo apt install -y pipx
+    pipx ensurepath
+    pipx install poetry
+    sudo gcc --version || sudo apt install -y build-essential
+    sudo clang --version || sudo apt install -y clang
+    sudo nodejs --version || sudo apt install -y nodejs
+    sudo go verison || sudo apt install -y golang
+    sudo git --version || sudo apt install -y git # and if it was installed like a directory?
 
 
     # utiliy
-    sudo unzip --version|| sudo apt install unzip
-    sudo curl --version || sudo apt install curl
-    sudo neofetch --version || sudo apt install neofetch
-    sudo htop --version || sudo apt install htop
+    sudo unzip --version|| sudo apt install -y unzip
+    sudo curl --version || sudo apt install -y curl
+    sudo neofetch --version || sudo apt install -y neofetch
+    sudo htop --version || sudo apt install -y htop
 
+    
+    # neovim 
+    sudo apt-get install -y ninja-build gettext cmake curl build-essential
+    git clone https://github.com/neovim/neovim.git
+    cd neovim 
+    make CMAKE_BUILD_TYPE=Release
+    sudo make install
+    cd ~/dotfiles/
 
-    # neovim
-    nvim --version || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage | \ 
-    chmod u+x nvim.appimage |
-    #to expose nvim globally:
-	sudo mkdir -p /opt/nvim |
-	sudo mv nvim.appimage /opt/nvim/nvim |
-	echo "end of nvim installation!" # Added echo operator to check if the "or" operator 
-					                 # failed to execute provided that nvim has a version
     # installing nvim-lspconfig
-    git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
+    git clone --depth 1 https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
 
-
-    # zsh and plugins
-    sudo zsh --version || sudo apt install zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 
     # docker section
@@ -45,12 +43,19 @@ PACKAGES(){
 
 
     # tmux 
-    tmux --version || sudo apt install tmux # actually  it doesn't view version of tmux 
+    tmux --version || sudo apt install -y tmux # actually  it doesn't view version of tmux 
 
 
     # setup git config 
     git config --global user.name "arsyhiy"
     git config --global user.email arsyhiy32@gmail.com
+
+    # zsh and plugins
+    sudo zsh --version || sudo apt install -y zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+
 }
 
 

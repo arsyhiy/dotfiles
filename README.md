@@ -21,10 +21,3 @@ docker compose up -d # to run in background
 ```
 
 # future ideas
-- adding pipx
-- adding poetry
-- refactor installing packages into : sudo apt install -y
-- movin zsh section into the end
-- refactor nvim section. reason : AppImages require FUSE to run.
-- update nodejs section to install latest version
-- make neovim build from source
