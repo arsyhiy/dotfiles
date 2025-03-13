@@ -12,8 +12,8 @@ git clone --recurse-submodules https://github.com/arsyhiy/dotfiles.git
 ## installation:
 ### main.sh 
 ```bash 
-chmod x+ <distro>.sh
-./<distro>.sh" #to run it
+chmod x+ main.sh
+./main.sh" #to run it
 ```
 ### docker 
 ```bash 
