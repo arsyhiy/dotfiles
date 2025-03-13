@@ -12,8 +12,8 @@ git clone --recurse-submodules https://github.com/arsyhiy/dotfiles.git
 ## installation:
 ### main.sh 
 ```bash 
-sudo apt install docker-compose #paste to make it executable and
-./main.sh" #to run it
+chmod x+ <distro>.sh
+./<distro>.sh" #to run it
 ```
 ### docker 
 ```bash 
