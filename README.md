@@ -21,3 +21,11 @@ docker compose up -d # to run in background
 ```
 
 # future ideas
+
+
+
+# just reminder for me 
+```bash 
+git submodule update                       
+
+```
