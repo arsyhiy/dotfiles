@@ -8,6 +8,7 @@ PACKAGES(){
     sudo gcc --version || sudo pacman -S  build-essential
     sudo clang --version || sudo pacman -S clang
     sudo nodejs --version || sudo pacman -S nodejs
+    sudo npm --version || sudo pacman -S npm
     sudo go verison || sudo pacman -S go
     sudo git --version || sudo pacman -S git # and if it was installed like a directory?
 
