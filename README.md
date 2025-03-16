@@ -21,7 +21,8 @@ docker compose up -d # to run in background
 ```
 
 # future ideas
-
+adding 
+- ripgrep
 
 
 # just reminder for me 
