@@ -23,7 +23,7 @@ docker compose up -d # to run in background
 # future ideas
 adding 
 - ripgrep
-
+update nodejs section to install latest version
 
 # just reminder for me 
 ```bash 
