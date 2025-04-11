@@ -23,6 +23,7 @@ docker compose up -d # to run in background
 # future ideas
 adding 
 - ripgrep
+- rust installation
 update nodejs section to install latest version
 
 # just reminder for me 
