@@ -11,22 +11,24 @@ PACKAGES(){
     pipx install poetry
     sudo gcc --version || sudo apt install -y build-essential
     sudo clang --version || sudo apt install -y clang
-    sudo nodejs --version || sudo apt install -y nodejs
     sudo go verison || sudo apt install -y golang
     sudo git --version || sudo apt install -y git # and if it was installed like a directory?
-
-
+    sudo rust --version || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    . "$HOME/.cargo/env"
+    sudo nodejs --version || curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo apt-get install nodejs 
+    
     # utiliy
     sudo unzip --version|| sudo apt install -y unzip
     sudo curl --version || sudo apt install -y curl
     sudo neofetch --version || sudo apt install -y neofetch
     sudo htop --version || sudo apt install -y htop
-
+    sudio ripgrep --version || sudo apt install -y ripgrep
     
     # neovim 
     sudo apt-get install -y ninja-build gettext cmake curl build-essential
     git clone https://github.com/neovim/neovim.git
-    cd neovim 
+    cd neovim
+    git switch release-0.11  
     make CMAKE_BUILD_TYPE=Release
     sudo make install
     cd ~/dotfiles/

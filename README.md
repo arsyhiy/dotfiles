@@ -21,11 +21,6 @@ docker compose up -d # to run in background
 ```
 
 # future ideas
-adding 
-- ripgrep
-- rust installation
-- update nodejs section to install latest version
-- making neovim compiling concrete version
 
 # just reminder for me 
 ```bash 
