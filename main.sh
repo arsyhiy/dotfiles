@@ -43,7 +43,8 @@ PACKAGES(){
     git config --global user.name "arsyhiy"
     git config --global user.email arsyhiy32@gmail.com
 
-
+    # flatpak section
+    flatpak install flathub org.telegram.desktop
 }
 
 
