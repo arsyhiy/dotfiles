@@ -1,4 +1,3 @@
-# This repository is intended for minimal setup of my workspace
 # NOTE: all the instructions were written for the future me
 before the start to clone this repo you need git
 ```bash 
