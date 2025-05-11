@@ -4,58 +4,44 @@
 PACKAGES(){
 
     # languages and utiliy to code 
-    sudo python3 --version  || sudo apt install -y python3
-    sudo apt install -y python3-venv # as i understand you can't check the version so it will just install 
-    sudo apt install -y pipx
+    sudo python3 --version  || sudo dnf install -y python3
+    sudo dnf install -y python3-venv # as i understand you can't check the version so it will just install 
+    sudo dnf install -y pipx
     pipx ensurepath
     pipx install poetry
-    sudo gcc --version || sudo apt install -y build-essential
-    sudo clang --version || sudo apt install -y clang
-    sudo go verison || sudo apt install -y golang
-    sudo git --version || sudo apt install -y git # and if it was installed like a directory?
+    sudo gcc --version || sudo apt dnf -y build-essential
+    sudo clang --version || sudo dnf install -y clang
+    sudo go verison || sudo dnf install -y golang
+    sudo git --version || sudo dnf install -y git # and if it was installed like a directory?
     sudo rust --version || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     . "$HOME/.cargo/env"
-    sudo nodejs --version || curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo apt-get install nodejs 
+    sudo nodejs --version || curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo dnf install nodejs 
     
     # utiliy
-    sudo unzip --version|| sudo apt install -y unzip
-    sudo curl --version || sudo apt install -y curl
-    sudo neofetch --version || sudo apt install -y neofetch
-    sudo htop --version || sudo apt install -y htop
-    sudio ripgrep --version || sudo apt install -y ripgrep
+    sudo unzip --version|| sudo apt dnf -y unzip
+    sudo curl --version || sudo dnf install -y curl
+    sudo neofetch --version || sudo dnf install -y neofetch
+    sudo htop --version || sudo dnf install -y htop
+    sudio ripgrep --version || sudo dnf install -y ripgrep
     
     # neovim 
-    sudo apt-get install -y ninja-build gettext cmake curl build-essential
-    git clone https://github.com/neovim/neovim.git
-    cd neovim
-    git switch release-0.11  
-    make CMAKE_BUILD_TYPE=Release
-    sudo make install
-    cd ~/dotfiles/
-
+    sudo dnf install -y nvim
     # installing nvim-lspconfig
     git clone --depth 1 https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
-
-
 
     # docker section
     curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
-    sudo apt install docker-compose
-
+    sudo dnf install docker-compose
+    rm get-docker.sh
 
     # tmux 
-    tmux --version || sudo apt install -y tmux # actually  it doesn't view version of tmux 
+    tmux --version || sudo dnf install -y tmux # actually  it doesn't view version of tmux 
 
 
     # setup git config 
     git config --global user.name "arsyhiy"
     git config --global user.email arsyhiy32@gmail.com
-
-    # zsh and plugins
-    sudo zsh --version || sudo apt install -y zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 
 }
@@ -64,20 +50,24 @@ PACKAGES(){
 COPYMOVE(){
     printf "\n"
     printf "=======================================================================\n"
-    printf "moving neovim.\n"
+    printf "executing config.sh .\n"
     printf "=======================================================================\n"
-    cp -rv nvim/init.lua ~/.config/nvim/
-    cp -rv nvim/lua ~/.config/nvim
+    ./config.sh
+}
 
+ZSH(){
+    printf "\n"
     printf "=======================================================================\n"
-    printf "moving .tmux.conf .zshrc\n"
+    printf "installing zsh .\n"
     printf "=======================================================================\n"
-    cp -rv .tmux.conf ~/
-    cp -rv .zshrc ~/
+
+    # zsh and plugins
+    sudo zsh --version || sudo dnf install -y zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 
 }
-
 
 packages(){
     while true; do
@@ -123,7 +113,7 @@ zsh(){
         read -r choice
 
         if [ "$choice" == "yes" ]; then
-            ZSHINSTALL
+            ZSH
             break
         elif [ "$choice" == "no" ]; then
             printf "installing zsh is canceled\n"
@@ -165,11 +155,13 @@ driver (){
         if [ "$choice" == "yes" ]; then
             PACKAGES
             COPYMOVE
+            ZSH
             break
         elif [ "$choice" == "no" ]; then
             printf "you will choice what to do\n"
              packages
              copymove
+             zsh
             break
         else
             printf "type yes or no\n"

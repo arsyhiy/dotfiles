@@ -25,5 +25,4 @@ docker compose up -d # to run in background
 # just reminder for me 
 ```bash 
 git submodule update                       
-
 ```
