@@ -45,6 +45,17 @@ PACKAGES(){
 
     # flatpak section
     flatpak install flathub org.telegram.desktop
+
+    # hyperland
+    sudo dnf install hyprland
+    sudo dnf install hyprland-devel # If you want to build plugins (use hyprpm)
+
+    sudo dnf install -y waybar
+
+    #ghostty
+    suo dnf copr enable pgdev/ghostty
+    sudo dnf install ghostty
+    sudo dnf install swaylock 
 }
 
 
