@@ -20,7 +20,6 @@ docker compose up -d # to run in background
 ```
 
 # future ideas
-- adding wallpaper
 # just reminder for me 
 ```bash 
 git submodule update                       
