@@ -67,4 +67,3 @@ copy $DEV_ENV/env/.zshrc $HOME/.zshrc
 copy $DEV_ENV/env/.tmux.conf $HOME/.tmux.conf
 
 
-hyprctl reload

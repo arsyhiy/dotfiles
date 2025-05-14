@@ -4,28 +4,35 @@
 PACKAGES(){
 
     # languages and utiliy to code 
-    sudo python3 --version  || sudo dnf install -y python3
-    sudo dnf install -y python3-venv # as i understand you can't check the version so it will just install 
-    sudo dnf install -y pipx
+    sudo python3 --version  || sudo apt install -y python3
+    sudo apt install -y python3-venv # as i understand you can't check the version so it will just install 
+    sudo apt install -y pipx
     pipx ensurepath
     pipx install poetry
-    sudo gcc --version || sudo apt dnf -y build-essential
-    sudo clang --version || sudo dnf install -y clang
-    sudo go verison || sudo dnf install -y golang
-    sudo git --version || sudo dnf install -y git # and if it was installed like a directory?
+    sudo gcc --version || sudo apt install -y build-essential
+    sudo clang --version || sudo apt install -y clang
+    sudo go verison || sudo apt install -y golang
+    sudo git --version || sudo apt install -y git # and if it was installed like a directory?
     sudo rust --version || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     . "$HOME/.cargo/env"
     sudo nodejs --version || curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo dnf install nodejs 
     
     # utiliy
-    sudo unzip --version|| sudo apt dnf -y unzip
-    sudo curl --version || sudo dnf install -y curl
-    sudo neofetch --version || sudo dnf install -y neofetch
-    sudo htop --version || sudo dnf install -y htop
-    sudio ripgrep --version || sudo dnf install -y ripgrep
+    sudo unzip --version|| sudo apt install -y unzip
+    sudo curl --version || sudo apt install -y curl
+    sudo neofetch --version || sudo apt install -y neofetch
+    sudo htop --version || sudo apt install -y htop
+    sudio ripgrep --version || sudo apt install -y ripgrep
     
-    # neovim 
-    sudo dnf install -y nvim
+    # neovim
+    sudo apt-get install ninja-build gettext cmake unzip curl   
+    git clone https://github.com/neovim/neovim
+    cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo 
+    git checkout stable
+    cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb 
+    cd ~
+    cd dotfiles
+
     # installing nvim-lspconfig
     git clone --depth 1 https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
 
@@ -36,26 +43,14 @@ PACKAGES(){
     rm get-docker.sh
 
     # tmux 
-    tmux --version || sudo dnf install -y tmux # actually  it doesn't view version of tmux 
+    tmux --version || sudo apt install -y tmux # actually  it doesn't view version of tmux 
 
 
     # setup git config 
     git config --global user.name "arsyhiy"
     git config --global user.email arsyhiy32@gmail.com
 
-    # flatpak section
-    flatpak install flathub org.telegram.desktop
 
-    # hyperland
-    sudo dnf install hyprland
-    sudo dnf install hyprland-devel # If you want to build plugins (use hyprpm)
-
-    sudo dnf install -y waybar
-
-    #ghostty
-    suo dnf copr enable pgdev/ghostty
-    sudo dnf install ghostty
-    sudo dnf install swaylock 
 }
 
 
