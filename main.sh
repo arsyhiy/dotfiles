@@ -45,6 +45,7 @@ PACKAGES(){
     # tmux 
     tmux --version || sudo apt install -y tmux # actually  it doesn't view version of tmux 
 
+    sudo apt install -y bear
 
     # setup git config 
     git config --global user.name "arsyhiy"
