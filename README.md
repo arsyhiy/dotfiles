@@ -20,6 +20,9 @@ docker compose up -d # to run in background
 ```
 
 # future ideas
+- adding fonts installing
+- adding necessary apps 
+- make config.sh work inside main.sh
 # just reminder for me 
 ```bash 
 git submodule update                       
