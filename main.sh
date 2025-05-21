@@ -13,9 +13,10 @@ PACKAGES(){
     sudo clang --version || sudo apt install -y clang
     sudo go verison || sudo apt install -y golang
     sudo git --version || sudo apt install -y git # and if it was installed like a directory?
+    sudo gh --version || sudo apt install -y gh
     sudo rust --version || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     . "$HOME/.cargo/env"
-    sudo nodejs --version || curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo dnf install nodejs 
+    sudo nodejs --version || curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo apt install nodejs 
     
     # utiliy
     sudo unzip --version|| sudo apt install -y unzip
@@ -23,15 +24,15 @@ PACKAGES(){
     sudo neofetch --version || sudo apt install -y neofetch
     sudo htop --version || sudo apt install -y htop
     sudio ripgrep --version || sudo apt install -y ripgrep
+
     
     # neovim
     sudo apt-get install ninja-build gettext cmake unzip curl   
     git clone https://github.com/neovim/neovim
-    cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo 
-    git checkout stable
-    cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb 
-    cd ~
-    cd dotfiles
+    cd neovim 
+    make CMAKE_BUILD_TYPE=Realease
+    sudo make install
+    cd ~/dotfiles
 
     # installing nvim-lspconfig
     git clone --depth 1 https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
@@ -70,7 +71,7 @@ ZSH(){
     printf "=======================================================================\n"
 
     # zsh and plugins
-    sudo zsh --version || sudo dnf install -y zsh
+    sudo zsh --version || sudo apt install -y zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
