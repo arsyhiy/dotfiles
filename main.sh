@@ -54,6 +54,7 @@ PACKAGES(){
     sudo snap install telegram-desktop
     sudo snap install anki-desktop
     sudo snap install obsidian --classic
+    # the reason why i use snap instead of flatpak is because its slow
 
 
     # setup git config 
@@ -83,6 +84,16 @@ ZSH(){
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
+
+}
+
+
+FONTS(){
+    printf "\n"
+    printf "=======================================================================\n"
+    printf "executting fonts .\n"
+    printf "=======================================================================\n"
+    ./font.sh
 
 }
 
@@ -143,6 +154,25 @@ zsh(){
 
 }
 
+fonts(){
+    while true; do 
+        printf "would you like to install fonts? (e.g yes or no ):"
+        read -r choice
+
+        if [ "$choice" == "yes" ]; then
+            FONTS
+            break
+        elif [ "$choice" == "no" ]; then
+            printf "installing fonts is canceled\n"
+            break
+        else
+            printf "type yes or no\n"
+        fi
+
+    done
+
+}
+
 
 clear
 cat <<'.'
@@ -173,12 +203,14 @@ driver (){
             PACKAGES
             COPYMOVE
             ZSH
+            FONTS
             break
         elif [ "$choice" == "no" ]; then
             printf "you will choice what to do\n"
              packages
              copymove
              zsh
+             fonts
             break
         else
             printf "type yes or no\n"
