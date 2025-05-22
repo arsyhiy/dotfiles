@@ -55,8 +55,18 @@ PACKAGES(){
     sudo snap install anki-desktop
     sudo snap install obsidian --classic
     # the reason why i use snap instead of flatpak is because its slow
-
-
+	
+    # steam
+    sudo apt install steam
+    # don't forget to read https://ubuntu.com/blog/linux-gaming-with-ubuntu-desktop-steam-and-proton
+    
+    # retroarch
+    sudo snap install retroarch
+    sudo snap connect retroarch:removable-media
+    
+    #flatpak apps
+    flatpak install pcsx2 # the only app that can be install by flatpak
+    
     # setup git config 
     git config --global user.name "arsyhiy"
     git config --global user.email arsyhiy32@gmail.com
