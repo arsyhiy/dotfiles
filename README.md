@@ -20,7 +20,7 @@ docker compose up -d # to run in background
 ```
 
 # future ideas
-- adding fonts installing
+- 
 # just reminder for me 
 ```bash 
 git submodule update                       
