@@ -49,7 +49,7 @@ PACKAGES(){
     # clangd utiliy
     sudo apt install -y bear
     
-    #snap apps
+    # snap apps
     sudo snap --version || sudo apt install snapd # make sure you have snapd
     sudo snap install telegram-desktop
     sudo snap install anki-desktop
@@ -64,13 +64,15 @@ PACKAGES(){
     sudo snap install retroarch
     sudo snap connect retroarch:removable-media
     
-    #flatpak apps
+    # flatpak apps
     flatpak install pcsx2 # the only app that can be install by flatpak
     
     # setup git config 
     git config --global user.name "arsyhiy"
     git config --global user.email arsyhiy32@gmail.com
 
+    # krita
+    sudo apt install krita
 
 }
 
