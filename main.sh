@@ -46,7 +46,15 @@ PACKAGES(){
     # tmux 
     tmux --version || sudo apt install -y tmux # actually  it doesn't view version of tmux 
 
+    # clangd utiliy
     sudo apt install -y bear
+    
+    #snap apps
+    sudo snap --version || sudo apt install snapd # make sure you have snapd
+    sudo snap install telegram-desktop
+    sudo snap install anki-desktop
+    sudo snap install obsidian --classic
+
 
     # setup git config 
     git config --global user.name "arsyhiy"
