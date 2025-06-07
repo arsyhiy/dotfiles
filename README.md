@@ -17,7 +17,7 @@ chmod x+ main.sh
 ### docker 
 there is docker compose file for gitea to run there is command:
 ```bash 
-docker compose up -d # to run in background 
+docker compose up -d
 ```
 
 # future ideas
