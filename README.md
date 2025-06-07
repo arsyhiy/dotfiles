@@ -1,5 +1,5 @@
 # NOTE: all the instructions were written for the future me
-clone this repo you need to install git if don't know
+to clone this repo you need to install git if don't know
 ```bash 
 sudo apt install git 
 ```
