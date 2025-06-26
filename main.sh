@@ -50,29 +50,29 @@ PACKAGES(){
     sudo apt install -y bear
     
     # snap apps
-    sudo snap --version || sudo apt install snapd # make sure you have snapd
-    sudo snap install telegram-desktop
-    sudo snap install anki-desktop
-    sudo snap install obsidian --classic
+    #sudo snap --version || sudo apt install snapd # make sure you have snapd
+    #sudo snap install telegram-desktop
+    #sudo snap install anki-desktop
+    #sudo snap install obsidian --classic
     # the reason why i use snap instead of flatpak is because its slow
 	
     # steam
-    sudo apt install steam
+    #sudo apt install steam
     # don't forget to read https://ubuntu.com/blog/linux-gaming-with-ubuntu-desktop-steam-and-proton
     
     # retroarch
-    sudo snap install retroarch
-    sudo snap connect retroarch:removable-media
+    #sudo snap install retroarch
+    #sudo snap connect retroarch:removable-media
     
     # flatpak apps
-    flatpak install pcsx2 # the only app that can be install by flatpak
+    #flatpak install pcsx2 # the only app that can be install by flatpak
     
     # setup git config 
     git config --global user.name "arsyhiy"
     git config --global user.email arsyhiy32@gmail.com
 
     # krita
-    sudo apt install krita
+    #sudo apt install krita
 
 }
 
@@ -111,17 +111,17 @@ FONTS(){
 
 packages(){
     while true; do
-        printf "install necessary packages? (e.g yes or no ):"
+        printf "install necessary packages? (e.g y - yes or n - no ):"
         read -r choice
 
-        if [ "$choice" == "yes" ]; then
+        if [ "$choice" == "y" ]; then
             PACKAGES
             break
-        elif [ "$choice" == "no" ]; then
+        elif [ "$choice" == "n" ]; then
             printf "installing packages is canceled\n"
             break
         else
-            printf "type yes or no\n"
+            printf "type y or n\n"
         fi
 
     done
@@ -130,17 +130,17 @@ packages(){
 
 copymove(){
         while true; do 
-            printf "move all necessary files? (e.g yes or no ):"
+            printf "move all necessary files? (e.g y - yes or n - no ):"
             read -r choice
 
-                if [ "$choice" == "yes" ]; then
+                if [ "$choice" == "y" ]; then
                     COPYMOVE
                 break
-            elif [ "$choice" == "no" ]; then
+            elif [ "$choice" == "n" ]; then
                 printf "installing fonts is canceled\n"
                 break
             else
-                printf "type yes or no\n"
+                printf "type y or n\n"
             fi
 
         done
@@ -149,17 +149,17 @@ copymove(){
 
 zsh(){
     while true; do 
-        printf "would you like to install zsh? (e.g yes or no ):"
+        printf "would you like to install zsh? (e.g y - yes or n - no ):"
         read -r choice
 
-        if [ "$choice" == "yes" ]; then
+        if [ "$choice" == "y" ]; then
             ZSH
             break
-        elif [ "$choice" == "no" ]; then
+        elif [ "$choice" == "n" ]; then
             printf "installing zsh is canceled\n"
             break
         else
-            printf "type yes or no\n"
+            printf "type y or n\n"
         fi
 
     done
@@ -168,17 +168,17 @@ zsh(){
 
 fonts(){
     while true; do 
-        printf "would you like to install fonts? (e.g yes or no ):"
+        printf "would you like to install fonts? (e.g y - yes or n - no ):"
         read -r choice
 
-        if [ "$choice" == "yes" ]; then
+        if [ "$choice" == "y" ]; then
             FONTS
             break
-        elif [ "$choice" == "no" ]; then
+        elif [ "$choice" == "n" ]; then
             printf "installing fonts is canceled\n"
             break
         else
-            printf "type yes or no\n"
+            printf "type y or n \n"
         fi
 
     done
@@ -208,16 +208,16 @@ printf "=======================================================================\
 # driver 
 driver (){
     while true;do 
-        printf "would you like to do all scrpits? (e.g yes or no):"
+        printf "would you like to do all scrpits? (e.g y - yes or n - no):"
         read -r choice
 
-        if [ "$choice" == "yes" ]; then
+        if [ "$choice" == "y" ]; then
             PACKAGES
             COPYMOVE
             ZSH
             FONTS
             break
-        elif [ "$choice" == "no" ]; then
+        elif [ "$choice" == "n" ]; then
             printf "you will choice what to do\n"
              packages
              copymove
@@ -225,7 +225,7 @@ driver (){
              fonts
             break
         else
-            printf "type yes or no\n"
+            printf "type y or n\n"
         fi
 
         done
