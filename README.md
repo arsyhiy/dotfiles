@@ -21,7 +21,7 @@ docker compose up -d
 ```
 
 # future ideas
-- 
+- adding i3wm config.
 # just reminder for me 
 ```bash 
 git submodule update                       
