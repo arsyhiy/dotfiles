@@ -79,6 +79,8 @@ PACKAGES(){
     sudo pavucontrol --version || sudo apt install pavucontrol
 
 
+    #ssh
+    sudo apt-get install openssh-server
 }
 
 
