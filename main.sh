@@ -74,6 +74,11 @@ PACKAGES(){
     # krita
     #sudo apt install krita
 
+    #i3 
+    sudo i3 --version || sudo apt install i3
+    sudo pavucontrol --version || sudo apt install pavucontrol
+
+
 }
 
 
