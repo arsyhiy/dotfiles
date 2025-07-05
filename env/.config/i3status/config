@@ -1,0 +1,24 @@
+general {
+	output_format = "i3bar"
+	colors = false
+	markup = pango
+	interval = 5
+}
+
+order += "volume master"
+order += "time"
+
+
+
+volume master {
+	format = "<span background='#696ebf'>    </span><span background='#bfbaac'>  %volume  </span>"
+	format_muted = "<span background='#696ebf'>  󰟎  </span><span background='#bfbaac'>  Muted  </span>"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+
+time {
+	format = "<span background='#2587cc'>   </span><span background='#bfbaac'>  %b %d at %H:%M  </span>"
+}
