@@ -11,14 +11,16 @@ order += "time"
 
 
 volume master {
-	format = "<span background='#696ebf'>    </span><span background='#bfbaac'>  %volume  </span>"
-	format_muted = "<span background='#696ebf'>  󰟎  </span><span background='#bfbaac'>  Muted  </span>"
+	format = "<span></span><span>%volume</span>"
+	format_muted = "<span></span><span>Muted</span>"
 	device = "default"
 	mixer = "Master"
 	mixer_idx = 0
 }
 
 
+
 time {
-	format = "<span background='#2587cc'>   </span><span background='#bfbaac'>  %b %d at %H:%M  </span>"
+	format = "<span></span><span>%Y-%m-%d %H:%M:%S</span>"
 }
+
