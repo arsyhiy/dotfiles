@@ -50,6 +50,7 @@ PACKAGES(){
     sudo apt install -y bear
     
     # snap apps
+    # sudo snap --version || sudo apt install snapd
     #sudo snap --version || sudo apt install snapd # make sure you have snapd
     #sudo snap install telegram-desktop
     #sudo snap install anki-desktop
@@ -77,7 +78,7 @@ PACKAGES(){
     #i3 
     sudo i3 --version || sudo apt install i3
     sudo pavucontrol --version || sudo apt install pavucontrol
-
+    sudo rofi -version || sudo apt install rofi
 
     #ssh
     sudo apt-get install openssh-server

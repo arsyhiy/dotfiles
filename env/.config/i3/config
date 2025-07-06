@@ -52,7 +52,7 @@ bindsym $alt+Tab exec kitty
 bindsym $alt+q kill
 
 # start rofi (a program launcher)
-bindsym ctrl+w exec "rofi -show drun"
+bindsym ctrl+w exec "rofi -show run -theme ~/.config/rofi/launcher.rasi"
 
 # move focused window
 bindsym ctrl+Left focus left
