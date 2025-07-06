@@ -36,6 +36,12 @@ bindsym $super+l exec i3lock
 
 
 
+#setxkbmap -layout us,de
+#setxkbmap -option 'grp:alt_shift_toggle'
+
+
+
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
