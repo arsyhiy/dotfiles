@@ -5,7 +5,7 @@ sudo apt install git
 ```
 
 ```bash
-git clone --recurse-submodules https://github.com/arsyhiy/dotfiles.git
+git clone https://github.com/arsyhiy/dotfiles.git
 ```
 
 ## installation:
@@ -21,9 +21,4 @@ docker compose up -d
 ```
 
 # future ideas
-- adding i3wm config.
-- adding kitty config
-# just reminder for me 
-```bash 
-git submodule update                       
-```
+-
