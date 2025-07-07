@@ -27,6 +27,7 @@ PACKAGES(){
 
     
     # neovim
+		# make to build it if there is not folder named neovim
     sudo apt-get install ninja-build gettext cmake unzip curl   
     git clone https://github.com/neovim/neovim
     cd neovim 
@@ -38,6 +39,7 @@ PACKAGES(){
     git clone --depth 1 https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
 
     # docker section
+		# make it work if there is not installed docker
     curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
     sudo dnf install docker-compose
@@ -76,12 +78,12 @@ PACKAGES(){
     #sudo apt install krita
 
     #i3 
-    sudo i3 --version || sudo apt install i3
-    sudo pavucontrol --version || sudo apt install pavucontrol
-    sudo rofi -version || sudo apt install rofi
+    sudo i3 --version || sudo apt install -y i3
+    sudo pavucontrol --version || sudo apt install -y pavucontrol
+    sudo rofi -version || sudo apt install -y rofi
 
     #ssh
-    sudo apt-get install openssh-server
+    sudo apt-get install -y openssh-server
 }
 
 
