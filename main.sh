@@ -38,6 +38,8 @@ PACKAGES(){
     # installing nvim-lspconfig
     git clone --depth 1 https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
 
+		git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim 
+		
     # docker section
 		# make it work if there is not installed docker
     curl -fsSL https://get.docker.com -o get-docker.sh
