@@ -21,4 +21,4 @@ docker compose up -d
 ```
 
 # future ideas
--
+- make it multiplatform (windwos 11 mac os linux) 
