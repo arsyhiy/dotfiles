@@ -15,7 +15,11 @@ winget install -e --id Git.Git
 windows11: 
 ``` bash
 winget install --id=Python.Python.3 -e 
-``stall -y python3
+
+for linux:
+-- debian/ubuntu
+``` bash
+sudo apt install python3
 ```
 NOTE: as i remember python supose to be install on every linux machine by default
  
