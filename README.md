@@ -22,3 +22,18 @@ docker compose up -d
 
 # future ideas
 - make it multiplatform (windwos 11 mac os linux) 
+
+
+
+
+
+
+# how to install python 
+
+windows11: 
+$ winget install --id=Python.Python.3 -e 
+
+linux:
+  $ python3 --version || sudo <pm> <install> python3 but i think it must to be install by default on every linux system
+mac os : 
+  install by homebrew or via site python.org 
