@@ -39,3 +39,6 @@ python main.py
 # future ideas
 made loging system for errors for linux in bash and for windows in powershell 
 
+
+# ideas that come in box with it
+- no dependencies

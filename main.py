@@ -3,13 +3,13 @@ import subprocess
 
 
 def main():
-    if os.name == "posix":
+    if os.name == "posix": # linux
         # print and sleep 5 "installing goods for linux"
         try:
             subprocess.run(["src/linux/./main.sh"], shell=True, check=True)
         except subprocess.CalledProcessError as err:
             print(err)  # need  a more informatic error message
-    elif os.name == "win32":
+    elif os.name == "nt": # windows
         # print and sleep 5 "installing goods for windows"
         try:
             subprocess.run(
