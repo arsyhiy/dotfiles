@@ -12,12 +12,13 @@ winget install -e --id Git.Git
 
 # how to install python 
 
-windows11: 
+for windows11: 
 ``` bash
 winget install --id=Python.Python.3 -e 
+```
 
 for linux:
--- debian/ubuntu
+- debian/ubuntu
 ``` bash
 sudo apt install python3
 ```
