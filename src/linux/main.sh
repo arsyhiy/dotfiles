@@ -29,11 +29,11 @@ PACKAGES(){
     # neovim
 		# make to build it if there is not folder named neovim
     sudo apt-get install ninja-build gettext cmake unzip curl   
-    git clone https://github.com/neovim/neovim
-    cd neovim 
-    make CMAKE_BUILD_TYPE=Realease
-    sudo make install
-    cd ~/dotfiles
+    #git clone https://github.com/neovim/neovim
+    #cd neovim 
+    #make CMAKE_BUILD_TYPE=Realease
+    #sudo make install
+    #cd ~/dotfiles
 
     # installing nvim-lspconfig
     git clone --depth 1 https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
