@@ -10,10 +10,6 @@ for windows
 winget install -e --id Git.Git
 ```
 
-```bash
-git clone https://github.com/arsyhiy/dotfiles.git
-```
-
 # how to install python 
 
 windows11: 
