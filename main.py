@@ -20,6 +20,10 @@ def main():
 
     return subprocess.CompletedProcess
 
+def install_package():
+    pass
+
+
 
 if __name__ == "__main__":
     main()
