@@ -38,6 +38,8 @@ python main.py
 
 # future ideas
 made loging system for errors for linux in bash and for windows in powershell 
+read plan.txt
+adding fuature to install neovim config into .config automaticly.
 
 
 # ideas that come in box with it
