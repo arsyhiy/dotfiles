@@ -1,0 +1,4 @@
+neofetch
+firefox
+emacs
+vim
