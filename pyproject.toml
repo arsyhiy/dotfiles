@@ -1,0 +1,18 @@
+[project]
+name = "dotfiles"
+version = "1.0"
+description = ""
+authors = [
+    {name = "arsyhiy",email = "arsyhiy32@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "black (>=25.1.0,<26.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

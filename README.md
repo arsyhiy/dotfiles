@@ -50,6 +50,10 @@ make colorscheme for windows terminal.
 # Rules for this repository
 
 NOTE: rules are written for only enhancement and controlling my self from committing "legacy code"
+- updating only on sundays. this rule was added for the reason i like improving my setup every day
 
-    updating only on sundays. this rule was added for the reason i like improving my setup every day
+
+NOTE: poetry was add only for enhancement the code
+
+
 

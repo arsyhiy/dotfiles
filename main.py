@@ -2,7 +2,7 @@ import os
 import subprocess
 
 
-dotfiles= """
+dotfiles = """
      ______   _______  _______  _______  ___   ___      _______  _______ 
     |      | |       ||       ||       ||   | |   |    |       ||       |
     |  _    ||   _   ||_     _||    ___||   | |   |    |    ___||  _____|
@@ -14,15 +14,25 @@ dotfiles= """
 """
 
 
-
 def main():
     print(dotfiles)
 
+    while True:
+        print("asking would you like install all this thing")
+        a = input()  # get a normal name for variables
+        if a == "y":
+            print("answer is yes")
+        elif a == "n":
+            print("answer is no")
+            print("exiting....")
+            break
+        else:
+            print("type yes or no")
 
 
 def install_package():
     with open("src/linux/package.txt", "r") as f:
-        packages = [line.strip() for  line in f  if line.strip()]
+        packages = [line.strip() for line in f if line.strip()]
         f.close()
 
     for package in packages:
@@ -31,24 +41,19 @@ def install_package():
             print(f" Установлен: {package}")
         except subprocess.CalledProcessError as e:
             print(f" Ошибка при установке {package}: {e}")
-            
+
     return subprocess.CompletedProcess
+
 
 def checksystem():
-    if os.name == "posix": # linux
-        # print and sleep 5 "installing goods for linux"
-        install_package()
-    elif os.name == "nt": # windows
-        # print and sleep 5 "installing goods for windows"
-        try:
-            subprocess.run(
-                ["powershell", "src/windows/./hello.ps1"], shell=True, check=True
-            )
-        except subprocess.CalledProcessError as err:
-            print(err)  # need  a more informatic error message
-
-    return subprocess.CompletedProcess
-
+    pc_os = "unknown"
+    if os.name == "posix":  # linux
+        pc_os = "linux"
+    elif os.name == "nt":  # windows
+        pc_os = "windows"
+    else:
+        pass
+    return pc_os
 
 
 if __name__ == "__main__":
