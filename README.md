@@ -46,3 +46,10 @@ make colorscheme for windows terminal.
 
 # ideas that come in box with it
 - no dependencies
+
+Rules for this repository
+
+NOTE: rules are written for only enhancement and controlling my self from committing "legacy code"
+
+    updating only on sundays. this rule was added for the reason i like improving my setup every day
+
