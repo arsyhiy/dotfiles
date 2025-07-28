@@ -43,6 +43,7 @@ python main.py
 - made colorscheme for tmux.
 - make colorscheme for windows terminal.
 - make a convenient system of dependency for windows for programming 
+-adding neovim and git instalation
 
 # ideas that come in box with it
 - no dependencies
