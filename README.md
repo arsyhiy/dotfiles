@@ -37,12 +37,12 @@ python main.py
 ```
 
 # future ideas
-made loging system for errors for linux in bash and for windows in powershell 
-read plan.txt
-adding fuature to install neovim config into .config automaticly.
-made colorscheme for tmux.
-make colorscheme for windows terminal.
-
+- made loging system for errors for linux in bash and for windows in powershell 
+- read plan.txt
+- adding fuature to install neovim config into .config automaticly.
+- made colorscheme for tmux.
+- make colorscheme for windows terminal.
+- make a convenient system of dependency for windows for programming 
 
 # ideas that come in box with it
 - no dependencies
