@@ -22,6 +22,15 @@ def main():
         a = input()  # get a normal name for variables
         if a == "y":
             print("answer is yes")
+            if os.name == "posix":  # linux
+                linux_install()
+                break
+            elif os.name == "nt":  # window
+                windows_install()
+                break
+            else:
+                print("somehow macos")
+
         elif a == "n":
             print("answer is no")
             print("exiting....")
@@ -30,7 +39,7 @@ def main():
             print("type yes or no")
 
 
-def install_package():
+def linux_install():
     with open("src/linux/package.txt", "r") as f:
         packages = [line.strip() for line in f if line.strip()]
         f.close()
@@ -44,16 +53,8 @@ def install_package():
 
     return subprocess.CompletedProcess
 
-
-def checksystem():
-    pc_os = "unknown"
-    if os.name == "posix":  # linux
-        pc_os = "linux"
-    elif os.name == "nt":  # windows
-        pc_os = "windows"
-    else:
-        pass
-    return pc_os
+def windows_install():
+    pass
 
 
 if __name__ == "__main__":
