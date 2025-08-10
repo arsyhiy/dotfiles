@@ -10,51 +10,26 @@ for windows
 winget install -e --id Git.Git
 ```
 
-# how to install python 
+# how to run dotifles 
 
-for windows11: 
-``` bash
-winget install --id=Python.Python.3 -e 
+for debian 
+```bash 
+sudo ./linux.sh
 ```
 
-for linux:
-- debian/ubuntu
-``` bash
-sudo apt install python3
+for windows
 ```
-NOTE: as i remember python supose to be install on every linux machine by default
- 
-# how to run this programm 
-
-linux:
-``` bash
-python3 main.py
-```
-windows:
-``` bash
-python main.py
-
+./windows
 ```
 
 # future ideas
-- made loging system for errors for linux in bash and for windows in powershell 
-- read plan.txt
 - adding fuature to install neovim config into .config automaticly.
 - made colorscheme for tmux.
 - make colorscheme for windows terminal.
 - make a convenient system of dependency for windows for programming 
--adding neovim and git instalation
-
-# ideas that come in box with it
-- no dependencies
+-adding neovim  instalation
 
 # Rules for this repository
 
 NOTE: rules are written for only enhancement and controlling my self from committing "legacy code"
 - updates only on sundays
-
-
-NOTE: poetry was add only for enhancement the code
-
-
-
