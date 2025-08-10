@@ -19,7 +19,7 @@ sudo ./linux.sh
 
 for windows
 ```
-./windows
+ .\windows.ps1
 ```
 
 # future ideas
