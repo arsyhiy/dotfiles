@@ -27,8 +27,8 @@ PACKAGES(){
 
     
     # neovim
-		# make to build it if there is not folder named neovim
-    sudo apt-get install ninja-build gettext cmake unzip curl   
+	# make to build it if there is not folder named neovim
+    #sudo apt-get install ninja-build gettext cmake unzip curl   
     #git clone https://github.com/neovim/neovim
     #cd neovim 
     #make CMAKE_BUILD_TYPE=Realease
@@ -80,9 +80,9 @@ PACKAGES(){
     #sudo apt install krita
 
     #i3 
-    sudo i3 --version || sudo apt install -y i3
-    sudo pavucontrol --version || sudo apt install -y pavucontrol
-    sudo rofi -version || sudo apt install -y rofi
+    #sudo i3 --version || sudo apt install -y i3
+    #sudo pavucontrol --version || sudo apt install -y pavucontrol
+    #sudo rofi -version || sudo apt install -y rofi
 
     #ssh
     sudo apt-get install -y openssh-server
