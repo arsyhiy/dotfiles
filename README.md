@@ -27,7 +27,8 @@ for windows
 - made colorscheme for tmux.
 - make colorscheme for windows terminal.
 - make a convenient system of dependency for windows for programming 
--adding neovim  instalation
+- adding neovim  instalation
+- make linux and windows directorys for more readble organisation of this repo
 
 # Rules for this repository
 
