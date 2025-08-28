@@ -29,6 +29,7 @@ for windows
 - make a convenient system of dependency for windows for programming 
 - adding neovim  instalation
 - make linux and windows directorys for more readble organisation of this repo
+- for now you can even rewrite all configs
 
 # Rules for this repository
 
