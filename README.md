@@ -33,13 +33,6 @@ for windows
 
 ## future ideas
 
-- adding fuature to install neovim config into .config automaticly.
-- made colorscheme for tmux.
-- make colorscheme for windows terminal.
-- make a convenient system of dependency for windows for programming
-- adding neovim instalation
-- adding oh my posh to windows
-
 ## Rules for this repository
 
 NOTE: rules are written for only enhancement and controlling my self from committing "legacy code"
