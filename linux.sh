@@ -116,7 +116,13 @@ NEOVIM(){
     sudo cmake --version || sudo apt-get install cmake 
     sudo unzip -v || sudo apt-get install unzip
     sudo curl --version || sudo apt-get install curl
-    nvim --version ||  cd | git clone https://github.com/neovim/neovim | cd neovim make CMAKE_BUILD_TYPE=Realease | sudo make install |cd ~/dotfiles
+    nvim --version ||  cd \
+        git clone https://github.com/neovim/neovim \
+        cd neovim \
+        git switch \
+        make CMAKE_BUILD_TYPE=Realease \
+        sudo make install \
+        cd ~/dotfiles
     git clone --depth 1 https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig 
     git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim 
 }
