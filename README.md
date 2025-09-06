@@ -38,8 +38,3 @@ for windows
 NOTE: rules are written for only enhancement and controlling my self from committing "legacy code"
 
 - updates only on sundays
-
-
-
-# from 04.09.2025 to 01.01.2026 i will not adding new features only fixing erros.
-
