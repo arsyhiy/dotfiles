@@ -26,17 +26,19 @@ PACKAGES(){
     # utiliy
     sudo unzip --version|| sudo pacman -S --noconfirm unzip # like go do the second thing even if first = true.
     sudo curl --version || sudo pacman -S --noconfirm curl
+
     # i need find analogue to neofetch.
     #sudo neofetch --version || sudo pacman -S --noconfirm neofetch
+
     sudo htop --version || sudo pacman -S --noconfirm htop
     sudo ripgrep --version || sudo pacman -S --noconfirm ripgrep
     
     # flatpak apps
     #flatpak install pcsx2 # the only app that can be install by flatpak
 
-	# neovim
-	sudo nvim --version || sudo pacman -S --noconfirm neovim
-	git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
+    # neovim
+    sudo nvim --version || sudo pacman -S --noconfirm neovim
+    git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
 	
     
     # setup git config 
