@@ -106,11 +106,3 @@ alias n=nvim
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
-
-
-# to make nvim executable from opt/nvim in any directory
-export PATH="$PATH:/opt/nvim/"
-
-export GOPATH="$(go env GOPATH)"
-export PATH="${PATH}:${GOPATH}/bin"
-
