@@ -20,7 +20,10 @@ PACKAGES(){
     sudo go || sudo pacman -S --noconfirm go # like with poetry. NOTE: i can't find the way not to do second after || comand. if go = True it will do the second thing 
     sudo cargo --version || sudo pacman -S --noconfirm rust
     sudo node --version || sudo pacman -S --noconfirm nodejs 
+
+    # tmux
     tmux -V || sudo pacman -S --noconfirm tmux 
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     sudo bear --version || sudo pacman -S --noconfirm bear
     
     # utiliy
