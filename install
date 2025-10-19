@@ -2,23 +2,18 @@
 
 
 PACKAGES(){
-
-
-
-
-
-
     # i can't find the way to check if there those font or note. it will cost time if  i downloading fonts every time. so when i need uncomment it. 
-    # sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd
-    #pacman -S noto-fonts noto-fonts-emoji ttf-linux-libertine noto-fonts-cjk
 
-	# languages and utiliy to code 
+    #sudo pacman -Syu --noconfirm ttf-jetbrains-mono-nerd
+    #sudo pacman -Syu noto-fonts noto-fonts-emoji ttf-linux-libertine noto-fonts-cjk
+
+    # languages and utiliy to code 
 
     # python
     sudo pipx --version || sudo pacman -S --noconfirm python-pipx \ pipx ensurepath
     poetry --version || pipx install poetry # for sudo poetry i get : command not found and 100% trying installing every time.
 	
-	# git
+    # git
     sudo git --version || sudo pacman -S --noconfirm git # and if it was installed like a directory?
     sudo gh --version || sudo pacman -S --noconfirm github-cli
 
@@ -49,15 +44,12 @@ PACKAGES(){
     sudo nvim --version || sudo pacman -S --noconfirm neovim
     git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
 	
-    
     # setup git config 
     git config --global user.name "arsyhiy"
     git config --global user.email arsyhiy32@gmail.com
 
-
     #ssh
     sshd -V || sudo pacman -S --noconfirm openssh-server
-
 
     # archlinux hyprland utilites
     sudo brightnessctl --version || sudo pacman -S --noconfirm brightnessctl
@@ -71,7 +63,6 @@ PACKAGES(){
     sudo swaync --version || sudo pacman -S --noconfirm swaync
     sudo yay --version || sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 }
-
 
 COPYMOVE(){
     printf "\n"
@@ -93,9 +84,6 @@ ZSH(){
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 }
-
-
-
 
 packages(){
     while true; do
@@ -153,8 +141,6 @@ zsh(){
 }
 
 
-
-
 clear
 cat <<'.'
  ______   _______  _______  _______  ___   ___      _______  _______ 
@@ -168,7 +154,6 @@ cat <<'.'
 printf "                                                      made by arsyhiy\n"
 printf "\n"
 printf "=======================================================================\n"
-
 
 # driver 
 driver (){
@@ -194,3 +179,4 @@ driver (){
         done
 }
 driver # NOTE: это для запуска driver
+
