@@ -6,18 +6,13 @@ PACKAGES(){
 
 
 
-    sudo pacman -Syu brightnessctl
-    sudo pacman -Syu pamixer
-    sudo pacman -Syu npm
-
-
-
 
 
     # i can't find the way to check if there those font or note. it will cost time if  i downloading fonts every time. so when i need uncomment it. 
     # sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd
-    
-    # languages and utiliy to code 
+    #pacman -S noto-fonts noto-fonts-emoji ttf-linux-libertine noto-fonts-cjk
+
+	# languages and utiliy to code 
 
     # python
     sudo pipx --version || sudo pacman -S --noconfirm python-pipx \ pipx ensurepath
@@ -62,6 +57,19 @@ PACKAGES(){
 
     #ssh
     sshd -V || sudo pacman -S --noconfirm openssh-server
+
+
+    # archlinux hyprland utilites
+    sudo brightnessctl --version || sudo pacman -S --noconfirm brightnessctl
+    sudo pamixer --version || sudo pacman -S --noconfirm pamixer
+    sudo npm --version || sudo pacman -S --noconfirm npm
+    sudo hyprlock --version || sudo pacman -S --noconfirm hyprlock
+    sudo hyprpaper --version || sudo pacman -S --noconfirm hyprpaper
+    sudo hypridle --version || sudo pacman -S --noconfirm hypridle
+    sudo wlogout --version || sudo pacman -S --noconfirm wlogout
+    sudo wlogout --version || sudo pacman -S --noconfirm wlogout
+    sudo swaync --version || sudo pacman -S --noconfirm swaync
+    sudo yay --version || sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 }
 
 
