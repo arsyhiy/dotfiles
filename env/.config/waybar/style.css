@@ -1,0 +1,162 @@
+
+
+@import "./theme.css";
+
+/* -- Global Styling -- */
+* {
+  border: none;
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: bold;
+  font-size: 14px;
+  color: @foreground;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+window#waybar > box {
+  margin: 5px 6px 0 6px;
+  padding: 2px 0;
+  background-color: @background;
+  border-radius: 15px;
+  border: 2px solid @selected;
+  opacity: 0.95;
+}
+
+/* -- Tooltip Styling -- */
+tooltip {
+  background: @background;
+  border: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  border-color: @selected;
+}
+
+/* -- General Module Styling -- */
+
+#idle_inhibitor,
+#hyprland-workspaces,
+#hyprland-window,
+#clock,
+#network,
+#tray,
+#hyprland-language,
+#pulseaudio,
+#custom-backlight,
+#battery,
+#custom-notification,
+#custom-power {
+  opacity: 1;
+  padding: 0px 3px;
+  margin: 0px 3px;
+}
+
+/* -- Left Modules -- */
+.modules-left {
+  margin-left: 6px;
+}
+
+/* Idle Inhibitor */
+#custom-idle_inhibitor {
+  padding: 0 0 0 4px;
+}
+
+/* Workspaces */
+/* Workspace Button */
+#workspaces button {
+  color: #fbf1c7;
+  border-radius: 8px;
+  margin: 2px 5px;
+  padding: 0 2px;
+  animation: ws_normal 20s ease-in-out 1;
+}
+
+/* Active Workspace Button */
+#workspaces button.active {
+  background: @selected;
+  margin-right: 2px;
+  margin-left: 2px;
+  padding: 0 5px;
+  animation: ws_active 20s ease-in-out 1;
+  transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+}
+
+/* Hover Effect for Workspace Buttons */
+#workspaces button:hover {
+  background: @selected;
+  animation: ws_hover 20s ease-in-out 1;
+  transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+}
+
+#window {
+  margin-left: 0;
+}
+
+/* -- Right Modules -- */
+/* Network */
+#network {
+  font-size: 13px;
+}
+
+/* Tray */
+#tray {
+  padding: 0 3px;
+  background: @background;
+}
+
+#tray menu {
+  border-radius: 10px;
+  background: @background;
+}
+
+#tray menu menuitem {
+  border-radius: 8px;
+}
+
+#tray menu menuitem:hover {
+  background-color: @selected;
+}
+
+/* Privacy */
+#privacy {
+  background-color: #005000;
+  border-radius: 6px;
+  padding: 0 6px;
+}
+
+
+/* Battery */
+#battery.warning {
+  color: #f9da95;
+}
+
+#battery.critical {
+  color: #f7668f;
+}
+
+/* Power Button */
+#custom-power {
+  padding-right: 3px;
+  padding-left: 9px;
+  border-radius: 8px;
+}
+
+#custom-power:hover {
+  background: @selected;
+  transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+}
+
+#window {
+  margin-top: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  transition: none;
+  color: transparent;
+  background: transparent;
+}
+
+#custom-notification {
+padding: 1px; 
+}

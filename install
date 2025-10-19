@@ -3,6 +3,17 @@
 
 PACKAGES(){
 
+
+
+
+    sudo pacman -Syu brightnessctl
+    sudo pacman -Syu pamixer
+    sudo pacman -Syu npm
+
+
+
+
+
     # i can't find the way to check if there those font or note. it will cost time if  i downloading fonts every time. so when i need uncomment it. 
     # sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd
     
