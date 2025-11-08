@@ -18,9 +18,15 @@ PACKAGES(){
     sudo gh --version || sudo pacman -S --noconfirm github-cli
 
     sudo clang --version || sudo pacman -S --noconfirm clang
+    sudo pacman -S cmake
+    
+
+
     sudo go || sudo pacman -S --noconfirm go # like with poetry. NOTE: i can't find the way not to do second after || comand. if go = True it will do the second thing 
     sudo cargo --version || sudo pacman -S --noconfirm rust
     sudo node --version || sudo pacman -S --noconfirm nodejs 
+    sudo elixir --version || sudo pacman -S --noconfirm elixir 
+    sudo erlang --version || sudo pacman -S --noconfirm erlang 
 
     # tmux
     tmux -V || sudo pacman -S --noconfirm tmux 

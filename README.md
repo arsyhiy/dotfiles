@@ -14,6 +14,7 @@ sudo ./install
 
 ## future ideas
 -- adding fzf
+-- add for hyprlock the check what language layout you use
 ## Rules for this repository
 
 NOTE: rules are written for only enhancement and controlling my self from committing "legacy code"
