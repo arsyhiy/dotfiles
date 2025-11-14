@@ -1,0 +1,3 @@
+[submodule "corne"]
+	path = corne
+	url = https://github.com/arsyhiy/corne.git
