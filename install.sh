@@ -1,53 +1,55 @@
 #!/bin/bash
 
-
 PACKAGES(){
-    # i can't find the way to check if there those font or note. it will cost time if  i downloading fonts every time. so when i need uncomment it. 
 
-    #sudo pacman -Syu --noconfirm ttf-jetbrains-mono-nerd
-    #sudo pacman -Syu noto-fonts noto-fonts-emoji ttf-linux-libertine noto-fonts-cjk
+	# fonts
+    sudo pacman -Q ttf-jetbrains-mono-nerd || sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd     
+    sudo pacman -Q noto-fonts || sudo pacman -S --noconfirm noto-fonts
+    sudo pacman -Q noto-fonts-emoji || sudo pacman -S --noconfirm noto-fonts-emoji
+    sudo pacman -Q ttf-linux-libertine || sudo pacman -S --noconfirm ttf-linux-libertine
+    sudo pacman -Q noto-fonts-cjk || sudo pacman -S --noconfirm noto-fonts-cjk
 
     # languages and utiliy to code 
 
     # python
-    sudo pipx --version || sudo pacman -S --noconfirm python-pipx \ pipx ensurepath
+    sudo pipx || sudo pacman -S --noconfirm python-pipx \ pipx ensurepath # you can't check pipx with pacman -Q
     poetry --version || pipx install poetry # for sudo poetry i get : command not found and 100% trying installing every time.
 	
     # git
-    sudo git --version || sudo pacman -S --noconfirm git # and if it was installed like a directory?
-    sudo gh --version || sudo pacman -S --noconfirm github-cli
+	sudo pacman -Q git || sudo pacman -S --noconfirm git # and if it was installed like a directory?
+	sudo pacman -Q gh || sudo pacman -S --noconfirm github-cli
 
-    sudo clang --version || sudo pacman -S --noconfirm clang
-    sudo pacman -S cmake
+    sudo pacman -Q clang || sudo pacman -S --noconfirm clang
+    sudo pacman -Q cmake || sudo pacman -S --noconfirm cmake
     
-
-
-    sudo go || sudo pacman -S --noconfirm go # like with poetry. NOTE: i can't find the way not to do second after || comand. if go = True it will do the second thing 
-    sudo cargo --version || sudo pacman -S --noconfirm rust
-    sudo node --version || sudo pacman -S --noconfirm nodejs 
-    sudo elixir --version || sudo pacman -S --noconfirm elixir 
-    sudo erlang --version || sudo pacman -S --noconfirm erlang 
+    sudo go || sudo pacman -S --noconfirm go # like with poetry. NOTE: i can't find the way not to do second after || comand.
+	                                         # if go = True it will do the second thing 
+	
+    sudo pacman -Q cargo || sudo pacman -S --noconfirm rust
+    sudo pacman -Q node || sudo pacman -S --noconfirm nodejs 
+    sudo pacman -Q elixir || sudo pacman -S --noconfirm elixir 
+    sudo pacman -Q erlang || sudo pacman -S --noconfirm erlang 
 
     # tmux
-    tmux -V || sudo pacman -S --noconfirm tmux 
+    sudo pacman -Q tmux || sudo pacman -S --noconfirm tmux 
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    sudo bear --version || sudo pacman -S --noconfirm bear
+    sudo pacman -Q bear || sudo pacman -S --noconfirm bear
     
     # utiliy
-    sudo unzip --version|| sudo pacman -S --noconfirm unzip # like go do the second thing even if first = true.
-    sudo curl --version || sudo pacman -S --noconfirm curl
+    sudo pacman -Q unzip || sudo pacman -S --noconfirm unzip # like go do the second thing even if first = true.
+    sudo pacman -Q curl || sudo pacman -S --noconfirm curl
 
     # i need find analogue to neofetch.
     #sudo neofetch --version || sudo pacman -S --noconfirm neofetch
 
-    sudo htop --version || sudo pacman -S --noconfirm htop
-    sudo ripgrep --version || sudo pacman -S --noconfirm ripgrep
+    sudo pacman -Q htop || sudo pacman -S --noconfirm htop
+    sudo pacman -Q ripgrep || sudo pacman -S --noconfirm ripgrep
     
     # flatpak apps
     #flatpak install pcsx2 # the only app that can be install by flatpak
 
     # neovim
-    sudo nvim --version || sudo pacman -S --noconfirm neovim
+    sudo pacman -Q nvim || sudo pacman -S --noconfirm neovim
     git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
 	
     # setup git config 
@@ -55,19 +57,19 @@ PACKAGES(){
     git config --global user.email arsyhiy32@gmail.com
 
     #ssh
-    sshd -V || sudo pacman -S --noconfirm openssh-server
+    sudo pacman -Q sshd || sudo pacman -S --noconfirm openssh-server
 
     # archlinux hyprland utilites
-    sudo brightnessctl --version || sudo pacman -S --noconfirm brightnessctl
-    sudo pamixer --version || sudo pacman -S --noconfirm pamixer
-    sudo npm --version || sudo pacman -S --noconfirm npm
-    sudo hyprlock --version || sudo pacman -S --noconfirm hyprlock
-    sudo hyprpaper --version || sudo pacman -S --noconfirm hyprpaper
-    sudo hypridle --version || sudo pacman -S --noconfirm hypridle
-    sudo wlogout --version || sudo pacman -S --noconfirm wlogout
-    sudo wlogout --version || sudo pacman -S --noconfirm wlogout
-    sudo swaync --version || sudo pacman -S --noconfirm swaync
-    sudo yay --version || sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+    sudo pacman -Q brightnessctl || sudo pacman -S --noconfirm brightnessctl
+    sudo pacman -Q pamixer || sudo pacman -S --noconfirm pamixer
+    sudo pacman -Q npm || sudo pacman -S --noconfirm npm
+    sudo pacman -Q hyprlock || sudo pacman -S --noconfirm hyprlock
+    sudo pacman -Q hyprpaper || sudo pacman -S --noconfirm hyprpaper
+    sudo pacman -Q hypridle || sudo pacman -S --noconfirm hypridle
+    sudo pacman -Q wlogout || sudo pacman -S --noconfirm wlogout
+    sudo pacman -Q wlogout || sudo pacman -S --noconfirm wlogout
+    sudo pacman -Q swaync || sudo pacman -S --noconfirm swaync
+    sudo pacman -Q yay || sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 }
 
 COPYMOVE(){
@@ -86,7 +88,7 @@ ZSH(){
     printf "=======================================================================\n"
 
     # zsh and plugins
-    sudo zsh --version || sudo pacman -S --noconfirm -y zsh
+    sudo pacman -Q zsh || sudo pacman -S --noconfirm -y zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 }
