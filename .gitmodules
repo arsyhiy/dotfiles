@@ -1,6 +1,3 @@
-[submodule "corne"]
-	path = corne
-	url = https://github.com/arsyhiy/corne.git
 [submodule "env/.config/nvim"]
 	path = env/.config/nvim
 	url = https://github.com/arsyhiy/nvim.git
@@ -10,3 +7,6 @@
 [submodule "env/.emacs.d"]
 	path = env/.emacs.d
 	url = https://github.com/arsyhiy/.emacs.d.git
+[submodule "env/corne"]
+	path = env/corne
+	url = https://github.com/arsyhiy/corne.git

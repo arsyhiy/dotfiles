@@ -6,6 +6,11 @@ to clone this repo you need to install git if don't know
 sudo pacman -S --noconfirm git
 ```
 
+and then
+```bash
+git clone --recurse-submodules https://github.com/arsyhiy/dotfiles.git
+```
+
 ## how to run dotifles
 
 ```bash

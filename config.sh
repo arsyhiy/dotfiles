@@ -68,3 +68,4 @@ update_files $DEV_ENV/env/.config $XDG_CONFIG_HOME
 copy $DEV_ENV/env/.zshrc $HOME/.zshrc
 copy $DEV_ENV/env/.tmux.conf $HOME/.tmux.conf
 copy $DEV_ENV/env/.emacs.d $HOME/.emacs.d/ 
+copy $DEV_ENV/env/corne $HOME/corne/ 
