@@ -1,3 +1,12 @@
 [submodule "corne"]
 	path = corne
 	url = https://github.com/arsyhiy/corne.git
+[submodule "env/.config/nvim"]
+	path = env/.config/nvim
+	url = https://github.com/arsyhiy/nvim.git
+[submodule "env/.config/env/.emacs.d"]
+	path = env/.config/env/.emacs.d
+	url = https://github.com/arsyhiy/.emacs.d.git
+[submodule "env/.emacs.d"]
+	path = env/.emacs.d
+	url = https://github.com/arsyhiy/.emacs.d.git

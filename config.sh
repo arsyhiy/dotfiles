@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#git submodule update
+git submodule update # NOTE: i just keep it here if that day comes...
 dry_run="0"
 DEV_ENV="$HOME/dotfiles"
 if [ -z "$XDG_CONFIG_HOME" ]; then
@@ -61,7 +61,10 @@ copy() {
     fi
 }
 
+
+
 update_files $DEV_ENV/env/.config $XDG_CONFIG_HOME
 
 copy $DEV_ENV/env/.zshrc $HOME/.zshrc
 copy $DEV_ENV/env/.tmux.conf $HOME/.tmux.conf
+copy $DEV_ENV/env/.emacs.d $HOME/.emacs.d/ 
