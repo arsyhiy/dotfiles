@@ -75,6 +75,7 @@ PACKAGES(){
     sudo pacman -Q yay || sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
     sudo pacman -Q waybar || sudo pacman -S --noconfirm waybar
     go install go.senan.xyz/cliphist@latest
+    sudo yay -S rofi-bluetooth-git
 
     # bluetooth
     sudo pacman -Q bluez || sudo pacman -S --noconfirm bluez
