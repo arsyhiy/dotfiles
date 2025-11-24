@@ -56,6 +56,7 @@ PACKAGES(){
     # neovim
     sudo pacman -Q nvim || sudo pacman -S --noconfirm neovim
     git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
+    sudo pacman -Q neovide || sudo pacman -S --noconfirm neovide 
 	
     # setup git config 
     git config --global user.name "arsyhiy"
