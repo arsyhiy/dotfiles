@@ -83,6 +83,10 @@ PACKAGES(){
     sudo pacman -Q  bluez-utils || sudo pacman -S --noconfirm bluez-utils
     sudo pacman -Q blueman || sudo pacman -S --noconfirm blueman
     systemctl start bluetooth.service # maybe we need to check first
+
+    # terminal
+    sudo pacman -Q ghostty || sudo pacman -S --noconfirm ghostty
+    
 }
 
 COPYMOVE(){
