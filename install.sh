@@ -87,6 +87,10 @@ PACKAGES(){
     # terminal
     sudo pacman -Q ghostty || sudo pacman -S --noconfirm ghostty
     
+
+
+    # tor
+    yay -S  torbrowser-launcher
 }
 
 COPYMOVE(){
