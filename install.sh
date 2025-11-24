@@ -38,6 +38,7 @@ PACKAGES(){
     # utiliy
     sudo pacman -Q unzip || sudo pacman -S --noconfirm unzip # like go do the second thing even if first = true.
     sudo pacman -Q curl || sudo pacman -S --noconfirm curl
+    bash -c "$(curl -sLo- https://superfile.dev/install.sh)"
 
     # i need find analogue to neofetch.
     #sudo neofetch --version || sudo pacman -S --noconfirm neofetch
@@ -76,7 +77,7 @@ PACKAGES(){
     sudo pacman -Q waybar || sudo pacman -S --noconfirm waybar
     go install go.senan.xyz/cliphist@latest
     sudo yay -S rofi-bluetooth-git
-
+    
     # bluetooth
     sudo pacman -Q bluez || sudo pacman -S --noconfirm bluez
     sudo pacman -Q  bluez-utils || sudo pacman -S --noconfirm bluez-utils
