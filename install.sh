@@ -47,6 +47,7 @@ PACKAGES(){
     sudo pacman -Q ripgrep || sudo pacman -S --noconfirm ripgrep
     sudo pacman -S fzf
     sudo pacman -S lazygit
+    sudo pacman -S obsidian
     
     # flatpak apps
     #flatpak install pcsx2 # the only app that can be install by flatpak
