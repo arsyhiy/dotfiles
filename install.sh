@@ -53,6 +53,7 @@ PACKAGES(){
     flatpak install pcsx2 # the only app that can be install by flatpak
     flatpak install flathub org.telegram.desktop
     flatpak install flathub org.libretro.RetroArch
+    flatpak install flathub com.discordapp.Discord
     # we need to add anki installation
     # we need to uncomment /etc/pacman.d/mirrorlist read https://www.reddit.com/r/linux_gaming/comments/s9vfsk/installing_steam_on_arch/
 
