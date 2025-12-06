@@ -8,7 +8,7 @@ sudo pacman -S --noconfirm git
 
 and then
 ```bash
-git clone --recurse-submodules https://github.com/arsyhiy/dotfiles.git
+git clone --recurse-submodules https://codeberg.org/arseniiy/dotfiles.git
 ```
 
 ## how to run dotifles

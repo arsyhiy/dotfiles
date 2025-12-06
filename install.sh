@@ -38,7 +38,9 @@ PACKAGES(){
     # utiliy
     sudo pacman -Q unzip || sudo pacman -S --noconfirm unzip # like go do the second thing even if first = true.
     sudo pacman -Q curl || sudo pacman -S --noconfirm curl
-    bash -c "$(curl -sLo- https://superfile.dev/install.sh)"
+
+    # rewrite it
+    #bash -c "$(curl -sLo- https://superfile.dev/install.sh)"
 
     # i need find analogue to neofetch.
     #sudo neofetch --version || sudo pacman -S --noconfirm neofetch
@@ -61,7 +63,6 @@ PACKAGES(){
     # neovim
     sudo pacman -Q nvim || sudo pacman -S --noconfirm neovim
     git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
-    sudo pacman -Q neovide || sudo pacman -S --noconfirm neovide 
 	
     # setup git config 
     git config --global user.name "arsyhiy"
@@ -82,20 +83,23 @@ PACKAGES(){
     sudo pacman -Q yay || sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
     sudo pacman -Q waybar || sudo pacman -S --noconfirm waybar
     go install go.senan.xyz/cliphist@latest
-    sudo yay -S rofi-bluetooth-git
+
+	# rewrite it
+	# sudo yay -S rofi-bluetooth-git
     
     # bluetooth
     sudo pacman -Q bluez || sudo pacman -S --noconfirm bluez
     sudo pacman -Q  bluez-utils || sudo pacman -S --noconfirm bluez-utils
     sudo pacman -Q blueman || sudo pacman -S --noconfirm blueman
+
+	# actually we need to add it auto exec in linux
     systemctl start bluetooth.service # maybe we need to check first
 
     # terminal
     sudo pacman -Q ghostty || sudo pacman -S --noconfirm ghostty
     
-
-
     # tor
+	# i think, i need to check if it installed
     yay -S  torbrowser-launcher
 }
 

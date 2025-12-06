@@ -1,12 +1,9 @@
 [submodule "env/.config/nvim"]
 	path = env/.config/nvim
-	url = https://github.com/arsyhiy/nvim.git
-[submodule "env/.config/env/.emacs.d"]
-	path = env/.config/env/.emacs.d
-	url = https://github.com/arsyhiy/.emacs.d.git
+	url = https://codeberg.org/arseniiy/nvim.git
 [submodule "env/.emacs.d"]
 	path = env/.emacs.d
-	url = https://github.com/arsyhiy/.emacs.d.git
+	url = https://codeberg.org/arseniiy/.emacs.d.git
 [submodule "env/corne"]
 	path = env/corne
-	url = https://github.com/arsyhiy/corne.git
+	url = https://codeberg.org/arseniiy/corne.git
