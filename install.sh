@@ -37,6 +37,7 @@ PACKAGES(){
     # utiliy
     sudo pacman -Q unzip || sudo pacman -S --noconfirm unzip # like go do the second thing even if first = true.
     sudo pacman -Q curl || sudo pacman -S --noconfirm curl
+    sudo pacman -Q playerctl || sudo pacman -S --noconfirm playerctl
 
     # rewrite it
     #bash -c "$(curl -sLo- https://superfile.dev/install.sh)"
