@@ -78,7 +78,7 @@ PACKAGES(){
     sudo pacman -Q hyprlock || sudo pacman -S --noconfirm hyprlock
     sudo pacman -Q hyprpaper || sudo pacman -S --noconfirm hyprpaper
     sudo pacman -Q hypridle || sudo pacman -S --noconfirm hypridle
-    sudo pacman -Q wlogout || sudo pacman -S --noconfirm wlogout
+    sudo pacman -Q wlogout || sudo yay -S --noconfirm wlogout
     sudo pacman -Q swaync || sudo pacman -S --noconfirm swaync
     sudo pacman -Q yay || sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
     sudo pacman -Q waybar || sudo pacman -S --noconfirm waybar
