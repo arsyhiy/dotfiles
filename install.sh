@@ -22,8 +22,7 @@ PACKAGES(){
     sudo pacman -Q clang || sudo pacman -S --noconfirm clang
     sudo pacman -Q cmake || sudo pacman -S --noconfirm cmake
     
-    sudo go || sudo pacman -S --noconfirm go # like with poetry. NOTE: i can't find the way not to do second after || comand.
-	                                         # if go = True it will do the second thing 
+    sudo go || bash <(curl -sL https://git.io/go-installer)	       
 	
     sudo pacman -Q cargo || sudo pacman -S --noconfirm rust
     sudo pacman -Q node || sudo pacman -S --noconfirm nodejs 
