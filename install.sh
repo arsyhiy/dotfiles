@@ -101,6 +101,16 @@ PACKAGES(){
     # tor
 	# i think, i need to check if it installed
     yay -S  torbrowser-launcher
+
+	# disc drive
+	sudo pacman -S wodim
+	sudo pacman -S alsa-utils
+	sudo pacman -S mpv
+	sudo pacman -S pipewire pipewire-alsa pipewire-pulse wireplumber
+	sudo pacman -S libdvdread libdvdnav
+	yay -S libdvdcss
+
+
 }
 
 COPYMOVE(){
