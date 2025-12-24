@@ -3,7 +3,7 @@
 to clone this repo you need to install git if don't know
 
 ```bash
-sudo pacman -S --noconfirm git
+sudo apt install
 ```
 
 and then
@@ -21,10 +21,7 @@ sudo ./install
 -- adding fzf
 -- add for hyprlock the check what language layout you use
 -- upate allot of very nessecery apps and so
+-- adding wine
 ## Rules for this repository
 
 NOTE: rules are written for only enhancement and controlling my self from committing "legacy code"
-
-
-sudo pacman -S wine
-
