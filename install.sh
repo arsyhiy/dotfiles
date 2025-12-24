@@ -20,12 +20,12 @@ PACKAGES(){
    cmake --version || sudo apt install -y cmake
     
    ## go
-   sudo go || bash <(curl -sL https://git.io/go-installer)	       
+   sudo go ||  wget https://git.io/go-installer.sh && bash go-installer.sh	       
 	
    node --version || sudo apt install -y nodejs npm
  
    # tmux
-   tmux --version || sudo apt instal -y tmux
+   tmux --version || sudo apt install -y tmux
    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
    bear --version || sudo apt install -y bear
     
@@ -87,7 +87,7 @@ ZSH(){
     printf "=======================================================================\n"
 
     # zsh and plugins
-    sudo apt install zsh --yes
+    sudo apt install -y zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 }
@@ -185,3 +185,4 @@ driver (){
         done
 }
 driver # NOTE: это для запуска driver
+
