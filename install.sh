@@ -1,229 +1,187 @@
-#!/bin/bash
+!/bin/bash
 
-#PACKAGES(){
+PACKAGES(){
 
-	# fonts
-#    sudo pacman -Q ttf-jetbrains-mono-nerd || sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd     
-#    sudo pacman -Q noto-fonts || sudo pacman -S --noconfirm noto-fonts
-#    sudo pacman -Q noto-fonts-emoji || sudo pacman -S --noconfirm noto-fonts-emoji
-#    sudo pacman -Q ttf-linux-libertine || sudo pacman -S --noconfirm ttf-linux-libertine
-#    sudo pacman -Q noto-fonts-cjk || sudo pacman -S --noconfirm noto-fonts-cjk
+   # fonts
+   # add there that script
 
-    # languages and utiliy to code 
+   # languages and utiliy to code 
 
-   # python
-#    sudo pipx || sudo pacman -S --noconfirm python-pipx \ pipx ensurepath # you can't check pipx with pacman -Q
-#    poetry --version || pipx install poetry # for sudo poetry i get : command not found and 100% trying installing every time.
+   ## python
+   pipx --version || sudo apt install -y pipx
+   pipx ensurepath
+   sudo pipx ensurepath --global # optional to allow pipx actions with --global argument
+   poetry --version || pipx install poetry # for sudo poetry i get : command not found and 100% trying installing every time.
 	
-    # git
-#	sudo pacman -Q git || sudo pacman -S --noconfirm git # and if it was installed like a directory?
-#	sudo pacman -Q gh || sudo pacman -S --noconfirm github-cli
+   ## git
+   git --version || sudo apt install -y git # and if it was installed like a directory?
 
- #  sudo pacman -Q clang || sudo pacman -S --noconfirm clang
- #   sudo pacman -Q cmake || sudo pacman -S --noconfirm cmake
+   gcc --version || sudo apt install -y build-essential
+   cmake --version || sudo apt install -y cmake
     
-#		sudo go || bash <(curl -sL https://git.io/go-installer)	       
+   ## go
+   sudo go || bash <(curl -sL https://git.io/go-installer)	       
 	
-#    sudo pacman -Q cargo || sudo pacman -S --noconfirm rust
-#    sudo pacman -Q node || sudo pacman -S --noconfirm nodejs 
-#    sudo pacman -Q elixir || sudo pacman -S --noconfirm elixir 
-#    sudo pacman -Q erlang || sudo pacman -S --noconfirm erlang 
-
-    # tmux
-#    sudo pacman -Q tmux || sudo pacman -S --noconfirm tmux 
-#    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-#    sudo pacman -Q bear || sudo pacman -S --noconfirm bear
+   node --version || sudo apt install -y nodejs npm
+ 
+   # tmux
+   tmux --version || sudo apt instal -y tmux
+   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+   bear --version || sudo apt install -y bear
     
-    # utiliy
-#    sudo pacman -Q unzip || sudo pacman -S --noconfirm unzip # like go do the second thing even if first = true.
-#    sudo pacman -Q curl || sudo pacman -S --noconfirm curl
-#    sudo pacman -Q playerctl || sudo pacman -S --noconfirm playerctl
+   # utiliy
+   unzip --version || sudo apt install -y unzip # like go do the second thing even if first = true.
+   curl --version || sudo apt install -y curl
 
-    # rewrite it
-    #bash -c "$(curl -sLo- https://superfile.dev/install.sh)"
+   # i need find analogue to neofetch.
+   # sudo neofetch --version || sudo pacman -S --noconfirm neofetch
 
-    # i need find analogue to neofetch.
-    #sudo neofetch --version || sudo pacman -S --noconfirm neofetch
-
-#    sudo pacman -Q htop || sudo pacman -S --noconfirm htop
-#    sudo pacman -Q ripgrep || sudo pacman -S --noconfirm ripgrep
-#    sudo pacman -S fzf
-#    sudo pacman -S lazygit
-#    sudo pacman -S obsidian
+   htop --version || sudo apt install -y htop
+   ripgrep  --version || sudo apt install -y ripgrep
+   fzf --version || sudo apt install -y fzf
+   lazygit --version || sudo apt install -y lazygit
     
-    # flatpak apps
-#    flatpak install pcsx2 # the only app that can be install by flatpak
-#    flatpak install flathub org.telegram.desktop
-#    flatpak install flathub org.libretro.RetroArch
-#    flatpak install flathub com.discordapp.Discord
-    # we need to add anki installation
-    # we need to uncomment /etc/pacman.d/mirrorlist read https://www.reddit.com/r/linux_gaming/comments/s9vfsk/installing_steam_on_arch/
+   # flatpak apps
+   flatpak install flathub org.telegram.desktop
+   flatpak install flathub com.discordapp.Discord
+   flatpak install flathub md.obsidian.Obsidian
+   flatpak install flathub org.torproject.torbrowser-launcher
 
-
-    # neovim
-#    sudo pacman -Q nvim || sudo pacman -S --noconfirm neovim
-#    git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
+   # neovim
+   nvim --version || sudo apt install -y neovim
+   git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
 	
-    # setup git config 
-#    git config --global user.name "arsyhiy"
-#    git config --global user.email arsyhiy32@gmail.com
+   # setup git config 
+   git config --global user.name "arsyhiy"
+   git config --global user.email arsyhiy32@gmail.com
 
-    #ssh
-#    sudo pacman -Q sshd || sudo pacman -S --noconfirm openssh-server
-
-    # archlinux hyprland utilites
-    # sudo pacman -Q brightnessctl || sudo pacman -S --noconfirm brightnessctl
-    # sudo pacman -Q pamixer || sudo pacman -S --noconfirm pamixer
-    # sudo pacman -Q npm || sudo pacman -S --noconfirm npm
-    # sudo pacman -Q hyprlock || sudo pacman -S --noconfirm hyprlock
-    # sudo pacman -Q hyprpaper || sudo pacman -S --noconfirm hyprpaper
-    #
-    # sudo pacman -Q wlogout || sudo yay -S --noconfirm wlogout
-    # sudo pacman -Q swaync || sudo pacman -S --noconfirm swaync
-    # sudo pacman -Q yay || sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
-    # sudo pacman -Q waybar || sudo pacman -S --noconfirm waybar
-    # go install go.senan.xyz/cliphist@latest
-
-	# rewrite it
-	# sudo yay -S rofi-bluetooth-git
-    
-    # bluetooth
-    # sudo pacman -Q bluez || sudo pacman -S --noconfirm bluez
-    # sudo pacman -Q  bluez-utils || sudo pacman -S --noconfirm bluez-utils
-    # sudo pacman -Q blueman || sudo pacman -S --noconfirm blueman
-
-	# actually we need to add it auto exec in linux
-#    systemctl start bluetooth.service # maybe we need to check first
-
-    # terminal
-#    sudo pacman -Q ghostty || sudo pacman -S --noconfirm ghostty
-    
-    # tor
-	# i think, i need to check if it installed
-#    yay -S  torbrowser-launcher
-
-	# disc drive
-#	sudo pacman -S wodim
-#	sudo pacman -S alsa-utils
-#	sudo pacman -S mpv
-#	sudo pacman -S pipewire pipewire-alsa pipewire-pulse wireplumber
-#	sudo pacman -S libdvdread libdvdnav
-#	yay -S libdvdcss
+   # ssh
+   ssh --version || sudo apt install -y openssh-server
 
 
-# }
-#
-# COPYMOVE(){
-#     printf "\n"
-#     printf "=======================================================================\n"
-#     printf "executing config.sh .\n"
-#     printf "=======================================================================\n"
-#     chmod +x config.sh
-#     ./config.sh
-# }
-#
-# ZSH(){
-#     printf "\n"
-#     printf "=======================================================================\n"
-#     printf "installing zsh .\n"
-#     printf "=======================================================================\n"
-#
-#     # zsh and plugins
-#     sudo pacman -Q zsh || sudo pacman -S --noconfirm -y zsh
-#     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-#     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-# }
-#
-# packages(){
-#     while true; do
-#         printf "install necessary packages? (e.g y - yes or n - no ):"
-#         read -r choice
-#
-#         if [ "$choice" == "y" ]; then
-#             PACKAGES
-#             break
-#         elif [ "$choice" == "n" ]; then
-#             printf "installing packages is canceled\n"
-#             break
-#         else
-#             printf "type y or n\n"
-#         fi
-#
-#     done
-# }
-#
-# copymove(){
-#         while true; do 
-#             printf "move all necessary files? (e.g y - yes or n - no ):"
-#             read -r choice
-#
-#                 if [ "$choice" == "y" ]; then
-#                     COPYMOVE
-#                 break
-#             elif [ "$choice" == "n" ]; then
-#                 printf "installing fonts is canceled\n"
-#                 break
-#             else
-#                 printf "type y or n\n"
-#             fi
-#
-#         done
-# }
-#
-# zsh(){
-#     while true; do 
-#         printf "would you like to install zsh? (e.g y - yes or n - no ):"
-#         read -r choice
-#
-#         if [ "$choice" == "y" ]; then
-#             ZSH
-#             break
-#         elif [ "$choice" == "n" ]; then
-#             printf "installing zsh is canceled\n"
-#             break
-#         else
-#             printf "type y or n\n"
-#         fi
-#
-#     done
-#
-# }
-#
-# clear
-# cat <<'.'
-#  ______   _______  _______  _______  ___   ___      _______  _______ 
-# |      | |       ||       ||       ||   | |   |    |       ||       |
-# |  _    ||   _   ||_     _||    ___||   | |   |    |    ___||  _____|
-# | | |   ||  | |  |  |   |  |   |___ |   | |   |    |   |___ | |_____ 
-# | |_|   ||  |_|  |  |   |  |    ___||   | |   |___ |    ___||_____  |
-# |       ||       |  |   |  |   |    |   | |       ||   |___  _____| |
-# |______| |_______|  |___|  |___|    |___| |_______||_______||_______|
-# .
-# printf "                                                      made by arsyhiy\n"
-# printf "\n"
-# printf "=======================================================================\n"
-#
-# # driver 
-# driver (){
-#     while true;do 
-#         printf "would you like to do all scrpits? (e.g y - yes or n - no):"
-#         read -r choice
-#
-#         if [ "$choice" == "y" ]; then
-#             PACKAGES
-#             COPYMOVE
-#             ZSH
-#             break
-#         elif [ "$choice" == "n" ]; then
-#             printf "you will choice what to do\n"
-#              packages
-#              copymove
-#              zsh
-#              break
-#         else
-#             printf "type y or n\n"
-#         fi
-#
-#         done
-# }
-# driver # NOTE: это для запуска driver
+   # disc drive
+   wodim --version || sudo apt install -y wodim
+   alsa-utils --version || sudo apt install -y alsa-utils
+   mpv --version || sudo apt install -y mpv 
+   pipewire --version || sudo apt install -y pipewire
+   pipewire-alsa --version || sudo apt install -y pipewire-alsa
+   pipewire-pulse --version || sudo apt install -y pipewire-pulse
+   wireplumber --version || sudo apt install -y wireplumber
+
+
+}
+
+COPYMOVE(){
+    printf "\n"
+    printf "=======================================================================\n"
+    printf "executing config.sh .\n"
+    printf "=======================================================================\n"
+    chmod +x config.sh
+    ./config.sh
+}
+
+ZSH(){
+    printf "\n"
+    printf "=======================================================================\n"
+    printf "installing zsh .\n"
+    printf "=======================================================================\n"
+
+    # zsh and plugins
+    sudo apt install zsh --yes
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+}
+
+packages(){
+    while true; do
+        printf "install necessary packages? (e.g y - yes or n - no ):"
+        read -r choice
+
+        if [ "$choice" == "y" ]; then
+            PACKAGES
+            break
+        elif [ "$choice" == "n" ]; then
+            printf "installing packages is canceled\n"
+            break
+        else
+            printf "type y or n\n"
+        fi
+
+    done
+}
+
+copymove(){
+        while true; do 
+            printf "move all necessary files? (e.g y - yes or n - no ):"
+            read -r choice
+
+                if [ "$choice" == "y" ]; then
+                    COPYMOVE
+                break
+            elif [ "$choice" == "n" ]; then
+                printf "installing fonts is canceled\n"
+                break
+            else
+                printf "type y or n\n"
+            fi
+
+        done
+}
+
+zsh(){
+    while true; do 
+        printf "would you like to install zsh? (e.g y - yes or n - no ):"
+        read -r choice
+
+        if [ "$choice" == "y" ]; then
+            ZSH
+            break
+        elif [ "$choice" == "n" ]; then
+            printf "installing zsh is canceled\n"
+            break
+        else
+            printf "type y or n\n"
+        fi
+
+    done
+
+}
+
+clear
+cat <<'.'
+ ______   _______  _______  _______  ___   ___      _______  _______ 
+|      | |       ||       ||       ||   | |   |    |       ||       |
+|  _    ||   _   ||_     _||    ___||   | |   |    |    ___||  _____|
+| | |   ||  | |  |  |   |  |   |___ |   | |   |    |   |___ | |_____ 
+| |_|   ||  |_|  |  |   |  |    ___||   | |   |___ |    ___||_____  |
+|       ||       |  |   |  |   |    |   | |       ||   |___  _____| |
+|______| |_______|  |___|  |___|    |___| |_______||_______||_______|
+.
+printf "                                                      made by arsyhiy\n"
+printf "\n"
+printf "=======================================================================\n"
+
+# driver 
+driver (){
+    while true;do 
+        printf "would you like to do all scrpits? (e.g y - yes or n - no):"
+        read -r choice
+
+        if [ "$choice" == "y" ]; then
+            PACKAGES
+            COPYMOVE
+            ZSH
+            break
+        elif [ "$choice" == "n" ]; then
+            printf "you will choice what to do\n"
+             packages
+             copymove
+             zsh
+             break
+        else
+            printf "type y or n\n"
+        fi
+
+        done
+}
+driver # NOTE: это для запуска driver
