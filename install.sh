@@ -24,12 +24,12 @@ PACKAGES(){
 	
    node --version || sudo apt install -y nodejs npm
  
-   # tmux
+   ## tmux
    tmux --version || sudo apt install -y tmux
    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
    bear --version || sudo apt install -y bear
     
-   # utiliy
+   ## utiliy
    unzip --version || sudo apt install -y unzip # like go do the second thing even if first = true.
    curl --version || sudo apt install -y curl
 
@@ -50,6 +50,9 @@ PACKAGES(){
    # neovim
    nvim --version || sudo apt install -y neovim
    git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
+
+   # emacs
+   emacs --version || sudo apt install -y emascs
 	
    # setup git config 
    git config --global user.name "arsyhiy"
@@ -57,7 +60,6 @@ PACKAGES(){
 
    # ssh
    ssh --version || sudo apt install -y openssh-server
-
 
    # disc drive
    wodim --version || sudo apt install -y wodim
@@ -67,8 +69,6 @@ PACKAGES(){
    pipewire-alsa --version || sudo apt install -y pipewire-alsa
    pipewire-pulse --version || sudo apt install -y pipewire-pulse
    wireplumber --version || sudo apt install -y wireplumber
-
-
 }
 
 COPYMOVE(){
