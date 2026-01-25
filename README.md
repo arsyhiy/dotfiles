@@ -22,6 +22,7 @@ sudo ./install
 -- add for hyprlock the check what language layout you use
 -- upate allot of very nessecery apps and so
 -- adding wine
+-- rewrite entire repo for god sake
 ## Rules for this repository
 
 NOTE: rules are written for only enhancement and controlling my self from committing "legacy code"

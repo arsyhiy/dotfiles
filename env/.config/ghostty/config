@@ -1,0 +1,8 @@
+font-family = JetBrainsMonoNLNerdFont
+font-size = 15
+theme = Gruvbox Dark Hard
+cursor-style = block
+mouse-hide-while-typing = true
+quick-terminal-position = "center"
+background-blur = true
+cursor-color= #50864c
