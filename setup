@@ -15,18 +15,29 @@ printf "\n"
 printf "=======================================================================\n"
 
 # наверное надо перенести куда нибудь еще
-cp config.env.template config.env
+#cp config.env.template config.env
 
-source ./utils.sh
-CONFIG="config.env"
-source "$CONFIG"
+FLAGS="flags.env"
+source "$FLAGS"
 
 LOG_FILE="${LOG_FILE:-packages.log}"
 > "$LOG_FILE"
 
+set_flag_value() {
+    local flag="$1"
+    local value="$2"
+    local file="${FLAGS:-flags.env}"
+
+    if grep -q "^$flag=" "$file"; then
+        sed -i "s|^$flag=.*|$flag=$value|" "$file"
+    else
+        echo "$flag=$value" >> "$file"
+    fi
+}
+
 any_flag_is_false() {
-    source "$CONFIG"
-    for flag in INSTALL CONFIG; do
+    source "$FLAGS"
+    for flag in INSTALL_PACKAGES CONFIG_DONE; do
         if [[ "${!flag}" == "false" ]]; then
             return 0
         fi
@@ -38,64 +49,44 @@ any_flag_is_false() {
 while any_flag_is_false; do
     source "$CONFIG"
 
-    # установка пакетов деибана, snap и flathub приложения
-    # NOTE: обдумать название
     if [[ "$INSTALL" == "false" ]]; then
-        # может что то получше echo
         echo "Installing Debian packages..."
         if ./install.sh; then
             set_flag_value INSTALL true
         else
-            # что то получше echo
             echo "Error installing Debian packages" | tee -a "$LOG_FILE"
             set_flag_value INSTALL error
         fi
     elif [[ "$INSTALL" == "error" ]]; then
-        # не echo
         echo "Skipping Debian packages (previous error)" | tee -a "$LOG_FILE"
     fi
 
     # config
-    if [[ "$CONFIG" == "false" ]]; then
-        # может что то получше echo
+    if [[ "$CONFIG_DONE" == "false" ]]; then
         echo "config is configin"
         if ./config.sh; then
-            set_flag_value CONFIG true
+            set_flag_value CONFIG_DONE true
         else
-            # что то получше echo
             echo "Error config" | tee -a "$LOG_FILE"
-            set_flag_value CONFIG error
+            set_flag_value CONFIG_DONE error
         fi
-    elif [[ "$CONFIG" == "error" ]]; then
-        # не echo
+    elif [[ "$CONFIG_DONE" == "error" ]]; then
         echo "Skipping config (previous error)" | tee -a "$LOG_FILE"
+    fi
+
+    # every thing else
+    if [[ "$OTHER" == "false" ]]; then
+        echo "other thing goes"
+        if ./other.sh; then
+            set_flag_value OTHER true
+        else
+            echo "Error others" | tee -a "$LOG_FILE"
+            set_flag_value OTHER error
+        fi
+    elif [[ "$OTHER" == "error" ]]; then
+        echo "Skipping other (previous error)" | tee -a "$LOG_FILE"
     fi
 
 done
 
-# ненавижу echo
 echo "Setup finished. Check $LOG_FILE for details."
-
-
-
-
-
-
-
-надо добавить куда нибудь
-   ## python
-   pipx --version || sudo apt install -y pipx
-   pipx ensurepath
-   sudo pipx ensurepath --global # optional to allow pipx actions with --global argument
-   poetry --version || pipx install poetry # for sudo poetry i get : command not found and 100% trying installing every time.
-	
-
-   git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
-
-
-
-
-    # zsh and plugins
-    sudo apt install -y zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions

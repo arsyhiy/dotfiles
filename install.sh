@@ -1,5 +1,4 @@
 #!/bin/bash
-# NOTE: довести до нормального состояния только в когда доведем весь репозиторий до ума
 
 # this script is for installing all packages
 
@@ -18,18 +17,16 @@ packages=(
     unzip
     curl
     pipx
+    wine
 #    poetry
 )
 
 # all packages with not the same name as you use
-# NOTE: дать нормальное название
 declare -A exceptions=(
     ["ssh"]="openssh-server"
     ["nvim"]="neovim"
     ["gcc"]="build-essential"
 )
-
-
 
 # maybe it will better to keep it somewherelse no in dotfiles repo
 log_file="packages.log"
@@ -37,13 +34,13 @@ log_file="packages.log"
 
 for pkg in "${packages[@]}"; do
     if dpkg -s "$pkg" >/dev/null 2>&1; then
-        echo "$pkg уже установлен."
+        echo "$pkg all ready installed."
     else
-        echo "Устанавливаем $pkg..."
+        echo "installing $pkg..."
         if sudo apt install -y "$pkg"; then
-            echo "$pkg установлен успешно."
+            echo "$pkg installed with success."
         else
-            echo "$pkg не удалось установить, записываем в лог."
+            echo "$pkg cannot install it. write to log."
             echo "$pkg" >> "$log_file"
         fi
     fi
@@ -53,7 +50,7 @@ for bin in "${!exceptions[@]}"; do
     pkg="${exceptions[$bin]}"
 
     if command -v "$bin" >/dev/null 2>&1; then
-        echo "$bin already present"
+        echo "$bin allready present"
     else
         echo "Installing $pkg (for $bin)..."
         if sudo apt install -y "$pkg"; then
@@ -65,19 +62,7 @@ for bin in "${!exceptions[@]}"; do
     fi
 done
 
-
-
-
-
-
-   # flatpak apps
-   flatpak install flathub org.telegram.desktop
-   flatpak install flathub com.discordapp.Discord
-   flatpak install flathub md.obsidian.Obsidian
-   flatpak install flathub org.torproject.torbrowser-launcher
-
-
-# Flatpak приложения (не через массив)
+# Flatpak apps 
 flatpaks=(
     "org.telegram.desktop"
     "com.discordapp.Discord"
@@ -87,17 +72,14 @@ flatpaks=(
 
 for app in "${flatpaks[@]}"; do
     if flatpak list | grep -q "$app"; then
-        echo "$app уже установлен."
+        echo "$app allready installed."
     else
-        echo "Устанавливаем $app..."
+        echo "installing $app..."
         flatpak install -y flathub "$app"
     fi
 done
 
 if [ -s "$log_file" ]; then
-    echo "Не удалось установить следующие пакеты. Проверьте $log_file"
+    echo "cannot install specific packages. write in to $log_file . read for more information"
 fi
 
-
-
-#flathub
