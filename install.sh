@@ -65,6 +65,18 @@ for bin in "${!exceptions[@]}"; do
     fi
 done
 
+
+
+
+
+
+   # flatpak apps
+   flatpak install flathub org.telegram.desktop
+   flatpak install flathub com.discordapp.Discord
+   flatpak install flathub md.obsidian.Obsidian
+   flatpak install flathub org.torproject.torbrowser-launcher
+
+
 # Flatpak приложения (не через массив)
 flatpaks=(
     "org.telegram.desktop"

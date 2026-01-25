@@ -1,132 +1,101 @@
 #!/bin/bash
 
+clear
+cat <<'.'
+ ______   _______  _______  _______  ___   ___      _______  _______ 
+|      | |       ||       ||       ||   | |   |    |       ||       |
+|  _    ||   _   ||_     _||    ___||   | |   |    |    ___||  _____|
+| | |   ||  | |  |  |   |  |   |___ |   | |   |    |   |___ | |_____ 
+| |_|   ||  |_|  |  |   |  |    ___||   | |   |___ |    ___||_____  |
+|       ||       |  |   |  |   |    |   | |       ||   |___  _____| |
+|______| |_______|  |___|  |___|    |___| |_______||_______||_______|
+.
+printf "                                                      made by arsyhiy\n"
+printf "\n"
+printf "=======================================================================\n"
+
+# наверное надо перенести куда нибудь еще
 cp config.env.template config.env
 
-set -a
-source ./config.env
-set +a
-
-# теперь все переменные доступны
-if [[ "$DO_APT" == "true" ]]; then
-    echo "Installing Debian packages..."
-    # твой цикл установки
-fi
-
-if [[ "$DO_FLATPAK" == "true" ]]; then
-    echo "Installing Flatpak apps..."
-fi
-
-set_flag() {
-    local flag="$1"
-    local value="$2"
-    local file="config.env"
-
-    # Если флаг есть — заменить
-    if grep -q "^$flag=" "$file"; then
-        sed -i "s|^$flag=.*|$flag=$value|" "$file"
-    else
-        # Если флага нет — добавить
-        echo "$flag=$value" >> "$file"
-    fi
-}
-
-    set_flag DO_APT=false
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#!/bin/bash
-
+source ./utils.sh
 CONFIG="config.env"
 source "$CONFIG"
 
-LOG_FILE="${LOG_FILE:-failed_packages.log}"
+LOG_FILE="${LOG_FILE:-packages.log}"
 > "$LOG_FILE"
 
-# Функция для обновления флага
-set_flag() {
-    local flag="$1"
-    local value="$2"
-    sed -i "s|^$flag=.*|$flag=$value|" "$CONFIG"
-}
-
-# Проверяем, есть ли блоки со значением true
-any_flag_true() {
+any_flag_is_false() {
     source "$CONFIG"
-    for flag in DO_APT DO_FLATPAK DO_GIT; do
-        if [[ "${!flag}" == "true" ]]; then
+    for flag in INSTALL CONFIG; do
+        if [[ "${!flag}" == "false" ]]; then
             return 0
         fi
     done
     return 1
 }
 
-# Главный цикл
-while any_flag_true; do
+# need more helpfull name
+while any_flag_is_false; do
     source "$CONFIG"
 
-    # ---- Debian пакеты ----
-    if [[ "$DO_APT" == "true" ]]; then
+    # установка пакетов деибана, snap и flathub приложения
+    # NOTE: обдумать название
+    if [[ "$INSTALL" == "false" ]]; then
+        # может что то получше echo
         echo "Installing Debian packages..."
-        if ./install_apt.sh; then
-            set_flag DO_APT false
+        if ./install.sh; then
+            set_flag_value INSTALL true
         else
+            # что то получше echo
             echo "Error installing Debian packages" | tee -a "$LOG_FILE"
-            set_flag DO_APT error
+            set_flag_value INSTALL error
         fi
-    elif [[ "$DO_APT" == "error" ]]; then
+    elif [[ "$INSTALL" == "error" ]]; then
+        # не echo
         echo "Skipping Debian packages (previous error)" | tee -a "$LOG_FILE"
     fi
 
-    # ---- Flatpak ----
-    if [[ "$DO_FLATPAK" == "true" ]]; then
-        echo "Installing Flatpak apps..."
-        if ./install_flatpak.sh; then
-            set_flag DO_FLATPAK false
+    # config
+    if [[ "$CONFIG" == "false" ]]; then
+        # может что то получше echo
+        echo "config is configin"
+        if ./config.sh; then
+            set_flag_value CONFIG true
         else
-            echo "Error installing Flatpak apps" | tee -a "$LOG_FILE"
-            set_flag DO_FLATPAK error
+            # что то получше echo
+            echo "Error config" | tee -a "$LOG_FILE"
+            set_flag_value CONFIG error
         fi
-    elif [[ "$DO_FLATPAK" == "error" ]]; then
-        echo "Skipping Flatpak apps (previous error)" | tee -a "$LOG_FILE"
+    elif [[ "$CONFIG" == "error" ]]; then
+        # не echo
+        echo "Skipping config (previous error)" | tee -a "$LOG_FILE"
     fi
 
-    # ---- Git ----
-    if [[ "$DO_GIT" == "true" ]]; then
-        echo "Cloning Git repos..."
-        if ./install_git.sh; then
-            set_flag DO_GIT false
-        else
-            echo "Error cloning Git repos" | tee -a "$LOG_FILE"
-            set_flag DO_GIT error
-        fi
-    elif [[ "$DO_GIT" == "error" ]]; then
-        echo "Skipping Git repos (previous error)" | tee -a "$LOG_FILE"
-    fi
 done
 
+# ненавижу echo
 echo "Setup finished. Check $LOG_FILE for details."
 
+
+
+
+
+
+
+надо добавить куда нибудь
+   ## python
+   pipx --version || sudo apt install -y pipx
+   pipx ensurepath
+   sudo pipx ensurepath --global # optional to allow pipx actions with --global argument
+   poetry --version || pipx install poetry # for sudo poetry i get : command not found and 100% trying installing every time.
+	
+
+   git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
+
+
+
+
+    # zsh and plugins
+    sudo apt install -y zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
