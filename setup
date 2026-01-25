@@ -1,0 +1,132 @@
+#!/bin/bash
+
+cp config.env.template config.env
+
+set -a
+source ./config.env
+set +a
+
+# теперь все переменные доступны
+if [[ "$DO_APT" == "true" ]]; then
+    echo "Installing Debian packages..."
+    # твой цикл установки
+fi
+
+if [[ "$DO_FLATPAK" == "true" ]]; then
+    echo "Installing Flatpak apps..."
+fi
+
+set_flag() {
+    local flag="$1"
+    local value="$2"
+    local file="config.env"
+
+    # Если флаг есть — заменить
+    if grep -q "^$flag=" "$file"; then
+        sed -i "s|^$flag=.*|$flag=$value|" "$file"
+    else
+        # Если флага нет — добавить
+        echo "$flag=$value" >> "$file"
+    fi
+}
+
+    set_flag DO_APT=false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#!/bin/bash
+
+CONFIG="config.env"
+source "$CONFIG"
+
+LOG_FILE="${LOG_FILE:-failed_packages.log}"
+> "$LOG_FILE"
+
+# Функция для обновления флага
+set_flag() {
+    local flag="$1"
+    local value="$2"
+    sed -i "s|^$flag=.*|$flag=$value|" "$CONFIG"
+}
+
+# Проверяем, есть ли блоки со значением true
+any_flag_true() {
+    source "$CONFIG"
+    for flag in DO_APT DO_FLATPAK DO_GIT; do
+        if [[ "${!flag}" == "true" ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+# Главный цикл
+while any_flag_true; do
+    source "$CONFIG"
+
+    # ---- Debian пакеты ----
+    if [[ "$DO_APT" == "true" ]]; then
+        echo "Installing Debian packages..."
+        if ./install_apt.sh; then
+            set_flag DO_APT false
+        else
+            echo "Error installing Debian packages" | tee -a "$LOG_FILE"
+            set_flag DO_APT error
+        fi
+    elif [[ "$DO_APT" == "error" ]]; then
+        echo "Skipping Debian packages (previous error)" | tee -a "$LOG_FILE"
+    fi
+
+    # ---- Flatpak ----
+    if [[ "$DO_FLATPAK" == "true" ]]; then
+        echo "Installing Flatpak apps..."
+        if ./install_flatpak.sh; then
+            set_flag DO_FLATPAK false
+        else
+            echo "Error installing Flatpak apps" | tee -a "$LOG_FILE"
+            set_flag DO_FLATPAK error
+        fi
+    elif [[ "$DO_FLATPAK" == "error" ]]; then
+        echo "Skipping Flatpak apps (previous error)" | tee -a "$LOG_FILE"
+    fi
+
+    # ---- Git ----
+    if [[ "$DO_GIT" == "true" ]]; then
+        echo "Cloning Git repos..."
+        if ./install_git.sh; then
+            set_flag DO_GIT false
+        else
+            echo "Error cloning Git repos" | tee -a "$LOG_FILE"
+            set_flag DO_GIT error
+        fi
+    elif [[ "$DO_GIT" == "error" ]]; then
+        echo "Skipping Git repos (previous error)" | tee -a "$LOG_FILE"
+    fi
+done
+
+echo "Setup finished. Check $LOG_FILE for details."
+

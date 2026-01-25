@@ -1,188 +1,91 @@
-!/bin/bash
+#!/bin/bash
+# NOTE: довести до нормального состояния только в когда доведем весь репозиторий до ума
 
-PACKAGES(){
+# this script is for installing all packages
 
-   # fonts
-   # add there that script
+# all packages with the same name as you use
+packages=(
+    cmake
+    nodejs 
+    npm
+    tmux
+    emacs
+    htop
+    ripgrep
+    fzf
+    lazygit
+    bear
+    unzip
+    curl
+    pipx
+#    poetry
+)
 
-   # languages and utiliy to code 
+# all packages with not the same name as you use
+# NOTE: дать нормальное название
+declare -A exceptions=(
+    ["ssh"]="openssh-server"
+    ["nvim"]="neovim"
+    ["gcc"]="build-essential"
+)
 
-   ## python
-   pipx --version || sudo apt install -y pipx
-   pipx ensurepath
-   sudo pipx ensurepath --global # optional to allow pipx actions with --global argument
-   poetry --version || pipx install poetry # for sudo poetry i get : command not found and 100% trying installing every time.
-	
-   ## git
-   git --version || sudo apt install -y git # and if it was installed like a directory?
 
-   gcc --version || sudo apt install -y build-essential
-   cmake --version || sudo apt install -y cmake
-    
-   ## go
-   sudo go ||  wget https://git.io/go-installer.sh && bash go-installer.sh	       
-	
-   node --version || sudo apt install -y nodejs npm
- 
-   ## tmux
-   tmux --version || sudo apt install -y tmux
-   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-   bear --version || sudo apt install -y bear
-    
-   ## utiliy
-   unzip --version || sudo apt install -y unzip # like go do the second thing even if first = true.
-   curl --version || sudo apt install -y curl
 
-   # i need find analogue to neofetch.
-   # sudo neofetch --version || sudo pacman -S --noconfirm neofetch
+# maybe it will better to keep it somewherelse no in dotfiles repo
+log_file="packages.log"
+> "$log_file"
 
-   htop --version || sudo apt install -y htop
-   ripgrep  --version || sudo apt install -y ripgrep
-   fzf --version || sudo apt install -y fzf
-   lazygit --version || sudo apt install -y lazygit
-    
-   # flatpak apps
-   flatpak install flathub org.telegram.desktop
-   flatpak install flathub com.discordapp.Discord
-   flatpak install flathub md.obsidian.Obsidian
-   flatpak install flathub org.torproject.torbrowser-launcher
-
-   # neovim
-   nvim --version || sudo apt install -y neovim
-   git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
-
-   # emacs
-   emacs --version || sudo apt install -y emascs
-	
-   # setup git config 
-   git config --global user.name "arsyhiy"
-   git config --global user.email arsyhiy32@gmail.com
-
-   # ssh
-   ssh --version || sudo apt install -y openssh-server
-
-   # disc drive
-   wodim --version || sudo apt install -y wodim
-   alsa-utils --version || sudo apt install -y alsa-utils
-   mpv --version || sudo apt install -y mpv 
-   pipewire --version || sudo apt install -y pipewire
-   pipewire-alsa --version || sudo apt install -y pipewire-alsa
-   pipewire-pulse --version || sudo apt install -y pipewire-pulse
-   wireplumber --version || sudo apt install -y wireplumber
-}
-
-COPYMOVE(){
-    printf "\n"
-    printf "=======================================================================\n"
-    printf "executing config.sh .\n"
-    printf "=======================================================================\n"
-    chmod +x config.sh
-    ./config.sh
-}
-
-ZSH(){
-    printf "\n"
-    printf "=======================================================================\n"
-    printf "installing zsh .\n"
-    printf "=======================================================================\n"
-
-    # zsh and plugins
-    sudo apt install -y zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-}
-
-packages(){
-    while true; do
-        printf "install necessary packages? (e.g y - yes or n - no ):"
-        read -r choice
-
-        if [ "$choice" == "y" ]; then
-            PACKAGES
-            break
-        elif [ "$choice" == "n" ]; then
-            printf "installing packages is canceled\n"
-            break
+for pkg in "${packages[@]}"; do
+    if dpkg -s "$pkg" >/dev/null 2>&1; then
+        echo "$pkg уже установлен."
+    else
+        echo "Устанавливаем $pkg..."
+        if sudo apt install -y "$pkg"; then
+            echo "$pkg установлен успешно."
         else
-            printf "type y or n\n"
+            echo "$pkg не удалось установить, записываем в лог."
+            echo "$pkg" >> "$log_file"
         fi
+    fi
+done
 
-    done
-}
+for bin in "${!exceptions[@]}"; do
+    pkg="${exceptions[$bin]}"
 
-copymove(){
-        while true; do 
-            printf "move all necessary files? (e.g y - yes or n - no ):"
-            read -r choice
-
-                if [ "$choice" == "y" ]; then
-                    COPYMOVE
-                break
-            elif [ "$choice" == "n" ]; then
-                printf "installing fonts is canceled\n"
-                break
-            else
-                printf "type y or n\n"
-            fi
-
-        done
-}
-
-zsh(){
-    while true; do 
-        printf "would you like to install zsh? (e.g y - yes or n - no ):"
-        read -r choice
-
-        if [ "$choice" == "y" ]; then
-            ZSH
-            break
-        elif [ "$choice" == "n" ]; then
-            printf "installing zsh is canceled\n"
-            break
+    if command -v "$bin" >/dev/null 2>&1; then
+        echo "$bin already present"
+    else
+        echo "Installing $pkg (for $bin)..."
+        if sudo apt install -y "$pkg"; then
+            echo "$pkg installed"
         else
-            printf "type y or n\n"
+            echo "$pkg failed"
+            echo "$pkg" >> "$log_file"
         fi
+    fi
+done
 
-    done
+# Flatpak приложения (не через массив)
+flatpaks=(
+    "org.telegram.desktop"
+    "com.discordapp.Discord"
+    "md.obsidian.Obsidian"
+    "org.torproject.torbrowser-launcher"
+)
 
-}
+for app in "${flatpaks[@]}"; do
+    if flatpak list | grep -q "$app"; then
+        echo "$app уже установлен."
+    else
+        echo "Устанавливаем $app..."
+        flatpak install -y flathub "$app"
+    fi
+done
 
-clear
-cat <<'.'
- ______   _______  _______  _______  ___   ___      _______  _______ 
-|      | |       ||       ||       ||   | |   |    |       ||       |
-|  _    ||   _   ||_     _||    ___||   | |   |    |    ___||  _____|
-| | |   ||  | |  |  |   |  |   |___ |   | |   |    |   |___ | |_____ 
-| |_|   ||  |_|  |  |   |  |    ___||   | |   |___ |    ___||_____  |
-|       ||       |  |   |  |   |    |   | |       ||   |___  _____| |
-|______| |_______|  |___|  |___|    |___| |_______||_______||_______|
-.
-printf "                                                      made by arsyhiy\n"
-printf "\n"
-printf "=======================================================================\n"
+if [ -s "$log_file" ]; then
+    echo "Не удалось установить следующие пакеты. Проверьте $log_file"
+fi
 
-# driver 
-driver (){
-    while true;do 
-        printf "would you like to do all scrpits? (e.g y - yes or n - no):"
-        read -r choice
 
-        if [ "$choice" == "y" ]; then
-            PACKAGES
-            COPYMOVE
-            ZSH
-            break
-        elif [ "$choice" == "n" ]; then
-            printf "you will choice what to do\n"
-             packages
-             copymove
-             zsh
-             break
-        else
-            printf "type y or n\n"
-        fi
 
-        done
-}
-driver # NOTE: это для запуска driver
-
+#flathub
