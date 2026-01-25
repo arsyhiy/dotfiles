@@ -1,9 +1,0 @@
-[submodule "env/.config/nvim"]
-	path = env/.config/nvim
-	url = https://codeberg.org/arseniiy/nvim.git
-[submodule "env/.emacs.d"]
-	path = env/.emacs.d
-	url = https://codeberg.org/arseniiy/.emacs.d.git
-[submodule "env/corne"]
-	path = env/corne
-	url = https://codeberg.org/arseniiy/corne.git
