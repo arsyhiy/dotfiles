@@ -13,3 +13,6 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 sudo apt install snapd
 snap install ghostty --classic
+
+# emacs
+git clone ssh://git@codeberg.org/arseniiy/.emacs.d.git ~/.emacs.d
