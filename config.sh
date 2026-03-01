@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#git submodule update
+git submodule update
 dry_run="0"
 DEV_ENV="$HOME/dotfiles"
 if [ -z "$XDG_CONFIG_HOME" ]; then
