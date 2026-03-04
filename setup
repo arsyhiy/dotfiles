@@ -15,7 +15,7 @@ printf "\n"
 printf "=======================================================================\n"
 
 # наверное надо перенести куда нибудь еще
-#cp config.env.template config.env
+cp flags.env.template flags.env
 
 FLAGS="flags.env"
 source "$FLAGS"

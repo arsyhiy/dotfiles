@@ -16,3 +16,6 @@ snap install ghostty --classic
 
 # emacs
 git clone ssh://git@codeberg.org/arseniiy/.emacs.d.git ~/.emacs.d
+
+# nvim 
+git clone git@github.com:arsyhiy/nvim.git ~/.config/nvim/
