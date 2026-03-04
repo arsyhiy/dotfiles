@@ -14,8 +14,7 @@ printf "                                                      made by arsyhiy\n"
 printf "\n"
 printf "=======================================================================\n"
 
-# наверное надо перенести куда нибудь еще
-cp flags.env.template flags.env
+cp flags.env.template flags.env 
 
 FLAGS="flags.env"
 source "$FLAGS"
