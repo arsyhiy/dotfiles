@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+./cloning_configs.sh
+
 git submodule update
 dry_run="0"
 DEV_ENV="$HOME/dotfiles"

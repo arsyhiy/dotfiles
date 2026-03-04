@@ -1,6 +1,5 @@
 #!/bin/bash
 
-git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
 pipx --version || sudo apt install -y pipx
 pipx ensurepath
 sudo pipx ensurepath --global # optional to allow pipx actions with --global argument
