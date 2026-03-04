@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
+
 # emacs
 git clone https://github.com/arsyhiy/.emacs.d.git ~/.emacs.d
 
