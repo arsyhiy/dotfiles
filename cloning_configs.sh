@@ -6,4 +6,4 @@ git clone https://github.com/arsyhiy/.emacs.d.git ~/.emacs.d
 git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim
 
 # ghostty
-git clone https://github.com/arsyhiy/ghostty.git
+git clone https://github.com/arsyhiy/ghostty.git ~/.config/ghostty
