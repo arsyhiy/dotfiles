@@ -1,4 +1,4 @@
-## how to run dotifles
+# how to use
 
 ```bash
 sudo ./setup

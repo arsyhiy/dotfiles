@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # this script is for installing all packages
 

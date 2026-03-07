@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 pipx --version || sudo apt install -y pipx
 pipx ensurepath

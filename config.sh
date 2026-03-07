@@ -1,8 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 ./cloning_configs.sh
 
-git submodule update
 dry_run="0"
 DEV_ENV="$HOME/dotfiles"
 if [ -z "$XDG_CONFIG_HOME" ]; then

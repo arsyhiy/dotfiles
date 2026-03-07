@@ -8,3 +8,4 @@ git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim
 
 # ghostty
 git clone https://github.com/arsyhiy/ghostty.git ~/.config/ghostty
+
