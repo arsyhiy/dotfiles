@@ -1,6 +1,5 @@
 #!/bin/bash
 
-git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim # it will not cloning if if directory already there. so it will cost not much.
 pipx --version || sudo apt install -y pipx
 pipx ensurepath
 sudo pipx ensurepath --global # optional to allow pipx actions with --global argument
@@ -14,5 +13,3 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 sudo apt install snapd
 snap install ghostty --classic
 
-# emacs
-git clone ssh://git@codeberg.org/arseniiy/.emacs.d.git ~/.emacs.d

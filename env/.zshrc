@@ -106,3 +106,5 @@ alias n=nvim
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+setopt HIST_IGNORE_DUPS      # не записывать повторяющиеся подряд команды
+setopt HIST_IGNORE_ALL_DUPS  # или удалять старые дубликаты
