@@ -4,4 +4,10 @@
 sudo ./setup
 ```
 
-# TODO:
+# what i use 
+- debian (if your read source code all ready know)
+- sway (tiling manager)
+- neovim 
+- zsh
+- ghostty
+
