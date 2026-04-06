@@ -10,8 +10,10 @@ git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim
 git clone https://github.com/arsyhiy/ghostty.git ~/.config/ghostty
 
 # sway
-git clone git@github.com:arsyhiy/sway.git ~/.config/sway/
+git clone https://github.com/arsyhiy/sway.git ~/.config/sway/
 
 # waybar
-git clone git@github.com:arsyhiy/waybar.git ~/.config/waybar/
+git clone https://github.com/arsyhiy/waybar.git ~/.config/waybar/
 
+# wofi
+git clone https://github.com/arsyhiy/wofi.git ~/.config/wofi/ 
