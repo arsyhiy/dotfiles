@@ -13,3 +13,17 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 sudo apt install snapd
 snap install ghostty --classic
 
+
+# NOTE: check if every thing there bellow is can be installed.
+
+# sway 
+sudo apt install waybar swaync pavucontrol pamixer brightnessctl network-manager
+sudo apt install brightnessctl
+sudo apt install bluez blueman
+sudo apt install pipewire pipewire-pulse pamixer pavucontrol
+sudo apt install swaylock
+
+sudo apt install sway-notification-center
+sudo apt install rofi-bluetooth
+sudo apt install pavucontrol
+sudo apt install pamixer
