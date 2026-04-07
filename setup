@@ -14,77 +14,75 @@ printf "                                                      made by arsyhiy\n"
 printf "\n"
 printf "=======================================================================\n"
 
-cp flags.env.template flags.env 
+cp flags.env.template flags.env
 
 FLAGS="flags.env"
 source "$FLAGS"
 
 LOG_FILE="${LOG_FILE:-packages.log}"
-> "$LOG_FILE"
+>"$LOG_FILE"
 
 set_flag_value() {
-    local flag="$1"
-    local value="$2"
-    local file="${FLAGS:-flags.env}"
+	local flag="$1"
+	local value="$2"
+	local file="${FLAGS:-flags.env}"
 
-    if grep -q "^$flag=" "$file"; then
-        sed -i "s|^$flag=.*|$flag=$value|" "$file"
-    else
-        echo "$flag=$value" >> "$file"
-    fi
+	if grep -q "^$flag=" "$file"; then
+		sed -i "s|^$flag=.*|$flag=$value|" "$file"
+	else
+		echo "$flag=$value" >>"$file"
+	fi
 }
 
 any_flag_is_false() {
-    source "$FLAGS"
-    for flag in INSTALL_PACKAGES CONFIG_DONE; do
-        if [[ "${!flag}" == "false" ]]; then
-            return 0
-        fi
-    done
-    return 1
+	source "$FLAGS"
+	for flag in INSTALL_PACKAGES CONFIG_DONE; do
+		if [[ "${!flag}" == "false" ]]; then
+			return 0
+		fi
+	done
+	return 1
 }
 
-# need more helpfull name
 while any_flag_is_false; do
-    source "$CONFIG"
+	source "$CONFIG"
 
-    if [[ "$INSTALL" == "false" ]]; then
-        echo "Installing Debian packages..."
-        if ./install.sh; then
-            set_flag_value INSTALL true
-        else
-            echo "Error installing Debian packages" | tee -a "$LOG_FILE"
-            set_flag_value INSTALL error
-        fi
-    elif [[ "$INSTALL" == "error" ]]; then
-        echo "Skipping Debian packages (previous error)" | tee -a "$LOG_FILE"
-    fi
+	if [[ "$INSTALL" == "false" ]]; then
+		echo "Installing Debian packages..."
+		if ./install.sh; then
+			set_flag_value INSTALL true
+		else
+			echo "Error installing Debian packages" | tee -a "$LOG_FILE"
+			set_flag_value INSTALL error
+		fi
+	elif [[ "$INSTALL" == "error" ]]; then
+		echo "Skipping Debian packages (previous error)" | tee -a "$LOG_FILE"
+	fi
 
-    # config
-    if [[ "$CONFIG_DONE" == "false" ]]; then
-        echo "config is configin"
-        if ./config.sh; then
-            set_flag_value CONFIG_DONE true
-        else
-            echo "Error config" | tee -a "$LOG_FILE"
-            set_flag_value CONFIG_DONE error
-        fi
-    elif [[ "$CONFIG_DONE" == "error" ]]; then
-        echo "Skipping config (previous error)" | tee -a "$LOG_FILE"
-    fi
+	# config
+	if [[ "$CONFIG_DONE" == "false" ]]; then
+		echo "config is configin"
+		if ./config.sh; then
+			set_flag_value CONFIG_DONE true
+		else
+			echo "Error config" | tee -a "$LOG_FILE"
+			set_flag_value CONFIG_DONE error
+		fi
+	elif [[ "$CONFIG_DONE" == "error" ]]; then
+		echo "Skipping config (previous error)" | tee -a "$LOG_FILE"
+	fi
 
-    # every thing else
-    if [[ "$OTHER" == "false" ]]; then
-        echo "other thing goes"
-        if ./other.sh; then
-            set_flag_value OTHER true
-        else
-            echo "Error others" | tee -a "$LOG_FILE"
-            set_flag_value OTHER error
-        fi
-    elif [[ "$OTHER" == "error" ]]; then
-        echo "Skipping other (previous error)" | tee -a "$LOG_FILE"
-    fi
+	if [[ "$OTHER" == "false" ]]; then
+		echo "other thing goes"
+		if ./other.sh; then
+			set_flag_value OTHER true
+		else
+			echo "Error others" | tee -a "$LOG_FILE"
+			set_flag_value OTHER error
+		fi
+	elif [[ "$OTHER" == "error" ]]; then
+		echo "Skipping other (previous error)" | tee -a "$LOG_FILE"
+	fi
 
 done
 
