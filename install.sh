@@ -10,7 +10,7 @@ packages=(
 	htop
 	unzip
 	curl
-
+  gdb
 )
 
 # all packages with not the same name as you use
