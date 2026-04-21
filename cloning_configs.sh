@@ -1,2 +1,3 @@
 #!/usr/bin/bash
-echo "empty!!!"
+
+git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim
