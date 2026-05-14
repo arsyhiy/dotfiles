@@ -1,15 +1,15 @@
 local wezterm = require 'wezterm'
 
 return {
-  color_scheme = "Builtin gruvbox Dark",
+  color_scheme = 'Dark Pastel (Gogh)',
 
   font = wezterm.font("JetBrains Mono"),
   font_size = 15.0,
 
   enable_tab_bar = false,
-  window_decorations = "RESIZE",
+  -- window_decorations = "RESIZE",
 
-  window_background_opacity = 0.80,
+  window_background_opacity = 1,
 
   window_padding = {
     left = 8,

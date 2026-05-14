@@ -41,4 +41,4 @@ set title
 set noswapfile
 
 " Enable spellchecking
-set spell
+"set spell
