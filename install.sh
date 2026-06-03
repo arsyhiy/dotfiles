@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # all packages with the same name as you use
 packages=(
@@ -10,28 +10,29 @@ packages=(
 	htop
 	unzip
 	curl
-  gdb
+	gdb
+	gcc
+	neovim
 )
 
 # all packages with not the same name as you use
 declare -A exceptions=(
 	["ssh"]="openssh-server"
-	["gcc"]="build-essential"
 )
 
 log_file="packages.log"
->"$log_file"
+> "$log_file"
 
 for pkg in "${packages[@]}"; do
-	if dpkg -s "$pkg" >/dev/null 2>&1; then
-		echo "$pkg all ready installed."
+	if rpm -q "$pkg" >/dev/null 2>&1; then
+		echo "$pkg already installed."
 	else
 		echo "installing $pkg..."
-		if sudo apt install -y "$pkg"; then
-			echo "$pkg installed with success."
+
+		if sudo dnf install -y "$pkg"; then
+			echo "$pkg installed successfully."
 		else
-			echo "$pkg cannot install it. write to log."
-			echo "$pkg" >>"$log_file"
+			echo "$pkg failed" | tee -a "$log_file"
 		fi
 	fi
 done
@@ -40,19 +41,29 @@ for bin in "${!exceptions[@]}"; do
 	pkg="${exceptions[$bin]}"
 
 	if command -v "$bin" >/dev/null 2>&1; then
-		echo "$bin allready present"
+		echo "$bin already present"
 	else
 		echo "Installing $pkg (for $bin)..."
-		if sudo apt install -y "$pkg"; then
+
+		if sudo dnf install -y "$pkg"; then
 			echo "$pkg installed"
 		else
-			echo "$pkg failed"
-			echo "$pkg" >>"$log_file"
+			echo "$pkg failed" | tee -a "$log_file"
 		fi
 	fi
 done
 
-# Flatpak apps
+
+if ! command -v flatpak >/dev/null 2>&1; then
+	echo "Flatpak not found. Installing..."
+	sudo dnf install -y flatpak
+fi
+
+if ! flatpak remote-list | grep -q flathub; then
+	echo "Adding Flathub..."
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+fi
+
 flatpaks=(
 	"org.telegram.desktop"
 	"com.discordapp.Discord"
@@ -60,14 +71,17 @@ flatpaks=(
 )
 
 for app in "${flatpaks[@]}"; do
-	if flatpak list | grep -q "$app"; then
-		echo "$app allready installed."
+	if flatpak info "$app" >/dev/null 2>&1; then
+		echo "$app already installed."
 	else
 		echo "installing $app..."
 		flatpak install -y flathub "$app"
 	fi
 done
 
-if [ -s "$log_file" ]; then
-	echo "cannot install specific packages. write in to $log_file . read for more information"
+
+if [[ -s "$log_file" ]]; then
+	echo "Some packages failed. See $log_file"
+else
+	echo "All packages installed successfully."
 fi
