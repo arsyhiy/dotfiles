@@ -1,3 +1,5 @@
+# config.sh: copying config from the ENV
+
 #!/usr/bin/env bash
 
 ./cloning_configs.sh

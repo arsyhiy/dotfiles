@@ -1,8 +1,4 @@
-# git clone https://github.com/arsyhiy/nvim.git ~/.config/nvim
-
-# git clone https://github.com/arsyhiy/.emacs.d.git ~/.emacs.d/
-
-
+# cloning_configs.sh: cloning configs for programs from github with executing dependency.sh in them
 
 #!/usr/bin/env bash
 
@@ -26,12 +22,39 @@ clone_and_install() {
     fi
 }
 
+# neovim
 clone_and_install \
     "https://github.com/arsyhiy/nvim.git" \
     "$HOME/.config/nvim"
 
+# emacs
 clone_and_install \
     "https://github.com/arsyhiy/.emacs.d.git" \
     "$HOME/.emacs.d"
+
+# hypr
+clone_and_install \
+    "https://github.com/arsyhiy/hypr.git" \
+    "$HOME/.config/hypr"
+
+# wofi
+clone_and_install \
+    "https://github.com/arsyhiy/wofi.git" \
+    "$HOME/.config/wofi"
+
+# wlogout
+clone_and_install \
+    "https://github.com/arsyhiy/wlogout.git" \
+    "$HOME/.config/wlogout"
+
+# waybar
+clone_and_install \
+    "https://github.com/arsyhiy/waybar.git" \
+    "$HOME/.config/waybar"
+
+# kitty
+clone_and_install \
+    "https://github.com/arsyhiy/kitty.git" \
+    "$HOME/.config/kitty"
 
 echo "Готово."

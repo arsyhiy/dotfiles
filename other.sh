@@ -1,35 +1,22 @@
 #!/usr/bin/bash
 
-# sudo dnf install -y zsh
-#
-# # ohmyzsh
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-#
-# # zsh autosuggestions
-# git clone https://github.com/zsh-users/zsh-autosuggestions \
-# ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-#
-# # golang
-# # doesn't download the script ~ runs the script directly
-# bash <(curl -sL https://git.io/go-installer)
-#
-# # bash formatter
-# sudo dnf install -y shfmt
-#
-# # wezterm
-# # TODO: найти более красивое решение
-# sudo dnf install -y https://github.com/wezterm/wezterm/releases/download/20240203-110809-5046fc22/wezterm-20240203_110809_5046fc22-1.fedora39.x86_64.rpm
-#
-# # lazygit 
-# # acutally very convenient to use 
-# sudo dnf copr enable dejan/lazygit
-# sudo dnf install -y lazygit
-#
-#
-#
-# # hyprland
-# sudo dnf copr enable lionheartp/Hyprland
-# sudo dnf install -y hyprland
-# sudo dnf install -y waybar
-# sudo dnf install -y wlogout
-# sudo dnf install -y wofi
+sudo dnf install -y zsh
+
+# ohmyzsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# zsh autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# golang
+# doesn't download the script ~ runs the script directly
+bash <(curl -sL https://git.io/go-installer)
+
+# bash formatter
+sudo dnf install -y shfmt
+
+# lazygit 
+# acutally very convenient to use 
+sudo dnf copr enable dejan/lazygit
+sudo dnf install -y lazygit

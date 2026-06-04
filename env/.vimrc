@@ -1,3 +1,5 @@
+" .vimrc: config for vim 
+
 " line numer
 set number
 

@@ -1,3 +1,5 @@
+# setup: main entrance for the program
+
 #!/usr/bin/env bash
 
 clear

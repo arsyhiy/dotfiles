@@ -1,3 +1,5 @@
+# install.sh: installing packages and flatpack once 
+
 #!/usr/bin/env bash
 
 # all packages with the same name as you use
