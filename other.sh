@@ -23,3 +23,5 @@ sudo dnf install -y https://github.com/wezterm/wezterm/releases/download/2024020
 # acutally very convenient to use 
 sudo dnf copr enable dejan/lazygit
 sudo dnf install -y lazygit
+
+

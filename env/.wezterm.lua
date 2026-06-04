@@ -9,7 +9,8 @@ return {
   enable_tab_bar = false,
   -- window_decorations = "RESIZE",
 
-  window_background_opacity = 1,
+  -- window_background_opacity = 1,
+  window_background_opacity = 0.8,
 
   window_padding = {
     left = 8,
