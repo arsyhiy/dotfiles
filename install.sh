@@ -14,8 +14,6 @@ packages=(
 	curl
 	gdb
 	gcc
-	# neovim
-	# emacs
 )
 
 # all packages with not the same name as you use
