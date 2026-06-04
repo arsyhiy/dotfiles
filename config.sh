@@ -65,5 +65,4 @@ copy() {
 
 copy $DEV_ENV/env/.zshrc $HOME/.zshrc
 copy $DEV_ENV/env/.tmux.conf $HOME/.tmux.conf
-copy "$DEV_ENV/env/.vimrc" "$HOME/.vimrc"
-copy "$DEV_ENV/env/.wezterm.lua" "$HOME/.wezterm.lua"
+copy $DEV_ENV/env/.vimrc $HOME/.vimrc

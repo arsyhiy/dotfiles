@@ -12,8 +12,8 @@ packages=(
 	curl
 	gdb
 	gcc
-	neovim
-	emacs
+	# neovim
+	# emacs
 )
 
 # all packages with not the same name as you use
@@ -55,6 +55,8 @@ for bin in "${!exceptions[@]}"; do
 done
 
 
+
+# единственная реальная проблема  это медленная скачивание.
 if ! command -v flatpak >/dev/null 2>&1; then
 	echo "Flatpak not found. Installing..."
 	sudo dnf install -y flatpak
