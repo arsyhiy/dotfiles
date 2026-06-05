@@ -11,7 +11,7 @@ sudo ./setup
 - window manager: gnome and hyprland
 - with hyprland: wofi, wlogout, waybar
 - code editors: vim, neovim, emacs
-- terminal: kitty
+- terminal: ghostty
 
 
 # how my dotfiles work (in Russian)

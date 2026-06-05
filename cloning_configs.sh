@@ -52,9 +52,9 @@ clone_and_install \
     "https://github.com/arsyhiy/waybar.git" \
     "$HOME/.config/waybar"
 
-# kitty
+# ghostty
 clone_and_install \
-    "https://github.com/arsyhiy/kitty.git" \
-    "$HOME/.config/kitty"
+    "https://github.com/arsyhiy/ghostty.git" \
+    "$HOME/.config/ghostty/"
 
 echo "Готово."
