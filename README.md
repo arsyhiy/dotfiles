@@ -10,7 +10,7 @@ sudo ./setup
 - distribution: fedora
 - window manager: gnome and hyprland
 - with hyprland: wofi, wlogout, waybar
-- code editors: vim, neovim, emacs
+- code editors: Vim, Neovim, Emacs
 - terminal: ghostty
 
 

@@ -14,6 +14,7 @@ packages=(
 	curl
 	gdb
 	gcc
+	bear
 )
 
 # all packages with not the same name as you use
