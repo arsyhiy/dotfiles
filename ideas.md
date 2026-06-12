@@ -1,5 +1,3 @@
-
-
 ``` bash
 
 # cloning_configs.sh: cloning configs for programs from github with executing dependency.sh in them
@@ -55,8 +53,6 @@ clone_and_install \
 
 ```
 
-
-
 ```  bash
 # config.sh: copying config from the ENV
 
@@ -110,23 +106,3 @@ update_files() {
             fi
 ```
 
-
-# ghostty
-``` bash
-
-sudo dnf copr enable scottames/ghostty
-sudo dnf install ghostty
-
-```
-
-``` bash
-
-# dependency.sh: build neovim from scratch  
-
-#!/usr/bin/bash
-
-
-# fedora
-sudo dnf install -y neovim
-
-```

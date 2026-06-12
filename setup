@@ -54,46 +54,46 @@ while any_flag_is_false; do
 
     # INSTALL
     if [[ "$INSTALL" == "false" ]]; then
-        echo "[INFO] Installing packages..."
+        printf "[INFO] Installing packages..."
 
         if ./install.sh; then
             set_flag_value INSTALL true
         else
-            echo "[ERROR] Package installation failed" | tee -a "$LOG_FILE"
+            printf "[ERROR] Package installation failed" | tee -a "$LOG_FILE"
             set_flag_value INSTALL error
         fi
     fi
 
     # CONFIG
     if [[ "$CONFIG_DONE" == "false" ]]; then
-        echo "[INFO] Applying configuration..."
+        printf "[INFO] Applying configuration..."
 
-        if ./config.sh; then
+        if ./stow.sh; then
             set_flag_value CONFIG_DONE true
         else
-            echo "[ERROR] Configuration failed" | tee -a "$LOG_FILE"
+            printf "[ERROR] Configuration failed" | tee -a "$LOG_FILE"
             set_flag_value CONFIG_DONE error
         fi
     fi
 
     # OTHER
     if [[ "$OTHER" == "false" ]]; then
-        echo "[INFO] Running additional tasks..."
+        printf "[INFO] Running additional tasks..."
 
         if ./other.sh; then
             set_flag_value OTHER true
         else
-            echo "[ERROR] Additional tasks failed" | tee -a "$LOG_FILE"
+            printf "[ERROR] Additional tasks failed" | tee -a "$LOG_FILE"
             set_flag_value OTHER error
         fi
     fi
 done
 
-echo
-echo "Setup finished."
+printf "\n"
+printf "Setup finished."
 
 if [[ -s "$LOG_FILE" ]]; then
-    echo "Errors were logged to: $LOG_FILE"
+    printf "Errors were logged to: $LOG_FILE"
 else
-    echo "Everything completed successfully."
+    printf "Everything completed successfully."
 fi
