@@ -109,3 +109,24 @@ update_files() {
                 cp -r ./$c $2
             fi
 ```
+
+
+# ghostty
+``` bash
+
+sudo dnf copr enable scottames/ghostty
+sudo dnf install ghostty
+
+```
+
+``` bash
+
+# dependency.sh: build neovim from scratch  
+
+#!/usr/bin/bash
+
+
+# fedora
+sudo dnf install -y neovim
+
+```
