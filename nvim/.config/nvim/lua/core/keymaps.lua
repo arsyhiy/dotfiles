@@ -5,7 +5,6 @@ vim.g.mapleader = " "
 -- neotree
 vim.keymap.set("n", "<leader>e", ":Neotree filesystem reveal toggle<CR>", { noremap = true, silent = true })
 
-
 -- telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })

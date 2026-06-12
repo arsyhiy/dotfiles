@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
+
+# enable some extra repositories
+sudo dnf copr enable lionheartp/Hyprland
+sudo dnf copr enable scottames/ghostty
+sudo dnf copr enable dejan/lazygit
+
 # all packages with the same name as you use
 packages=(
+	shfmt
+	lazygit
 	cmake
 	nodejs
 	npm
@@ -14,6 +22,18 @@ packages=(
 	gcc
 	bear
 	stow
+	wofi
+	waybar
+	wlogout
+	hyprland-guiutils
+	hyprpaper
+	hyprlock
+	hypridle
+	swaync
+	emacs
+	hyprland
+	neovim
+	ghostty
 )
 
 # all packages with not the same name as you use

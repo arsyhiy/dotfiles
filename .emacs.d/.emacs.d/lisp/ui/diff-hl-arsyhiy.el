@@ -21,5 +21,6 @@
                                    (change . "┃")
                                    (unknown . "┆")
                                    (ignored . "i"))))
+
 (provide 'diff-hl-arsyhiy)
 ;;; diff-hl-arsyhiy.el ends here

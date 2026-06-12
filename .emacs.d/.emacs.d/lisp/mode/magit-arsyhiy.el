@@ -7,8 +7,7 @@
 ;;; Code:
 
 (use-package magit
-  :ensure t
-  :config)
+  :ensure t)
 
 (provide 'magit-arsyhiy)
 ;;; magit-arsyhiy.el ends here

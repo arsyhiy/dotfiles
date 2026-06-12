@@ -85,7 +85,6 @@
   (evil-define-key 'normal 'global (kbd "] t") 'tab-next)
   (evil-define-key 'normal 'global (kbd "[ t") 'tab-previous)
 
-
   (evil-define-key 'normal 'global (kbd "<leader> m p")
     (lambda ()
       (interactive)
@@ -99,8 +98,6 @@
     (kbd "gI") 'lsp-find-implementation
     (kbd "<leader> l f") 'lsp-format-buffer)
 
-
-
   ;; i just rethinkk how tab should work
   (setq-default indent-tabs-mode t)
   (setq tab-always-indent nil)
@@ -112,7 +109,6 @@
   ;; insert \t in insert mode and only
   (evil-define-key 'insert 'global (kbd "TAB") #'my/insert-tab)
 
-
   (defun ek/lsp-describe-and-jump ()
     "Show hover documentation and jump to *lsp-help* buffer."
     (interactive)
@@ -120,7 +116,6 @@
     (let ((help-buffer "*lsp-help*"))
       (when (get-buffer help-buffer)
         (switch-to-buffer-other-window help-buffer))))
-
 
   (evil-define-key 'normal 'global (kbd "K")
     (if (>= emacs-major-version 31)

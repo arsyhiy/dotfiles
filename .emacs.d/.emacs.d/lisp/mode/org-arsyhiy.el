@@ -17,7 +17,6 @@
     (lambda ()
       (setq-local fill-column 80))))
 
-
 (global-set-key (kbd "C-c o")
   (lambda ()
     (interactive)

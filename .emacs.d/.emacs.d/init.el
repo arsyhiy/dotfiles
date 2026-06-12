@@ -12,9 +12,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/personal"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/ui"))
 
-
 ;; functionality for initialization
-
 (defun srequire (feature)
   "Safe open FEATURE just like require."
   (condition-case err
@@ -31,14 +29,10 @@
         (display-buffer (current-buffer))))
     nil))
 
-
-;; load files
-
 ;; options
 (srequire 'options)
 
 ;; === modes =============================================================================
-
 (srequire 'cape-arsyhiy)
 (srequire 'consult-arsyhiy)
 (srequire 'corfu-arsyhiy)
@@ -70,12 +64,10 @@
 (srequire 'typescript-arsyhiy)
 
 ;; === personal ==========================================================================
-
 (srequire 'run-program)
 (srequire 'org-utils.el)
 
 ;; === ui ================================================================================
-
 (srequire 'diff-hl-arsyhiy)
 (srequire 'hl-todo-arsyhiy)
 (srequire 'indent-guide-arsyhiy)

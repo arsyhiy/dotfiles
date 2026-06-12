@@ -4,7 +4,6 @@
 sudo ./setup
 ```
 
-
 # what i use
 - gnu linux
 - distribution: fedora
@@ -12,9 +11,3 @@ sudo ./setup
 - with hyprland: wofi, wlogout, waybar
 - code editors: Vim, Neovim, Emacs
 - terminal: ghostty
-
-
-# how my dotfiles work (in Russian)
-одна из главных идей почему у меня так устроен конфиг так это идея модульности и 
-компактности уменьшить обьем скачиваемого тоесть что бы была возможнсость легко 
-подредактировать проект а самое нужное тут было.

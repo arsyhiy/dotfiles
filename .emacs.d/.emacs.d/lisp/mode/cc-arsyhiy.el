@@ -5,6 +5,7 @@
 ;;; Commentary:
 
 ;;; Code:
+
 (use-package cc-mode
   :ensure nil
   :mode (("\\.c\\'"   . c-ts-mode)
