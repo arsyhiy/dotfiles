@@ -8,12 +8,19 @@
 
 (use-package orderless
   :ensure t
-  :defer t
-  :after vertico
-  :init
-  (setq completion-styles '(orderless basic)
-    completion-category-defaults nil
-    completion-category-overrides '((file (styles partial-completion)))))
+  :custom
+  (completion-styles '(orderless flex basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides
+    '((file (styles partial-completion))))
+  :config
+  (defun arsyhiy/orderless-literal-dispatcher
+    (pattern _index _total)
+    (when (string-prefix-p "=" pattern)
+      `(orderless-literal . ,(substring pattern 1))))
+
+  (setq orderless-style-dispatchers
+    '(arsyhiy/orderless-literal-dispatcher)))
 
 (provide 'orderless-arsyhiy)
 ;;; orderless-arsyhiy.el ends here

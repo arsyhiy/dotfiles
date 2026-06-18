@@ -54,7 +54,7 @@
   (lsp-eldoc-render-all t)
   
   (lsp-completion-enable t)
-  (lsp-completion-enable-additional-text-edit t)
+  (lsp-completion-enable-additional-text-edit nil)
   (lsp-enable-snippet t)
   (lsp-completion-show-kind t)
   
