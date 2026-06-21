@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-stow ghostty tmux vim zshrc nvim .emacs.d hypr waybar wofi wlogout 
+stow ghostty tmux vim zshrc nvim hypr waybar wofi wlogout 

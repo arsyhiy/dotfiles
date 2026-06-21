@@ -9,5 +9,6 @@ sudo ./setup
 - distribution: fedora
 - window manager: gnome and hyprland
 - with hyprland: wofi, wlogout, waybar
-- code editors: Vim, Neovim, Emacs
-- terminal: ghostty
+- code editors: Vim, Neovim
+- terminal: ghostty with zsh
+

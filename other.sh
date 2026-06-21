@@ -23,6 +23,5 @@ sudo systemctl enable --now docker
 sudo dnf install docker-compose-switch
 sudo usermod -aG docker $USER
 
-
 # npm
 npm install -g vscode-langservers-extracted
