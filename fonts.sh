@@ -5,4 +5,3 @@
 curl -o /tmp/jetbrains.zip -L ttps://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip
 unzip /tmp/jetbrains.zip -d ~/.local/share/fonts/
 fc-cache -vf ~/.local/share/fonts/
-

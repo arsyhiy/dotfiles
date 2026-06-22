@@ -4,4 +4,3 @@
 '''bash
 qmk setup
 '''
-

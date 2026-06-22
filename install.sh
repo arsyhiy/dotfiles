@@ -1,39 +1,9 @@
 #!/usr/bin/env bash
 
-
-# enable some extra repositories
-sudo dnf copr enable lionheartp/Hyprland
-sudo dnf copr enable scottames/ghostty
-sudo dnf copr enable dejan/lazygit
-
 # all packages with the same name as you use
 packages=(
-	shfmt
-	lazygit
-	cmake
 	nodejs
 	npm
-	tmux
-	vim
-	htop
-	unzip
-	curl
-	gdb
-	gcc
-	bear
-	stow
-	wofi
-	waybar
-	wlogout
-	hyprland-guiutils
-	hyprpaper
-	hyprlock
-	hypridle
-	swaync
-	emacs
-	hyprland
-	neovim
-	ghostty
 )
 
 # all packages with not the same name as you use
@@ -76,7 +46,7 @@ done
 
 
 
-# единственная реальная проблема  это медленная скачивание.
+# NOTE: единственная реальная проблема  это медленная скачивание.
 if ! command -v flatpak >/dev/null 2>&1; then
 	echo "Flatpak not found. Installing..."
 	sudo dnf install -y flatpak
