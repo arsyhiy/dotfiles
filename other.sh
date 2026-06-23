@@ -16,3 +16,7 @@ echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com
 
 dnf check-update &&
 sudo dnf install code # or code-insiders
+
+# pipx 
+sudo dnf install pipx
+pipx ensurepath
