@@ -64,6 +64,18 @@ while any_flag_is_false; do
         fi
     fi
 
+    # CONFIG
+    if [[ "$CONFIG_DONE" == "false" ]]; then
+        printf "[INFO] Applying configuration..."
+
+        if ./stow.sh; then
+            set_flag_value CONFIG_DONE true
+        else
+            printf "[ERROR] Configuration failed" | tee -a "$LOG_FILE"
+            set_flag_value CONFIG_DONE error
+        fi
+    fi
+
     # OTHER
     if [[ "$OTHER" == "false" ]]; then
         printf "[INFO] Running additional tasks..."

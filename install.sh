@@ -4,6 +4,7 @@
 packages=(
 	nodejs
 	npm
+	stow
 )
 
 # all packages with not the same name as you use
