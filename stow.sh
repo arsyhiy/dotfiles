@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo stow zshrc
+sudo stow zshrc vim tmux

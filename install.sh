@@ -5,6 +5,8 @@ packages=(
 	nodejs
 	npm
 	stow
+    vim
+    tmux
 )
 
 # all packages with not the same name as you use
