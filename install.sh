@@ -7,6 +7,7 @@ packages=(
 	stow
     vim
     tmux
+    lazygit
 )
 
 # all packages with not the same name as you use

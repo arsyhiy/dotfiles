@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo stow zshrc vim tmux
+sudo stow zshrc vim tmux ghostty
