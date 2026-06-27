@@ -5,16 +5,11 @@ font-thicken=true
 font-thicken-strength=1
 adjust-cell-height=1
 
-# background
-#background-opacity = 0.85
 background-opacity = 1
-#background-blur = 16
-#background=#000000
 theme = IBM 5153 CGA
 
 # others
 shell-integration-features = no-cursor,no-sudo,no-title
-#gtk-titlebar = false
 confirm-close-surface=false
 cursor-color = #20C20E
 maximize=true
