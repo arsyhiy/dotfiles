@@ -7,8 +7,8 @@ packages=(
   	clang
   	cmake
   	htop
-	unzip
-	curl
+	  unzip
+	  curl
   	nodejs
   	npm 
   	stow
@@ -16,7 +16,7 @@ packages=(
   	neovim
   	tmux
   	lazygit
-	bear
+	  bear
 )
 
 # all packages with not the same name as you use

@@ -4,7 +4,6 @@ return {
 	event = { "BufReadPost", "BufNewFile" },
 
 	opts = {
-		  -- FIXME: i don't actually know i need that but i will keep for a while
 		ensure_installed = {
 			"lua",
 			"vim",
