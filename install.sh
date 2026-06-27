@@ -2,12 +2,21 @@
 
 # all packages with the same name as you use
 packages=(
-	nodejs
-	npm
-	stow
-    vim
-    tmux
-    lazygit
+  	gcc
+  	g++
+  	clang
+  	cmake
+  	htop
+	unzip
+	curl
+  	nodejs
+  	npm 
+  	stow
+  	vim
+  	neovim
+  	tmux
+  	lazygit
+	bear
 )
 
 # all packages with not the same name as you use
