@@ -7,16 +7,13 @@ packages=(
   	clang
   	cmake
   	htop
-	  unzip
-	  curl
+    unzip
+    curl
   	nodejs
   	npm 
   	stow
-  	vim
-  	neovim
-  	tmux
-  	lazygit
-	  bear
+    bear
+	emacs
 )
 
 # all packages with not the same name as you use
