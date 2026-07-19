@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo stow zshrc ghostty tmux .emacs.d
+sudo stow zshrc ghostty tmux nvim

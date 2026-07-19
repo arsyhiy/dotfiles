@@ -13,7 +13,7 @@ packages=(
   	npm 
   	stow
     bear
-	emacs
+    neovim
 )
 
 # all packages with not the same name as you use

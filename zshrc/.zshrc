@@ -9,3 +9,4 @@ source $ZSH/oh-my-zsh.sh
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 
+alias n=nvim
