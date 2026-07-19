@@ -16,14 +16,14 @@
   (delete-by-moving-to-trash t)
   (make-backup-files nil)
 	(dired-free-space nil
-      dired-dwim-target t
-      dired-deletion-confirmer 'y-or-n-p
-      dired-filter-verbose nil
-      dired-recursive-deletes 'top
-      dired-recursive-copies 'always
-      dired-vc-rename-file t
-      dired-create-destination-dirs 'ask
-      dired-clean-confirm-killing-deleted-buffers nil)
+    dired-dwim-target t
+    dired-deletion-confirmer 'y-or-n-p
+    dired-filter-verbose nil
+    dired-recursive-deletes 'top
+    dired-recursive-copies 'always
+    dired-vc-rename-file t
+    dired-create-destination-dirs 'ask
+    dired-clean-confirm-killing-deleted-buffers nil)
 	(dired-auto-revert-buffer 'dired-directory-changed-p)
 
   ;; editing ====================================;;
@@ -84,7 +84,7 @@
   (setq switch-to-prev-buffer-skip 'skip-these-buffers)
 
   ;; fonts
-  (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 150)
+  (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 130)
 
   (setq custom-file (locate-user-emacs-file "custom-vars.el"))
   (load custom-file 'noerror 'nomessage)
