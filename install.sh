@@ -15,6 +15,7 @@ packages=(
     bear
     neovim
     emacs
+    dotnet-sdk-9.0 
 )
 
 # all packages with not the same name as you use
