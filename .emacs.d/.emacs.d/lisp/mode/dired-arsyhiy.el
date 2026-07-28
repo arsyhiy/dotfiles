@@ -8,28 +8,37 @@
 
 (with-eval-after-load 'dired
   (setq dired-dwim-target t
-        dired-kill-when-opening-new-dired-buffer t)
+    dired-kill-when-opening-new-dired-buffer t)
 
   (setq dired-listing-switches
-        (if (eq system-type 'gnu/linux)
-            "-lah --group-directories-first"
-          "-lah"))
+    (if (eq system-type 'gnu/linux)
+      "-lah --group-directories-first"
+      "-lah"))
 
   (setq dired-guess-shell-alist-user
-        '(("\\.\\(png\\|jpe?g\\|tiff\\)"
-           (cond
-            ((executable-find "feh") "feh")
-            ((executable-find "xdg-open") "xdg-open")
-            (t "open")))
-          ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)"
-           (cond
-            ((executable-find "mpv") "mpv")
-            ((executable-find "xdg-open") "xdg-open")
-            (t "open")))
-          (".*"
-           (or (and (executable-find "xdg-open") "xdg-open")
-               "open")))))
+    '(("\\.\\(png\\|jpe?g\\|tiff\\)"
+        (cond
+          ((executable-find "feh") "feh")
+          ((executable-find "xdg-open") "xdg-open")
+          (t "open")))
+       ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)"
+         (cond
+           ((executable-find "mpv") "mpv")
+           ((executable-find "xdg-open") "xdg-open")
+           (t "open")))
+       (".*"
+         (or (and (executable-find "xdg-open") "xdg-open")
+           "open")))))
 
+
+;; NOTE: скрываем все файл с .meta в конце
+(with-eval-after-load 'dired
+  (require 'dired-x)
+
+  ;; Скрывать только Unity .meta файлы
+  (setq dired-omit-files "\\.meta$")
+
+  (add-hook 'dired-mode-hook #'dired-omit-mode))
 
 
 (provide 'dired-arsyhiy)
