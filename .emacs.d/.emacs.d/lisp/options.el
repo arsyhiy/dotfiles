@@ -7,7 +7,7 @@
 ;;; Code:
 
 (use-package emacs
-  :ensure nil ;; don't try to install it
+  :ensure nil ;; don't even try to install it
   :custom
 
   ;; files ======================================;;

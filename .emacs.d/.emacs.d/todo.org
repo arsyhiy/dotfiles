@@ -1,5 +1,4 @@
-* для чего этот файл?
-оснавная идея файла это описать идеи для emacs а также проблемы. каждая идея и ошибка это ** названиее и текст к названию 
+the main purpose of this file is write down ideas for emacs
 
+** idea: write a convenient config for markdown
 
-** идея: написать конфиг для удобного написания и прочтения markdown

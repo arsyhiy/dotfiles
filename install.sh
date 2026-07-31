@@ -15,7 +15,7 @@ packages=(
     bear
     neovim
     emacs
-    dotnet-sdk-9.0 
+    # dotnet-sdk-9.0 
 )
 
 # all packages with not the same name as you use
@@ -58,7 +58,7 @@ done
 
 
 
-# NOTE: единственная реальная проблема  это медленная скачивание.
+# NOTE: every thing is good with flatpak but it is pain to download even a one app
 if ! command -v flatpak >/dev/null 2>&1; then
 	echo "Flatpak not found. Installing..."
 	sudo dnf install -y flatpak
