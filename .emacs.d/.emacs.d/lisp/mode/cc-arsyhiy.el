@@ -6,23 +6,47 @@
 
 ;;; Code:
 
-(use-package cc-mode
+(use-package c-ts-mode
   :ensure nil
-  :mode (("\\.c\\'"   . c-ts-mode)
-          ("\\.h\\'"   . c-ts-mode)
-          ("\\.cpp\\'" . c++-ts-mode)
-          ("\\.hpp\\'" . c++-ts-mode))
-  :hook ((c-ts-mode . my/c-ts-setup)
-          (c++-ts-mode . my/c-ts-setup))
-  :config
-  (defun my/c-ts-setup ()
-    (setq-local indent-tabs-mode nil)
-    (setq-local c-ts-mode-indent-offset 2)))
+  :mode
+  ("\\.c\\'" . c-ts-mode)
+  ("\\.h\\'" . c-or-c++-ts-mode)
+  ("\\.cpp\\'" . c++-ts-mode)
+  ("\\.hpp\\'" . c++-ts-mode)
 
-(use-package elec-pair
-  :ensure nil
+  :bind
+  (:map c-ts-mode-map
+    ("<f1>" . my-c/make-clean)
+    ("<f2>" . my-c/make-all)
+    ("<f3>" . my-c/make-run))
+
   :config
-  (electric-pair-mode 1))
+
+  (c-ts-indent-offset 4)
+  (c-ts-mode-indent-style 'linux)
+
+  (c-ts-mode-enable-doxygen t)
+
+  (eletric-pair-mode 1))
+
+(defun my-c/make-clean ()
+  "Run make clean in project root."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (compile "make clean")))
+
+
+(defun my-c/make-all ()
+  "Run make all in project root."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (compile "make all")))
+
+(defun my-c/make-run ()
+  "Run make run in project root."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (compile "make run")))
 
 (provide 'cc-arsyhiy)
 ;;; cc-arsyhiy.el ends here

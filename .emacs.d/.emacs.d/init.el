@@ -16,6 +16,10 @@
 ;; options
 (require 'options)
 
+
+;; === libraries
+(require 'libraries)
+
 ;; === modes =============================================================================
 (require 'cape-arsyhiy)
 (require 'consult-arsyhiy)
@@ -56,6 +60,9 @@
 (require 'themes-arsyhiy)
 (require 'treesitter-arsyhiy)
 (require 'window-arsyhiy)
+
+
+
 
 
 ;;; init.el ends here
