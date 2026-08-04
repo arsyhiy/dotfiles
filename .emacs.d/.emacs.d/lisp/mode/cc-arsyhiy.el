@@ -48,5 +48,7 @@
   (let ((default-directory (projectile-project-root)))
     (compile "make run")))
 
+;; todo: add make-custom with arguments memory.
+
 (provide 'cc-arsyhiy)
 ;;; cc-arsyhiy.el ends here

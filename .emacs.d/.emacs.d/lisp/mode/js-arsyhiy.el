@@ -1,24 +1,24 @@
-;;; js-arsyhiy.el --- JavaScript configuration -*- lexical-binding: t; -*-
+;;; js-arsyhiy.el --- mode for javascript -*- lexical-binding: t; -*-
 
 ;; Author: arsyhiy
 ;; Package-Requires: ((emacs "30.1"))
 
 ;;; Commentary:
 
-;; Personal JavaScript configuration.
-
 ;;; Code:
 
-(defun js-arsyhiy-setup ()
-  "Configure `js-ts-mode'."
+(defun my-js-mode-setup ()
+  "Setq-local vars for 'js-mode'."
   (setq-local js-indent-level 2
-    tab-width 2))
+    tab-width 2
+    treesit-font-lock-level 4))
 
 (use-package js
   :mode "\\.js\\'"
   :hook
-  ((js-ts-mode . js-arsyhiy-setup)
-    (js-ts-mode . electric-pair-local-mode)))
+  ((js-ts-mode . my-js-mode-setup)
+    (js-ts-mode . electric-pair-local-mode))
+  )
 
 (provide 'js-arsyhiy)
 

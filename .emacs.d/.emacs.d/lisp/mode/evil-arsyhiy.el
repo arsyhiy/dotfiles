@@ -87,7 +87,7 @@
     (kbd "<leader> r n") 'lsp-rename
     (kbd "gI") 'lsp-find-implementation
     (kbd "<leader> l f") 'lsp-format-buffer)
-		
+	
   (defun ek/lsp-describe-and-jump ()
     "Show hover documentation and jump to *lsp-help* buffer."
     (interactive)
