@@ -114,6 +114,9 @@
       (if (use-region-p)
         (comment-or-uncomment-region (region-beginning) (region-end)))))
 
+  (with-eval-after-load 'python
+    (evil-define-key 'normal python-ts-mode-map
+      (kbd "C-p") #'my-py/format-buffer))
   (evil-mode 1))
 
 
