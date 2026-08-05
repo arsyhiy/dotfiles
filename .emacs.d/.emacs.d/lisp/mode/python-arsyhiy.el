@@ -11,6 +11,7 @@
   :mode ("\\.py\\'" . python-ts-mode)
   :hook ((python-ts-mode . lsp-deferred)))
 
+;; TODO: обдумать все случаи при использовании форматирования
 (defun my-py/format-buffer ()
   "Format the current Python file with Black."
   (interactive)
