@@ -1,5 +1,4 @@
 ;;; typescript-arsyhiy.el --- TypeScript configuration -*- lexical-binding: t; -*-
-
 ;; Author: arsyhiy
 ;; Package-Requires: ((emacs "30.1"))
 

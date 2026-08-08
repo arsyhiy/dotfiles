@@ -15,14 +15,14 @@
 
   :hook
   ((js-ts-mode
-    tsx-ts-mode
-    typescript-ts-mode
-    python-ts-mode
-    c-ts-mode
-    go-ts-mode
-    rust-ts-mode
-    web-mode)
-   . lsp-deferred)
+     tsx-ts-mode
+     typescript-ts-mode
+     python-ts-mode
+     c-ts-mode
+     go-ts-mode
+     rust-ts-mode
+     web-mode)
+    . lsp-deferred)
 
   :custom
   (lsp-completion-provider :capf)
@@ -64,7 +64,6 @@
 
   ;; Peek window
   (lsp-ui-peek-enable t))
-
 
 (use-package lsp-pyright
   :after lsp-mode

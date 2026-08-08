@@ -1,9 +1,9 @@
 ;;; formatter-arsyhiy.el --- Simple buffer formatter -*- lexical-binding: t; -*-
+;; Author: arsyhiy
+;; Package-Requires: ((emacs "30.1"))
 
 ;;; Commentary:
-;;
 ;; Format current buffer depending on major-mode.
-;;
 
 ;;; Code:
 

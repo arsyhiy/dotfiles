@@ -35,7 +35,6 @@
   (let ((default-directory (projectile-project-root)))
     (compile "make clean")))
 
-
 (defun my-c/make-all ()
   "Run make all in project root."
   (interactive)

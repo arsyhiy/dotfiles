@@ -6,7 +6,9 @@
 
 ;;; Code:
 
+;; TODO: переписать конфиг для  emacs lisp
 (defun my-elisp-mode-setup ()
+  "Setup for elisp."
   (electric-pair-local-mode 1)
   (show-paren-local-mode 1)
   (eldoc-mode 1)

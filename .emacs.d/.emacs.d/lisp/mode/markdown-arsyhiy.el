@@ -12,6 +12,5 @@
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
 
-
 (provide 'markdown-arsyhiy)
 ;;; markdown-arsyhiy.el ends here

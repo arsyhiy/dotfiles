@@ -6,11 +6,11 @@
 
 ;;; Code:
 
-(use-package modus-themes
+(use-package ef-themes
   :ensure t
 
   :init
-  (load-theme 'modus-vivendi-tritanopia t))
+  (load-theme 'ef-orange t))
 
 (provide 'themes-arsyhiy)
 ;;; themes-arsyhiy.el ends here

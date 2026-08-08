@@ -1,5 +1,4 @@
 ;;; js-arsyhiy.el --- mode for javascript -*- lexical-binding: t; -*-
-
 ;; Author: arsyhiy
 ;; Package-Requires: ((emacs "30.1"))
 

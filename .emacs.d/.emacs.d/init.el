@@ -60,8 +60,10 @@
 (require 'themes-arsyhiy)
 (require 'treesitter-arsyhiy)
 (require 'window-arsyhiy)
+(require 'modeline-arsyhiy)
 
-;; personl modes
+;; personal functionality
 (require 'my-run-format)
+
 
 ;;; init.el ends here

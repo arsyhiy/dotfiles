@@ -81,12 +81,7 @@
   (evil-define-key 'normal 'global (kbd "] t") 'tab-next)
   (evil-define-key 'normal 'global (kbd "[ t") 'tab-previous)
 
-
-
   (evil-define-key 'normal 'global (kbd "C-p") #'my-format-buffer)
-
-
-
 
   (evil-define-key 'normal lsp-mode-map
     (kbd "gr") 'lsp-find-references

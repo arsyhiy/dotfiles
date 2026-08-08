@@ -1,11 +1,8 @@
 ;;; css-arsyhiy.el --- CSS configuration -*- lexical-binding: t; -*-
-
 ;; Author: arsyhiy
 ;; Package-Requires: ((emacs "30.1"))
 
 ;;; Commentary:
-
-;; Personal CSS configuration.
 
 ;;; Code:
 

@@ -30,16 +30,13 @@
          (or (and (executable-find "xdg-open") "xdg-open")
            "open")))))
 
-
-;; NOTE: скрываем все файл с .meta в конце
 (with-eval-after-load 'dired
   (require 'dired-x)
 
-  ;; Скрывать только Unity .meta файлы
+  ;; NOTE: hide all .meta file. thats for c#
   (setq dired-omit-files "\\.meta$")
 
   (add-hook 'dired-mode-hook #'dired-omit-mode))
-
 
 (provide 'dired-arsyhiy)
 ;;; dired-arsyhiy.el ends here
