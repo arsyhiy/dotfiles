@@ -61,8 +61,7 @@
 (require 'treesitter-arsyhiy)
 (require 'window-arsyhiy)
 
-
-
-
+;; personl modes
+(require 'my-run-format)
 
 ;;; init.el ends here

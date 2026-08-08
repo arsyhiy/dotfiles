@@ -81,6 +81,13 @@
   (evil-define-key 'normal 'global (kbd "] t") 'tab-next)
   (evil-define-key 'normal 'global (kbd "[ t") 'tab-previous)
 
+
+
+  (evil-define-key 'normal 'global (kbd "C-p") #'my-format-buffer)
+
+
+
+
   (evil-define-key 'normal lsp-mode-map
     (kbd "gr") 'lsp-find-references
     (kbd "<leader> c a") 'lsp-execute-code-action
@@ -114,9 +121,6 @@
       (if (use-region-p)
         (comment-or-uncomment-region (region-beginning) (region-end)))))
 
-  (with-eval-after-load 'python
-    (evil-define-key 'normal python-ts-mode-map
-      (kbd "C-p") #'my-py/format-buffer))
   (evil-mode 1))
 
 
