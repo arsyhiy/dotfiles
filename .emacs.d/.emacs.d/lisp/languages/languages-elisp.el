@@ -1,4 +1,4 @@
-;;; languages-elips.el --- mode for emacs lisp -*- lexical-binding: t; -*-
+;;; languages-elisp.el --- mode for emacs lisp -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
 ;; Package-Requires: ((emacs "30.1"))
 
@@ -29,4 +29,4 @@
 (add-hook 'emacs-lisp-mode-hook #'my-elisp-mode-setup)
 
 (provide 'languages-elips)
-;;; languages-elips.el ends here
+;;; languages-elisp.el ends here

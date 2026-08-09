@@ -1,4 +1,4 @@
-;;; core-editting-vertico.el --- VERTical Interactive COmpletion  -*- lexical-binding: t; -*-
+;;; core-editing-vertico.el --- VERTical Interactive COmpletion  -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
 ;; Package-Requires: ((emacs "30.1"))
 
@@ -18,4 +18,4 @@
   (vertico-preselect 'directory))
 
 (provide 'core-editing-vertico)
-;;; core-editting-vertico.el ends here
+;;; core-editing-vertico.el ends here

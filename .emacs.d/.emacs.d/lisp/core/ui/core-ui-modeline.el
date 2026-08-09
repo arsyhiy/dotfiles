@@ -11,7 +11,7 @@
   :init (doom-modeline-mode 1)
 
   :config
-  (doom-modeline-height 35)
+  (doom-modeline-height 40)
 
   )
 

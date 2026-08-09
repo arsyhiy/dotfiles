@@ -1,4 +1,4 @@
-;;; languages-markdown.el ---  Emacs Markdown Mode  -*- lexical-binding: t; -*-
+;; languages-markdown.el ---  Emacs Markdown Mode  -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
 ;; Package-Requires: ((emacs "30.1"))
 
