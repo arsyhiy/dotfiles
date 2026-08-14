@@ -1,11 +1,84 @@
-;;; core-options.el --- options settings -*- lexical-binding: t; -*-
-;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+#+STARTUP: content
+#+FILETAGS: :emacs:
 
-;;; Commentary:
+#+title:My Personal Emacs Configuration
+#+PROPERTY: header-args:emacs-lisp :results none :tangle ./init.el :mkdirp yes
 
-;;; Code:
 
+* load all i need
+
+#+begin_src emacs-lisp
+
+
+
+;; ui
+(ilusia-layer 'ui)
+(ilusia-layer 'dashboard)
+                
+;; input
+
+
+;; magit
+(ilusia-layer 'version-control)
+
+
+
+(set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 130)
+(set-face-attribute 'mode-line nil :height 85 :inherit 'fixed-pitch)
+
+(setq org-edit-src-content-indentation 0)
+
+(ilusia-module 'consult)
+(ilusia-module 'marginalia)
+(ilusia-module 'orderless)
+(ilusia-module 'undo-tree)
+(ilusia-module 'vertico)
+(ilusia-module 'vterm)
+(toggle-frame-maximized);; очень удобная настройка 
+(ilusia-layer 'treesitter)
+
+(ilusia-layer 'ide)
+#+end_src
+
+
+* editor
+
+* UI
+** theme
+#+begin_src emacs-lisp
+(ilusia-module 'ef-themes)
+(load-theme 'ef-orange t)
+#+end_src
+** modeline
+#+begin_src emacs-lisp
+  (ilusia-layer 'modeline-doom)
+#+end_src
+*
+* development
+** version control
+#+begin_src emacs-lisp
+(ilusia-layer 'version-control)
+#+end_src
+* input
+#+begin_src emacs-lisp
+(ilusia-layer 'input)
+#+end_src
+** evil
+#+begin_src emacs-lisp
+  (ilusia-module 'evil)
+#+end_src
+* navigation
+#+begin_src emacs-lisp
+(ilusia-layer 'navigation)
+#+end_src
+* file management
+#+begin_src emacs-lisp
+(ilusia-layer 'file-management)
+#+end_src
+
+
+* personal configuration
+#+begin_src emacs-lisp
 (use-package emacs
   :ensure nil ;; don't even try to install it
   :custom
@@ -107,6 +180,4 @@
   (electric-pair-mode 1)
   (electric-indent-mode 1)
   (modify-coding-system-alist 'file "" 'utf-8))
-
-(provide 'core-options)
-;;; core-options.el ends here
+#+end_src 
