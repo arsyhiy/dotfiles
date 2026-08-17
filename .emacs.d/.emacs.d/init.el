@@ -37,9 +37,56 @@
 
 (ilusia-module 'evil)
 
+(ilusia-layer 'editing)
+
+(ilusia-module 'evil)
+
 (ilusia-layer 'navigation)
 
 (ilusia-layer 'file-management)
+
+(use-package c-ts-mode
+  :ensure nil
+  :mode
+  ("\\.c\\'" . c-ts-mode)
+  ("\\.h\\'" . c-or-c++-ts-mode)
+  ("\\.cpp\\'" . c++-ts-mode)
+  ("\\.hpp\\'" . c++-ts-mode)
+
+  :bind
+  (:map c-ts-mode-map
+    ("<f1>" . my-c/make-clean)
+    ("<f2>" . my-c/make-all)
+    ("<f3>" . my-c/make-run))
+
+  :config
+
+  (c-ts-indent-offset 4)
+  (c-ts-mode-indent-style 'linux)
+
+  (c-ts-mode-enable-doxygen t)
+
+  (eletric-pair-mode 1))
+
+(defun my-c/make-clean ()
+  "Run make clean in project root."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (compile "make clean")))
+
+(defun my-c/make-all ()
+  "Run make all in project root."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (compile "make all")))
+
+(defun my-c/make-run ()
+  "Run make run in project root."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (compile "make run")))
+
+;; todo: add make-custom with arguments memory.
 
 (use-package emacs
   :ensure nil ;; don't even try to install it
