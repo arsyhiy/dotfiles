@@ -39,8 +39,6 @@
 
 (ilusia-layer 'editing)
 
-(ilusia-module 'evil)
-
 (ilusia-layer 'navigation)
 
 (ilusia-layer 'file-management)
