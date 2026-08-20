@@ -11,9 +11,6 @@
 
 
 
-;; ui
-(ilusia-layer 'ui)
-(ilusia-layer 'dashboard)
                 
 ;; input
 
@@ -35,41 +32,39 @@
 (ilusia-module 'vertico)
 (ilusia-module 'vterm)
 (toggle-frame-maximized);; очень удобная настройка 
-(ilusia-layer 'treesitter)
+;; (ilusia-layer 'treesitter)
 
 (ilusia-layer 'ide)
+(ilusia-layer 'languages)
+
+
+
 #+end_src
 
-
-* editor
 
 * UI
-** theme
-#+begin_src emacs-lisp
+#+begin_src  emacs-lisp
+
+(ilusia-layer 'ui-base)
+(ilusia-layer 'dashboard)
+
 (ilusia-module 'ef-themes)
-(load-theme 'ef-orange t)
+
+(ilusia-layer 'modeline-doom)
+
 #+end_src
-** modeline
-#+begin_src emacs-lisp
-  (ilusia-layer 'modeline-doom)
-#+end_src
-*
 * development
 ** version control
 #+begin_src emacs-lisp
 (ilusia-layer 'version-control)
 #+end_src
-* input
-#+begin_src emacs-lisp
-(ilusia-layer 'input)
-#+end_src
 ** evil
 #+begin_src emacs-lisp
   (ilusia-module 'evil)
 #+end_src
-* editing
+* input-editing
 #+begin_src emacs-lisp
-(ilusia-layer 'editing)
+(ilusia-layer 'input-editing)
 #+end_src
 * navigation
 #+begin_src emacs-lisp
@@ -81,6 +76,7 @@
 #+end_src
 
 * languages
+** c
 #+begin_src emacs-lisp
 (use-package c-ts-mode
   :ensure nil
@@ -126,6 +122,17 @@
 ;; todo: add make-custom with arguments memory.
 #+end_src
 
+** python
+#+begin_src emacs-lisp
+
+(ilusia-module 'python-base)
+(use-package pyvenv
+  :straight t)
+#+end_src
+* format
+#+begin_src emacs-lisp
+(ilusia-layer 'format)
+#+end_src
 * personal configuration
 #+begin_src emacs-lisp
 (use-package emacs

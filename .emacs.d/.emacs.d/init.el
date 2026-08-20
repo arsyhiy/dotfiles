@@ -1,7 +1,3 @@
-;; ui
-(ilusia-layer 'ui)
-(ilusia-layer 'dashboard)
-                
 ;; input
 
 
@@ -22,22 +18,23 @@
 (ilusia-module 'vertico)
 (ilusia-module 'vterm)
 (toggle-frame-maximized);; очень удобная настройка 
-(ilusia-layer 'treesitter)
+;; (ilusia-layer 'treesitter)
 
 (ilusia-layer 'ide)
+(ilusia-layer 'languages)
+
+(ilusia-layer 'ui-base)
+(ilusia-layer 'dashboard)
 
 (ilusia-module 'ef-themes)
-(load-theme 'ef-orange t)
 
 (ilusia-layer 'modeline-doom)
 
 (ilusia-layer 'version-control)
 
-(ilusia-layer 'input)
-
 (ilusia-module 'evil)
 
-(ilusia-layer 'editing)
+(ilusia-layer 'input-editing)
 
 (ilusia-layer 'navigation)
 
@@ -85,6 +82,12 @@
     (compile "make run")))
 
 ;; todo: add make-custom with arguments memory.
+
+(ilusia-module 'python-base)
+(use-package pyvenv
+  :straight t)
+
+(ilusia-layer 'format)
 
 (use-package emacs
   :ensure nil ;; don't even try to install it
