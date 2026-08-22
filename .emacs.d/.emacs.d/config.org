@@ -49,8 +49,22 @@
 (ilusia-layer 'dashboard)
 
 (ilusia-module 'ef-themes)
+;; Theme
+
+;; Typography
+(set-face-attribute 'default nil
+                    :family "JetBrainsMono Nerd Font"
+                    :height 130)
+;; Current line
+(add-hook 'prog-mode-hook #'hl-line-mode)
+
+;; (set-face-attribute 'hl-line nil
+;;                     :background "#2b2b2b")
 
 (ilusia-layer 'modeline-doom)
+
+
+
 
 #+end_src
 * development
@@ -65,6 +79,7 @@
 * input-editing
 #+begin_src emacs-lisp
 (ilusia-layer 'input-editing)
+(ilusia-module 'which-key)
 #+end_src
 * navigation
 #+begin_src emacs-lisp
@@ -212,8 +227,6 @@
     (string-match "\\*[^*]+\\*" (buffer-name buffer)))
   (setq switch-to-prev-buffer-skip 'skip-these-buffers)
 
-  ;; fonts
-  (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 130)
 
   (setq custom-file (locate-user-emacs-file "custom-vars.el"))
   (load custom-file 'noerror 'nomessage)
@@ -237,3 +250,6 @@
   (electric-indent-mode 1)
   (modify-coding-system-alist 'file "" 'utf-8))
 #+end_src 
+
+
+

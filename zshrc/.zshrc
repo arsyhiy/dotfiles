@@ -10,3 +10,7 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 
 alias n=nvim
+
+. "$HOME/.local/bin/env"
+
+export PATH="/home/popandopuloarseniy/.local/bin:$PATH"
