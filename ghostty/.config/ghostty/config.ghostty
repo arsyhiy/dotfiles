@@ -5,14 +5,19 @@ font-thicken=true
 font-thicken-strength=1
 adjust-cell-height=1
 
-background-opacity = 0.8
+# look
 theme = IBM 5153 CGA
+background-opacity = 0.85
+background-blur-radius = 20
+window-decoration = false
 
 # others
 shell-integration-features = no-cursor,no-sudo,no-title
 confirm-close-surface=false
 cursor-color = #20C20E
 maximize=true
+copy-on-select = clipboard
+scrollback-limit = 100000
 
 # keybinding
 keybind = ctrl+enter=unbind
