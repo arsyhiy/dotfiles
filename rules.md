@@ -6,3 +6,15 @@ write and describe everything in english for the purpose of readable code.
 
 maybe it very obvious that repository should be in english but i think it 
 is good to  write down and don't think anymore what should be it's already on paper  
+
+
+# Every file has a header describing its purpose.
+
+Format: <comment> <path>: <description>
+
+Example:
+''' markdown
+# ~/.config/nvim/init.lua: Neovim configuration
+''' 
+
+that's for all project *.sh and setup files

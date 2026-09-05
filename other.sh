@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# other.sh: every i can't categorize of move to another file
+
 # docker
 sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 
@@ -29,5 +31,5 @@ ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # ghostty
 dnf copr enable scottames/ghostty
-dnf install -y ghostty
+sudo dnf install -y ghostty
 

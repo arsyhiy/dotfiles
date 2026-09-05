@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# install.sh: installing every thing to the machine
+
 # all packages with the same name as you use
 packages=(
   	gcc
@@ -14,8 +16,7 @@ packages=(
   	stow
     bear
     neovim
-    emacs
-    # dotnet-sdk-9.0 
+    fzf
 )
 
 # all packages with not the same name as you use

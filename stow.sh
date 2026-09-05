@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-sudo stow zshrc ghostty tmux nvim .emacs.d
+# stow.sh: how we add configs to the machine
+
+sudo stow zshrc ghostty tmux nvim

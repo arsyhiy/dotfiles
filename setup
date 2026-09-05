@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# setup: main enterence for dotfiles
+
 clear
 cat <<'.'
  ______   _______  _______  _______  ___   ___      _______  _______ 

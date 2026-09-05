@@ -1,7 +1,7 @@
 local opt = vim.opt
 
 opt.number = true
---hopt.relativenumber = true
+opt.relativenumber = true
 opt.tabstop = 2
 opt.shiftwidth = 4
 opt.expandtab = true
