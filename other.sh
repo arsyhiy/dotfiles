@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# other.sh: every i can't categorize of move to another file
-
 # docker
 sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 
@@ -10,22 +8,25 @@ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 sudo systemctl enable --now docker
 
 sudo dnf install docker-compose-switch
+
 sudo usermod -aG docker $USER
 
-# pipx 
+# python
+
+## pipx 
 sudo dnf install pipx
 pipx ensurepath
 
-# poetry
+## poetry
 pipx install poetry
 
 # zsh
 sudo dnf install -y zsh
 
-# ohmyzsh
+## ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# zsh autosuggestions
+## zsh autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions \
 ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 

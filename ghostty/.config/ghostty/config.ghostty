@@ -1,13 +1,13 @@
 # fonts
 font-family = "JetBrainsMono Nerd Font"
-font-size = 13
+font-size = 15
 font-thicken=true
 font-thicken-strength=1
 adjust-cell-height=1
 
 # look
 theme = IBM 5153 CGA
-background-opacity = 0.85
+background-opacity = 0.90
 background-blur-radius = 20
 window-decoration = false
 

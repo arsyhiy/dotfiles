@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# install.sh: installing every thing to the machine
-
 # all packages with the same name as you use
 packages=(
   	gcc
@@ -57,8 +55,6 @@ for bin in "${!exceptions[@]}"; do
 	fi
 done
 
-
-
 # NOTE: every thing is good with flatpak but it is pain to download even a one app
 if ! command -v flatpak >/dev/null 2>&1; then
 	echo "Flatpak not found. Installing..."
@@ -84,7 +80,6 @@ for app in "${flatpaks[@]}"; do
 		flatpak install -y flathub "$app"
 	fi
 done
-
 
 if [[ -s "$log_file" ]]; then
 	echo "Some packages failed. See $log_file"
