@@ -34,3 +34,9 @@ ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 dnf copr enable scottames/ghostty
 sudo dnf install -y ghostty
 
+
+# rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# installing lua formatter
+cargo install stylua
