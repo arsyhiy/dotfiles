@@ -1,25 +1,15 @@
 #!/usr/bin/env bash
 
-# all packages with the same name as you use
 packages=(
   	gcc
   	g++
   	clang
-  	cmake
-  	htop
     unzip
     curl
   	nodejs
   	npm 
   	stow
-    bear
-    neovim
-    fzf
-)
-
-# all packages with not the same name as you use
-declare -A exceptions=(
-	["ssh"]="openssh-server"
+    openssh-server
 )
 
 log_file="packages.log"
@@ -39,23 +29,7 @@ for pkg in "${packages[@]}"; do
 	fi
 done
 
-for bin in "${!exceptions[@]}"; do
-	pkg="${exceptions[$bin]}"
-
-	if command -v "$bin" >/dev/null 2>&1; then
-		echo "$bin already present"
-	else
-		echo "Installing $pkg (for $bin)..."
-
-		if sudo dnf install -y "$pkg"; then
-			echo "$pkg installed"
-		else
-			echo "$pkg failed" | tee -a "$log_file"
-		fi
-	fi
-done
-
-# NOTE: every thing is good with flatpak but it is pain to download even a one app
+# NOTE: every thing is good with flatpak but it is slow to download even a one app
 if ! command -v flatpak >/dev/null 2>&1; then
 	echo "Flatpak not found. Installing..."
 	sudo dnf install -y flatpak

@@ -90,7 +90,9 @@ while any_flag_is_false; do
 done
 
 printf "\n"
+printf "=======================================================================\n"
 printf "Setup finished."
+printf "\n"
 
 if [[ -s "$LOG_FILE" ]]; then
     printf "Errors were logged to: $LOG_FILE"

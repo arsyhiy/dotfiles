@@ -34,7 +34,6 @@ ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 dnf copr enable scottames/ghostty
 sudo dnf install -y ghostty
 
-
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
@@ -44,3 +43,11 @@ cargo install stylua
 # go 
 # doesn't download the script ~ runs the script directly
 curl -sL https://git.io/go-installer | bash
+
+
+# vscode 
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+
+dnf check-update &&
+sudo dnf install code # or code-insiders
