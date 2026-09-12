@@ -10,6 +10,7 @@ packages=(
   	npm 
   	stow
     openssh-server
+    neovim
 )
 
 log_file="packages.log"
