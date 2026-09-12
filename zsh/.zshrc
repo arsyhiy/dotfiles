@@ -47,22 +47,3 @@ alias mkdir='mkdir -p'
 alias df='df -h'
 alias du='du -h'
 alias free='free -h'
-
-# Fuzzy find
-fzd() {
-    local dir
-    dir=$(find "$HOME" -type d 2>/dev/null | fzf)
-
-    if [[ -n "$dir" ]]; then
-        cd "$dir"
-    fi
-}
-
-ff() {
-    local file
-    file=$(find . -type f 2>/dev/null | fzf)
-
-    if [[ -n "$file" ]]; then
-        nvim "$file"
-    fi
-}
