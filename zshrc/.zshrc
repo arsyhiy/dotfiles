@@ -37,3 +37,9 @@ ff(){
 . "$HOME/.local/bin/env"
 
 export PATH="/home/popandopuloarseniy/.local/bin:$PATH"
+
+# >>> go.sh managed block >>>
+export GOROOT=/home/popandopuloarseniy/.go
+export GOPATH=/home/popandopuloarseniy/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+# <<< go.sh managed block <<<

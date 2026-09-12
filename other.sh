@@ -40,3 +40,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # installing lua formatter
 cargo install stylua
+
+# go 
+# doesn't download the script ~ runs the script directly
+curl -sL https://git.io/go-installer | bash
