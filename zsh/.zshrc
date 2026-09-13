@@ -49,6 +49,7 @@ alias du='du -h'
 alias free='free -h'
 
 alias n='nvim'
+alias e='emacs -nw'
 
 
 # functions for fuzzy finder or fz
