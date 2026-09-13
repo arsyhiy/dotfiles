@@ -33,7 +33,7 @@
 (with-eval-after-load 'dired
   (require 'dired-x)
 
-  ;; NOTE: hide all .meta file. thats for c#
+  ;; NOTE: hide all .meta file. thats for unity
   (setq dired-omit-files "\\.meta$")
 
   (add-hook 'dired-mode-hook #'dired-omit-mode))

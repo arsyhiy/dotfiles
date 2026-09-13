@@ -9,10 +9,8 @@
 (use-package lsp-mode
   :ensure t
   :commands lsp-deferred
-
   :init
   (setq lsp-keymap-prefix "C-c l")
-
   :hook
   ((js-ts-mode
      tsx-ts-mode
@@ -23,7 +21,6 @@
      rust-ts-mode
      web-mode)
     . lsp-deferred)
-
   :custom
   (lsp-completion-provider :capf)
   (lsp-diagnostics-provider :flymake)
@@ -40,14 +37,12 @@
   (lsp-auto-guess-root t)
   (lsp-restart 'auto-restart)
   (lsp-eldoc-enable-hover nil)
-
   :config
   (lsp-enable-which-key-integration))
 
 (use-package lsp-ui
   :after lsp-mode
   :hook (lsp-mode . lsp-ui-mode)
-
   :custom
   ;; Documentation popup
   (lsp-ui-doc-enable t)
@@ -58,10 +53,8 @@
   (lsp-ui-doc-show-with-cursor t)
   (lsp-ui-doc-show-with-mouse nil)
   (lsp-ui-doc-use-childframe t)
-
   ;; Disable inline hints
   (lsp-ui-sideline-enable nil)
-
   ;; Peek window
   (lsp-ui-peek-enable t))
 

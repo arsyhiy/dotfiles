@@ -109,8 +109,8 @@
   (modify-coding-system-alist 'file "" 'utf-8))
 
 ;;;; no-littering
-(use-package no-littering
-  :straight t)
+;; (use-package no-littering
+;;   :straight t)
 
 (provide 'core-options)
 ;;; core-options.el ends here

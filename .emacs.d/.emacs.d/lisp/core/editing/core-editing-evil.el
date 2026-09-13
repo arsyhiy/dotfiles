@@ -30,7 +30,8 @@
   (evil-define-key 'normal 'global (kbd "<leader> c G") 'consult-git-grep)
   (evil-define-key 'normal 'global (kbd "<leader> c r") 'consult-ripgrep)
   (evil-define-key 'normal 'global (kbd "<leader> c i") 'consult-info)
-  (evil-define-key 'normal 'global (kbd "<leader> c /") 'consult-line)
+  (evil-define-key 'normal 'global (kbd "<leader> c l") 'consult-line)
+  (evil-define-key 'normal 'global (kbd "<leader> c s") #'consult-imenu)
 
   (evil-define-key 'normal 'global (kbd "<leader> f f") 'consult-flymake)
   (evil-define-key 'normal 'global (kbd "<leader> f n") 'flymake-goto-next-error)
@@ -38,11 +39,7 @@
 
   (evil-define-key 'normal 'global (kbd "<leader> d d") 'dired)
   (evil-define-key 'normal 'global (kbd "<leader> d j") 'dired-jump)
-
   (evil-define-key 'normal 'global (kbd "<leader> x f") 'find-file)
-
-  (evil-define-key 'normal 'global (kbd "] c") 'diff-hl-next-hunk)
-  (evil-define-key 'normal 'global (kbd "[ c") 'diff-hl-previous-hunk)
 
   (evil-define-key 'normal 'global (kbd "<leader> m s") 'magit-status)
   (evil-define-key 'normal 'global (kbd "<leader> m l") 'magit-log-current)
@@ -52,16 +49,13 @@
 
   (evil-define-key 'normal 'global (kbd "<leader> s n") 'switch-to-next-buffer)
   (evil-define-key 'normal 'global (kbd "<leader> s p") 'switch-to-prev-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader> c b") 'consult-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader> b b") 'ibuffer)
   (evil-define-key 'normal 'global (kbd "<leader> b k") 'kill-current-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader> b s") 'save-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>SPC") 'consult-buffer)
 
-  (evil-define-key 'normal 'global (kbd "<leader> h m") 'describe-mode)
-  (evil-define-key 'normal 'global (kbd "<leader> h f") 'describe-function)
-  (evil-define-key 'normal 'global (kbd "<leader> h v") 'describe-variable)
-  (evil-define-key 'normal 'global (kbd "<leader> h k") 'describe-key)
+  (evil-define-key 'normal 'global (kbd "<leader> D m") 'describe-mode)
+  (evil-define-key 'normal 'global (kbd "<leader> D f") 'describe-function)
+  (evil-define-key 'normal 'global (kbd "<leader> D v") 'describe-variable)
+  (evil-define-key 'normal 'global (kbd "<leader> D k") 'describe-key)
 
   (evil-define-key 'normal 'global (kbd "C-p") #'my-format-buffer)
 

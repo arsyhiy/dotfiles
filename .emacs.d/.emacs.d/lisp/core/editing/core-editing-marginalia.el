@@ -9,7 +9,6 @@
 (use-package marginalia
   :ensure t
   :hook (after-init . marginalia-mode)
-
   :custom
   (marginalia-align 'right)
   (marginalia-align-offset 8)

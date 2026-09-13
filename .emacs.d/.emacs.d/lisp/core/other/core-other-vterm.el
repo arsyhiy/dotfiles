@@ -1,4 +1,3 @@
-```elisp
 ;;; core-other-vterm.el --- Vterm -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
 ;; Package-Requires: ((emacs "30.1"))
@@ -18,7 +17,6 @@
   (vterm-shell "/bin/zsh")
 
   :config
-  ;; Закрывать буфер после завершения процесса
   (add-hook 'vterm-exit-functions
             (lambda (buffer _event)
               (when (buffer-live-p buffer)
@@ -26,4 +24,3 @@
 
 (provide 'core-other-vterm)
 ;;; core-other-vterm.el ends here
-```

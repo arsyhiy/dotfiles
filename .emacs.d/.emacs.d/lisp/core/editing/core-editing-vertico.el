@@ -10,7 +10,6 @@
   :ensure t
   :hook
   (after-init . vertico-mode)
-
   :custom
   (vertico-count 10)
   (vertico-resize nil)
