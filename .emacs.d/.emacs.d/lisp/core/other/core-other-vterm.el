@@ -7,7 +7,7 @@
 ;;; Code:
 
 (use-package vterm
-  :straight t
+  :ensure t
   :commands vterm
   :bind
   ("C-c t" . vterm)
@@ -18,9 +18,9 @@
 
   :config
   (add-hook 'vterm-exit-functions
-            (lambda (buffer _event)
-              (when (buffer-live-p buffer)
-                (kill-buffer buffer)))))
+    (lambda (buffer _event)
+      (when (buffer-live-p buffer)
+        (kill-buffer buffer)))))
 
 (provide 'core-other-vterm)
 ;;; core-other-vterm.el ends here

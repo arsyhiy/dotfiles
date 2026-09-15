@@ -1,6 +1,6 @@
 ;;; core-editing-cape.el --- completion at point extensions  -*- lexical-binding: t; -*-
 ;; author: arsyhiy
-;; package-requires: ((emacs "30.1"))
+;; package-requires: ((emacs "30.2"))
 
 ;;; commentary:
 
@@ -22,6 +22,6 @@
   (setq cape-dabbrev-ignore-case t)
   (setq cape-dabbrev-check-other-buffers t)
   (setq cape-dabbrev-buffer-lerit 20))
-  
+
 (provide 'core-editing-cape)
 ;;; core-editing-cape.el ends here

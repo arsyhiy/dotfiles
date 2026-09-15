@@ -1,11 +1,12 @@
 ;;; languages-js.el --- mode for javascript -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 
 ;;; Code:
 
+;;; TODO: REWRITE THIS SHIT
 (defun my-js-mode-setup ()
   "Setq-local vars for 'js-mode'."
   (setq-local js-indent-level 2

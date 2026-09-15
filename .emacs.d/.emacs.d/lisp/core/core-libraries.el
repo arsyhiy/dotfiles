@@ -1,6 +1,6 @@
 ;;; core-libraries.el --- all libraries in one file -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 

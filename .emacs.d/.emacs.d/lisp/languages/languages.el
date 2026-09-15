@@ -1,6 +1,6 @@
 ;;; languages.el --- require all languages files from one -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 
@@ -16,6 +16,7 @@
 (require 'languages-markdown)
 (require 'languages-org)
 (require 'languages-typescript)
+(require 'languages-rust)
 
 (provide 'languages)
 ;;; languages.el ends here

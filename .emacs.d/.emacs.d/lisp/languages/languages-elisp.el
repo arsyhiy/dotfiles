@@ -1,6 +1,6 @@
 ;;; languages-elisp.el --- mode for emacs lisp -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 

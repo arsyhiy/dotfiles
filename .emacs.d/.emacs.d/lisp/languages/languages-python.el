@@ -32,7 +32,7 @@
 
 ;;; languages-python.el --- mode for programming language python -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 

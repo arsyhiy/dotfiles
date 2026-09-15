@@ -1,6 +1,6 @@
 ;;; tools-black.el --- black formatter in emacs -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 
@@ -15,7 +15,6 @@
     "black -"
     t
     t))
-
 
 (provide 'tools-black)
 ;;; tools-black.el ends here

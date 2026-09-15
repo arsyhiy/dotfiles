@@ -1,19 +1,19 @@
 ;;; core.el --- core module entrance -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 
 ;;; Code:
 
 (add-to-list 'load-path
-             (expand-file-name "editing" (file-name-directory load-file-name)))
+  (expand-file-name "editing" (file-name-directory load-file-name)))
 
 (add-to-list 'load-path
-             (expand-file-name "ui" (file-name-directory load-file-name)))
+  (expand-file-name "ui" (file-name-directory load-file-name)))
 
 (add-to-list 'load-path
-             (expand-file-name "other" (file-name-directory load-file-name)))
+  (expand-file-name "other" (file-name-directory load-file-name)))
 
 ;; core
 (require 'core-interface)
@@ -26,10 +26,11 @@
 (require 'core-editing-consult)
 (require 'core-editing-corfu)
 (require 'core-editing-eldoc)
-(require 'core-editing-flymake)
 (require 'core-editing-isearch)
 (require 'core-editing-marginalia)
 (require 'core-editing-orderless)
+(require 'core-editing-lsp)
+(require 'core-editing-flymake)
 (require 'core-editing-undo-tree)
 (require 'core-editing-vertico)
 (require 'core-editing-which-key)

@@ -1,13 +1,12 @@
 ;;; tools.el --- require all tools in one file -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 
 ;;; Code:
 
- (require 'tools-magit)
- (require 'tools-black)
+(require 'tools-black)
 
 (provide 'tools)
 ;;; tools.el ends here

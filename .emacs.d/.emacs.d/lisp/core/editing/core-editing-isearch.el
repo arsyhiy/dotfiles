@@ -1,6 +1,6 @@
 ;;; core-editing-isearch.el --- search system in Emacs -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 

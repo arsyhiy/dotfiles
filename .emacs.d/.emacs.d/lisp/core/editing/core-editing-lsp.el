@@ -1,6 +1,6 @@
 ;;; core-editing-lsp.el --- Emacs client/library for the Language Server Protocol  -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 

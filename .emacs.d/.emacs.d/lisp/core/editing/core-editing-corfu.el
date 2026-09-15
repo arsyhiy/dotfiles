@@ -1,6 +1,6 @@
 ;;; core-editing-corfu.el --- text completion framework for Emacs -*- lexical-binding: t; -*-
 ;; author: arsyhiy
-;; package-requires: ((emacs "30.1"))
+;; package-requires: ((emacs "30.2"))
 
 ;;; commentary:
 

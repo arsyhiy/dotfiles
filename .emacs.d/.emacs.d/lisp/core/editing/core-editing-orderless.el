@@ -1,6 +1,6 @@
 ;;; core-editing-orderless.el --- Emacs completion style that matches multiple regexps in any order  -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 
@@ -10,12 +10,12 @@
   :ensure t
   :init
   (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides
-        '((file (styles partial-completion))
-          (command (styles orderless))
-          (symbol (styles orderless))
-          (variable (styles orderless))))
+    completion-category-defaults nil
+    completion-category-overrides
+    '((file (styles partial-completion))
+       (command (styles orderless))
+       (symbol (styles orderless))
+       (variable (styles orderless))))
   (setq completion-flex-nospace t))
 
 (provide 'core-editing-orderless)

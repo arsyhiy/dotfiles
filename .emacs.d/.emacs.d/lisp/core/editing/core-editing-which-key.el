@@ -1,6 +1,6 @@
 ;;; core-editing-which-key.el --- Emacs package that displays available keybindings in popup  -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 

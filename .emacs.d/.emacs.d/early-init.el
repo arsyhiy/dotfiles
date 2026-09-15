@@ -1,6 +1,6 @@
 ;;; early-init.el --- Early initialization -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 
@@ -14,16 +14,16 @@
 (defvar bootstrap-version)
 
 (let ((bootstrap-file
-       (expand-file-name
-        "straight/repos/straight.el/bootstrap.el"
-        user-emacs-directory))
-      (bootstrap-version 7))
+        (expand-file-name
+          "straight/repos/straight.el/bootstrap.el"
+          user-emacs-directory))
+       (bootstrap-version 7))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent
-         'inhibit-cookies)
+      (url-retrieve-synchronously
+        "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+        'silent
+        'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
@@ -37,14 +37,17 @@
 (setq file-name-handler-alist nil)
 
 (setq inhibit-startup-screen t
-      inhibit-startup-echo-area-message t)
+  inhibit-startup-echo-area-message t)
 
 (setq frame-resize-pixelwise t
-      frame-inhibit-implied-resize t)
+  frame-inhibit-implied-resize t)
 
 (setq read-process-output-max (* 4 1024 1024))
 
 (setq bidi-display-reordering 'left-to-right
-      bidi-inhibit-bpa t)
+  bidi-inhibit-bpa t)
+
+;;; DANGER CODE KEEP IN MIND WHAT IT'S DO!!!!
+(setq trusted-content :all)
 
 ;;; early-init.el ends here

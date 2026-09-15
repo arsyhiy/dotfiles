@@ -1,6 +1,6 @@
 ;;; core-ui-window.el --- rules for window -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.2"))
 
 ;;; Commentary:
 
@@ -10,28 +10,28 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (setq display-buffer-alist
-      '(
+  '(
 
-        ;; Debug / help buffers
-        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|Help\\|Messages\\|Bookmark List\\|Ibuffer\\|Occur\\|eldoc.*\\)\\*"
-         (display-buffer-in-side-window
-          (side . bottom)
-          (window-height . 0.25)
-          (slot . 0)))
+     ;; Debug / help buffers
+     ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|Help\\|Messages\\|Bookmark List\\|Ibuffer\\|Occur\\|eldoc.*\\)\\*"
+       (display-buffer-in-side-window
+         (side . bottom)
+         (window-height . 0.25)
+         (slot . 0)))
 
-        ;; LSP / documentation buffers
-        ("\\*lsp-help\\*"
-         (display-buffer-in-side-window
-          (side . bottom)
-          (window-height . 0.25)
-          (slot . 0)))
+     ;; LSP / documentation buffers
+     ("\\*lsp-help\\*"
+       (display-buffer-in-side-window
+         (side . bottom)
+         (window-height . 0.25)
+         (slot . 0)))
 
-        ;; Diagnostics / xref / completion
-        ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
-         (display-buffer-in-side-window
-          (side . bottom)
-          (window-height . 0.25)
-          (slot . 1)))))
+     ;; Diagnostics / xref / completion
+     ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
+       (display-buffer-in-side-window
+         (side . bottom)
+         (window-height . 0.25)
+         (slot . 1)))))
 
 (provide 'core-ui-window)
 ;;; core-ui-window.el ends here
