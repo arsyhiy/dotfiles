@@ -7,12 +7,12 @@
 ;;; Code:
 
 (use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
+:ensure t
+:init
+(doom-modeline-mode 1)
 
-  :config
-  (doom-modeline-height 60))
+:custom
+(doom-modeline-height 40))
 
 (provide 'core-ui-modeline)
 ;;; core-ui-modeline.el ends here
-
