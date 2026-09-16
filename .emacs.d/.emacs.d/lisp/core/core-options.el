@@ -108,9 +108,5 @@
   (electric-indent-mode 1)
   (modify-coding-system-alist 'file "" 'utf-8))
 
-;;;; no-littering
-;; (use-package no-littering
-;;   :straight t)
-
 (provide 'core-options)
 ;;; core-options.el ends here

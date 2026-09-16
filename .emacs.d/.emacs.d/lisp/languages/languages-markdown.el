@@ -10,6 +10,7 @@
   :ensure nil
   :defer t
   :mode ("\\.md\\'" . gfm-mode)
+  :init
   (setq markdown-command "multimarkdown"
         fill-column 80)
   :hook

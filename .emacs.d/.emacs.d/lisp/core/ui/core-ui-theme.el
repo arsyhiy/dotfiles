@@ -8,7 +8,6 @@
 
 (use-package ef-themes
   :ensure t
-
   :init
   (load-theme 'ef-dark t))
 

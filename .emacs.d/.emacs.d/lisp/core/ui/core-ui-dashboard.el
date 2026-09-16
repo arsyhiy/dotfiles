@@ -1,6 +1,6 @@
 ;;; core-ui-dashboard.el --- Dashboard for Emacs -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.2"))
+;; Package-Requires: ((emacs "30.1"))
 
 ;;; Commentary:
 
@@ -30,10 +30,7 @@
   (dashboard-set-footer t)
 
   :config
-  ;; Dashboard as the initial buffer.
-  (setq initial-buffer-choice
-    (lambda ()
-      (get-buffer-create "*dashboard*")))
+  (setq initial-buffer-choice #'dashboard-open)
 
   (dashboard-setup-startup-hook))
 

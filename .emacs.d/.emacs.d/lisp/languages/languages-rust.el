@@ -7,7 +7,8 @@
 ;;; Code:
 
 (use-package rust-mode
-  :ensure t
+
+  :ensure nil
   :mode "\\.rs\\'")
 
 (provide 'languages-rust)

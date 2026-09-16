@@ -11,9 +11,7 @@
   :init (doom-modeline-mode 1)
 
   :config
-  (doom-modeline-height 60)
-
-  )
+  (doom-modeline-height 60))
 
 (provide 'core-ui-modeline)
 ;;; core-ui-modeline.el ends here

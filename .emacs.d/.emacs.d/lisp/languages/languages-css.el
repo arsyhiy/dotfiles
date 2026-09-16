@@ -1,12 +1,13 @@
 ;;; languages-css.el --- CSS configuration -*- lexical-binding: t; -*-
 ;; Author: arsyhiy
-;; Package-Requires: ((emacs "30.2"))
+;; Package-Requires: ((emacs "30.1"))
 
 ;;; Commentary:
 
 ;;; Code:
 
 (use-package css-ts-mode
+  :straight nil
   :ensure nil
   :mode "\\.css\\'"
   :hook

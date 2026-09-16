@@ -6,3 +6,6 @@
 /.emacs.d/.emacs.d/places
 /.emacs.d/.emacs.d/projects
 /.emacs.d/.emacs.d/recentf
+/.emacs.d/.emacs.d/.lsp-session-v1
+/.emacs.d/.emacs.d/elpa
+/.emacs.d/.emacs.d/transient/history.el

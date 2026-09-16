@@ -8,23 +8,9 @@
 
 (use-package org
   :ensure nil
-  :defer t
   :hook
   (org-mode . auto-fill-mode)
-  :config
-  (setq org-agenda-files '("~/NOTES/orgfiles/todo.org"))
-  (add-hook 'org-mode-hook
-    (lambda ()
-      (setq-local fill-column 80))))
-
-(global-set-key (kbd "C-c o")
-  (lambda ()
-    (interactive)
-    (org-agenda nil "a")))
-(global-set-key (kbd "C-c T")
-  (lambda ()
-    (interactive)
-    (find-file "~/NOTES/orgfiles/todo.org")))
+  (org-mode . (lambda () (setq-local fill-column 80))))
 
 (provide 'languages-org)
 ;;; languages-org.el ends here

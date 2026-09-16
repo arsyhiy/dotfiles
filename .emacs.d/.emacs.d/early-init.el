@@ -47,7 +47,7 @@
 (setq bidi-display-reordering 'left-to-right
   bidi-inhibit-bpa t)
 
-;;; DANGER CODE KEEP IN MIND WHAT IT'S DO!!!!
+;;; DANGER CODE. KEEP IN MIND WHAT IT'S DO!!!!
 (setq trusted-content :all)
 
 ;;; early-init.el ends here
