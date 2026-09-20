@@ -9,3 +9,5 @@
 /.emacs.d/.emacs.d/.lsp-session-v1
 /.emacs.d/.emacs.d/elpa
 /.emacs.d/.emacs.d/transient/history.el
+/.emacs.d/.emacs.d/custom-vars.el
+/.emacs.d/.emacs.d/tramp

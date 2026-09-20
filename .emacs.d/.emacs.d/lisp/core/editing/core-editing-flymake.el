@@ -18,5 +18,14 @@
        (warning "▲" flymake-warning)
        (note    "●" flymake-note))))
 
+
+(with-eval-after-load 'rust-ts-mode
+  (add-hook 'rust-ts-mode-hook
+            (lambda ()
+              (setq-local flymake-diagnostic-functions
+                          (remove #'rust-ts-flymake
+                                  flymake-diagnostic-functions)))))
+
+
 (provide 'core-editing-flymake)
 ;;; core-editing-flymake.el ends here

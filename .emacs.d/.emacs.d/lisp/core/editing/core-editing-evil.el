@@ -24,6 +24,12 @@
 
   (evil-set-leader 'normal (kbd "SPC"))
   (evil-set-leader 'visual (kbd "SPC"))
+  
+  (evil-define-key 'normal 'global
+    (kbd "C-h") #'windmove-left
+    (kbd "C-j") #'windmove-down
+    (kbd "C-k") #'windmove-up
+    (kbd "C-l") #'windmove-right)
 
   (evil-define-key 'normal 'global (kbd "<leader> c f") 'consult-find)
   (evil-define-key 'normal 'global (kbd "<leader> c g") 'consult-grep)
