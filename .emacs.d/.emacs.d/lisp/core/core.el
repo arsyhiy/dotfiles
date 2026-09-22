@@ -34,7 +34,8 @@
 (require 'core-editing-undo-tree)
 (require 'core-editing-vertico)
 (require 'core-editing-which-key)
-(require 'core-editing-yasnippet)
+
+;; (require 'core-editing-yasnippet)
 
 ;; ui
 (require 'core-ui-theme)

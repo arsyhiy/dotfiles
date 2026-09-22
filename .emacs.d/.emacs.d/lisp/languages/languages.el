@@ -7,16 +7,16 @@
 ;;; Code:
 
 
-(require 'languages-python)
-(require 'languages-cc)
-(require 'languages-css)
+; (require 'languages-python)
+;; (require 'languages-cc)
+;; (require 'languages-css)
 ; (require 'languages-elisp)
-(require 'languages-html)
-(require 'languages-js)
-(require 'languages-markdown)
+;; (require 'languages-html)
+;; (require 'languages-js)
+;; (require 'languages-markdown)
 (require 'languages-org)
-(require 'languages-typescript)
-(require 'languages-rust)
+;; (require 'languages-typescript)
+;; (require 'languages-rust)
 
 (provide 'languages)
 ;;; languages.el ends here

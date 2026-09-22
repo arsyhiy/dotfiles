@@ -32,7 +32,7 @@
   (tab-always-indent 'complete)
   (tab-width 2)
 	(comment-multi-line t)
-	(comment-auto-fill-only-comments t)
+	; (comment-auto-fill-only-comments t)
 	(comment-empty-lines t)
 	(sentence-end-double-space nil)
 	(require-final-newline t)
