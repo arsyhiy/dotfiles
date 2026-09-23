@@ -11,3 +11,5 @@
 /.emacs.d/.emacs.d/transient/history.el
 /.emacs.d/.emacs.d/custom-vars.el
 /.emacs.d/.emacs.d/tramp
+/.emacs.d/.emacs.d/config.el
+/.emacs.d/.emacs.d/lisp/core/ui/ui.el

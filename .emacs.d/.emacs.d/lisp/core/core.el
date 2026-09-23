@@ -9,12 +9,12 @@
 (add-to-list 'load-path
   (expand-file-name "editing" (file-name-directory load-file-name)))
 
-(add-to-list 'load-path
-  (expand-file-name "ui" (file-name-directory load-file-name)))
 
 (add-to-list 'load-path
   (expand-file-name "other" (file-name-directory load-file-name)))
 
+(add-to-list 'load-path
+  (expand-file-name "ui" (file-name-directory load-file-name)))
 ;; core
 (require 'core-interface)
 (require 'core-options)
@@ -37,7 +37,6 @@
 
 ;; (require 'core-editing-yasnippet)
 
-;; ui
 (require 'core-ui-theme)
 (require 'core-ui-modeline)
 (require 'core-ui-diff-hl)
@@ -49,7 +48,6 @@
 (require 'core-ui-window)
 (require 'core-ui-dashboard)
 (require 'core-ui-magit)
-;; (require 'core-ui-tilt-keper)
 
 ;; other
 (require 'core-other-smerge)

@@ -1,0 +1,38 @@
+#+title: Emacs Configuration
+
+* functionality to reaload config without exiting the emacs
+#+begin_src emacs-lisp
+(defun my/reload-config-org ()
+  "Reload ~/.emacs.d/config.org."
+  (interactive)
+  (org-babel-load-file (expand-file-name "~/.emacs.d/config.org"))
+  (message "config.org reloaded!"))
+#+end_src
+
+* moving init.el to here
+this this is supose to be dirty
+#+begin_src emacs-lisp
+
+
+;;; init.el --- starting point for emacs configuration -*- lexical-binding: t; -*-
+;; Author: arsyhiy
+;; Package-Requires: ((emacs "30.2"))
+
+;;; Commentary:
+
+;;; Code:
+
+(add-to-list 'load-path "~/.emacs.d/lisp/core/")
+(add-to-list 'load-path "~/.emacs.d/lisp/languages/")
+(add-to-list 'load-path "~/.emacs.d/lisp/tools/")
+
+(require 'core)
+
+(require 'languages)
+
+
+
+;; (require 'tools)
+
+;;; init.el ends here
+#+end_src
