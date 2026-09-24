@@ -1,4 +1,0 @@
-the main purpose of this file is write down ideas for emacs
-
-** idea: write a convenient config for markdown
-
