@@ -11,7 +11,6 @@ packages=(
   	stow
     openssh-server
     neovim
-    emacs
 )
 
 log_file="packages.log"
