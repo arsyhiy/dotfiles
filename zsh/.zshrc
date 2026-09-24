@@ -51,8 +51,7 @@ alias free='free -h'
 alias n='nvim'
 alias e='emacs -nw'
 
-
-# functions for fuzzy finder or fz
+# functions for fzf
 fd() {
     local dir
     dir=$(find ~ -type d | fzf)
