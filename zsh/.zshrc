@@ -49,7 +49,7 @@ alias du='du -h'
 alias free='free -h'
 
 alias n='nvim'
-alias e='emacs -nw'
+alias t='tmux'
 
 # functions for fzf
 fd() {
