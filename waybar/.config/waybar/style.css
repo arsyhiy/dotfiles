@@ -2,39 +2,52 @@
     border: none;
     border-radius: 0;
     font-family: monospace;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 window#waybar {
     background: transparent;
 }
 
-#workspaces,
-#clock,
+#workspaces {
+    margin: 0;
+    padding: 0;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 0 2px;
+    min-width: 20px;
+
+    background: transparent;
+    color: #aaaaaa;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    background: #444444;
+}
+
+#workspaces button:hover {
+    color: #ffffff;
+    background: #333333;
+}
+
+#clock {
+    padding: 0 10px;
+    color: #ffffff;
+}
+
 #keyboard-state,
 #pulseaudio,
 #network,
 #battery {
     padding: 0 10px;
+    color: #dddddd;
 }
 
-#workspaces button {
-    padding: 0 6px;
-    background: transparent;
-    color: #666666;
-}
-
-#workspaces button.active {
+#language {
+    padding: 0 10px;
     color: #ffffff;
-}
-
-#clock {
-    color: #ffffff;
-}
-
-#keyboard-state,
-#pulseaudio,
-#network,
-#battery {
-    color: #aaaaaa;
+    font-size: 16px;
 }

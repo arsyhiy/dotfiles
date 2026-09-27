@@ -19,11 +19,7 @@
     ],
 
     "hyprland/workspaces": {
-        "format": "{name}",
-        "format-icons": {
-            "active": "●",
-            "default": "○"
-        },
+        "format": "{id}",
         "persistent-workspaces": {
             "*": 5
         }
