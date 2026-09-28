@@ -26,8 +26,8 @@
     },
 
     "clock": {
-        "format": "{:%H:%M}",
-        "tooltip-format": "{:%A, %d %B %Y}"
+    "format": "{:%H:%M  %d.%m.%Y}",
+    "tooltip-format": "{:%A, %d %B %Y}"
     },
 
     "keyboard-state": {
