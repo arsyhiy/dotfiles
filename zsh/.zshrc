@@ -69,3 +69,16 @@ ff(){
         nvim "$file" # or make your favorite editor for that
     fi
 }
+
+
+off() {
+    systemctl poweroff
+}
+
+sleep() {
+    systemctl suspend
+}
+
+logout() {
+    loginctl terminate-user "$USER"
+}
