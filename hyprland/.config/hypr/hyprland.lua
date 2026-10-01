@@ -42,6 +42,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("hyprpaper")
+	hl.exec_cmd("sleep 2 && systemctl --user start wallpaper.service")
 end)
 
 -------------------------------
