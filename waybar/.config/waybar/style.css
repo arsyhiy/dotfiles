@@ -6,8 +6,11 @@
 }
 
 window#waybar {
-    background: transparent;
+    background: #0f172a;
+    color: #e2e8f0;
 }
+
+/* Workspaces */
 
 #workspaces {
     margin: 0;
@@ -20,34 +23,42 @@ window#waybar {
     min-width: 20px;
 
     background: transparent;
-    color: #aaaaaa;
+    color: #94a3b8;
 }
 
 #workspaces button.active {
-    color: #ffffff;
-    background: #444444;
+    color: #0f172a;
+    background: #7dd3fc;
+    border-radius: 6px;
 }
 
 #workspaces button:hover {
-    color: #ffffff;
-    background: #333333;
+    color: #e2e8f0;
+    background: #334155;
+    border-radius: 6px;
 }
+
+/* Clock */
 
 #clock {
     padding: 0 10px;
-    color: #ffffff;
+    color: #7dd3fc;
 }
+
+/* System modules */
 
 #keyboard-state,
 #pulseaudio,
 #network,
 #battery {
     padding: 0 10px;
-    color: #dddddd;
+    color: #cbd5e1;
 }
+
+/* Keyboard layout */
 
 #language {
     padding: 0 10px;
-    color: #ffffff;
+    color: #7dd3fc;
     font-size: 16px;
 }
