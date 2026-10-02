@@ -1,0 +1,73 @@
+#!/bin/bash
+
+set -e
+
+echo "==> Setting up Emacs daemon..."
+
+SYSTEMD_DIR="$HOME/.config/systemd/user"
+DESKTOP_DIR="$HOME/.local/share/applications"
+
+mkdir -p "$SYSTEMD_DIR"
+mkdir -p "$DESKTOP_DIR"
+
+cat > "$SYSTEMD_DIR/emacs.service" <<'EOF'
+[Unit]
+Description=Emacs daemon
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs --daemon
+ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+EOF
+
+echo "==> Created Emacs systemd service"
+
+SYSTEM_EMACS_DESKTOP="/usr/share/applications/emacs.desktop"
+USER_EMACS_DESKTOP="$DESKTOP_DIR/emacs.desktop"
+
+if [ -f "$SYSTEM_EMACS_DESKTOP" ]; then
+cp "$SYSTEM_EMACS_DESKTOP" "$USER_EMACS_DESKTOP"
+
+if grep -q '^Hidden=' "$USER_EMACS_DESKTOP"; then
+    sed -i 's/^Hidden=.*/Hidden=true/' "$USER_EMACS_DESKTOP"
+else
+    sed -i '/^\[Desktop Entry\]/a Hidden=true' "$USER_EMACS_DESKTOP"
+fi
+
+echo "==> Hidden system Emacs launcher"
+
+fi
+
+cat > "$DESKTOP_DIR/emacs-client.desktop" <<'EOF'
+[Desktop Entry]
+Name=Emacs
+Comment=Emacs Client
+Exec=emacsclient -c
+Icon=emacs
+Type=Application
+Terminal=false
+Categories=Development;TextEditor;
+StartupWMClass=Emacs
+EOF
+
+echo "==> Created Emacs client launcher"
+
+systemctl --user daemon-reload
+systemctl --user enable emacs.service
+systemctl --user restart emacs.service
+
+if command -v update-desktop-database >/dev/null 2>&1; then
+update-desktop-database "$DESKTOP_DIR" >/dev/null 2>&1 || true
+fi
+
+echo
+echo "==> Emacs daemon is running."
+echo "==> System Emacs launcher is hidden."
+echo "==> Only the Emacs client launcher is visible."
+echo
+
+systemctl --user --no-pager status emacs.service
