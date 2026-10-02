@@ -44,7 +44,6 @@ cargo install stylua
 # doesn't download the script ~ runs the script directly
 curl -sL https://git.io/go-installer | bash
 
-
 # hyprland
 # TODO:  составить точный список того что нужно скачать для  hyprland
 sudo dnf install noctalia-hyprland-meta
