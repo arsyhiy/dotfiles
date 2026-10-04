@@ -75,9 +75,9 @@ off() {
     systemctl poweroff
 }
 
-sleep() {
-    systemctl suspend
-}
+# sleep() {
+#     systemctl suspend
+# }
 
 logout() {
     loginctl terminate-user "$USER"
