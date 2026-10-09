@@ -3,6 +3,7 @@
 packages=(
   	stow
     vim 
+    emacs
     tmux
     fzf
     curl

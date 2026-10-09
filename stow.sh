@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo stow tmux vim zsh 
+sudo stow tmux zsh vim emacs
