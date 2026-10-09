@@ -7,6 +7,7 @@ packages=(
     fzf
     curl
     unzip
+    lazygit
 )
 
 log_file="packages.log"
