@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+./install.sh
+./stow.sh
