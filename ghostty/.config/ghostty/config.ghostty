@@ -1,0 +1,10 @@
+font-size=15
+font-family = "JetBrains Mono"
+maximize = true
+
+background-opacity = 0.85
+background-blur=16
+background=#000000
+
+window-decoration = none
+
