@@ -1,0 +1,4 @@
+
+
+vim.o.number = true
+
