@@ -48,7 +48,7 @@ alias df='df -h'
 alias du='du -h'
 alias free='free -h'
 
-alias v='vim'
+alias n='nvim'
 alias t='tmux'
 
 # functions for fzf
@@ -66,7 +66,7 @@ ff(){
     file=$(find . -type f | fzf)
 
     if [ -n "$file" ]; then
-        vim "$file" # or make your favorite editor for that
+        nvim "$file" # or make your favorite editor for that
     fi
 }
 

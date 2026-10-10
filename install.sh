@@ -2,11 +2,10 @@
 
 packages=(
   	stow
-    vim 
-    emacs
     tmux
     fzf
     curl
+    npm
     unzip
     lazygit
 )

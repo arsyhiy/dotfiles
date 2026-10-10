@@ -4,5 +4,3 @@
 sudo ./setup
 ```
 
-# TODO:
-- пересмотреть corne 
