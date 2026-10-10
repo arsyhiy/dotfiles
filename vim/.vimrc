@@ -1,16 +1,6 @@
-set expandtab
-set smarttab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set number
-set foldcolumn=2
-syntax on
-set noerrorbells
-set novisualbell
-set mouse=a
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
-set encoding=utf8
+set backspace=2         " backspace in insert mode works like normal editor
+syntax on               " syntax highlighting
+filetype indent on      " activates indenting for files
+set autoindent          " auto indenting
+set number              " line numbers
+set nobackup            " get rid of anoying ~file

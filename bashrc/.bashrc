@@ -56,3 +56,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+alias t='tmux'
+alias v='vim'
