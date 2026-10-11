@@ -2,7 +2,7 @@ font-size=15
 font-family = "JetBrains Mono"
 maximize = true
 
-background-opacity = 0.85
+background-opacity = 0.90
 background-blur=16
 background=#000000
 
