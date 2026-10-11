@@ -1,4 +1,0 @@
-
-
-vim.o.number = true
-
