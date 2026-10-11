@@ -198,6 +198,54 @@
         (when (buffer-live-p buffer)
           (kill-buffer buffer)))))
 #+end_src
+** compile
+** run project
+#+begin_src emacs-lisp
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode +1))
+
+(defcustom my/project-compile-commands nil
+  "Alist of project roots and their last compile commands."
+  :type '(alist :key-type directory
+                :value-type string)
+  :group 'tools)
+
+(defun my/project-run-compile ()
+  "Run an interactive compile command for the current project."
+  (interactive)
+  (unless (projectile-project-p)
+    (user-error "Current buffer is not inside a Projectile project"))
+
+  (let* ((root (file-name-as-directory
+                (expand-file-name (projectile-project-root))))
+         (default-directory root)
+         (previous (cdr (assoc root my/project-compile-commands)))
+         (command (read-string
+                   (if previous
+                       (format "Run in %s (default %s): "
+                               (abbreviate-file-name root)
+                               previous)
+                     (format "Run in %s: "
+                             (abbreviate-file-name root)))
+                   nil nil previous)))
+
+    (unless (string-empty-p command)
+      (setf (alist-get root my/project-compile-commands
+                       nil nil #'string=)
+            command)
+
+      ;; Persist commands between Emacs sessions.
+      (customize-save-variable
+       'my/project-compile-commands
+       my/project-compile-commands)
+
+      ;; Run from the project root.
+      (compile command))))
+
+(global-set-key (kbd "<f5>") #'my/project-run-compile)
+#+end_src
 * editing features
 ** undo tree
 #+begin_src emacs-lisp
@@ -491,6 +539,36 @@
                             (remove #'rust-ts-flymake
                                     flymake-diagnostic-functions)))))
 #+end_src
+** debuger
+*** dap-mode
+#+begin_src emacs-lisp
+(use-package dap-mode
+  :ensure t
+  :after lsp-mode
+  :bind (:map dap-mode-map
+              ("<f5>" . dap-debug)
+              ("<f6>" . dap-next)
+              ("<f7>" . dap-step-in)
+              ("<f8>" . dap-step-out)
+              ("<f9>" . dap-breakpoint-toggle))
+  :config
+  (dap-auto-configure-mode))
+#+end_src
+*** gud
+#+begin_src emacs-lisp
+(use-package gud
+  :ensure nil
+  :commands (gdb gud-gdb)
+  :bind (:map gud-mode-map
+              ("<f5>" . gud-cont)
+              ("<f6>" . gud-next)
+              ("<f7>" . gud-step)
+              ("<f8>" . gud-finish)
+              ("<f9>" . gud-break))
+  :config
+  (setq gdb-many-windows t
+        gdb-show-main t))
+#+end_src
 * UI
 ** window
 #+begin_src emacs-lisp
@@ -666,49 +744,9 @@
          (html "https://github.com/tree-sitter/tree-sitter-html" "v0.23.2")
          (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.2")))
 #+end_src
-* languages all in one
+* languages
+** languages all in one
 #+begin_src  emacs-lisp
-  (use-package c-ts-mode
-    :ensure nil
-    :mode
-    ("\\.c\\'" . c-ts-mode)
-    ("\\.h\\'" . c-or-c++-ts-mode)
-    ("\\.cpp\\'" . c++-ts-mode)
-    ("\\.hpp\\'" . c++-ts-mode)
-    :bind
-    (:map c-ts-mode-map
-      ("<f1>" . my-c/make-clean)
-      ("<f2>" . my-c/make-all)
-      ("<f3>" . my-c/make-run))
-
-    :config
-
-    (c-ts-indent-offset 4)
-    (c-ts-mode-indent-style 'linux)
-
-    (c-ts-mode-enable-doxygen t)
-
-    (eletric-pair-mode 1))
-
-    (defun my-c/make-clean ()
-      "Run make clean in project root."
-      (interactive)
-      (let ((default-directory (projectile-project-root)))
-        (compile "make clean")))
-
-    (defun my-c/make-all ()
-      "Run make all in project root."
-      (interactive)
-      (let ((default-directory (projectile-project-root)))
-        (compile "make all")))
-
-    (defun my-c/make-run ()
-      "Run make run in project root."
-      (interactive)
-      (let ((default-directory (projectile-project-root)))
-        (compile "make run")))
-
-      ;; todo: add make-custom with arguments memory.
 
   (use-package css-ts-mode
     :straight nil
@@ -723,27 +761,6 @@
     (add-to-list 'major-mode-remap-alist
     '(css-mode . css-ts-mode)))  
 
-  ;; TODO: переписать конфиг для  emacs lisp
-  (defun my-elisp-mode-setup ()
-    "Setup for elisp."
-    (electric-pair-local-mode 1)
-    (show-paren-local-mode 1)
-    (eldoc-mode 1)
-    (prettify-symbols-mode 1)
-
-    (setq-local indent-tabs-mode nil
-                lisp-indent-offset 2)
-
-    (local-set-key (kbd "C-c C-e") #'eval-last-sexp)
-    (local-set-key (kbd "C-c C-r") #'eval-region)
-    (local-set-key (kbd "C-c C-b") #'eval-buffer)
-
-    (add-hook 'before-save-hook
-      (lambda ()
-        (indent-region (point-min) (point-max)))
-          nil t))
-
-     (add-hook 'emacs-lisp-mode-hook #'my-elisp-mode-setup)
 
   (use-package html-ts-mode
     :ensure nil
@@ -780,6 +797,38 @@
      :hook
      (gfm-mode . auto-fill-mode))
 
+
+
+
+  (use-package rust-mode
+    :ensure nil
+    :mode "\\.rs\\'")
+
+    (add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
+    (setenv "PATH"
+      (concat (expand-file-name "~/.cargo/bin") ":"
+        (getenv "PATH")))
+
+  (use-package typescript-mode
+    :init
+    (add-to-list 'major-mode-remap-alist
+      '(typescript-mode . typescript-ts-mode))
+    (add-to-list 'major-mode-remap-alist
+      '(js-mode . js-ts-mode)))
+#+end_src
+
+** python
+#+begin_src emacs-lisp
+
+  (use-package python
+    :ensure nil
+    :mode ("\\.py\\'" . python-ts-mode)
+    :hook ((python-ts-mode . lsp-deferred)))
+
+#+end_src
+
+** org
+#+begin_src  emacs-lisp
   (defconst my/org-directory
     (expand-file-name "~/org/"))
 
@@ -830,66 +879,91 @@
      ("C-c o c" . org-capture)
      ("C-c o a" . org-agenda)
      ("C-c o s" . org-store-link)))
+#+end_src
 
-  ;;; languages-python.el
-  ;; 
-  ;; (require 'python)
-  ;; (require 'tools-black)
-  ;; 
-  ;; (defun my-python-run ()
-  ;;   "Run python file."
-  ;;   (interactive)
-  ;;   (save-buffer)
-  ;;   (compile
-  ;;    (format "python %s"
-  ;;            (shell-quote-argument
-  ;;             (buffer-file-name)))))
-  ;; 
-  ;; 
-  ;; (defun my-python-setup ()
-  ;;   "Configure Python buffers."
-  ;; 
-  ;;   (setq-local
-  ;;    my-formatter-function
-  ;;    #'my-black-format)
-  ;; 
-  ;;   (setq-local
-  ;;    my-run-function
-  ;;    #'my-python-run))
-  ;; 
-  ;; 
-  ;; (add-hook
-  ;;  'python-ts-mode-hook
-  ;;  #'my-python-setup)
-
-
-  ;;; languages-python.el --- mode for programming language python -*- lexical-binding: t; -*-
-  ;; Author: arsyhiy
-  ;; Package-Requires: ((emacs "30.2"))
-
-  ;;; Commentary:
-
-  ;;; Code:
-
-  (use-package python
+** c/c++
+#+begin_src emacs-lisp
+  (use-package c-ts-mode
     :ensure nil
-    :mode ("\\.py\\'" . python-ts-mode)
-    :hook ((python-ts-mode . lsp-deferred)))
+    :mode
+    ("\\.c\\'" . c-ts-mode)
+    ("\\.h\\'" . c-or-c++-ts-mode)
+    ("\\.cpp\\'" . c++-ts-mode)
+    ("\\.hpp\\'" . c++-ts-mode)
+    :bind
+    (:map c-ts-mode-map
+      ("<f1>" . my-c/make-clean)
+      ("<f2>" . my-c/make-all)
+      ("<f3>" . my-c/make-run))
 
+    :config
 
-  (use-package rust-mode
+    (c-ts-indent-offset 4)
+    (c-ts-mode-indent-style 'linux)
+
+    (c-ts-mode-enable-doxygen t)
+
+    (eletric-pair-mode 1))
+
+    (defun my-c/make-clean ()
+      "Run make clean in project root."
+      (interactive)
+      (let ((default-directory (projectile-project-root)))
+        (compile "make clean")))
+
+    (defun my-c/make-all ()
+      "Run make all in project root."
+      (interactive)
+      (let ((default-directory (projectile-project-root)))
+        (compile "make all")))
+
+    (defun my-c/make-run ()
+      "Run make run in project root."
+      (interactive)
+      (let ((default-directory (projectile-project-root)))
+        (compile "make run")))
+
+      ;; todo: add make-custom with arguments memory.
+#+end_src
+
+** elisp
+#+begin_src  emacs-lisp
+  (use-package emacs-lisp-mode
     :ensure nil
-    :mode "\\.rs\\'")
+    :hook
+    ((emacs-lisp-mode . electric-pair-local-mode)
+      (emacs-lisp-mode . show-paren-local-mode)
+      (emacs-lisp-mode . eldoc-mode)
+      (emacs-lisp-mode . prettify-symbols-mode))
 
-    (add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
-    (setenv "PATH"
-      (concat (expand-file-name "~/.cargo/bin") ":"
-        (getenv "PATH")))
+    :bind
+    (:map emacs-lisp-mode-map
+        ("C-c C-e" . eval-last-sexp)
+        ("C-c C-r" . eval-region)
+        ("C-c C-b" . eval-buffer))
 
-  (use-package typescript-mode
     :init
-    (add-to-list 'major-mode-remap-alist
-      '(typescript-mode . typescript-ts-mode))
-    (add-to-list 'major-mode-remap-alist
-      '(js-mode . js-ts-mode)))
+    (defun my/emacs-lisp-indent-setup ()
+      "Configure indentation for Emacs Lisp."
+      (setq-local indent-tabs-mode nil
+                lisp-indent-offset 2))
+
+    (defun my/emacs-lisp-format-buffer ()
+      "Indent the whole Emacs Lisp buffer before saving."
+      (when (derived-mode-p 'emacs-lisp-mode)
+        (indent-region (point-min) (point-max))))
+
+    :hook
+    (emacs-lisp-mode . my/emacs-lisp-indent-setup)
+
+    :config
+    (add-hook 'before-save-hook
+      #'my/emacs-lisp-format-buffer))
+#+end_src
+*** highlight-quoted
+#+begin_src emacs-lisp
+  (use-package highlight-quoted
+    :straight t 
+    :hook
+    ('emacs-lisp-mode-hook 'highlight-quoted-mode))
 #+end_src

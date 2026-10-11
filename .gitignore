@@ -7,3 +7,10 @@
 /emacs/.emacs.d/straight/
 /emacs/.emacs.d/transient/
 /emacs/.emacs.d/tree-sitter/
+/emacs/.emacs.d/.cache/
+/emacs/.emacs.d/.config.org.~undo-tree~
+/emacs/.emacs.d/.lsp-session-v1
+/emacs/.emacs.d/projectile-bookmarks.eld
+/emacs/.emacs.d/projectile-frecency.eld
+/flags.env
+/packages.log
