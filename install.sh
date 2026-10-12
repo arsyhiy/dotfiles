@@ -8,6 +8,7 @@ packages=(
     stow
     npm
     emacs
+    lazygit
     tmux
 )
 
