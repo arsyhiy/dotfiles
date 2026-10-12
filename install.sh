@@ -6,6 +6,7 @@ packages=(
     unzip
     curl
     stow
+    npm
     emacs
     tmux
 )

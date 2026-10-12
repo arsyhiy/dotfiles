@@ -48,5 +48,27 @@ alias df='df -h'
 alias du='du -h'
 alias free='free -h'
 
+alias n='nvim'
 alias t='tmux'
+
+# functions for fzf
+# find directory
+fd() {
+    local dir
+    dir=$(find ~ -type d | fzf)
+
+    if [ -n "$dir" ]; then
+        cd "$dir"
+    fi
+}
+
+# find file
+ff(){
+    local file
+    file=$(find . -type f | fzf)
+
+    if [ -n "$file" ]; then
+        nvim "$file" # or make your favorite editor for that
+    fi
+}
 
