@@ -36,3 +36,6 @@ sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghost
 
 # install fonts 
 curl -fsSL https://raw.githubusercontent.com/officialrajdeepsingh/nerd-fonts-installer/main/install.sh | bash -s -- JetBrainsMono
+
+# rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
