@@ -7,6 +7,8 @@ packages=(
     curl
     stow
     npm
+    pkg-config 
+    libssl-dev
     emacs
     lazygit
     tmux

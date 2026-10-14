@@ -7,6 +7,7 @@
 ;;; config.el --- configuration file in .el   -*- lexical-binding: t; -*-
 #+end_src 
 * emacs features
+all related to emacs but not for editing features
 ** consult
 #+begin_src  emacs-lisp
   (use-package consult
