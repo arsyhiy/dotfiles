@@ -941,35 +941,14 @@ all related to emacs but not for editing features
 #+begin_src  emacs-lisp
   (use-package emacs-lisp-mode
     :ensure nil
+    :config
+    (setq-local indent-tabs-mode nil
+                lisp-indent-offset 2)
     :hook
     ((emacs-lisp-mode . electric-pair-local-mode)
-      (emacs-lisp-mode . show-paren-local-mode)
-      (emacs-lisp-mode . eldoc-mode)
-      (emacs-lisp-mode . prettify-symbols-mode))
-
-    :bind
-    (:map emacs-lisp-mode-map
-        ("C-c C-e" . eval-last-sexp)
-        ("C-c C-r" . eval-region)
-        ("C-c C-b" . eval-buffer))
-
-    :init
-    (defun my/emacs-lisp-indent-setup ()
-      "Configure indentation for Emacs Lisp."
-      (setq-local indent-tabs-mode nil
-                lisp-indent-offset 2))
-
-    (defun my/emacs-lisp-format-buffer ()
-      "Indent the whole Emacs Lisp buffer before saving."
-      (when (derived-mode-p 'emacs-lisp-mode)
-        (indent-region (point-min) (point-max))))
-
-    :hook
-    (emacs-lisp-mode . my/emacs-lisp-indent-setup)
-
-    :config
-    (add-hook 'before-save-hook
-      #'my/emacs-lisp-format-buffer))
+     (emacs-lisp-mode . show-paren-local-mode)
+     (emacs-lisp-mode . eldoc-mode)
+     (emacs-lisp-mode . prettify-symbols-mode)))
 #+end_src
 *** highlight-quoted
 #+begin_src emacs-lisp
