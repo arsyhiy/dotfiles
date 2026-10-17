@@ -812,26 +812,7 @@
   (auto-fill-mode 1)
   (add-hook 'org-mode-hook #'my-journal-enable-if-file))
 
-(use-package c-ts-mode
-  :ensure nil ;; all ready a part of emacs
-  :mode
-  ("\\.c\\'" . c-ts-mode)
-  ("\\.h\\'" . c-or-c++-ts-mode)
-  ("\\.cpp\\'" . c++-ts-mode)
-  ("\\.hpp\\'" . c++-ts-mode)
-  :bind
-  (:map c-ts-mode-map
-        ("<f1>" . my-c/make-clean)
-        ("<f2>" . my-c/make-all)
-        ("<f3>" . my-c/make-run))
-  :config
-  (c-ts-indent-offset 4)
-  (c-ts-mode-indent-style 'linux)
-  
-  (c-ts-mode-enable-doxygen t)
-  
-  (eletric-pair-mode 1))
-
+;; todo: add make-custom with arguments memory.
 (defun my-c/make-clean ()
   "Run make clean in project root."
   (interactive)
@@ -850,7 +831,30 @@
   (let ((default-directory (projectile-project-root)))
     (compile "make run")))
 
-;; todo: add make-custom with arguments memory.
+(defun my-c/make-custom (arguments)
+  "Run make with custom ARGUMENTS in project root."
+  (interactive "sMake arguments: ")
+  (let ((default-directory (projectile-project-root)))
+    (compile (concat "make " arguments))))
+
+  (use-package c-ts-mode
+    :ensure nil ;; all ready a part of emacs
+    :mode
+    ("\\.c\\'" . c-ts-mode)
+    ("\\.h\\'" . c-or-c++-ts-mode)
+    ("\\.cpp\\'" . c++-ts-mode)
+    ("\\.hpp\\'" . c++-ts-mode)
+    :bind
+    (:map c-ts-mode-map ;; NOTE: на самом деле я не знаю как мне нужны комманды так что это сформеруется в будущем и всегда есть make-custom для этого 
+          ("<f1>" . my-c/make-clean)
+          ("<f2>" . my-c/make-all)
+          ("<f3>" . my-c/make-run)
+          ("<f4>" . my-c/make-custom))
+    :config
+    (c-ts-indent-offset 4)
+    (c-ts-mode-indent-style 'linux)
+    (c-ts-mode-enable-doxygen t)
+    (eletric-pair-mode 1))
 
 (use-package emacs-lisp-mode
   :ensure nil
