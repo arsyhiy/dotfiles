@@ -883,7 +883,7 @@ all related to emacs but not for editing features
       (my-journal-mode 1)))
 
   (use-package org
-    :ensure nil ;; org is built in package
+    :ensure nil ;; all ready a part of emacs
     :configur
     (setq-local fill-column 80)
     (auto-fill-mode 1)
@@ -892,8 +892,27 @@ all related to emacs but not for editing features
 
 ** c/c++
 #+begin_src emacs-lisp
+  ;; todo: add make-custom with arguments memory.
+  (defun my-c/make-clean ()
+    "Run make clean in project root."
+    (interactive)
+    (let ((default-directory (projectile-project-root)))
+      (compile "make clean")))
+
+  (defun my-c/make-all ()
+    "Run make all in project root."
+    (interactive)
+    (let ((default-directory (projectile-project-root)))
+      (compile "make all")))
+
+  (defun my-c/make-run ()
+    "Run make run in project root."
+    (interactive)
+    (let ((default-directory (projectile-project-root)))
+      (compile "make run")))
+
   (use-package c-ts-mode
-    :ensure nil
+    :ensure nil ;; all ready a part of emacs
     :mode
     ("\\.c\\'" . c-ts-mode)
     ("\\.h\\'" . c-or-c++-ts-mode)
@@ -901,38 +920,14 @@ all related to emacs but not for editing features
     ("\\.hpp\\'" . c++-ts-mode)
     :bind
     (:map c-ts-mode-map
-      ("<f1>" . my-c/make-clean)
-      ("<f2>" . my-c/make-all)
-      ("<f3>" . my-c/make-run))
-
+          ("<f1>" . my-c/make-clean)
+          ("<f2>" . my-c/make-all)
+          ("<f3>" . my-c/make-run))
     :config
-
     (c-ts-indent-offset 4)
     (c-ts-mode-indent-style 'linux)
-
     (c-ts-mode-enable-doxygen t)
-
     (eletric-pair-mode 1))
-
-    (defun my-c/make-clean ()
-      "Run make clean in project root."
-      (interactive)
-      (let ((default-directory (projectile-project-root)))
-        (compile "make clean")))
-
-    (defun my-c/make-all ()
-      "Run make all in project root."
-      (interactive)
-      (let ((default-directory (projectile-project-root)))
-        (compile "make all")))
-
-    (defun my-c/make-run ()
-      "Run make run in project root."
-      (interactive)
-      (let ((default-directory (projectile-project-root)))
-        (compile "make run")))
-
-      ;; todo: add make-custom with arguments memory.
 #+end_src
 
 ** elisp

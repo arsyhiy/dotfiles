@@ -781,9 +781,9 @@
           (org-export-with-author nil)
           (org-export-with-date nil))
       (org-export-to-file
-          'md
+          'md5
           (expand-file-name
-           (concat (file-name-base buffer-file-name) ".md")
+           (concatenat (file-name-base buffer-file-name) ".md")
            my-journal-md-dir))))
   
   nil)
@@ -797,7 +797,6 @@
     (remove-hook 'after-save-hook
                  #'my-journal-export-on-save t)))
 
-;; NOTE: тоесть мод можно активировать и будет также работать
 (defun my-journal-enable-if-file ()
   "Enable journal mode for files in the journal directory."
   (when (and buffer-file-name
@@ -806,17 +805,15 @@
               (expand-file-name buffer-file-name)))
     (my-journal-mode 1)))
 
-
 (use-package org
-  :ensure nil ;; org is built in package
-  :config
+  :ensure nil ;; all ready a part of emacs
+  :configur
   (setq-local fill-column 80)
   (auto-fill-mode 1)
-  (add-hook 'org-mode-hook #'my-journal-enable-if-file)
-  )
+  (add-hook 'org-mode-hook #'my-journal-enable-if-file))
 
 (use-package c-ts-mode
-  :ensure nil
+  :ensure nil ;; all ready a part of emacs
   :mode
   ("\\.c\\'" . c-ts-mode)
   ("\\.h\\'" . c-or-c++-ts-mode)
@@ -824,38 +821,36 @@
   ("\\.hpp\\'" . c++-ts-mode)
   :bind
   (:map c-ts-mode-map
-    ("<f1>" . my-c/make-clean)
-    ("<f2>" . my-c/make-all)
-    ("<f3>" . my-c/make-run))
-
+        ("<f1>" . my-c/make-clean)
+        ("<f2>" . my-c/make-all)
+        ("<f3>" . my-c/make-run))
   :config
-
   (c-ts-indent-offset 4)
   (c-ts-mode-indent-style 'linux)
-
+  
   (c-ts-mode-enable-doxygen t)
-
+  
   (eletric-pair-mode 1))
 
-  (defun my-c/make-clean ()
-    "Run make clean in project root."
-    (interactive)
-    (let ((default-directory (projectile-project-root)))
-      (compile "make clean")))
+(defun my-c/make-clean ()
+  "Run make clean in project root."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (compile "make clean")))
 
-  (defun my-c/make-all ()
-    "Run make all in project root."
-    (interactive)
-    (let ((default-directory (projectile-project-root)))
-      (compile "make all")))
+(defun my-c/make-all ()
+  "Run make all in project root."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (compile "make all")))
 
-  (defun my-c/make-run ()
-    "Run make run in project root."
-    (interactive)
-    (let ((default-directory (projectile-project-root)))
-      (compile "make run")))
+(defun my-c/make-run ()
+  "Run make run in project root."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (compile "make run")))
 
-    ;; todo: add make-custom with arguments memory.
+;; todo: add make-custom with arguments memory.
 
 (use-package emacs-lisp-mode
   :ensure nil
