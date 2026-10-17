@@ -304,6 +304,7 @@
   
   ;; my-journal-mode
   (evil-define-key 'normal 'global (kbd "<leader> j t") 'my-journal-open-today)
+
   
 
   (evil-define-key 'normal lsp-mode-map
@@ -796,6 +797,7 @@
     (remove-hook 'after-save-hook
                  #'my-journal-export-on-save t)))
 
+;; NOTE: тоесть мод можно активировать и будет также работать
 (defun my-journal-enable-if-file ()
   "Enable journal mode for files in the journal directory."
   (when (and buffer-file-name
@@ -804,13 +806,14 @@
               (expand-file-name buffer-file-name)))
     (my-journal-mode 1)))
 
+
 (use-package org
   :ensure nil ;; org is built in package
   :config
   (setq-local fill-column 80)
   (auto-fill-mode 1)
-  :hook
-  ('find-file-hook #'my-journal-enable-if-file))
+  (add-hook 'org-mode-hook #'my-journal-enable-if-file)
+  )
 
 (use-package c-ts-mode
   :ensure nil
