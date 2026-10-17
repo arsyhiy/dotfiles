@@ -250,21 +250,19 @@ all related to emacs but not for editing features
 * editing features
 ** undo tree
 #+begin_src emacs-lisp
-  (use-package undo-tree
-    :config
-    (undo-tree-auto-save-history nil)
+(use-package undo-tree
+  :config
+  (setq undo-tree-auto-save-history nil
+        undo-tree-visualizer-timestamps t
+        undo-tree-visualizer-diff t
+        undo-tree-history-directory-alist
+        `(("." . ,(expand-file-name "undo" user-emacs-directory)))
+        undo-limit 16000000
+        undo-strong-limit 32000000
+        undo-outer-limit 128000000)
 
-    (undo-tree-visualizer-timestamps t)
-    (undo-tree-visualizer-diff t)
-
-    (undo-tree-history-directory-alist
-          `(("." . ,(expand-file-name "undo" user-emacs-directory))))
-
-    (undo-limit 16000000
-          undo-strong-limit 32000000
-          undo-outer-limit 128000000)
-
-    (global-undo-tree-mode 1))
+  :hook
+  (after-init . global-undo-tree-mode))
 #+end_src
 ** evil-mode
 #+begin_src emacs-lisp
@@ -830,56 +828,61 @@ all related to emacs but not for editing features
 
 ** org
 #+begin_src  emacs-lisp
-  (defconst my/org-directory
-    (expand-file-name "~/org/"))
+  (require 'org)
+  (require 'ox-md)
+     
+  (defvar my-journal-org-dir "~/orgjournal/")
+  (defvar my-journal-md-dir "~/NOTES/daily/") 
 
-  (defconst my/org-daily-directory
-    (expand-file-name "daily/" my/org-directory))
-
-  (defconst my/org-notes-directory
-    (expand-file-name "notes/" my/org-directory))
-
-  (defconst my/org-todo-file
-    (expand-file-name "todo.org" my/org-directory))
-
-  (defconst my/org-git-directory
-    my/org-directory)
-
-  (dolist (directory
-    (list my/org-directory
-          my/org-daily-directory
-          my/org-notes-directory))
-    (unless (file-directory-p directory)
-      (make-directory directory t)))
-
-  (defun my/org-mode-setup ()
-    "Configure Org mode."
-    (setq-local fill-column 80)
-    (auto-fill-mode 1))
-
-  (defun my/org-open-today ()
-    "Open today's daily note."
+  (defun my-journal-open-today ()
+    "Open today's journal entry."
     (interactive)
+    (make-directory my-journal-org-dir t)
+    (make-directory my-journal-md-dir t)
     (find-file
-      (expand-file-name
-        (format-time-string "%Y-%m-%d.org")
-       my/org-daily-directory)))
+     (expand-file-name
+      (concat (format-time-string "%Y-%m-%d") ".org")
+      my-journal-org-dir)))
 
-  (defun my/org-open-todo ()
-    "Open the personal TODO file."
-    (interactive)
-    (find-file my/org-todo-file))
+  (defun my-journal-export-on-save ()
+    "Export journal entry to Markdown after saving."
+    (when (and my-journal-mode buffer-file-name)
+      (let ((org-export-with-toc nil)
+            (org-export-with-author nil)
+            (org-export-with-date nil))
+        (org-export-to-file
+            'md
+            (expand-file-name
+             (concat (file-name-base buffer-file-name) ".md")
+             my-journal-md-dir))))
+    
+    nil)
+
+  (define-minor-mode my-journal-mode
+    "Minor mode for journal entries."
+    :lighter " Journal"
+    (if my-journal-mode
+        (add-hook 'after-save-hook
+                  #'my-journal-export-on-save nil t)
+      (remove-hook 'after-save-hook
+                   #'my-journal-export-on-save t)))
+
+  (defun my-journal-enable-if-file ()
+    "Enable journal mode for files in the journal directory."
+    (when (and buffer-file-name
+               (string-prefix-p
+                (expand-file-name my-journal-org-dir)
+                (expand-file-name buffer-file-name)))
+      (my-journal-mode 1)))
 
   (use-package org
-    :ensure nil
-    :hook
-    (org-mode . my/org-mode-setup)
-    :bind
-    (("C-c o d" . my/org-open-today)
-     ("C-c o t" . my/org-open-todo)
-     ("C-c o c" . org-capture)
-     ("C-c o a" . org-agenda)
-     ("C-c o s" . org-store-link)))
+    :ensure nil ;; org is built in package
+    :config
+    (setq-local fill-column 80)
+    (auto-fill-mode 1)
+    
+    (global-set-key (kbd "C-c jt") #'my-journal-open-today)
+    (add-hook 'find-file-hook #'my-journal-enable-if-file))
 #+end_src
 
 ** c/c++
