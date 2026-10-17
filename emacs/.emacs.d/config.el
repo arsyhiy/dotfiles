@@ -299,7 +299,13 @@
   (evil-define-key 'normal 'global (kbd "<leader> D f") 'describe-function)
   (evil-define-key 'normal 'global (kbd "<leader> D v") 'describe-variable)
   (evil-define-key 'normal 'global (kbd "<leader> D k") 'describe-key)
+
+
   
+  ;; my-journal-mode
+  (evil-define-key 'normal 'global (kbd "<leader> j t") 'my-journal-open-today)
+  
+
   (evil-define-key 'normal lsp-mode-map
     (kbd "gr") 'lsp-find-references
     (kbd "<leader> c a") 'lsp-execute-code-action
@@ -798,16 +804,13 @@
               (expand-file-name buffer-file-name)))
     (my-journal-mode 1)))
 
-
-
 (use-package org
   :ensure nil ;; org is built in package
   :config
   (setq-local fill-column 80)
   (auto-fill-mode 1)
-  
-  (global-set-key (kbd "C-c jt") #'my-journal-open-today)
-  (add-hook 'find-file-hook #'my-journal-enable-if-file))
+  :hook
+  ('find-file-hook #'my-journal-enable-if-file))
 
 (use-package c-ts-mode
   :ensure nil

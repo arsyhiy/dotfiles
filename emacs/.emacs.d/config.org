@@ -327,7 +327,14 @@ all related to emacs but not for editing features
     (evil-define-key 'normal 'global (kbd "<leader> D f") 'describe-function)
     (evil-define-key 'normal 'global (kbd "<leader> D v") 'describe-variable)
     (evil-define-key 'normal 'global (kbd "<leader> D k") 'describe-key)
+
+
     
+    ;; my-journal-mode
+    (evil-define-key 'normal 'global (kbd "<leader> j t") 'my-journal-open-today)
+
+    
+
     (evil-define-key 'normal lsp-mode-map
       (kbd "gr") 'lsp-find-references
       (kbd "<leader> c a") 'lsp-execute-code-action
@@ -828,61 +835,61 @@ all related to emacs but not for editing features
 
 ** org
 #+begin_src  emacs-lisp
-  (require 'org)
-  (require 'ox-md)
+   (require 'org)
+   (require 'ox-md)
+      
+   (defvar my-journal-org-dir "~/orgjournal/")
+   (defvar my-journal-md-dir "~/NOTES/daily/") 
+
+   (defun my-journal-open-today ()
+     "Open today's journal entry."
+     (interactive)
+     (make-directory my-journal-org-dir t)
+     (make-directory my-journal-md-dir t)
+     (find-file
+      (expand-file-name
+       (concat (format-time-string "%Y-%m-%d") ".org")
+       my-journal-org-dir)))
+
+   (defun my-journal-export-on-save ()
+     "Export journal entry to Markdown after saving."
+     (when (and my-journal-mode buffer-file-name)
+       (let ((org-export-with-toc nil)
+             (org-export-with-author nil)
+             (org-export-with-date nil))
+         (org-export-to-file
+             'md
+             (expand-file-name
+              (concat (file-name-base buffer-file-name) ".md")
+              my-journal-md-dir))))
      
-  (defvar my-journal-org-dir "~/orgjournal/")
-  (defvar my-journal-md-dir "~/NOTES/daily/") 
+     nil)
 
-  (defun my-journal-open-today ()
-    "Open today's journal entry."
-    (interactive)
-    (make-directory my-journal-org-dir t)
-    (make-directory my-journal-md-dir t)
-    (find-file
-     (expand-file-name
-      (concat (format-time-string "%Y-%m-%d") ".org")
-      my-journal-org-dir)))
+   (define-minor-mode my-journal-mode
+     "Minor mode for journal entries."
+     :lighter " Journal"
+     (if my-journal-mode
+         (add-hook 'after-save-hook
+                   #'my-journal-export-on-save nil t)
+       (remove-hook 'after-save-hook
+                    #'my-journal-export-on-save t)))
 
-  (defun my-journal-export-on-save ()
-    "Export journal entry to Markdown after saving."
-    (when (and my-journal-mode buffer-file-name)
-      (let ((org-export-with-toc nil)
-            (org-export-with-author nil)
-            (org-export-with-date nil))
-        (org-export-to-file
-            'md
-            (expand-file-name
-             (concat (file-name-base buffer-file-name) ".md")
-             my-journal-md-dir))))
-    
-    nil)
+   (defun my-journal-enable-if-file ()
+     "Enable journal mode for files in the journal directory."
+     (when (and buffer-file-name
+                (string-prefix-p
+                 (expand-file-name my-journal-org-dir)
+                 (expand-file-name buffer-file-name)))
+       (my-journal-mode 1)))
 
-  (define-minor-mode my-journal-mode
-    "Minor mode for journal entries."
-    :lighter " Journal"
-    (if my-journal-mode
-        (add-hook 'after-save-hook
-                  #'my-journal-export-on-save nil t)
-      (remove-hook 'after-save-hook
-                   #'my-journal-export-on-save t)))
+   (use-package org
+     :ensure nil ;; org is built in package
+     :config
+     (setq-local fill-column 80)
+     (auto-fill-mode 1)
+     :hook
+     ('find-file-hook #'my-journal-enable-if-file))
 
-  (defun my-journal-enable-if-file ()
-    "Enable journal mode for files in the journal directory."
-    (when (and buffer-file-name
-               (string-prefix-p
-                (expand-file-name my-journal-org-dir)
-                (expand-file-name buffer-file-name)))
-      (my-journal-mode 1)))
-
-  (use-package org
-    :ensure nil ;; org is built in package
-    :config
-    (setq-local fill-column 80)
-    (auto-fill-mode 1)
-    
-    (global-set-key (kbd "C-c jt") #'my-journal-open-today)
-    (add-hook 'find-file-hook #'my-journal-enable-if-file))
 #+end_src
 
 ** c/c++
