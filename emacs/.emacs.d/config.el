@@ -360,27 +360,6 @@
   :config
   (global-evil-matchit-mode 1))
 
-;;TODO: не совсем работает как задуманно 
-;; (defun my/format-region-or-buffer ()
-;;   "Форматировать отступы и убрать лишние пустые строки."
-;;   (interactive)
-;;   (let ((start (if (use-region-p)
-;;                    (region-beginning)
-;;                  (point-min)))
-;;         (end (if (use-region-p)
-;;                  (region-end)
-;;                (point-max))))
-;; 
-;;     (save-excursion
-;;       (save-restriction
-;;         (narrow-to-region start end)
-;;         (indent-region (point-min) (point-max))
-;;         (goto-char (point-min))
-;;         (while (re-search-forward "\n[ \t]*\n\\([ \t]*\n\\)+" nil t)
-;;           (replace-match "\n\n"))))))
-;; 
-;; (global-set-key (kbd "C-c f") #'my/format-region-or-buffer)
-
 (use-package corfu
   :ensure t
   :defer t
