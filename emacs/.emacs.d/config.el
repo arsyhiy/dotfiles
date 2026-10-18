@@ -609,7 +609,7 @@
   (doom-modeline-mode 1)
 
   :custom
-  (doom-modeline-height 60))
+  (doom-modeline-height 40))
 
 (defcustom ek-use-nerd-fonts t
   "Use Nerd Fonts icons."
