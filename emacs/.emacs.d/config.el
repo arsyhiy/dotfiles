@@ -1,5 +1,11 @@
 ;;; config.el --- configuration file in .el   -*- lexical-binding: t; -*-
 
+(add-to-list 'load-path
+             (expand-file-name "lisp" user-emacs-directory))
+
+;; my-journal for org mode
+(require 'my-journal)
+
 (use-package consult
   :ensure t
   :init
@@ -737,59 +743,11 @@
   :mode ("\\.py\\'" . python-ts-mode)
   :hook ((python-ts-mode . lsp-deferred)))
 
-(require 'org)
-(require 'ox-md)
-   
-(defvar my-journal-org-dir "~/orgjournal/")
-(defvar my-journal-md-dir "~/NOTES/daily/") 
-
-(defun my-journal-open-today ()
-  "Open today's journal entry."
-  (interactive)
-  (make-directory my-journal-org-dir t)
-  (make-directory my-journal-md-dir t)
-  (find-file
-   (expand-file-name
-    (concat (format-time-string "%Y-%m-%d") ".org")
-    my-journal-org-dir)))
-
-(defun my-journal-export-on-save ()
-  "Export journal entry to Markdown after saving."
-  (when (and my-journal-mode buffer-file-name)
-    (let ((org-export-with-toc nil)
-          (org-export-with-author nil)
-          (org-export-with-date nil))
-      (org-export-to-file
-          'md5
-          (expand-file-name
-           (concatenat (file-name-base buffer-file-name) ".md")
-           my-journal-md-dir))))
-  
-  nil)
-
-(define-minor-mode my-journal-mode
-  "Minor mode for journal entries."
-  :lighter " Journal"
-  (if my-journal-mode
-      (add-hook 'after-save-hook
-                #'my-journal-export-on-save nil t)
-    (remove-hook 'after-save-hook
-                 #'my-journal-export-on-save t)))
-
-(defun my-journal-enable-if-file ()
-  "Enable journal mode for files in the journal directory."
-  (when (and buffer-file-name
-             (string-prefix-p
-              (expand-file-name my-journal-org-dir)
-              (expand-file-name buffer-file-name)))
-    (my-journal-mode 1)))
-
 (use-package org
   :ensure nil ;; all ready a part of emacs
-  :configur
+  :config
   (setq-local fill-column 80)
-  (auto-fill-mode 1)
-  (add-hook 'org-mode-hook #'my-journal-enable-if-file))
+  (auto-fill-mode 1))
 
 ;; todo: add make-custom with arguments memory.
 (defun my-c/make-clean ()
