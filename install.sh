@@ -11,6 +11,7 @@ packages=(
     libssl-dev
     emacs
     lazygit
+    pandoc
     tmux
 )
 
