@@ -13,6 +13,7 @@ packages=(
     lazygit
     pandoc
     tmux
+    openjdk-25-jdk
 )
 
 log_file="packages.log"
