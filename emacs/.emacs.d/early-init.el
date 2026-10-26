@@ -50,4 +50,5 @@
 ;;; DANGER CODE. KEEP IN MIND WHAT IT'S DO!!!!
 (setq trusted-content :all)
 
+(setq lsp-disabled-clients '(semgrep-ls))
 ;;; early-init.el ends here
