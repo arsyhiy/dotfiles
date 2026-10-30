@@ -406,6 +406,26 @@
   (vertico-cycle nil)
   (vertico-preselect 'directory))
 
+(use-package tempel
+  :ensure t
+  :bind (("M-+" . tempel-complete)
+         ("M-*" . tempel-insert))
+
+  :init
+  (defun tempel-setup-capf ()
+    (require 'tempel)
+    (setq-local completion-at-point-functions
+                (cons #'tempel-expand
+                      completion-at-point-functions)))
+
+  :hook
+  ((prog-mode text-mode conf-mode html-ts-mode)
+   . tempel-setup-capf))
+
+(use-package tempel-collection
+  :ensure t
+  :after tempel)
+
 (use-package which-key
   :ensure nil
   :defer t
@@ -426,6 +446,7 @@
         go-ts-mode
         java-ts-mode
         java-mode
+        html-ts-mode
         rust-ts-mode
         web-mode)
        . lsp-deferred)
@@ -689,17 +710,6 @@
   '(css-mode . css-ts-mode)))  
 
 
-(use-package html-ts-mode
-  :ensure nil
-  :mode ("\\.html?\\'" . html-ts-mode)
-  :custom
-  (sgml-basic-offset 2)
-
-  :hook
-  (html-ts-mode . (lambda ()
-    (setq-local tab-width 2)
-    (electric-pair-local-mode 1)
-    (display-line-numbers-mode 1))))
 
 ;;; TODO: REWRITE THIS SHIT
 (defun my-js-mode-setup ()
@@ -747,6 +757,17 @@
   :ensure nil
   :mode ("\\.py\\'" . python-ts-mode)
   :hook ((python-ts-mode . lsp-deferred)))
+
+(use-package html-ts-mode
+  :ensure nil
+  :mode ("\\.html?\\'" . html-ts-mode)
+  :hook
+  (html-ts-mode . (lambda ()
+                    (setq-local tab-width 2)
+                    (setq-local standard-indent 2)
+                    (electric-pair-local-mode 1)
+                    (sgml-electric-tag-pair-mode 1)
+                    (display-line-numbers-mode 1))))
 
 (use-package org
   :ensure nil ;; all ready a part of emacs

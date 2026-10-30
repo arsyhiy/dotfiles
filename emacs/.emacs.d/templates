@@ -1,0 +1,28 @@
+html-ts-mode
+
+(div "<div>" p "</div>")
+(span "<span>" p "</span>")
+(p "<p>" p "</p>")
+(h1 "<h1>" p "</h1>")
+(h2 "<h2>" p "</h2>")
+(h3 "<h3>" p "</h3>")
+(section "<section>" n> p n "</section>")
+(article "<article>" n> p n "</article>")
+(header "<header>" n> p n "</header>")
+(footer "<footer>" n> p n "</footer>")
+(main "<main>" n> p n "</main>")
+(nav "<nav>" n> p n "</nav>")
+(ul "<ul>" n> p n "</ul>")
+(ol "<ol>" n> p n "</ol>")
+(li "<li>" p "</li>")
+(a "<a href=\"" (p "URL") "\">" p "</a>")
+(img "<img src=\"" (p "Source") "\" alt=\"" (p "Alt") "\">")
+(button "<button type=\"button\">" p "</button>")
+
+html-mode
+
+(div "<div>" p "</div>")
+(span "<span>" p "</span>")
+(p "<p>" p "</p>")
+(h1 "<h1>" p "</h1>")
+(h2 "<h2>" p "</h2>")
