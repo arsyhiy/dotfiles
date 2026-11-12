@@ -13,7 +13,9 @@
 
   ;; my-journal for org mode
   (require 'my-journal)
-  
+
+  ;; hot-take
+  (require 'hot-take)
 #+end_src
 * emacs features
 all related to emacs but not for editing features
@@ -589,6 +591,23 @@ all related to emacs but not for editing features
   :config
   (setq gdb-many-windows t
         gdb-show-main t))
+#+end_src
+** review
+*** hot-take
+#+begin_src emacs-lisp
+  ;; один из бэкендов:
+  (setq hot-take-backend-command '("llm" "-m" "claude-3-5-sonnet"))
+  ;; или lisp-функция (удобно с gptel):
+  (defun my-agent (prompt)
+    (gptel-request prompt :buffer "*gptel*
+   "))
+  (setq hot-take-backend-function #'my-agent)
+
+  ;; обсуждаемые хунки отправлять в gptel
+  (add-hook 'hot-take-discuss-hook
+            (lambda (file diff hunk)
+              (gptel-send
+               (format "Reviewing %s. Thoughts?\n```diff\n%s```" file (or hunk diff)))))
 #+end_src
 * UI
 ** window

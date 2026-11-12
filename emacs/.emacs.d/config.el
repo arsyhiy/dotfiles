@@ -6,6 +6,9 @@
 ;; my-journal for org mode
 (require 'my-journal)
 
+;; hot-take
+(require 'hot-take)
+
 (use-package consult
   :ensure t
   :init
@@ -542,6 +545,20 @@
   :config
   (setq gdb-many-windows t
         gdb-show-main t))
+
+;; один из бэкендов:
+(setq hot-take-backend-command '("llm" "-m" "claude-3-5-sonnet"))
+;; или lisp-функция (удобно с gptel):
+(defun my-agent (prompt)
+  (gptel-request prompt :buffer "*gptel*
+ "))
+(setq hot-take-backend-function #'my-agent)
+
+;; обсуждаемые хунки отправлять в gptel
+(add-hook 'hot-take-discuss-hook
+          (lambda (file diff hunk)
+            (gptel-send
+             (format "Reviewing %s. Thoughts?\n```diff\n%s```" file (or hunk diff)))))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
