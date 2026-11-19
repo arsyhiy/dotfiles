@@ -6,6 +6,18 @@
 ;; my-journal for org mode
 (require 'my-journal)
 
+(add-to-list 'exec-path "/home/arsyhiy/.local/bin")
+  (setenv "PATH"
+          (concat "/home/arsyhiy/.local/bin:"
+                  (getenv "PATH")))
+
+  ;; Получить API-ключ из Zsh
+(let ((key (string-trim
+            (shell-command-to-string
+             "zsh -c 'source ~/.zshrc >/dev/null 2>&1; print -r -- \"$CHEAPVIBECODE_API_KEY\"'"))))
+  (unless (string-empty-p key)
+    (setenv "CHEAPVIBECODE_API_KEY" key)))
+
 (use-package consult
   :ensure t
   :init
@@ -23,27 +35,27 @@
         consult-async-input-debounce 0.3))
 
 (with-eval-after-load 'dired
-  (setq dired-dwim-target t
-        dired-kill-when-opening-new-dired-buffer t)
-
+   (setq dired-dwim-target t
+         dired-kill-when-opening-new-dired-buffer t)
+ 
   (setq dired-listing-switches
-        (if (eq system-type 'gnu/linux)
-            "-lah --group-directories-first"
-          "-lah"))
-  (setq dired-guess-shell-alist-user
-        '(("\\.\\(png\\|jpe?g\\|tiff\\)"
-           (cond
-            ((executable-find "feh") "feh")
-            ((executable-find "xdg-open") "xdg-open")
-            (t "open")))
-          ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)"
-           (cond
-            ((executable-find "mpv") "mpv")
-            ((executable-find "xdg-open") "xdg-open")
-            (t "open")))
-          (".*"
-           (or (and (executable-find "xdg-open") "xdg-open")
-               "open")))))
+         (if (eq system-type 'gnu/linux)
+             "-lah --group-directories-first"
+           "-lah"))
+   (setq dired-guess-shell-alist-user
+         '(("\\.\\(png\\|jpe?g\\|tiff\\)"
+            (cond
+             ((executable-find "feh") "feh")
+             ((executable-find "xdg-open") "xdg-open")
+             (t "open")))
+           ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)"
+            (cond
+             ((executable-find "mpv") "mpv")
+             ((executable-find "xdg-open") "xdg-open")
+             (t "open")))
+           (".*"
+            (or (and (executable-find "xdg-open") "xdg-open")
+                "open")))))
 
 (use-package emacs
   :ensure nil
@@ -229,20 +241,6 @@
       (compile command))))
 
 (global-set-key (kbd "<f5>") #'my/project-run-compile)
-
-(use-package undo-tree
-  :config
-  (setq undo-tree-auto-save-history nil
-        undo-tree-visualizer-timestamps t
-        undo-tree-visualizer-diff t
-        undo-tree-history-directory-alist
-        `(("." . ,(expand-file-name "undo" user-emacs-directory)))
-        undo-limit 16000000
-        undo-strong-limit 32000000
-        undo-outer-limit 128000000)
-
-  :hook
-  (after-init . global-undo-tree-mode))
 
 (defun load-config ()
   (interactive)
@@ -555,25 +553,42 @@
   ;; Интеграция с Magit
   (setq difftastic-magit-use-magit-faces t))
 
-(use-package claude-code-ide
-  :straight (:type git :host github :repo "manzaltu/claude-code-ide.el")
-  :bind (("C-c C-'" . claude-code-ide-menu)
-         ("C-c c c" . claude-code-ide)               ; запустить сессию
-         ("C-c c t" . claude-code-ide-toggle)        ; показать/скрыть окно
-         ("C-c c b" . claude-code-ide-switch-to-buffer)
-         ("C-c c r" . claude-code-ide-resume)        ; возобновить сессию
-         ("C-c c n" . claude-code-ide-continue)      ; продолжить последнюю
-         ("C-c c p" . claude-code-ide-send-prompt)   ; отправить промпт из минибуфера
-         ("C-c c i" . claude-code-ide-insert-at-mentioned) ; вставить выделение в промпт
-         ("C-c c l" . claude-code-ide-list-sessions)
-         ("C-c c e" . claude-code-ide-send-escape)   ; escape в сессию
-         ("C-c c q" . claude-code-ide-stop))         ; остановить сессию
-  :config
-  ;; Использовать Fable 5 и отключить кэш
-  (setq claude-code-ide-cli-extra-flags "--model claude-fable-5")
+;; ;;; agent-shell — Oh My Pi
+  ;; (use-package agent-shell
+  ;;   :straight (:type git :host github :repo "xenodium/agent-shell")
+  ;;   :bind (("C-c a a" . agent-shell)
+  ;;          ("C-c a o" . agent-shell-omp-start)
+  ;;          ("C-c a c" . agent-shell-prompt-compose)
+  ;;          ("C-c a v" . agent-shell-viewport)
+  ;;          ("C-c a m" . agent-shell-menu)
+  ;;          :map agent-shell-mode-map
+  ;;          ("C-c C-o" . agent-shell-other-buffer)
+  ;;          ("C-c C-w" . agent-shell-add-context))
+  ;;   :config
+  ;;   (require 'agent-shell-omp))
 
-  ;; Включить Emacs MCP tools
-  (claude-code-ide-emacs-tools-setup))
+  ;;; agent-shell — Oh My Pi
+(use-package agent-shell
+  :straight (:type git :host github :repo "xenodium/agent-shell")
+
+  :custom
+  (agent-shell-display-action
+   '(display-buffer-in-side-window
+     (side . right)
+     (window-width . 0.40)
+     (slot . 0)))
+
+  :bind (("C-c a a" . agent-shell)
+         ("C-c a o" . agent-shell-omp-start)
+         ("C-c a c" . agent-shell-prompt-compose)
+         ("C-c a v" . agent-shell-viewport)
+         ("C-c a m" . agent-shell-menu)
+         :map agent-shell-mode-map
+         ("C-c C-o" . agent-shell-other-buffer)
+         ("C-c C-w" . agent-shell-add-context))
+
+  :config
+  (require 'agent-shell-omp))
 
 (use-package marginalia
   :ensure t
@@ -585,28 +600,125 @@
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+    ;; (setq display-buffer-alist
+    ;;       '(
+    ;;         ;; debug / help buffers
+    ;;         ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
+    ;;          (display-buffer-in-side-window
+    ;;           (side . bottom)
+    ;;           (window-height . 0.25)
+    ;;           (slot . 0)))
+    ;; 
+    ;;         ;; lsp / documentation buffers
+    ;;         ("\\*lsp-help\\*"
+    ;;          (display-buffer-in-side-window
+    ;;           (side . bottom)
+    ;;           (window-height . 0.25)
+    ;;           (slot . 0)))
+    ;; 
+    ;;         ;; diagnostics / xref / completion
+    ;;         ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
+    ;;          (display-buffer-in-side-window
+    ;;           (side . bottom)
+    ;;           (window-height . 0.25)
+    ;;           (slot . 1)))
+    ;; 
+    ;;         ;; agent-shell buffers
+    ;;         ("\\*agent-shell.*\\*"
+    ;;          (display-buffer-in-side-window
+    ;;          (side . right)
+    ;;          (window-width . 0.4)
+    ;;          (slot . 0))))
+  ;; (setq display-buffer-alist
+  ;;       '(
+  ;;         ;; debug / help buffers
+  ;;         ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
+  ;;          (display-buffer-in-side-window)
+  ;;          (side . bottom)
+  ;;          (window-height . 0.25)
+  ;;          (slot . 0))
+  ;; 
+  ;;         ;; lsp / documentation buffers
+  ;;         ("\\*lsp-help\\*"
+  ;;          (display-buffer-in-side-window)
+  ;;          (side . bottom)
+  ;;          (window-height . 0.25)
+  ;;          (slot . 0))
+  ;; 
+  ;;         ;; diagnostics / xref / completion
+  ;;         ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
+  ;;          (display-buffer-in-side-window)
+  ;;          (side . bottom)
+  ;;          (window-height . 0.25)
+  ;;          (slot . 1))
+  ;; 
+  ;;         ;; agent-shell buffers
+  ;;         ("\\*agent-shell.*\\*"
+  ;;          (display-buffer-in-side-window)
+  ;;          (side . right)
+  ;;          (window-width . 0.4)
+  ;;          (slot . 0))))
+
+  ;; (setq display-buffer-alist
+  ;;     '(
+  ;;       ;; Agent Shell — боковая панель справа
+  ;;       ("\\*agent-shell.*\\*"
+  ;;        (display-buffer-in-side-window)
+  ;;        (side . right)
+  ;;        (window-width . 0.40)
+  ;;        (slot . 0)
+  ;;        (preserve-size . (t . t)))
+  ;; 
+  ;;       ;; Debug / help buffers
+  ;;       ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
+  ;;        (display-buffer-in-side-window)
+  ;;        (side . bottom)
+  ;;        (window-height . 0.25)
+  ;;        (slot . 0))
+  ;; 
+  ;;       ;; LSP / documentation buffers
+  ;;       ("\\*lsp-help\\*"
+  ;;        (display-buffer-in-side-window)
+  ;;        (side . bottom)
+  ;;        (window-height . 0.25)
+  ;;        (slot . 0))
+  ;; 
+  ;;       ;; Diagnostics / xref / completion
+  ;;       ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
+  ;;        (display-buffer-in-side-window)
+  ;;        (side . bottom)
+  ;;        (window-height . 0.25)
+  ;;        (slot . 1))))
 (setq display-buffer-alist
       '(
+        ;; OMP Agent / agent-shell — правая боковая панель
+        ("\\*\\(OMP Agent\\|agent-shell\\).*\\*"
+         (display-buffer-in-side-window)
+         (side . right)
+         (window-width . 0.40)
+         (slot . 0)
+         (preserve-size . (t . t)))
+
         ;; Debug / help buffers
-        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|Help\\|Messages\\|Bookmark List\\|Ibuffer\\|Occur\\|eldoc.*\\)\\*"
-         (display-buffer-in-side-window
-          (side . bottom)
-          (window-height . 0.25)
-          (slot . 0)))
+        ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
+         (display-buffer-in-side-window)
+         (side . bottom)
+         (window-height . 0.25)
+         (slot . 0))
 
         ;; LSP / documentation buffers
         ("\\*lsp-help\\*"
-         (display-buffer-in-side-window
-          (side . bottom)
-          (window-height . 0.25)
-          (slot . 0)))
+         (display-buffer-in-side-window)
+         (side . bottom)
+         (window-height . 0.25)
+         (slot . 0))
 
         ;; Diagnostics / xref / completion
         ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
-         (display-buffer-in-side-window
-          (side . bottom)
-          (window-height . 0.25)
-          (slot . 1)))))
+         (display-buffer-in-side-window)
+         (side . bottom)
+         (window-height . 0.25)
+         (slot . 1))))
 
 (use-package recentf
   :ensure nil
@@ -737,7 +849,6 @@
         (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.2")))
 
 (use-package css-ts-mode
-  :straight nil
   :ensure nil
   :mode "\\.css\\'"
   :hook
@@ -747,9 +858,7 @@
                                css-indent-offset 2)))
   :config
   (add-to-list 'major-mode-remap-alist
-               '(css-mode . css-ts-mode)))  
-
-
+               '(css-mode . css-ts-mode)))
 
 ;;; TODO: REWRITE THIS SHIT
 (defun my-js-mode-setup ()
@@ -761,8 +870,7 @@
 (use-package js
   :mode "\\.js\\'"
   :hook
-  ((js-ts-mode . my-js-mode-setup)
-   (js-ts-mode . electric-pair-local-mode)))
+  ((js-ts-mode . electric-pair-local-mode)))
 
 (use-package markdown-mode
   :ensure nil
@@ -773,9 +881,6 @@
         fill-column 80)
   :hook
   (gfm-mode . auto-fill-mode))
-
-
-
 
 (use-package rust-mode
   :ensure nil
