@@ -71,4 +71,3 @@ ff(){
         nvim "$file" # or make your favorite editor for that
     fi
 }
-

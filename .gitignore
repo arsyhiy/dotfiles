@@ -16,3 +16,6 @@
 /packages.log
 /emacs/.emacs.d/eclipse.jdt.ls/
 /emacs/.emacs.d/workspace/
+emacs/.emacs.d/lisp/hot-take.el~
+.hot-take-rejected/20261112-192748-.hot-take-rejected_20261112-192727-emacs_.emacs.d_.dap-breakpoints.patch.patch
+.aider*
