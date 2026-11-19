@@ -7,11 +7,11 @@
 (require 'my-journal)
 
 (add-to-list 'exec-path "/home/arsyhiy/.local/bin")
-  (setenv "PATH"
-          (concat "/home/arsyhiy/.local/bin:"
-                  (getenv "PATH")))
+(setenv "PATH"
+        (concat "/home/arsyhiy/.local/bin:"
+                (getenv "PATH")))
 
-  ;; Получить API-ключ из Zsh
+;; Получить API-ключ из Zsh
 (let ((key (string-trim
             (shell-command-to-string
              "zsh -c 'source ~/.zshrc >/dev/null 2>&1; print -r -- \"$CHEAPVIBECODE_API_KEY\"'"))))
@@ -35,27 +35,27 @@
         consult-async-input-debounce 0.3))
 
 (with-eval-after-load 'dired
-   (setq dired-dwim-target t
-         dired-kill-when-opening-new-dired-buffer t)
- 
+  (setq dired-dwim-target t
+        dired-kill-when-opening-new-dired-buffer t)
+  
   (setq dired-listing-switches
-         (if (eq system-type 'gnu/linux)
-             "-lah --group-directories-first"
-           "-lah"))
-   (setq dired-guess-shell-alist-user
-         '(("\\.\\(png\\|jpe?g\\|tiff\\)"
-            (cond
-             ((executable-find "feh") "feh")
-             ((executable-find "xdg-open") "xdg-open")
-             (t "open")))
-           ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)"
-            (cond
-             ((executable-find "mpv") "mpv")
-             ((executable-find "xdg-open") "xdg-open")
-             (t "open")))
-           (".*"
-            (or (and (executable-find "xdg-open") "xdg-open")
-                "open")))))
+        (if (eq system-type 'gnu/linux)
+            "-lah --group-directories-first"
+          "-lah"))
+  (setq dired-guess-shell-alist-user
+        '(("\\.\\(png\\|jpe?g\\|tiff\\)"
+           (cond
+            ((executable-find "feh") "feh")
+            ((executable-find "xdg-open") "xdg-open")
+            (t "open")))
+          ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)"
+           (cond
+            ((executable-find "mpv") "mpv")
+            ((executable-find "xdg-open") "xdg-open")
+            (t "open")))
+          (".*"
+           (or (and (executable-find "xdg-open") "xdg-open")
+               "open")))))
 
 (use-package emacs
   :ensure nil
@@ -242,6 +242,21 @@
 
 (global-set-key (kbd "<f5>") #'my/project-run-compile)
 
+(use-package undo-tree
+  :config
+  (setq undo-tree-auto-save-history nil
+        undo-tree-visualizer-timestamps t
+        undo-tree-visualizer-diff t
+        undo-tree-history-directory-alist
+        `(("." . ,(expand-file-name "undo" user-emacs-directory)))
+        undo-limit 16000000
+        undo-strong-limit 32000000
+        undo-outer-limit 128000000)
+
+  :hook
+  (after-init . global-undo-tree-mode))
+
+;; extra small functionality
 (defun load-config ()
   (interactive)
   (org-babel-load-file
@@ -301,12 +316,8 @@
   (evil-define-key 'normal 'global (kbd "<leader> D v") 'describe-variable)
   (evil-define-key 'normal 'global (kbd "<leader> D k") 'describe-key)
 
-
-  
   ;; my-journal-mode
   (evil-define-key 'normal 'global (kbd "<leader> j t") 'my-journal-open-today)
-
-  
 
   (evil-define-key 'normal lsp-mode-map
     (kbd "gr") 'lsp-find-references
@@ -343,7 +354,6 @@
   (evil-define-key 'normal 'global (kbd "<leader>lf") #'load-config)
 
   (evil-mode 1))
-
 
 (use-package evil-collection
   :custom
@@ -553,19 +563,43 @@
   ;; Интеграция с Magit
   (setq difftastic-magit-use-magit-faces t))
 
+(use-package diff-review
+  :straight (diff-review
+             :type git
+             :host github
+             :repo "xiaoxinghu/diff-review"
+             :files ("*.el" "test" "LICENSE" "README.md"))
+
+  :custom
+  (diff-review-command-prefix "C-c r")
+  (diff-review-sidebar-side 'right)
+  (diff-review-sidebar-width 40)
+  (diff-review-sidebar nil)
+  (diff-review-context 3)
+  (diff-review-inline-removed t)
+  (diff-review-fringe 'left)
+  (diff-review-author "xiaoxing")
+
+  :hook
+  ((diff-review-mode diff-review-sidebar-mode) . hl-line-mode)
+
+  :init
+  (with-eval-after-load 'magit
+    (diff-review-magit-mode)))
+
 ;; ;;; agent-shell — Oh My Pi
-  ;; (use-package agent-shell
-  ;;   :straight (:type git :host github :repo "xenodium/agent-shell")
-  ;;   :bind (("C-c a a" . agent-shell)
-  ;;          ("C-c a o" . agent-shell-omp-start)
-  ;;          ("C-c a c" . agent-shell-prompt-compose)
-  ;;          ("C-c a v" . agent-shell-viewport)
-  ;;          ("C-c a m" . agent-shell-menu)
-  ;;          :map agent-shell-mode-map
-  ;;          ("C-c C-o" . agent-shell-other-buffer)
-  ;;          ("C-c C-w" . agent-shell-add-context))
-  ;;   :config
-  ;;   (require 'agent-shell-omp))
+;; (use-package agent-shell
+;;   :straight (:type git :host github :repo "xenodium/agent-shell")
+;;   :bind (("C-c a a" . agent-shell)
+;;          ("C-c a o" . agent-shell-omp-start)
+;;          ("C-c a c" . agent-shell-prompt-compose)
+;;          ("C-c a v" . agent-shell-viewport)
+;;          ("C-c a m" . agent-shell-menu)
+;;          :map agent-shell-mode-map
+;;          ("C-c C-o" . agent-shell-other-buffer)
+;;          ("C-c C-w" . agent-shell-add-context))
+;;   :config
+;;   (require 'agent-shell-omp))
 
   ;;; agent-shell — Oh My Pi
 (use-package agent-shell
@@ -600,95 +634,95 @@
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-    ;; (setq display-buffer-alist
-    ;;       '(
-    ;;         ;; debug / help buffers
-    ;;         ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
-    ;;          (display-buffer-in-side-window
-    ;;           (side . bottom)
-    ;;           (window-height . 0.25)
-    ;;           (slot . 0)))
-    ;; 
-    ;;         ;; lsp / documentation buffers
-    ;;         ("\\*lsp-help\\*"
-    ;;          (display-buffer-in-side-window
-    ;;           (side . bottom)
-    ;;           (window-height . 0.25)
-    ;;           (slot . 0)))
-    ;; 
-    ;;         ;; diagnostics / xref / completion
-    ;;         ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
-    ;;          (display-buffer-in-side-window
-    ;;           (side . bottom)
-    ;;           (window-height . 0.25)
-    ;;           (slot . 1)))
-    ;; 
-    ;;         ;; agent-shell buffers
-    ;;         ("\\*agent-shell.*\\*"
-    ;;          (display-buffer-in-side-window
-    ;;          (side . right)
-    ;;          (window-width . 0.4)
-    ;;          (slot . 0))))
-  ;; (setq display-buffer-alist
-  ;;       '(
-  ;;         ;; debug / help buffers
-  ;;         ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
-  ;;          (display-buffer-in-side-window)
-  ;;          (side . bottom)
-  ;;          (window-height . 0.25)
-  ;;          (slot . 0))
-  ;; 
-  ;;         ;; lsp / documentation buffers
-  ;;         ("\\*lsp-help\\*"
-  ;;          (display-buffer-in-side-window)
-  ;;          (side . bottom)
-  ;;          (window-height . 0.25)
-  ;;          (slot . 0))
-  ;; 
-  ;;         ;; diagnostics / xref / completion
-  ;;         ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
-  ;;          (display-buffer-in-side-window)
-  ;;          (side . bottom)
-  ;;          (window-height . 0.25)
-  ;;          (slot . 1))
-  ;; 
-  ;;         ;; agent-shell buffers
-  ;;         ("\\*agent-shell.*\\*"
-  ;;          (display-buffer-in-side-window)
-  ;;          (side . right)
-  ;;          (window-width . 0.4)
-  ;;          (slot . 0))))
+;; (setq display-buffer-alist
+;;       '(
+;;         ;; debug / help buffers
+;;         ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
+;;          (display-buffer-in-side-window
+;;           (side . bottom)
+;;           (window-height . 0.25)
+;;           (slot . 0)))
+;; 
+;;         ;; lsp / documentation buffers
+;;         ("\\*lsp-help\\*"
+;;          (display-buffer-in-side-window
+;;           (side . bottom)
+;;           (window-height . 0.25)
+;;           (slot . 0)))
+;; 
+;;         ;; diagnostics / xref / completion
+;;         ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
+;;          (display-buffer-in-side-window
+;;           (side . bottom)
+;;           (window-height . 0.25)
+;;           (slot . 1)))
+;; 
+;;         ;; agent-shell buffers
+;;         ("\\*agent-shell.*\\*"
+;;          (display-buffer-in-side-window
+;;          (side . right)
+;;          (window-width . 0.4)
+;;          (slot . 0))))
+;; (setq display-buffer-alist
+;;       '(
+;;         ;; debug / help buffers
+;;         ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
+;;          (display-buffer-in-side-window)
+;;          (side . bottom)
+;;          (window-height . 0.25)
+;;          (slot . 0))
+;; 
+;;         ;; lsp / documentation buffers
+;;         ("\\*lsp-help\\*"
+;;          (display-buffer-in-side-window)
+;;          (side . bottom)
+;;          (window-height . 0.25)
+;;          (slot . 0))
+;; 
+;;         ;; diagnostics / xref / completion
+;;         ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
+;;          (display-buffer-in-side-window)
+;;          (side . bottom)
+;;          (window-height . 0.25)
+;;          (slot . 1))
+;; 
+;;         ;; agent-shell buffers
+;;         ("\\*agent-shell.*\\*"
+;;          (display-buffer-in-side-window)
+;;          (side . right)
+;;          (window-width . 0.4)
+;;          (slot . 0))))
 
-  ;; (setq display-buffer-alist
-  ;;     '(
-  ;;       ;; Agent Shell — боковая панель справа
-  ;;       ("\\*agent-shell.*\\*"
-  ;;        (display-buffer-in-side-window)
-  ;;        (side . right)
-  ;;        (window-width . 0.40)
-  ;;        (slot . 0)
-  ;;        (preserve-size . (t . t)))
-  ;; 
-  ;;       ;; Debug / help buffers
-  ;;       ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
-  ;;        (display-buffer-in-side-window)
-  ;;        (side . bottom)
-  ;;        (window-height . 0.25)
-  ;;        (slot . 0))
-  ;; 
-  ;;       ;; LSP / documentation buffers
-  ;;       ("\\*lsp-help\\*"
-  ;;        (display-buffer-in-side-window)
-  ;;        (side . bottom)
-  ;;        (window-height . 0.25)
-  ;;        (slot . 0))
-  ;; 
-  ;;       ;; Diagnostics / xref / completion
-  ;;       ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
-  ;;        (display-buffer-in-side-window)
-  ;;        (side . bottom)
-  ;;        (window-height . 0.25)
-  ;;        (slot . 1))))
+;; (setq display-buffer-alist
+;;     '(
+;;       ;; Agent Shell — боковая панель справа
+;;       ("\\*agent-shell.*\\*"
+;;        (display-buffer-in-side-window)
+;;        (side . right)
+;;        (window-width . 0.40)
+;;        (slot . 0)
+;;        (preserve-size . (t . t)))
+;; 
+;;       ;; Debug / help buffers
+;;       ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
+;;        (display-buffer-in-side-window)
+;;        (side . bottom)
+;;        (window-height . 0.25)
+;;        (slot . 0))
+;; 
+;;       ;; LSP / documentation buffers
+;;       ("\\*lsp-help\\*"
+;;        (display-buffer-in-side-window)
+;;        (side . bottom)
+;;        (window-height . 0.25)
+;;        (slot . 0))
+;; 
+;;       ;; Diagnostics / xref / completion
+;;       ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
+;;        (display-buffer-in-side-window)
+;;        (side . bottom)
+;;        (window-height . 0.25)
+;;        (slot . 1))))
 (setq display-buffer-alist
       '(
         ;; OMP Agent / agent-shell — правая боковая панель
