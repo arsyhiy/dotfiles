@@ -4,7 +4,7 @@
 
 * header for config.el
 #+begin_src  emacs-lisp
-;;; config.el --- configuration file in .el   -*- lexical-binding: t; -*-
+  ;;; config.el --- configuration file in .el   -*- lexical-binding: t; -*-
 #+end_src 
 * load files in lisp directory and require them
 #+begin_src emacs-lisp
@@ -14,8 +14,6 @@
   ;; my-journal for org mode
   (require 'my-journal)
 
-  ;; hot-take
-  (require 'hot-take)
 #+end_src
 * emacs features
 all related to emacs but not for editing features
@@ -25,42 +23,42 @@ all related to emacs but not for editing features
     :ensure t
     :init
     (setq xref-show-xrefs-function #'consult-xref
-      xref-show-definitions-function #'consult-xref)
+          xref-show-definitions-function #'consult-xref)
     :config
     (with-eval-after-load 'register
       (setq register-preview-function #'consult-register-window))
     (setq consult-narrow-key "<"
-      consult-preview-key 'any)
+          consult-preview-key 'any)
     (setq consult-buffer-display-action #'display-buffer-same-window)
     (setq consult-async-min-input 2
-      consult-async-refresh-delay 0.15
-      consult-async-input-throttle 0.2
-      consult-async-input-debounce 0.3))
+          consult-async-refresh-delay 0.15
+          consult-async-input-throttle 0.2
+          consult-async-input-debounce 0.3))
 #+end_src
 ** dired
 #+begin_src emacs-lisp
-    (with-eval-after-load 'dired
-      (setq dired-dwim-target t
-        dired-kill-when-opening-new-dired-buffer t)
+  (with-eval-after-load 'dired
+    (setq dired-dwim-target t
+          dired-kill-when-opening-new-dired-buffer t)
 
-      (setq dired-listing-switches
-        (if (eq system-type 'gnu/linux)
-          "-lah --group-directories-first"
-          "-lah"))
-      (setq dired-guess-shell-alist-user
-        '(("\\.\\(png\\|jpe?g\\|tiff\\)"
-            (cond
+    (setq dired-listing-switches
+          (if (eq system-type 'gnu/linux)
+              "-lah --group-directories-first"
+            "-lah"))
+    (setq dired-guess-shell-alist-user
+          '(("\\.\\(png\\|jpe?g\\|tiff\\)"
+             (cond
               ((executable-find "feh") "feh")
               ((executable-find "xdg-open") "xdg-open")
               (t "open")))
-           ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)"
+            ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)"
              (cond
-               ((executable-find "mpv") "mpv")
-               ((executable-find "xdg-open") "xdg-open")
-               (t "open")))
-           (".*"
+              ((executable-find "mpv") "mpv")
+              ((executable-find "xdg-open") "xdg-open")
+              (t "open")))
+            (".*"
              (or (and (executable-find "xdg-open") "xdg-open")
-               "open")))))
+                 "open")))))
 #+end_src
 ** emacs options
 #+begin_src emacs-lisp
@@ -184,12 +182,12 @@ all related to emacs but not for editing features
     :ensure t
     :init
     (setq completion-styles '(orderless basic)
-      completion-category-defaults nil
-      completion-category-overrides
-      '((file (styles partial-completion))
-         (command (styles orderless))
-         (symbol (styles orderless))
-         (variable (styles orderless))))
+          completion-category-defaults nil
+          completion-category-overrides
+          '((file (styles partial-completion))
+            (command (styles orderless))
+            (symbol (styles orderless))
+            (variable (styles orderless))))
     (setq completion-flex-nospace t))
 #+end_src
 ** vterm
@@ -206,195 +204,195 @@ all related to emacs but not for editing features
 
     :config
     (add-hook 'vterm-exit-functions
-      (lambda (buffer _event)
-        (when (buffer-live-p buffer)
-          (kill-buffer buffer)))))
+              (lambda (buffer _event)
+                (when (buffer-live-p buffer)
+                  (kill-buffer buffer)))))
 #+end_src
 ** compile
 ** run project
 #+begin_src emacs-lisp
-(use-package projectile
-  :ensure t
-  :config
-  (projectile-mode +1))
+  (use-package projectile
+    :ensure t
+    :config
+    (projectile-mode +1))
 
-(defcustom my/project-compile-commands nil
-  "Alist of project roots and their last compile commands."
-  :type '(alist :key-type directory
-                :value-type string)
-  :group 'tools)
+  (defcustom my/project-compile-commands nil
+    "Alist of project roots and their last compile commands."
+    :type '(alist :key-type directory
+                  :value-type string)
+    :group 'tools)
 
-(defun my/project-run-compile ()
-  "Run an interactive compile command for the current project."
-  (interactive)
-  (unless (projectile-project-p)
-    (user-error "Current buffer is not inside a Projectile project"))
+  (defun my/project-run-compile ()
+    "Run an interactive compile command for the current project."
+    (interactive)
+    (unless (projectile-project-p)
+      (user-error "Current buffer is not inside a Projectile project"))
 
-  (let* ((root (file-name-as-directory
-                (expand-file-name (projectile-project-root))))
-         (default-directory root)
-         (previous (cdr (assoc root my/project-compile-commands)))
-         (command (read-string
-                   (if previous
-                       (format "Run in %s (default %s): "
-                               (abbreviate-file-name root)
-                               previous)
-                     (format "Run in %s: "
-                             (abbreviate-file-name root)))
-                   nil nil previous)))
+    (let* ((root (file-name-as-directory
+                  (expand-file-name (projectile-project-root))))
+           (default-directory root)
+           (previous (cdr (assoc root my/project-compile-commands)))
+           (command (read-string
+                     (if previous
+                         (format "Run in %s (default %s): "
+                                 (abbreviate-file-name root)
+                                 previous)
+                       (format "Run in %s: "
+                               (abbreviate-file-name root)))
+                     nil nil previous)))
 
-    (unless (string-empty-p command)
-      (setf (alist-get root my/project-compile-commands
-                       nil nil #'string=)
-            command)
+      (unless (string-empty-p command)
+        (setf (alist-get root my/project-compile-commands
+                         nil nil #'string=)
+              command)
 
-      ;; Persist commands between Emacs sessions.
-      (customize-save-variable
-       'my/project-compile-commands
-       my/project-compile-commands)
+        ;; Persist commands between Emacs sessions.
+        (customize-save-variable
+         'my/project-compile-commands
+         my/project-compile-commands)
 
-      ;; Run from the project root.
-      (compile command))))
+        ;; Run from the project root.
+        (compile command))))
 
-(global-set-key (kbd "<f5>") #'my/project-run-compile)
+  (global-set-key (kbd "<f5>") #'my/project-run-compile)
 #+end_src
 * editing features
 ** undo tree
 #+begin_src emacs-lisp
-(use-package undo-tree
-  :config
-  (setq undo-tree-auto-save-history nil
-        undo-tree-visualizer-timestamps t
-        undo-tree-visualizer-diff t
-        undo-tree-history-directory-alist
-        `(("." . ,(expand-file-name "undo" user-emacs-directory)))
-        undo-limit 16000000
-        undo-strong-limit 32000000
-        undo-outer-limit 128000000)
+  (use-package undo-tree
+    :config
+    (setq undo-tree-auto-save-history nil
+          undo-tree-visualizer-timestamps t
+          undo-tree-visualizer-diff t
+          undo-tree-history-directory-alist
+          `(("." . ,(expand-file-name "undo" user-emacs-directory)))
+          undo-limit 16000000
+          undo-strong-limit 32000000
+          undo-outer-limit 128000000)
 
-  :hook
-  (after-init . global-undo-tree-mode))
+    :hook
+    (after-init . global-undo-tree-mode))
 #+end_src
 ** evil-mode
 #+begin_src emacs-lisp
-    (defun load-config ()
+  (defun load-config ()
+    (interactive)
+    (org-babel-load-file
+     (expand-file-name "config.org" user-emacs-directory)))
+
+  (use-package evil
+    :hook
+    (after-init . evil-mode)
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    (setq evil-want-C-u-delete t)
+    :config
+    (evil-set-initial-state 'eshell-mode 'emacs)
+    (evil-set-initial-state 'shell-mode 'emacs)
+    (evil-set-undo-system 'undo-tree)
+
+    (setq evil-leader/in-all-states t)
+    (setq evil-want-fine-undo t)
+
+    (evil-set-leader 'normal (kbd "SPC"))
+    (evil-set-leader 'visual (kbd "SPC"))
+
+    (evil-define-key 'normal 'global
+      (kbd "C-h") #'windmove-left
+      (kbd "C-j") #'windmove-down
+      (kbd "C-k") #'windmove-up
+      (kbd "C-l") #'windmove-right)
+
+    (evil-define-key 'normal 'global (kbd "<leader> c f") 'consult-find)
+    (evil-define-key 'normal 'global (kbd "<leader> c g") 'consult-grep)
+    (evil-define-key 'normal 'global (kbd "<leader> c G") 'consult-git-grep)
+    (evil-define-key 'normal 'global (kbd "<leader> c r") 'consult-ripgrep)
+    (evil-define-key 'normal 'global (kbd "<leader> c i") 'consult-info)
+    (evil-define-key 'normal 'global (kbd "<leader> c l") 'consult-line)
+    (evil-define-key 'normal 'global (kbd "<leader> c s") #'consult-imenu)
+    
+    (evil-define-key 'normal 'global (kbd "<leader> f f") 'consult-flymake)
+    (evil-define-key 'normal 'global (kbd "<leader> f n") 'flymake-goto-next-error)
+    (evil-define-key 'normal 'global (kbd "<leader> f p") 'flymake-goto-prev-error)
+    
+    (evil-define-key 'normal 'global (kbd "<leader> d d") 'dired)
+    (evil-define-key 'normal 'global (kbd "<leader> d j") 'dired-jump)
+    (evil-define-key 'normal 'global (kbd "<leader> x f") 'find-file)
+    (evil-define-key 'normal 'global (kbd "<leader> m s") 'magit-status) (evil-define-key 'normal 'global (kbd "<leader> m l") 'magit-log-current) (evil-define-key 'normal 'global (kbd "<leader> m d") 'magit-diff-buffer-file)
+    (evil-define-key 'normal 'global (kbd "<leader> d D") 'diff-hl-show-hunk)
+    (evil-define-key 'normal 'global (kbd "<leader> v a") 'vc-annotate)
+    
+    (evil-define-key 'normal 'global (kbd "<leader> s n") 'switch-to-next-buffer)
+    (evil-define-key 'normal 'global (kbd "<leader> s p") 'switch-to-prev-buffer)
+    (evil-define-key 'normal 'global (kbd "<leader> b k") 'kill-current-buffer)
+    (evil-define-key 'normal 'global (kbd "<leader>SPC") 'consult-buffer)
+    
+    (evil-define-key 'normal 'global (kbd "<leader> D m") 'describe-mode)
+    (evil-define-key 'normal 'global (kbd "<leader> D f") 'describe-function)
+    (evil-define-key 'normal 'global (kbd "<leader> D v") 'describe-variable)
+    (evil-define-key 'normal 'global (kbd "<leader> D k") 'describe-key)
+
+
+    
+    ;; my-journal-mode
+    (evil-define-key 'normal 'global (kbd "<leader> j t") 'my-journal-open-today)
+
+    
+
+    (evil-define-key 'normal lsp-mode-map
+      (kbd "gr") 'lsp-find-references
+      (kbd "<leader> c a") 'lsp-execute-code-action
+      (kbd "<leader> r n") 'lsp-rename
+      (kbd "gI") 'lsp-find-implementation
+      (kbd "<leader> l f") 'lsp-format-buffer)
+    
+    (defun ek/lsp-describe-and-jump ()
+      "Show hover documentation and jump to *lsp-help* buffer."
       (interactive)
-      (org-babel-load-file
-       (expand-file-name "config.org" user-emacs-directory)))
+      (lsp-describe-thing-at-point)
+      (let ((help-buffer "*lsp-help*"))
+        (when (get-buffer help-buffer)
+          (switch-to-buffer-other-window help-buffer))))
+    
+    (evil-define-key 'normal 'global (kbd "K")
+      (if (>= emacs-major-version 31)
+          #'eldoc-box-help-at-point
+        #'ek/lsp-describe-and-jump))
 
-    (use-package evil
-      :hook
-      (after-init . evil-mode)
-      :init
-      (setq evil-want-integration t)
-      (setq evil-want-keybinding nil)
-      (setq evil-want-C-u-scroll t)
-      (setq evil-want-C-u-delete t)
-      :config
-      (evil-set-initial-state 'eshell-mode 'emacs)
-      (evil-set-initial-state 'shell-mode 'emacs)
-      (evil-set-undo-system 'undo-tree)
-
-      (setq evil-leader/in-all-states t)
-      (setq evil-want-fine-undo t)
-
-      (evil-set-leader 'normal (kbd "SPC"))
-      (evil-set-leader 'visual (kbd "SPC"))
-
-      (evil-define-key 'normal 'global
-        (kbd "C-h") #'windmove-left
-        (kbd "C-j") #'windmove-down
-        (kbd "C-k") #'windmove-up
-        (kbd "C-l") #'windmove-right)
-
-      (evil-define-key 'normal 'global (kbd "<leader> c f") 'consult-find)
-      (evil-define-key 'normal 'global (kbd "<leader> c g") 'consult-grep)
-      (evil-define-key 'normal 'global (kbd "<leader> c G") 'consult-git-grep)
-      (evil-define-key 'normal 'global (kbd "<leader> c r") 'consult-ripgrep)
-      (evil-define-key 'normal 'global (kbd "<leader> c i") 'consult-info)
-      (evil-define-key 'normal 'global (kbd "<leader> c l") 'consult-line)
-      (evil-define-key 'normal 'global (kbd "<leader> c s") #'consult-imenu)
-      
-      (evil-define-key 'normal 'global (kbd "<leader> f f") 'consult-flymake)
-      (evil-define-key 'normal 'global (kbd "<leader> f n") 'flymake-goto-next-error)
-      (evil-define-key 'normal 'global (kbd "<leader> f p") 'flymake-goto-prev-error)
-      
-      (evil-define-key 'normal 'global (kbd "<leader> d d") 'dired)
-      (evil-define-key 'normal 'global (kbd "<leader> d j") 'dired-jump)
-      (evil-define-key 'normal 'global (kbd "<leader> x f") 'find-file)
-      (evil-define-key 'normal 'global (kbd "<leader> m s") 'magit-status) (evil-define-key 'normal 'global (kbd "<leader> m l") 'magit-log-current) (evil-define-key 'normal 'global (kbd "<leader> m d") 'magit-diff-buffer-file)
-      (evil-define-key 'normal 'global (kbd "<leader> d D") 'diff-hl-show-hunk)
-      (evil-define-key 'normal 'global (kbd "<leader> v a") 'vc-annotate)
-      
-      (evil-define-key 'normal 'global (kbd "<leader> s n") 'switch-to-next-buffer)
-      (evil-define-key 'normal 'global (kbd "<leader> s p") 'switch-to-prev-buffer)
-      (evil-define-key 'normal 'global (kbd "<leader> b k") 'kill-current-buffer)
-      (evil-define-key 'normal 'global (kbd "<leader>SPC") 'consult-buffer)
-      
-      (evil-define-key 'normal 'global (kbd "<leader> D m") 'describe-mode)
-      (evil-define-key 'normal 'global (kbd "<leader> D f") 'describe-function)
-      (evil-define-key 'normal 'global (kbd "<leader> D v") 'describe-variable)
-      (evil-define-key 'normal 'global (kbd "<leader> D k") 'describe-key)
-
-
-      
-      ;; my-journal-mode
-      (evil-define-key 'normal 'global (kbd "<leader> j t") 'my-journal-open-today)
-
-      
-
-      (evil-define-key 'normal lsp-mode-map
-        (kbd "gr") 'lsp-find-references
-        (kbd "<leader> c a") 'lsp-execute-code-action
-        (kbd "<leader> r n") 'lsp-rename
-        (kbd "gI") 'lsp-find-implementation
-        (kbd "<leader> l f") 'lsp-format-buffer)
-      
-      (defun ek/lsp-describe-and-jump ()
-        "Show hover documentation and jump to *lsp-help* buffer."
+    (evil-define-key 'normal 'global (kbd "gcc")
+      (lambda ()
         (interactive)
-        (lsp-describe-thing-at-point)
-        (let ((help-buffer "*lsp-help*"))
-          (when (get-buffer help-buffer)
-            (switch-to-buffer-other-window help-buffer))))
-      
-      (evil-define-key 'normal 'global (kbd "K")
-       (if (>= emacs-major-version 31)
-         #'eldoc-box-help-at-point
-         #'ek/lsp-describe-and-jump))
+        (if (not (use-region-p))
+            (comment-or-uncomment-region (line-beginning-position) (line-end-position)))))
 
-      (evil-define-key 'normal 'global (kbd "gcc")
-        (lambda ()
-          (interactive)
-          (if (not (use-region-p))
-              (comment-or-uncomment-region (line-beginning-position) (line-end-position)))))
+    (evil-define-key 'visual 'global (kbd "gc")
+      (lambda ()
+        (interactive)
+        (if (use-region-p)
+            (comment-or-uncomment-region (region-beginning) (region-end)))))
 
-      (evil-define-key 'visual 'global (kbd "gc")
-        (lambda ()
-          (interactive)
-          (if (use-region-p)
-              (comment-or-uncomment-region (region-beginning) (region-end)))))
+    (evil-define-key 'normal 'global (kbd "<leader>lf") #'load-config)
 
-      (evil-define-key 'normal 'global (kbd "<leader>lf") #'load-config)
-
-      (evil-mode 1))
+    (evil-mode 1))
 
 
-    (use-package evil-collection
-      :custom
-      (evil-collection-want-find-usages-bindings t)
-      :hook
-      (evil-mode . evil-collection-init))
+  (use-package evil-collection
+    :custom
+    (evil-collection-want-find-usages-bindings t)
+    :hook
+    (evil-mode . evil-collection-init))
 
-    (use-package evil-surround
-      :after evil-collection
-      :config
-      (global-evil-surround-mode 1))
+  (use-package evil-surround
+    :after evil-collection
+    :config
+    (global-evil-surround-mode 1))
 
-    (use-package evil-matchit
-      :after evil-collection
-      :config
-      (global-evil-matchit-mode 1))
+  (use-package evil-matchit
+    :after evil-collection
+    :config
+    (global-evil-matchit-mode 1))
 #+end_src
 ** auto-completion
 #+begin_src emacs-lisp
@@ -443,25 +441,25 @@ all related to emacs but not for editing features
 #+end_src
 *** snippets
 #+begin_src emacs-lisp
-(use-package tempel
-  :ensure t
-  :bind (("M-+" . tempel-complete)
-         ("M-*" . tempel-insert))
+  (use-package tempel
+    :ensure t
+    :bind (("M-+" . tempel-complete)
+           ("M-*" . tempel-insert))
 
-  :init
-  (defun tempel-setup-capf ()
-    (require 'tempel)
-    (setq-local completion-at-point-functions
-                (cons #'tempel-expand
-                      completion-at-point-functions)))
+    :init
+    (defun tempel-setup-capf ()
+      (require 'tempel)
+      (setq-local completion-at-point-functions
+                  (cons #'tempel-expand
+                        completion-at-point-functions)))
 
-  :hook
-  ((prog-mode text-mode conf-mode html-ts-mode)
-   . tempel-setup-capf))
+    :hook
+    ((prog-mode text-mode conf-mode html-ts-mode)
+     . tempel-setup-capf))
 
-(use-package tempel-collection
-  :ensure t
-  :after tempel)
+  (use-package tempel-collection
+    :ensure t
+    :after tempel)
 #+end_src
 ** which key
 #+begin_src emacs-lisp
@@ -470,68 +468,68 @@ all related to emacs but not for editing features
     :defer t
     :hook
     (after-init . which-key-mode))
-  #+end_src 
+#+end_src 
 ** lsp-mode
 #+begin_src  emacs-lisp
-      (use-package lsp-mode
-        :ensure t
-        :commands lsp-deferred
-        :init
-        (setq lsp-keymap-prefix "C-c l")
-        :hook
-        ((js-ts-mode
-          tsx-ts-mode
-          typescript-ts-mode
-          python-ts-mode
-          c-ts-mode
-          go-ts-mode
-          java-ts-mode
-          java-mode
-          html-ts-mode
-          rust-ts-mode
-          web-mode)
-         . lsp-deferred)
-        :custom
-        (lsp-completion-provider :capf)
-        (lsp-diagnostics-provider :flymake)
-        (lsp-idle-delay 0.5)
-        (lsp-enable-snippet nil)
-        (lsp-enable-file-watchers nil)
-        (lsp-headerline-breadcrumb-enable nil)
-        (lsp-enable-on-type-formatting nil)
-        (lsp-enable-imenu t)
-        (lsp-log-io nil)
-        (lsp-keep-workspace-alive nil)
-        (lsp-semantic-tokens-enable nil)
-        (lsp-enable-indentation nil)
-        (lsp-auto-guess-root t)
-        (lsp-restart 'auto-restart)
-        (lsp-eldoc-enable-hover nil)
-        :config
-        (lsp-enable-which-key-integration))
+  (use-package lsp-mode
+    :ensure t
+    :commands lsp-deferred
+    :init
+    (setq lsp-keymap-prefix "C-c l")
+    :hook
+    ((js-ts-mode
+      tsx-ts-mode
+      typescript-ts-mode
+      python-ts-mode
+      c-ts-mode
+      go-ts-mode
+      java-ts-mode
+      java-mode
+      html-ts-mode
+      rust-ts-mode
+      web-mode)
+     . lsp-deferred)
+    :custom
+    (lsp-completion-provider :capf)
+    (lsp-diagnostics-provider :flymake)
+    (lsp-idle-delay 0.5)
+    (lsp-enable-snippet nil)
+    (lsp-enable-file-watchers nil)
+    (lsp-headerline-breadcrumb-enable nil)
+    (lsp-enable-on-type-formatting nil)
+    (lsp-enable-imenu t)
+    (lsp-log-io nil)
+    (lsp-keep-workspace-alive nil)
+    (lsp-semantic-tokens-enable nil)
+    (lsp-enable-indentation nil)
+    (lsp-auto-guess-root t)
+    (lsp-restart 'auto-restart)
+    (lsp-eldoc-enable-hover nil)
+    :config
+    (lsp-enable-which-key-integration))
 
-      (use-package lsp-ui
-        :after lsp-mode
-        :hook (lsp-mode . lsp-ui-mode)
-        :custom
-        ;; Documentation popup
-        (lsp-ui-doc-enable t)
-        (lsp-ui-doc-delay 0.2)
-        (lsp-ui-doc-position 'at-point)
-        (lsp-ui-doc-max-width 80)
-        (lsp-ui-doc-max-height 20)
-        (lsp-ui-doc-show-with-cursor t)
-        (lsp-ui-doc-show-with-mouse nil)
-        (lsp-ui-doc-use-childframe t)
-        ;; Disable inline hints
-        (lsp-ui-sideline-enable nil)
-        ;; Peek window
-        (lsp-ui-peek-enable t))
+  (use-package lsp-ui
+    :after lsp-mode
+    :hook (lsp-mode . lsp-ui-mode)
+    :custom
+    ;; Documentation popup
+    (lsp-ui-doc-enable t)
+    (lsp-ui-doc-delay 0.2)
+    (lsp-ui-doc-position 'at-point)
+    (lsp-ui-doc-max-width 80)
+    (lsp-ui-doc-max-height 20)
+    (lsp-ui-doc-show-with-cursor t)
+    (lsp-ui-doc-show-with-mouse nil)
+    (lsp-ui-doc-use-childframe t)
+    ;; Disable inline hints
+    (lsp-ui-sideline-enable nil)
+    ;; Peek window
+    (lsp-ui-peek-enable t))
 
-      (use-package lsp-pyright
-        :after lsp-mode
-        :custom
-        (lsp-pyright-langserver-command "basedpyright"))
+  (use-package lsp-pyright
+    :after lsp-mode
+    :custom
+    (lsp-pyright-langserver-command "basedpyright"))
 
   (use-package lsp-java
     :ensure t
@@ -539,7 +537,7 @@ all related to emacs but not for editing features
     :init
     (add-hook 'java-ts-mode-hook #'lsp-deferred))
 
- #+end_src
+#+end_src
 *** flymake
 #+begin_src emacs-lisp
   (use-package flymake
@@ -550,9 +548,9 @@ all related to emacs but not for editing features
     (flymake-no-changes-timeout 0.5)
     (flymake-show-diagnostics-at-end-of-line t)
     (flymake-margin-indicators-string
-      '((error   "✘" flymake-error)
-         (warning "▲" flymake-warning)
-         (note    "●" flymake-note))))
+     '((error   "✘" flymake-error)
+       (warning "▲" flymake-warning)
+       (note    "●" flymake-note))))
 
 
   (with-eval-after-load 'rust-ts-mode
@@ -565,49 +563,84 @@ all related to emacs but not for editing features
 ** debuger
 *** dap-mode
 #+begin_src emacs-lisp
-(use-package dap-mode
-  :ensure t
-  :after lsp-mode
-  :bind (:map dap-mode-map
-              ("<f5>" . dap-debug)
-              ("<f6>" . dap-next)
-              ("<f7>" . dap-step-in)
-              ("<f8>" . dap-step-out)
-              ("<f9>" . dap-breakpoint-toggle))
-  :config
-  (dap-auto-configure-mode))
+  (use-package dap-mode
+    :ensure t
+    :after lsp-mode
+    :bind (:map dap-mode-map
+                ("<f5>" . dap-debug)
+                ("<f6>" . dap-next)
+                ("<f7>" . dap-step-in)
+                ("<f8>" . dap-step-out)
+                ("<f9>" . dap-breakpoint-toggle))
+    :config
+    (dap-auto-configure-mode))
 #+end_src
 *** gud
 #+begin_src emacs-lisp
-(use-package gud
-  :ensure nil
-  :commands (gdb gud-gdb)
-  :bind (:map gud-mode-map
-              ("<f5>" . gud-cont)
-              ("<f6>" . gud-next)
-              ("<f7>" . gud-step)
-              ("<f8>" . gud-finish)
-              ("<f9>" . gud-break))
-  :config
-  (setq gdb-many-windows t
-        gdb-show-main t))
+  (use-package gud
+    :ensure nil
+    :commands (gdb gud-gdb)
+    :bind (:map gud-mode-map
+                ("<f5>" . gud-cont)
+                ("<f6>" . gud-next)
+                ("<f7>" . gud-step)
+                ("<f8>" . gud-finish)
+                ("<f9>" . gud-break))
+    :config
+    (setq gdb-many-windows t
+          gdb-show-main t))
 #+end_src
 ** review
-*** hot-take
-#+begin_src emacs-lisp
-  ;; один из бэкендов:
-  (setq hot-take-backend-command '("llm" "-m" "claude-3-5-sonnet"))
-  ;; или lisp-функция (удобно с gptel):
-  (defun my-agent (prompt)
-    (gptel-request prompt :buffer "*gptel*
-   "))
-  (setq hot-take-backend-function #'my-agent)
+*** code-review
+#+begin_src  emacs-lisp
+  (use-package code-review
+    :ensure t
+    :after magit
+    :bind ("C-c r" . code-review-start)) ; или code-review-forge-pr-at-point
+#+end_src
 
-  ;; обсуждаемые хунки отправлять в gptel
-  (add-hook 'hot-take-discuss-hook
-            (lambda (file diff hunk)
-              (gptel-send
-               (format "Reviewing %s. Thoughts?\n```diff\n%s```" file (or hunk diff)))))
+*** diffstatic
+#+begin_src  emacs-lisp
+  (use-package difftastic
+    :ensure t
+    :after magit
+    :config
+    ;; Интеграция с Magit
+    (setq difftastic-magit-use-magit-faces t))
+#+end_src
+** ai
+*** claude-code-ide
+#+begin_src emacs-lisp
+  (use-package claude-code-ide
+    :straight (:type git :host github :repo "manzaltu/claude-code-ide.el")
+    :bind (("C-c C-'" . claude-code-ide-menu)
+           ("C-c c c" . claude-code-ide)               ; запустить сессию
+           ("C-c c t" . claude-code-ide-toggle)        ; показать/скрыть окно
+           ("C-c c b" . claude-code-ide-switch-to-buffer)
+           ("C-c c r" . claude-code-ide-resume)        ; возобновить сессию
+           ("C-c c n" . claude-code-ide-continue)      ; продолжить последнюю
+           ("C-c c p" . claude-code-ide-send-prompt)   ; отправить промпт из минибуфера
+           ("C-c c i" . claude-code-ide-insert-at-mentioned) ; вставить выделение в промпт
+           ("C-c c l" . claude-code-ide-list-sessions)
+           ("C-c c e" . claude-code-ide-send-escape)   ; escape в сессию
+           ("C-c c q" . claude-code-ide-stop))         ; остановить сессию
+    :config
+    ;; Использовать Fable 5 и отключить кэш
+    (setq claude-code-ide-cli-extra-flags "--model claude-fable-5")
+
+    ;; Включить Emacs MCP tools
+    (claude-code-ide-emacs-tools-setup))
+#+end_src
+
+** marginalia
+#+begin_src  emacs-lisp
+  (use-package marginalia
+    :ensure t
+    :hook (after-init . marginalia-mode)
+    :custom
+    (marginalia-align 'right)
+    (marginalia-align-offset 8)
+    (marginalia-max-relative-age 0))
 #+end_src
 * UI
 ** window
@@ -652,10 +685,10 @@ all related to emacs but not for editing features
     :custom
     (dashboard-center-content t)
     (dashboard-items '((recents   . 5)
-                        (projects  . 5)
-                        (bookmarks . 5)
-                        (registers . 5)
-                        (agenda    . 5)))
+                       (projects  . 5)
+                       (bookmarks . 5)
+                       (registers . 5)
+                       (agenda    . 5)))
     (dashboard-startup-banner 'official)
     (dashboard-set-init-info t)
     (dashboard-set-file-icons t)
@@ -680,10 +713,10 @@ all related to emacs but not for editing features
     :custom
     (diff-hl-side 'left)
     (diff-hl-margin-symbols-alist '((insert . "┃")
-                                     (delete . "-")
-                                     (change . "┃")
-                                     (unknown . "┆")
-                                     (ignored . "i"))))
+                                    (delete . "-")
+                                    (change . "┃")
+                                    (unknown . "┆")
+                                    (ignored . "i"))))
 #+end_src
 ** indent
 #+begin_src emacs-lisp
@@ -701,10 +734,10 @@ all related to emacs but not for editing features
     :ensure nil
     :defer t
     :bind (:map smerge-mode-map
-            ("C-c ^ u" . smerge-keep-upper)
-            ("C-c ^ l" . smerge-keep-lower)
-            ("C-c ^ n" . smerge-next)
-            ("C-c ^ p" . smerge-previous)))
+                ("C-c ^ u" . smerge-keep-upper)
+                ("C-c ^ l" . smerge-keep-lower)
+                ("C-c ^ n" . smerge-next)
+                ("C-c ^ p" . smerge-previous)))
 #+end_src
 ** modeline
 #+begin_src emacs-lisp
@@ -775,14 +808,14 @@ all related to emacs but not for editing features
     (treesit-auto-add-to-auto-mode-alist 'all)
     (global-treesit-auto-mode t))
 
-    ;; временный хак в будущем удалить его
-    ;; честно тут я чуть не бросил emacs настолько это меня вымараживает
-    (setq treesit-language-source-alist
-      '((c   "https://github.com/tree-sitter/tree-sitter-c" "v0.23.2")
-         (cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.2")
-         (css "https://github.com/tree-sitter/tree-sitter-css" "v0.23.2")
-         (html "https://github.com/tree-sitter/tree-sitter-html" "v0.23.2")
-         (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.2")))
+  ;; временный хак в будущем удалить его
+  ;; честно тут я чуть не бросил emacs настолько это меня вымараживает
+  (setq treesit-language-source-alist
+        '((c   "https://github.com/tree-sitter/tree-sitter-c" "v0.23.2")
+          (cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.2")
+          (css "https://github.com/tree-sitter/tree-sitter-css" "v0.23.2")
+          (html "https://github.com/tree-sitter/tree-sitter-html" "v0.23.2")
+          (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.2")))
 #+end_src
 * languages
 ** languages all in one
@@ -795,11 +828,11 @@ all related to emacs but not for editing features
     :hook
     (css-ts-mode . electric-pair-local-mode)
     (css-ts-mode . (lambda ()
-      (setq-local tab-width 2
-                  css-indent-offset 2)))
+                     (setq-local tab-width 2
+                                 css-indent-offset 2)))
     :config
     (add-to-list 'major-mode-remap-alist
-    '(css-mode . css-ts-mode)))  
+                 '(css-mode . css-ts-mode)))  
 
 
 
@@ -807,24 +840,24 @@ all related to emacs but not for editing features
   (defun my-js-mode-setup ()
     "Setq-local vars for 'js-mode'."
     (setq-local js-indent-level 2
-      tab-width 2
-      treesit-font-lock-level 4))
+                tab-width 2
+                treesit-font-lock-level 4))
 
   (use-package js
     :mode "\\.js\\'"
     :hook
     ((js-ts-mode . my-js-mode-setup)
-    (js-ts-mode . electric-pair-local-mode)))
+     (js-ts-mode . electric-pair-local-mode)))
 
   (use-package markdown-mode
-     :ensure nil
-     :defer t
-     :mode ("\\.md\\'" . gfm-mode)
-     :init
-     (setq markdown-command "multimarkdown"
-       fill-column 80)
-     :hook
-     (gfm-mode . auto-fill-mode))
+    :ensure nil
+    :defer t
+    :mode ("\\.md\\'" . gfm-mode)
+    :init
+    (setq markdown-command "multimarkdown"
+          fill-column 80)
+    :hook
+    (gfm-mode . auto-fill-mode))
 
 
 
@@ -833,17 +866,17 @@ all related to emacs but not for editing features
     :ensure nil
     :mode "\\.rs\\'")
 
-    (add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
-    (setenv "PATH"
-      (concat (expand-file-name "~/.cargo/bin") ":"
-        (getenv "PATH")))
+  (add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
+  (setenv "PATH"
+          (concat (expand-file-name "~/.cargo/bin") ":"
+                  (getenv "PATH")))
 
   (use-package typescript-mode
     :init
     (add-to-list 'major-mode-remap-alist
-      '(typescript-mode . typescript-ts-mode))
+                 '(typescript-mode . typescript-ts-mode))
     (add-to-list 'major-mode-remap-alist
-      '(js-mode . js-ts-mode)))
+                 '(js-mode . js-ts-mode)))
 #+end_src
 
 ** python
@@ -859,16 +892,16 @@ all related to emacs but not for editing features
 ** html
 
 #+begin_src  emacs-lisp
-(use-package html-ts-mode
-  :ensure nil
-  :mode ("\\.html?\\'" . html-ts-mode)
-  :hook
-  (html-ts-mode . (lambda ()
-                    (setq-local tab-width 2)
-                    (setq-local standard-indent 2)
-                    (electric-pair-local-mode 1)
-                    (sgml-electric-tag-pair-mode 1)
-                    (display-line-numbers-mode 1))))
+  (use-package html-ts-mode
+    :ensure nil
+    :mode ("\\.html?\\'" . html-ts-mode)
+    :hook
+    (html-ts-mode . (lambda ()
+                      (setq-local tab-width 2)
+                      (setq-local standard-indent 2)
+                      (electric-pair-local-mode 1)
+                      (sgml-electric-tag-pair-mode 1)
+                      (display-line-numbers-mode 1))))
 #+end_src
 
 ** org
@@ -878,7 +911,7 @@ all related to emacs but not for editing features
     :config
     (setq-local fill-column 80)
     (auto-fill-mode 1))
-    #+end_src
+#+end_src
 
 ** c/c++
 #+begin_src emacs-lisp
@@ -907,24 +940,24 @@ all related to emacs but not for editing features
     (let ((default-directory (projectile-project-root)))
       (compile (concat "make " arguments))))
 
-    (use-package c-ts-mode
-      :ensure nil ;; all ready a part of emacs
-      :mode
-      ("\\.c\\'" . c-ts-mode)
-      ("\\.h\\'" . c-or-c++-ts-mode)
-      ("\\.cpp\\'" . c++-ts-mode)
-      ("\\.hpp\\'" . c++-ts-mode)
-      :bind
-      (:map c-ts-mode-map ;; NOTE: на самом деле я не знаю как мне нужны комманды так что это сформеруется в будущем и всегда есть make-custom для этого 
-            ("<f1>" . my-c/make-clean)
-            ("<f2>" . my-c/make-all)
-            ("<f3>" . my-c/make-run)
-            ("<f4>" . my-c/make-custom))
-      :config
-      (c-ts-indent-offset 4)
-      (c-ts-mode-indent-style 'linux)
-      (c-ts-mode-enable-doxygen t)
-      (eletric-pair-mode 1))
+  (use-package c-ts-mode
+    :ensure nil ;; all ready a part of emacs
+    :mode
+    ("\\.c\\'" . c-ts-mode)
+    ("\\.h\\'" . c-or-c++-ts-mode)
+    ("\\.cpp\\'" . c++-ts-mode)
+    ("\\.hpp\\'" . c++-ts-mode)
+    :bind
+    (:map c-ts-mode-map ;; NOTE: на самом деле я не знаю как мне нужны комманды так что это сформеруется в будущем и всегда есть make-custom для этого 
+          ("<f1>" . my-c/make-clean)
+          ("<f2>" . my-c/make-all)
+          ("<f3>" . my-c/make-run)
+          ("<f4>" . my-c/make-custom))
+    :config
+    (c-ts-indent-offset 4)
+    (c-ts-mode-indent-style 'linux)
+    (c-ts-mode-enable-doxygen t)
+    (eletric-pair-mode 1))
 #+end_src
 
 ** elisp

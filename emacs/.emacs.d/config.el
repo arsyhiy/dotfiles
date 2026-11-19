@@ -6,47 +6,44 @@
 ;; my-journal for org mode
 (require 'my-journal)
 
-;; hot-take
-(require 'hot-take)
-
 (use-package consult
   :ensure t
   :init
   (setq xref-show-xrefs-function #'consult-xref
-    xref-show-definitions-function #'consult-xref)
+        xref-show-definitions-function #'consult-xref)
   :config
   (with-eval-after-load 'register
     (setq register-preview-function #'consult-register-window))
   (setq consult-narrow-key "<"
-    consult-preview-key 'any)
+        consult-preview-key 'any)
   (setq consult-buffer-display-action #'display-buffer-same-window)
   (setq consult-async-min-input 2
-    consult-async-refresh-delay 0.15
-    consult-async-input-throttle 0.2
-    consult-async-input-debounce 0.3))
+        consult-async-refresh-delay 0.15
+        consult-async-input-throttle 0.2
+        consult-async-input-debounce 0.3))
 
 (with-eval-after-load 'dired
   (setq dired-dwim-target t
-    dired-kill-when-opening-new-dired-buffer t)
+        dired-kill-when-opening-new-dired-buffer t)
 
   (setq dired-listing-switches
-    (if (eq system-type 'gnu/linux)
-      "-lah --group-directories-first"
-      "-lah"))
+        (if (eq system-type 'gnu/linux)
+            "-lah --group-directories-first"
+          "-lah"))
   (setq dired-guess-shell-alist-user
-    '(("\\.\\(png\\|jpe?g\\|tiff\\)"
-        (cond
-          ((executable-find "feh") "feh")
-          ((executable-find "xdg-open") "xdg-open")
-          (t "open")))
-       ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)"
-         (cond
-           ((executable-find "mpv") "mpv")
-           ((executable-find "xdg-open") "xdg-open")
-           (t "open")))
-       (".*"
-         (or (and (executable-find "xdg-open") "xdg-open")
-           "open")))))
+        '(("\\.\\(png\\|jpe?g\\|tiff\\)"
+           (cond
+            ((executable-find "feh") "feh")
+            ((executable-find "xdg-open") "xdg-open")
+            (t "open")))
+          ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)"
+           (cond
+            ((executable-find "mpv") "mpv")
+            ((executable-find "xdg-open") "xdg-open")
+            (t "open")))
+          (".*"
+           (or (and (executable-find "xdg-open") "xdg-open")
+               "open")))))
 
 (use-package emacs
   :ensure nil
@@ -164,12 +161,12 @@
   :ensure t
   :init
   (setq completion-styles '(orderless basic)
-    completion-category-defaults nil
-    completion-category-overrides
-    '((file (styles partial-completion))
-       (command (styles orderless))
-       (symbol (styles orderless))
-       (variable (styles orderless))))
+        completion-category-defaults nil
+        completion-category-overrides
+        '((file (styles partial-completion))
+          (command (styles orderless))
+          (symbol (styles orderless))
+          (variable (styles orderless))))
   (setq completion-flex-nospace t))
 
 (use-package vterm
@@ -184,9 +181,9 @@
 
   :config
   (add-hook 'vterm-exit-functions
-    (lambda (buffer _event)
-      (when (buffer-live-p buffer)
-        (kill-buffer buffer)))))
+            (lambda (buffer _event)
+              (when (buffer-live-p buffer)
+                (kill-buffer buffer)))))
 
 (use-package projectile
   :ensure t
@@ -329,9 +326,9 @@
         (switch-to-buffer-other-window help-buffer))))
   
   (evil-define-key 'normal 'global (kbd "K")
-   (if (>= emacs-major-version 31)
-     #'eldoc-box-help-at-point
-     #'ek/lsp-describe-and-jump))
+    (if (>= emacs-major-version 31)
+        #'eldoc-box-help-at-point
+      #'ek/lsp-describe-and-jump))
 
   (evil-define-key 'normal 'global (kbd "gcc")
     (lambda ()
@@ -436,64 +433,64 @@
   (after-init . which-key-mode))
 
 (use-package lsp-mode
-      :ensure t
-      :commands lsp-deferred
-      :init
-      (setq lsp-keymap-prefix "C-c l")
-      :hook
-      ((js-ts-mode
-        tsx-ts-mode
-        typescript-ts-mode
-        python-ts-mode
-        c-ts-mode
-        go-ts-mode
-        java-ts-mode
-        java-mode
-        html-ts-mode
-        rust-ts-mode
-        web-mode)
-       . lsp-deferred)
-      :custom
-      (lsp-completion-provider :capf)
-      (lsp-diagnostics-provider :flymake)
-      (lsp-idle-delay 0.5)
-      (lsp-enable-snippet nil)
-      (lsp-enable-file-watchers nil)
-      (lsp-headerline-breadcrumb-enable nil)
-      (lsp-enable-on-type-formatting nil)
-      (lsp-enable-imenu t)
-      (lsp-log-io nil)
-      (lsp-keep-workspace-alive nil)
-      (lsp-semantic-tokens-enable nil)
-      (lsp-enable-indentation nil)
-      (lsp-auto-guess-root t)
-      (lsp-restart 'auto-restart)
-      (lsp-eldoc-enable-hover nil)
-      :config
-      (lsp-enable-which-key-integration))
+  :ensure t
+  :commands lsp-deferred
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook
+  ((js-ts-mode
+    tsx-ts-mode
+    typescript-ts-mode
+    python-ts-mode
+    c-ts-mode
+    go-ts-mode
+    java-ts-mode
+    java-mode
+    html-ts-mode
+    rust-ts-mode
+    web-mode)
+   . lsp-deferred)
+  :custom
+  (lsp-completion-provider :capf)
+  (lsp-diagnostics-provider :flymake)
+  (lsp-idle-delay 0.5)
+  (lsp-enable-snippet nil)
+  (lsp-enable-file-watchers nil)
+  (lsp-headerline-breadcrumb-enable nil)
+  (lsp-enable-on-type-formatting nil)
+  (lsp-enable-imenu t)
+  (lsp-log-io nil)
+  (lsp-keep-workspace-alive nil)
+  (lsp-semantic-tokens-enable nil)
+  (lsp-enable-indentation nil)
+  (lsp-auto-guess-root t)
+  (lsp-restart 'auto-restart)
+  (lsp-eldoc-enable-hover nil)
+  :config
+  (lsp-enable-which-key-integration))
 
-    (use-package lsp-ui
-      :after lsp-mode
-      :hook (lsp-mode . lsp-ui-mode)
-      :custom
-      ;; Documentation popup
-      (lsp-ui-doc-enable t)
-      (lsp-ui-doc-delay 0.2)
-      (lsp-ui-doc-position 'at-point)
-      (lsp-ui-doc-max-width 80)
-      (lsp-ui-doc-max-height 20)
-      (lsp-ui-doc-show-with-cursor t)
-      (lsp-ui-doc-show-with-mouse nil)
-      (lsp-ui-doc-use-childframe t)
-      ;; Disable inline hints
-      (lsp-ui-sideline-enable nil)
-      ;; Peek window
-      (lsp-ui-peek-enable t))
+(use-package lsp-ui
+  :after lsp-mode
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  ;; Documentation popup
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-delay 0.2)
+  (lsp-ui-doc-position 'at-point)
+  (lsp-ui-doc-max-width 80)
+  (lsp-ui-doc-max-height 20)
+  (lsp-ui-doc-show-with-cursor t)
+  (lsp-ui-doc-show-with-mouse nil)
+  (lsp-ui-doc-use-childframe t)
+  ;; Disable inline hints
+  (lsp-ui-sideline-enable nil)
+  ;; Peek window
+  (lsp-ui-peek-enable t))
 
-    (use-package lsp-pyright
-      :after lsp-mode
-      :custom
-      (lsp-pyright-langserver-command "basedpyright"))
+(use-package lsp-pyright
+  :after lsp-mode
+  :custom
+  (lsp-pyright-langserver-command "basedpyright"))
 
 (use-package lsp-java
   :ensure t
@@ -509,9 +506,9 @@
   (flymake-no-changes-timeout 0.5)
   (flymake-show-diagnostics-at-end-of-line t)
   (flymake-margin-indicators-string
-    '((error   "✘" flymake-error)
-       (warning "▲" flymake-warning)
-       (note    "●" flymake-note))))
+   '((error   "✘" flymake-error)
+     (warning "▲" flymake-warning)
+     (note    "●" flymake-note))))
 
 
 (with-eval-after-load 'rust-ts-mode
@@ -546,19 +543,248 @@
   (setq gdb-many-windows t
         gdb-show-main t))
 
-;; один из бэкендов:
-(setq hot-take-backend-command '("llm" "-m" "claude-3-5-sonnet"))
-;; или lisp-функция (удобно с gptel):
-(defun my-agent (prompt)
-  (gptel-request prompt :buffer "*gptel*
- "))
-(setq hot-take-backend-function #'my-agent)
+(use-package code-review
+  :ensure t
+  :after magit
+  :bind ("C-c r" . code-review-start)) ; или code-review-forge-pr-at-point
 
-;; обсуждаемые хунки отправлять в gptel
-(add-hook 'hot-take-discuss-hook
-          (lambda (file diff hunk)
-            (gptel-send
-             (format "Reviewing %s. Thoughts?\n```diff\n%s```" file (or hunk diff)))))
+(use-package difftastic
+  :ensure t
+  :after magit
+  :config
+  ;; Интеграция с Magit
+  (setq difftastic-magit-use-magit-faces t))
+
+;;   (add-to-list 'exec-path (expand-file-name "~/.local/bin"))
+        ;;   (setenv "PATH" (concat (expand-file-name "~/.local/bin") ":" (getenv "PATH")))
+        ;; 
+        ;;   (use-package aidermacs
+        ;;     :ensure t
+        ;;     :bind ("C-c a" . aidermacs-transient-menu)
+        ;;     :custom
+        ;;     (aidermacs-default-model "anthropic/claude-opus-5")
+        ;;     (aidermacs-show-diff-after-change t)
+        ;;     (aidermacs-auto-commits nil)
+        ;;     ;; 👇 Добавляем аргумент для смены языка чата
+        ;;     (aidermacs-extra-args '("--chat-language" "ru"))
+        ;; (setq aidermacs-backend 'vterm)
+        ;;     :init
+        ;;     (with-eval-after-load 'evil
+        ;;       ;; The most useful aidermacs commands under <leader> a
+        ;;       (evil-define-key '(normal visual) 'global
+        ;;         (kbd "<leader> a a") #'aidermacs-transient-menu
+        ;;         (kbd "<leader> a s") #'aidermacs-switch-to-buffer
+        ;;         (kbd "<leader> a f") #'aidermacs-add-file
+        ;;         (kbd "<leader> a d") #'aidermacs-drop-file
+        ;;         (kbd "<leader> a b") #'aidermacs-add-current-buffer
+        ;;         (kbd "<leader> a r") #'aidermacs-send-line-or-region
+        ;;         (kbd "<leader> a c") #'aidermacs-send-buffer
+        ;;         (kbd "<leader> a A") #'aidermacs-accept-change
+        ;;         (kbd "<leader> a R") #'aidermacs-reject-change
+        ;;         (kbd "<leader> a q") #'aidermacs-exit))
+        ;;     :config
+        ;;     (add-hook 'aidermacs-before-run-backend-hook
+        ;;               (lambda ()
+        ;;                 (setenv "ANTHROPIC_API_BASE" "https://ru.cheapvibecode.ru")
+        ;;                 (setenv "ANTHROPIC_BASE_URL" "https://ru.cheapvibecode.ru")
+        ;;                 (let ((key (auth-source-pick-first-password
+        ;;                             :host "ru.cheapvibecode.ru"
+        ;;                             :user "apikey")))
+        ;;                   (when key
+        ;;                     (setenv "ANTHROPIC_API_KEY" key)))
+        ;;                 (setenv "ANTHROPIC_API_KEY"
+        ;;                         "sk-tradersshop-dbccecbeeac46d3c346e646af176b81124eb523a696bec7cbddb34f6b76d4bd4")
+        ;;                 )))
+    
+    
+    ;; (add-to-list 'exec-path
+    ;;              (expand-file-name "~/.local/bin"))
+    ;; ;;
+
+    ;; (setenv "PATH"
+    ;;         (concat (expand-file-name "~/.local/bin")
+    ;;                 ":" (getenv "PATH")))
+    ;; 
+    ;; (use-package vterm
+    ;;   :ensure t)
+    ;; 
+    ;; (use-package aidermacs
+    ;;   :ensure t
+    ;;   :bind ("C-c a" . aidermacs-transient-menu)
+    ;; 
+    ;;   :custom
+    ;;   (aidermacs-backend 'vterm)
+    ;;   (aidermacs-default-model "anthropic/claude-opus-5")
+    ;;   (aidermacs-show-diff-after-change t)
+    ;;   (aidermacs-auto-commits nil)
+    ;; 
+    ;;   (aidermacs-extra-args
+    ;;    '("--chat-language" "ru"
+    ;;      "--pretty"
+    ;;      "--dark-mode"
+    ;;      "--code-theme" "monokai"
+    ;;      "--assistant-output-color" "#89b4fa"
+    ;;      "--user-input-color" "#a6e3a1"
+    ;;      "--tool-output-color" "#cba6f7"))
+    ;; 
+    ;;   :init
+    ;;   (with-eval-after-load 'evil
+    ;;     (evil-define-key '(normal visual) 'global
+    ;;       (kbd "<leader> a a") #'aidermacs-transient-menu
+    ;;       (kbd "<leader> a s") #'aidermacs-switch-to-buffer
+    ;;       (kbd "<leader> a f") #'aidermacs-add-file
+    ;;       (kbd "<leader> a d") #'aidermacs-drop-file
+    ;;       (kbd "<leader> a b") #'aidermacs-add-current-buffer
+    ;;       (kbd "<leader> a r") #'aidermacs-send-line-or-region
+    ;;       (kbd "<leader> a c") #'aidermacs-send-buffer
+    ;;       (kbd "<leader> a A") #'aidermacs-accept-change
+    ;;       (kbd "<leader> a R") #'aidermacs-reject-change
+    ;;       (kbd "<leader> a q") #'aidermacs-exit))
+    ;; 
+    ;;   :config
+    ;;   (add-hook 'aidermacs-before-run-backend-hook
+    ;;             (lambda ()
+    ;;               (setenv "ANTHROPIC_API_BASE"
+    ;;                       "https://ru.cheapvibecode.ru")
+    ;;               (setenv "ANTHROPIC_BASE_URL"
+    ;;                       "https://ru.cheapvibecode.ru")
+    ;;               (setenv "ANTHROPIC_API_KEY"
+    ;;                       "sk-tradersshop-dbccecbeeac46d3c346e646af176b81124eb523a696bec7cbddb34f6b76d4bd4")))))
+
+
+
+    
+  ;; (add-to-list 'exec-path
+  ;;              (expand-file-name "~/.local/bin"))
+  ;; 
+  ;; (setenv "PATH"
+  ;;         (concat (expand-file-name "~/.local/bin")
+  ;;                 ":" (getenv "PATH")))
+  ;; 
+  ;; (use-package vterm
+  ;;   :ensure t)
+  ;; 
+  ;; (use-package aidermacs
+  ;;   :ensure t
+  ;;   :bind ("C-c a" . aidermacs-transient-menu)
+  ;; 
+  ;;   :custom
+  ;;   (aidermacs-backend 'comint)
+  ;;   (aidermacs-default-model "anthropic/claude-opus-5")
+  ;;   (aidermacs-show-diff-after-change t)
+  ;;   (aidermacs-auto-commits nil)
+  ;; 
+  ;;   (aidermacs-extra-args
+  ;;    '("--chat-language" "ru"
+  ;;      "--pretty"
+  ;;      "--dark-mode"
+  ;;      "--code-theme" "monokai"
+  ;;      "--assistant-output-color" "#89b4fa"
+  ;;      "--user-input-color" "#a6e3a1"
+  ;;      "--tool-output-color" "#cba6f7"))
+  ;; 
+  ;;   :init
+  ;;   (with-eval-after-load 'evil
+  ;;     (evil-define-key '(normal visual) 'global
+  ;;       (kbd "<leader> a a") #'aidermacs-transient-menu
+  ;;       (kbd "<leader> a s") #'aidermacs-switch-to-buffer
+  ;;       (kbd "<leader> a f") #'aidermacs-add-file
+  ;;       (kbd "<leader> a d") #'aidermacs-drop-file
+  ;;       (kbd "<leader> a b") #'aidermacs-add-current-buffer
+  ;;       (kbd "<leader> a r") #'aidermacs-send-line-or-region
+  ;;       (kbd "<leader> a c") #'aidermacs-send-buffer
+  ;;       (kbd "<leader> a A") #'aidermacs-accept-change
+  ;;       (kbd "<leader> a R") #'aidermacs-reject-change
+  ;;       (kbd "<leader> a q") #'aidermacs-exit))
+  ;; 
+  ;;   :config
+  ;;   (add-hook 'aidermacs-before-run-backend-hook
+  ;;             (lambda ()
+  ;;               (setenv "ANTHROPIC_API_BASE"
+  ;;                       "https://ru.cheapvibecode.ru")
+  ;;               (setenv "ANTHROPIC_BASE_URL"
+  ;;                       "https://ru.cheapvibecode.ru")
+  ;;               (setenv "ANTHROPIC_API_KEY"
+  ;;                       "sk-tradersshop-dbccecbeeac46d3c346e646af176b81124eb523a696bec7cbddb34f6b76d4bd4"))))
+
+
+
+  
+(add-to-list 'exec-path (expand-file-name "~/.local/bin"))
+
+(setenv "PATH"
+        (concat (expand-file-name "~/.local/bin")
+                ":" (getenv "PATH")))
+
+(use-package aidermacs
+  :ensure t
+  :bind ("C-c a" . aidermacs-transient-menu)
+
+  :custom
+  (aidermacs-backend 'comint)
+  (aidermacs-default-model "anthropic/claude-opus-5")
+  (aidermacs-show-diff-after-change t)
+  (aidermacs-auto-commits nil)
+  (aidermacs-extra-args
+   '("--chat-language" "ru"
+     "--pretty"
+     "--dark-mode"
+     "--code-theme" "monokai"
+     "--assistant-output-color" "#89b4fa"
+     "--user-input-color" "#a6e3a1"
+     "--tool-output-color" "#cba6f7"))
+
+  :init
+  (with-eval-after-load 'evil
+    (evil-define-key '(normal visual) 'global
+      (kbd "<leader> a a") #'aidermacs-transient-menu
+      (kbd "<leader> a s") #'aidermacs-switch-to-buffer
+      (kbd "<leader> a f") #'aidermacs-add-file
+      (kbd "<leader> a d") #'aidermacs-drop-file
+      (kbd "<leader> a b") #'aidermacs-add-current-buffer
+      (kbd "<leader> a r") #'aidermacs-send-line-or-region
+      (kbd "<leader> a c") #'aidermacs-send-buffer
+      (kbd "<leader> a A") #'aidermacs-accept-change
+      (kbd "<leader> a R") #'aidermacs-reject-change
+      (kbd "<leader> a q") #'aidermacs-exit))
+
+  :config
+  (add-hook 'aidermacs-before-run-backend-hook
+            (lambda ()
+              (setenv "ANTHROPIC_API_BASE"
+                      "https://ru.cheapvibecode.ru")
+              (setenv "ANTHROPIC_BASE_URL"
+                      "https://ru.cheapvibecode.ru")
+              (setenv "ANTHROPIC_API_KEY"
+                      "sk-tradersshop-dbccecbeeac46d3c346e646af176b81124eb523a696bec7cbddb34f6b76d4bd4"))))
+
+(use-package claude-code-ide
+  :straight (:type git :host github :repo "manzaltu/claude-code-ide.el")
+  :bind (("C-c C-'" . claude-code-ide-menu)
+         ("C-c c c" . claude-code-ide)               ; запустить сессию
+         ("C-c c t" . claude-code-ide-toggle)        ; показать/скрыть окно
+         ("C-c c b" . claude-code-ide-switch-to-buffer)
+         ("C-c c r" . claude-code-ide-resume)        ; возобновить сессию
+         ("C-c c n" . claude-code-ide-continue)      ; продолжить последнюю
+         ("C-c c p" . claude-code-ide-send-prompt)   ; отправить промпт из минибуфера
+         ("C-c c i" . claude-code-ide-insert-at-mentioned) ; вставить выделение в промпт
+         ("C-c c l" . claude-code-ide-list-sessions)
+         ("C-c c e" . claude-code-ide-send-escape)   ; escape в сессию
+         ("C-c c q" . claude-code-ide-stop))         ; остановить сессию
+  :config
+  ;; Использовать Fable 5 и отключить кэш
+  (setq claude-code-ide-cli-extra-flags "--model claude-fable-5")
+
+  ;; Включить Emacs MCP tools
+  (claude-code-ide-emacs-tools-setup))
+
+(use-package marginalia
+  :ensure t
+  :hook (after-init . marginalia-mode)
+  :custom
+  (marginalia-align 'right)
+  (marginalia-align-offset 8)
+  (marginalia-max-relative-age 0))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -598,10 +824,10 @@
   :custom
   (dashboard-center-content t)
   (dashboard-items '((recents   . 5)
-                      (projects  . 5)
-                      (bookmarks . 5)
-                      (registers . 5)
-                      (agenda    . 5)))
+                     (projects  . 5)
+                     (bookmarks . 5)
+                     (registers . 5)
+                     (agenda    . 5)))
   (dashboard-startup-banner 'official)
   (dashboard-set-init-info t)
   (dashboard-set-file-icons t)
@@ -624,10 +850,10 @@
   :custom
   (diff-hl-side 'left)
   (diff-hl-margin-symbols-alist '((insert . "┃")
-                                   (delete . "-")
-                                   (change . "┃")
-                                   (unknown . "┆")
-                                   (ignored . "i"))))
+                                  (delete . "-")
+                                  (change . "┃")
+                                  (unknown . "┆")
+                                  (ignored . "i"))))
 
 (use-package highlight-indent-guides
   :hook (prog-mode . highlight-indent-guides-mode)
@@ -641,10 +867,10 @@
   :ensure nil
   :defer t
   :bind (:map smerge-mode-map
-          ("C-c ^ u" . smerge-keep-upper)
-          ("C-c ^ l" . smerge-keep-lower)
-          ("C-c ^ n" . smerge-next)
-          ("C-c ^ p" . smerge-previous)))
+              ("C-c ^ u" . smerge-keep-upper)
+              ("C-c ^ l" . smerge-keep-lower)
+              ("C-c ^ n" . smerge-next)
+              ("C-c ^ p" . smerge-previous)))
 
 (use-package doom-modeline
   :ensure t
@@ -704,14 +930,14 @@
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode t))
 
-  ;; временный хак в будущем удалить его
-  ;; честно тут я чуть не бросил emacs настолько это меня вымараживает
-  (setq treesit-language-source-alist
-    '((c   "https://github.com/tree-sitter/tree-sitter-c" "v0.23.2")
-       (cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.2")
-       (css "https://github.com/tree-sitter/tree-sitter-css" "v0.23.2")
-       (html "https://github.com/tree-sitter/tree-sitter-html" "v0.23.2")
-       (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.2")))
+;; временный хак в будущем удалить его
+;; честно тут я чуть не бросил emacs настолько это меня вымараживает
+(setq treesit-language-source-alist
+      '((c   "https://github.com/tree-sitter/tree-sitter-c" "v0.23.2")
+        (cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.2")
+        (css "https://github.com/tree-sitter/tree-sitter-css" "v0.23.2")
+        (html "https://github.com/tree-sitter/tree-sitter-html" "v0.23.2")
+        (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.2")))
 
 (use-package css-ts-mode
   :straight nil
@@ -720,11 +946,11 @@
   :hook
   (css-ts-mode . electric-pair-local-mode)
   (css-ts-mode . (lambda ()
-    (setq-local tab-width 2
-                css-indent-offset 2)))
+                   (setq-local tab-width 2
+                               css-indent-offset 2)))
   :config
   (add-to-list 'major-mode-remap-alist
-  '(css-mode . css-ts-mode)))  
+               '(css-mode . css-ts-mode)))  
 
 
 
@@ -732,24 +958,24 @@
 (defun my-js-mode-setup ()
   "Setq-local vars for 'js-mode'."
   (setq-local js-indent-level 2
-    tab-width 2
-    treesit-font-lock-level 4))
+              tab-width 2
+              treesit-font-lock-level 4))
 
 (use-package js
   :mode "\\.js\\'"
   :hook
   ((js-ts-mode . my-js-mode-setup)
-  (js-ts-mode . electric-pair-local-mode)))
+   (js-ts-mode . electric-pair-local-mode)))
 
 (use-package markdown-mode
-   :ensure nil
-   :defer t
-   :mode ("\\.md\\'" . gfm-mode)
-   :init
-   (setq markdown-command "multimarkdown"
-     fill-column 80)
-   :hook
-   (gfm-mode . auto-fill-mode))
+  :ensure nil
+  :defer t
+  :mode ("\\.md\\'" . gfm-mode)
+  :init
+  (setq markdown-command "multimarkdown"
+        fill-column 80)
+  :hook
+  (gfm-mode . auto-fill-mode))
 
 
 
@@ -758,17 +984,17 @@
   :ensure nil
   :mode "\\.rs\\'")
 
-  (add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
-  (setenv "PATH"
-    (concat (expand-file-name "~/.cargo/bin") ":"
-      (getenv "PATH")))
+(add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
+(setenv "PATH"
+        (concat (expand-file-name "~/.cargo/bin") ":"
+                (getenv "PATH")))
 
 (use-package typescript-mode
   :init
   (add-to-list 'major-mode-remap-alist
-    '(typescript-mode . typescript-ts-mode))
+               '(typescript-mode . typescript-ts-mode))
   (add-to-list 'major-mode-remap-alist
-    '(js-mode . js-ts-mode)))
+               '(js-mode . js-ts-mode)))
 
 (use-package python
   :ensure nil
@@ -817,24 +1043,24 @@
   (let ((default-directory (projectile-project-root)))
     (compile (concat "make " arguments))))
 
-  (use-package c-ts-mode
-    :ensure nil ;; all ready a part of emacs
-    :mode
-    ("\\.c\\'" . c-ts-mode)
-    ("\\.h\\'" . c-or-c++-ts-mode)
-    ("\\.cpp\\'" . c++-ts-mode)
-    ("\\.hpp\\'" . c++-ts-mode)
-    :bind
-    (:map c-ts-mode-map ;; NOTE: на самом деле я не знаю как мне нужны комманды так что это сформеруется в будущем и всегда есть make-custom для этого 
-          ("<f1>" . my-c/make-clean)
-          ("<f2>" . my-c/make-all)
-          ("<f3>" . my-c/make-run)
-          ("<f4>" . my-c/make-custom))
-    :config
-    (c-ts-indent-offset 4)
-    (c-ts-mode-indent-style 'linux)
-    (c-ts-mode-enable-doxygen t)
-    (eletric-pair-mode 1))
+(use-package c-ts-mode
+  :ensure nil ;; all ready a part of emacs
+  :mode
+  ("\\.c\\'" . c-ts-mode)
+  ("\\.h\\'" . c-or-c++-ts-mode)
+  ("\\.cpp\\'" . c++-ts-mode)
+  ("\\.hpp\\'" . c++-ts-mode)
+  :bind
+  (:map c-ts-mode-map ;; NOTE: на самом деле я не знаю как мне нужны комманды так что это сформеруется в будущем и всегда есть make-custom для этого 
+        ("<f1>" . my-c/make-clean)
+        ("<f2>" . my-c/make-all)
+        ("<f3>" . my-c/make-run)
+        ("<f4>" . my-c/make-custom))
+  :config
+  (c-ts-indent-offset 4)
+  (c-ts-mode-indent-style 'linux)
+  (c-ts-mode-enable-doxygen t)
+  (eletric-pair-mode 1))
 
 (use-package emacs-lisp-mode
   :ensure nil
