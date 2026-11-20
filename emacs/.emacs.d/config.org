@@ -13,6 +13,7 @@
 
   ;; my-journal for org mode
   (require 'my-journal)
+  (require 'last-patch)
 #+end_src
 * temp var
 #+begin_src  emacs-lisp
@@ -661,13 +662,13 @@ all related to emacs but not for editing features
            ("C-c a c" . agent-shell-prompt-compose)
            ("C-c a v" . agent-shell-viewport)
            ("C-c a m" . agent-shell-menu)
+           ("C-c a s" . agent-shell-send-region)
            :map agent-shell-mode-map
            ("C-c C-o" . agent-shell-other-buffer)
            ("C-c C-w" . agent-shell-add-context))
 
     :config
     (require 'agent-shell-omp))
-#+end_src
 ** marginalia
 #+begin_src  emacs-lisp
   (use-package marginalia
