@@ -12,12 +12,12 @@
         (concat "/home/arsyhiy/.local/bin:"
                 (getenv "PATH")))
 
-;; Получить API-ключ из Zsh
-(let ((key (string-trim
-            (shell-command-to-string
-             "zsh -c 'source ~/.zshrc >/dev/null 2>&1; print -r -- \"$CHEAPVIBECODE_API_KEY\"'"))))
-  (unless (string-empty-p key)
-    (setenv "CHEAPVIBECODE_API_KEY" key)))
+;; ;; Получить API-ключ из Zsh
+;; (let ((key (string-trim
+;;             (shell-command-to-string
+;;              "zsh -c 'source ~/.zshrc >/dev/null 2>&1; print -r -- \"$CHEAPVIBECODE_API_KEY\"'"))))
+;;   (unless (string-empty-p key)
+;;     (setenv "CHEAPVIBECODE_API_KEY" key)))
 
 (use-package consult
   :ensure t
@@ -607,7 +607,8 @@
          ("C-c a s" . agent-shell-send-region)
          :map agent-shell-mode-map
          ("C-c C-o" . agent-shell-other-buffer)
-         ("C-c C-w" . agent-shell-add-context))
+         )
+         ;; ("C-c C-w" . agent-shell-add-context))
 
   :config
   (require 'agent-shell-omp))
@@ -622,95 +623,6 @@
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-;; (setq display-buffer-alist
-;;       '(
-;;         ;; debug / help buffers
-;;         ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
-;;          (display-buffer-in-side-window
-;;           (side . bottom)
-;;           (window-height . 0.25)
-;;           (slot . 0)))
-;; 
-;;         ;; lsp / documentation buffers
-;;         ("\\*lsp-help\\*"
-;;          (display-buffer-in-side-window
-;;           (side . bottom)
-;;           (window-height . 0.25)
-;;           (slot . 0)))
-;; 
-;;         ;; diagnostics / xref / completion
-;;         ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
-;;          (display-buffer-in-side-window
-;;           (side . bottom)
-;;           (window-height . 0.25)
-;;           (slot . 1)))
-;; 
-;;         ;; agent-shell buffers
-;;         ("\\*agent-shell.*\\*"
-;;          (display-buffer-in-side-window
-;;          (side . right)
-;;          (window-width . 0.4)
-;;          (slot . 0))))
-;; (setq display-buffer-alist
-;;       '(
-;;         ;; debug / help buffers
-;;         ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
-;;          (display-buffer-in-side-window)
-;;          (side . bottom)
-;;          (window-height . 0.25)
-;;          (slot . 0))
-;; 
-;;         ;; lsp / documentation buffers
-;;         ("\\*lsp-help\\*"
-;;          (display-buffer-in-side-window)
-;;          (side . bottom)
-;;          (window-height . 0.25)
-;;          (slot . 0))
-;; 
-;;         ;; diagnostics / xref / completion
-;;         ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
-;;          (display-buffer-in-side-window)
-;;          (side . bottom)
-;;          (window-height . 0.25)
-;;          (slot . 1))
-;; 
-;;         ;; agent-shell buffers
-;;         ("\\*agent-shell.*\\*"
-;;          (display-buffer-in-side-window)
-;;          (side . right)
-;;          (window-width . 0.4)
-;;          (slot . 0))))
-
-;; (setq display-buffer-alist
-;;     '(
-;;       ;; Agent Shell — боковая панель справа
-;;       ("\\*agent-shell.*\\*"
-;;        (display-buffer-in-side-window)
-;;        (side . right)
-;;        (window-width . 0.40)
-;;        (slot . 0)
-;;        (preserve-size . (t . t)))
-;; 
-;;       ;; Debug / help buffers
-;;       ("\\*\\(backtrace\\|warnings\\|compile-log\\|help\\|messages\\|bookmark list\\|ibuffer\\|occur\\|eldoc.*\\)\\*"
-;;        (display-buffer-in-side-window)
-;;        (side . bottom)
-;;        (window-height . 0.25)
-;;        (slot . 0))
-;; 
-;;       ;; LSP / documentation buffers
-;;       ("\\*lsp-help\\*"
-;;        (display-buffer-in-side-window)
-;;        (side . bottom)
-;;        (window-height . 0.25)
-;;        (slot . 0))
-;; 
-;;       ;; Diagnostics / xref / completion
-;;       ("\\*\\(xref\\|flymake.*\\|completions.*\\)\\*"
-;;        (display-buffer-in-side-window)
-;;        (side . bottom)
-;;        (window-height . 0.25)
-;;        (slot . 1))))
 (setq display-buffer-alist
       '(
         ;; OMP Agent / agent-shell — правая боковая панель
