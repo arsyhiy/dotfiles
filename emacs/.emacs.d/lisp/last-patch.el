@@ -42,4 +42,3 @@
 (provide 'last-patch)
 
 ;;; last-patch.el ends here
-

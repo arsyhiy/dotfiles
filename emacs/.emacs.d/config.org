@@ -657,6 +657,7 @@ all related to emacs but not for editing features
        (window-width . 0.40)
        (slot . 0)))
 
+
     :bind (("C-c a a" . agent-shell)
            ("C-c a o" . agent-shell-omp-start)
            ("C-c a c" . agent-shell-prompt-compose)
@@ -665,10 +666,12 @@ all related to emacs but not for editing features
            ("C-c a s" . agent-shell-send-region)
            :map agent-shell-mode-map
            ("C-c C-o" . agent-shell-other-buffer)
-           ("C-c C-w" . agent-shell-add-context))
+           )
+           ;; ("C-c C-w" . agent-shell-add-context))
 
     :config
     (require 'agent-shell-omp))
+#+end_src
 ** marginalia
 #+begin_src  emacs-lisp
   (use-package marginalia

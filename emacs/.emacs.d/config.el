@@ -588,6 +588,38 @@
   (with-eval-after-load 'magit
     (diff-review-magit-mode)))
 
+(use-package agent-shell
+  :straight (:type git :host github :repo "xenodium/agent-shell")
+
+  :custom
+  (agent-shell-display-action
+   '(display-buffer-in-side-window
+     (side . right)
+     (window-width . 0.40)
+     (slot . 0)))
+
+
+  :bind (("C-c a a" . agent-shell)
+         ("C-c a o" . agent-shell-omp-start)
+         ("C-c a c" . agent-shell-prompt-compose)
+         ("C-c a v" . agent-shell-viewport)
+         ("C-c a m" . agent-shell-menu)
+         ("C-c a s" . agent-shell-send-region)
+         :map agent-shell-mode-map
+         ("C-c C-o" . agent-shell-other-buffer)
+         ("C-c C-w" . agent-shell-add-context))
+
+  :config
+  (require 'agent-shell-omp))
+
+(use-package marginalia
+  :ensure t
+  :hook (after-init . marginalia-mode)
+  :custom
+  (marginalia-align 'right)
+  (marginalia-align-offset 8)
+  (marginalia-max-relative-age 0))
+
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; (setq display-buffer-alist
