@@ -733,10 +733,10 @@
   :custom
   (rainbow-delimiters-max-face-count 9))
 
-(use-package ef-themes
-  :ensure t
-  :init
-  (load-theme 'ef-dark t))
+;; CalorieMate diet-bar palette; defined in lisp/caloriemate-theme.el
+(add-to-list 'custom-theme-load-path
+             (expand-file-name "lisp" user-emacs-directory))
+(load-theme 'caloriemate t)
 
 (use-package treesit-auto
   :ensure t

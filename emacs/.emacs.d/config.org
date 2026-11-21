@@ -804,12 +804,12 @@
     :custom
     (rainbow-delimiters-max-face-count 9))
 #+end_src
-** ef-theme
-#+begin_src  emacs-lisp
-  (use-package ef-themes
-    :ensure t
-    :init
-    (load-theme 'ef-dark t))
+** caloriemate-theme
+#+begin_src emacs-lisp
+  ;; CalorieMate diet-bar palette; defined in lisp/caloriemate-theme.el
+  (add-to-list 'custom-theme-load-path
+               (expand-file-name "lisp" user-emacs-directory))
+  (load-theme 'caloriemate t)
 #+end_src
 ** treesitter
 #+begin_src emacs-lisp
