@@ -1,3 +1,14 @@
+# =============================================================================
+# IDE & Editor
+# =============================================================================
+.aider*
+.aider.chat.history.md
+.aider.tags.cache.v4/
+.aider.input.history
+
+# =============================================================================
+# Emacs configuration
+# =============================================================================
 /emacs/.emacs.d/auto-save-list/
 /emacs/.emacs.d/eln-cache/
 /emacs/.emacs.d/elpa/
@@ -12,10 +23,32 @@
 /emacs/.emacs.d/.lsp-session-v1
 /emacs/.emacs.d/projectile-bookmarks.eld
 /emacs/.emacs.d/projectile-frecency.eld
-/flags.env
-/packages.log
 /emacs/.emacs.d/eclipse.jdt.ls/
 /emacs/.emacs.d/workspace/
+/emacs/.emacs.d/forge-database.sqlite
 emacs/.emacs.d/lisp/hot-take.el~
+emacs/.emacs.d/agent
+/emacs/.emacs.d/bookmarks
+
+# =============================================================================
+# NeoVim
+# =============================================================================
+nvim/.config/nvim/lazy-lock.json
+
+# =============================================================================
+# Project & Build
+# =============================================================================
+/flags.env
+/packages.log
+
+# =============================================================================
+# Rejected changes & patches
+# =============================================================================
+.hot-take-rejected/
 .hot-take-rejected/20261112-192748-.hot-take-rejected_20261112-192727-emacs_.emacs.d_.dap-breakpoints.patch.patch
-.aider*
+
+# =============================================================================
+# Other
+# =============================================================================
+vim.org
+.agent-shell/
