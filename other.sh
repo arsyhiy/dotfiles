@@ -39,3 +39,6 @@ curl -fsSL https://raw.githubusercontent.com/officialrajdeepsingh/nerd-fonts-ins
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# omp
+curl -fsSL https://omp.sh/install | sh
