@@ -1,17 +1,11 @@
 # AGENTS.md
 
-## Правило
+## Git workflow
 
-Писать изменения только в виде серии патчей формата `git format-patch`,
-по одному патчу на запрос/задачу. Файлы проекта не изменять, патчи не применять.
-
-### Требования к патчам
-
-- Формат `git format-patch`: заголовки `From`, `Date`, `Subject`, пустая
-  строка, тело письма, затем diff.
-- Один патч = один запрос; внутри патча может быть несколько коммитов,
-  если они логически связаны и решают одну задачу.
-- Каждый коммит в патче — с осмысленным сообщением
-  (conventional commits приветствуются).
-- Патчи нумеруются в порядке применения (`0001-...`, `0002-...` и т.д.);
-  применение — `git am` или `git am --3way`.
+- Never commit directly to `main`, `master`, or `dev`. Create a feature branch.
+- Follow Conventional Commits: `<type>(<scope>): <subject>`.
+- Subject: imperative mood, lowercase, no trailing period, max 50 chars.
+- One logical change per commit. If the message needs "and", it's two commits.
+- Never commit secrets, `.env` files, or generated artifacts.
+- Run `npm test` and `npm run lint` before committing. If checks fail, do not commit.
+- For commit execution, use the `commit` skill (`.claude/skills/commit/SKILL.md`).
