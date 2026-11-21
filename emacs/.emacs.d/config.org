@@ -631,7 +631,7 @@
 ** ai
 *** agent-shell
 #+begin_src emacs-lisp
-  ;; for omp
+  ;; Add ~/.local/bin to PATH and exec-path so Emacs finds the omp CLI.
   (add-to-list 'exec-path "/home/arsyhiy/.local/bin")
   (setenv "PATH"
           (concat "/home/arsyhiy/.local/bin:"
