@@ -291,6 +291,7 @@
   (evil-define-key 'normal 'global (kbd "<leader> d j") 'dired-jump)
   (evil-define-key 'normal 'global (kbd "<leader> x f") 'find-file)
   (evil-define-key 'normal 'global (kbd "<leader> m s") 'magit-status) (evil-define-key 'normal 'global (kbd "<leader> m l") 'magit-log-current) (evil-define-key 'normal 'global (kbd "<leader> m d") 'magit-diff-buffer-file)
+  (evil-define-key 'normal 'global (kbd "<leader> m r") 'my-review-last-commit)
   (evil-define-key 'normal 'global (kbd "<leader> d D") 'diff-hl-show-hunk)
   (evil-define-key 'normal 'global (kbd "<leader> v a") 'vc-annotate)
   
@@ -551,31 +552,39 @@
   ;; Интеграция с Magit
   (setq difftastic-magit-use-magit-faces t))
 
-(use-package diff-review
-  :straight (diff-review
-             :type git
-             :host github
-             :repo "xiaoxinghu/diff-review"
-             :files ("*.el" "test" "LICENSE" "README.md"))
+(defun my-review-last-commit ()
+  "Review changes from the last commit (HEAD~1..HEAD)."
+  (interactive)
+  (let ((root (diff-review--root-here)))
+    (diff-review-find-file
+     (diff-review--range-file root "HEAD~1" "HEAD")
+     root "HEAD~1" "HEAD")))
 
-  :custom
-  (diff-review-command-prefix "C-c r")
-  (diff-review-sidebar-side 'right)
-  (diff-review-sidebar-width 40)
-  (diff-review-sidebar nil)
-  (diff-review-context 3)
-  (diff-review-inline-removed t)
-  (diff-review-fringe 'left)
-  (diff-review-author "xiaoxing")
+  (use-package diff-review
+    :straight (diff-review
+               :type git
+               :host github
+               :repo "xiaoxinghu/diff-review"
+               :files ("*.el" "test" "LICENSE" "README.md"))
 
-  :hook
-  ((diff-review-mode diff-review-sidebar-mode) . hl-line-mode)
+    :custom
+    (diff-review-command-prefix "C-c r")
+    (diff-review-sidebar-side 'right)
+    (diff-review-sidebar-width 40)
+    (diff-review-sidebar nil)
+    (diff-review-context 3)
+    (diff-review-inline-removed t)
+    (diff-review-fringe 'left)
+    (diff-review-author "arsyhiy")
 
-  :init
-  (with-eval-after-load 'magit
-    (diff-review-magit-mode)))
+    :hook
+    ((diff-review-mode diff-review-sidebar-mode) . hl-line-mode)
 
-;; for omp
+    :init
+    (with-eval-after-load 'magit
+      (diff-review-magit-mode)))
+
+;; Add ~/.local/bin to PATH and exec-path so Emacs finds the omp CLI.
 (add-to-list 'exec-path "/home/arsyhiy/.local/bin")
 (setenv "PATH"
         (concat "/home/arsyhiy/.local/bin:"
