@@ -22,7 +22,6 @@ allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git a
 4. Verify with `git log -1` and `git status`.
 
 ## Guards
-- If current branch is `main`/`master`/`dev`, refuse and suggest a feature branch.
 - If staged changes contain `.env`, keys, or secrets, refuse and unstage them.
 - Do not use `git add -A` unless the user explicitly asks to commit everything.
 - If multiple unrelated units exist, ask before splitting — do not commit everything as one.
