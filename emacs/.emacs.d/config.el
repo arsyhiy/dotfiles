@@ -4,7 +4,6 @@
              (expand-file-name "lisp" user-emacs-directory))
 
 (require 'my-journal)
-(require 'last-patch)
 
 (use-package consult
   :ensure t
@@ -403,26 +402,6 @@
   (vertico-cycle nil)
   (vertico-preselect 'directory))
 
-(use-package tempel
-  :ensure t
-  :bind (("M-+" . tempel-complete)
-         ("M-*" . tempel-insert))
-
-  :init
-  (defun tempel-setup-capf ()
-    (require 'tempel)
-    (setq-local completion-at-point-functions
-                (cons #'tempel-expand
-                      completion-at-point-functions)))
-
-  :hook
-  ((prog-mode text-mode conf-mode html-ts-mode)
-   . tempel-setup-capf))
-
-(use-package tempel-collection
-  :ensure t
-  :after tempel)
-
 (use-package which-key
   :ensure nil
   :defer t
@@ -545,13 +524,6 @@
   :after magit
   :bind ("C-c r" . code-review-start)) ; или code-review-forge-pr-at-point
 
-(use-package difftastic
-  :ensure t
-  :after magit
-  :config
-  ;; Интеграция с Magit
-  (setq difftastic-magit-use-magit-faces t))
-
 (defun my-review-last-commit ()
   "Review changes from the last commit (HEAD~1..HEAD)."
   (interactive)
@@ -610,7 +582,6 @@
          :map agent-shell-mode-map
          ("C-c C-o" . agent-shell-other-buffer)
          )
-  ;; ("C-c C-w" . agent-shell-add-context))
 
   :config
   (require 'agent-shell-omp))

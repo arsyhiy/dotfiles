@@ -12,7 +12,6 @@
                (expand-file-name "lisp" user-emacs-directory))
 
   (require 'my-journal)
-  (require 'last-patch)
 #+end_src
 * emacs features
 ** consult
