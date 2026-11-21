@@ -20,18 +20,20 @@
 
 
 
+## Comments
 
+- Write comments in the file's native syntax: `#` (Python, shell, YAML),
+  `//` (JS/TS/Go/Rust), `--` (SQL), `<!-- -->` (HTML/Markdown).
+- One line, one idea. Format: `<symbol> <what/why>`, max ~100 chars.
+- Prefer **why** over **what**. Never comment obvious code.
+- No commented-out code. Delete it; git remembers.
+- No decorative banners (`# ===== Section =====`) unless the file already uses them.
+- Docstrings/JSDoc: only for public APIs, matching the project's existing style.
 
-
-
-
-
-
-
-
-
-
-
+Example:
+```python
+# Retry because the upstream API is flaky during peak hours.
+response = fetch_with_retry(url)
 
 
 
