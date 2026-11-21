@@ -320,6 +320,7 @@
     (evil-define-key 'normal 'global (kbd "<leader> d j") 'dired-jump)
     (evil-define-key 'normal 'global (kbd "<leader> x f") 'find-file)
     (evil-define-key 'normal 'global (kbd "<leader> m s") 'magit-status) (evil-define-key 'normal 'global (kbd "<leader> m l") 'magit-log-current) (evil-define-key 'normal 'global (kbd "<leader> m d") 'magit-diff-buffer-file)
+    (evil-define-key 'normal 'global (kbd "<leader> m r") 'my-review-last-commit)
     (evil-define-key 'normal 'global (kbd "<leader> d D") 'diff-hl-show-hunk)
     (evil-define-key 'normal 'global (kbd "<leader> v a") 'vc-annotate)
     
