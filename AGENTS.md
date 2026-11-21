@@ -1,5 +1,15 @@
 # AGENTS.md
 
+## Workflow
+
+- Every task that changes files ends with commit(s). No exceptions
+  unless the user explicitly says "don't commit" or the task is read-only.
+- One logical change = one commit. If the message needs "and", split it.
+- If tests or lint fail, do not commit — fix first, then commit.
+- In plan mode (or when only exploring), do not commit.
+- Message format, branch rules, and pre-commit checks are in
+  `## Git workflow` below.
+
 ## Git workflow
 
 - Never commit directly to `main`, `master`, or `dev`. Create a feature branch.
@@ -9,3 +19,132 @@
 - Never commit secrets, `.env` files, or generated artifacts.
 - Run `npm test` and `npm run lint` before committing. If checks fail, do not commit.
 - For commit execution, use the `commit` skill (`.claude/skills/commit/SKILL.md`).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# AGENTS.md ends here
