@@ -3,21 +3,8 @@
 (add-to-list 'load-path
              (expand-file-name "lisp" user-emacs-directory))
 
-;; my-journal for org mode
 (require 'my-journal)
 (require 'last-patch)
-
-(add-to-list 'exec-path "/home/arsyhiy/.local/bin")
-(setenv "PATH"
-        (concat "/home/arsyhiy/.local/bin:"
-                (getenv "PATH")))
-
-;; ;; Получить API-ключ из Zsh
-;; (let ((key (string-trim
-;;             (shell-command-to-string
-;;              "zsh -c 'source ~/.zshrc >/dev/null 2>&1; print -r -- \"$CHEAPVIBECODE_API_KEY\"'"))))
-;;   (unless (string-empty-p key)
-;;     (setenv "CHEAPVIBECODE_API_KEY" key)))
 
 (use-package consult
   :ensure t
@@ -588,6 +575,12 @@
   (with-eval-after-load 'magit
     (diff-review-magit-mode)))
 
+;; for omp
+(add-to-list 'exec-path "/home/arsyhiy/.local/bin")
+(setenv "PATH"
+        (concat "/home/arsyhiy/.local/bin:"
+                (getenv "PATH")))
+
 (use-package agent-shell
   :straight (:type git :host github :repo "xenodium/agent-shell")
 
@@ -608,7 +601,7 @@
          :map agent-shell-mode-map
          ("C-c C-o" . agent-shell-other-buffer)
          )
-         ;; ("C-c C-w" . agent-shell-add-context))
+  ;; ("C-c C-w" . agent-shell-add-context))
 
   :config
   (require 'agent-shell-omp))
