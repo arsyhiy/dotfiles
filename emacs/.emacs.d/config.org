@@ -140,6 +140,7 @@
 
     ;; fonts
     (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 150)
+    ;; (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 200)
 
     (setq custom-file (locate-user-emacs-file "custom-vars.el"))
     (load custom-file 'noerror 'nomessage)
@@ -273,7 +274,8 @@
 ** evil-mode
 #+begin_src emacs-lisp
   ;; extra small functionality
-  (defun load-config ()
+  (defun reload-config ()
+    "hot reload emacs"
     (interactive)
     (org-babel-load-file
      (expand-file-name "config.org" user-emacs-directory)))
@@ -368,7 +370,7 @@
         (if (use-region-p)
             (comment-or-uncomment-region (region-beginning) (region-end)))))
 
-    (evil-define-key 'normal 'global (kbd "<leader>lf") #'load-config)
+    (evil-define-key 'normal 'global (kbd "<leader>lf") #'reload-config)
 
     (evil-mode 1))
 
@@ -568,7 +570,7 @@
   (use-package code-review
     :ensure t
     :after magit
-    :bind ("C-c r" . code-review-start)) ; или code-review-forge-pr-at-point
+    :bind ("C-c r" . code-review-start))
 #+end_src
 *** diff-review
 #+begin_src emacs-lisp
@@ -804,13 +806,20 @@
     :custom
     (rainbow-delimiters-max-face-count 9))
 #+end_src
-** caloriemate-theme
-#+begin_src emacs-lisp
-  ;; CalorieMate diet-bar palette; defined in lisp/caloriemate-theme.el
-  (add-to-list 'custom-theme-load-path
-               (expand-file-name "lisp" user-emacs-directory))
-  (load-theme 'caloriemate t)
+** ef-theme
+#+begin_src  emacs-lisp
+  (use-package ef-themes
+    :ensure t
+    :init
+    (load-theme 'ef-bio t))
 #+end_src
+# ** caloriemate-theme
+# #+begin_src emacs-lisp
+#   ;; CalorieMate diet-bar palette; defined in lisp/caloriemate-theme.el
+#   (add-to-list 'custom-theme-load-path
+#                (expand-file-name "lisp" user-emacs-directory))
+#   (load-theme 'caloriemate t)
+# #+end_src
 ** treesitter
 #+begin_src emacs-lisp
   (use-package treesit-auto
@@ -845,12 +854,13 @@
     (add-to-list 'major-mode-remap-alist
                  '(css-mode . css-ts-mode)))
 
-  ;;; TODO: REWRITE THIS SHIT
-  (defun my-js-mode-setup ()
-    "Setq-local vars for 'js-mode'."
-    (setq-local js-indent-level 2
-                tab-width 2
-                treesit-font-lock-level 4))
+    ;;; TODO: REWRITE THIS SHIT
+  ;; (defun my-js-mode-setup ()
+  ;;   "Setq-local vars for 'js-mode'."
+  ;;   (setq-local js-indent-level 2
+  ;;               tab-width 2
+  ;;               treesit-font-lock-level 4))
+  ;; 
 
   (use-package js
     :mode "\\.js\\'"

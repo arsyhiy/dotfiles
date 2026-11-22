@@ -1,4 +1,4 @@
 # you also need to setup: 
-'''bash
+''' bash
 qmk setup
 '''

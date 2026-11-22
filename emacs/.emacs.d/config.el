@@ -125,6 +125,7 @@
 
   ;; fonts
   (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 150)
+  ;; (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 200)
 
   (setq custom-file (locate-user-emacs-file "custom-vars.el"))
   (load custom-file 'noerror 'nomessage)
@@ -244,7 +245,8 @@
   (after-init . global-undo-tree-mode))
 
 ;; extra small functionality
-(defun load-config ()
+(defun reload-config ()
+  "hot reload emacs"
   (interactive)
   (org-babel-load-file
    (expand-file-name "config.org" user-emacs-directory)))
@@ -339,7 +341,7 @@
       (if (use-region-p)
           (comment-or-uncomment-region (region-beginning) (region-end)))))
 
-  (evil-define-key 'normal 'global (kbd "<leader>lf") #'load-config)
+  (evil-define-key 'normal 'global (kbd "<leader>lf") #'reload-config)
 
   (evil-mode 1))
 
@@ -733,10 +735,10 @@
   :custom
   (rainbow-delimiters-max-face-count 9))
 
-;; CalorieMate diet-bar palette; defined in lisp/caloriemate-theme.el
-(add-to-list 'custom-theme-load-path
-             (expand-file-name "lisp" user-emacs-directory))
-(load-theme 'caloriemate t)
+(use-package ef-themes
+  :ensure t
+  :init
+  (load-theme 'ef-bio t))
 
 (use-package treesit-auto
   :ensure t
