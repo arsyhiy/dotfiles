@@ -525,7 +525,7 @@
 (use-package code-review
   :ensure t
   :after magit
-  :bind ("C-c r" . code-review-start)) ; или code-review-forge-pr-at-point
+  :bind ("C-c r" . code-review-start))
 
  (defun my-review-commits-since (since)
    "Review commits reachable from HEAD since SINCE."
@@ -806,12 +806,13 @@
   (add-to-list 'major-mode-remap-alist
                '(css-mode . css-ts-mode)))
 
-;;; TODO: REWRITE THIS SHIT
-(defun my-js-mode-setup ()
-  "Setq-local vars for 'js-mode'."
-  (setq-local js-indent-level 2
-              tab-width 2
-              treesit-font-lock-level 4))
+  ;;; TODO: REWRITE THIS SHIT
+;; (defun my-js-mode-setup ()
+;;   "Setq-local vars for 'js-mode'."
+;;   (setq-local js-indent-level 2
+;;               tab-width 2
+;;               treesit-font-lock-level 4))
+;; 
 
 (use-package js
   :mode "\\.js\\'"
