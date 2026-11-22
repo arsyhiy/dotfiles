@@ -987,7 +987,7 @@
            'md
            (expand-file-name
             (concat (file-name-base buffer-file-name) ".md")
-            "~/NOTES/daily/"))))
+            "~/NOTES/daily/")))))
 
     (defun my-org-roam-journal--enable-markdown-export ()
       "Enable Markdown export for org-roam daily notes."
