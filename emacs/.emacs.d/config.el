@@ -3,7 +3,6 @@
 (add-to-list 'load-path
              (expand-file-name "lisp" user-emacs-directory))
 
-
 (use-package consult
   :ensure t
   :init
@@ -291,7 +290,7 @@
   (evil-define-key 'normal 'global (kbd "<leader> d j") 'dired-jump)
   (evil-define-key 'normal 'global (kbd "<leader> x f") 'find-file)
   (evil-define-key 'normal 'global (kbd "<leader> m s") 'magit-status) (evil-define-key 'normal 'global (kbd "<leader> m l") 'magit-log-current) (evil-define-key 'normal 'global (kbd "<leader> m d") 'magit-diff-buffer-file)
-  (evil-define-key 'normal 'global (kbd "<leader> m r") 'my-review-last-commit)
+  (evil-define-key 'normal 'global (kbd "<leader> m r") #'my-review-last-commit)
   (evil-define-key 'normal 'global (kbd "<leader> m H") #'my-review-last-hour)
   (evil-define-key 'normal 'global (kbd "<leader> m D") #'my-review-last-day)
   (evil-define-key 'normal 'global (kbd "<leader> d D") 'diff-hl-show-hunk)
@@ -307,8 +306,6 @@
   (evil-define-key 'normal 'global (kbd "<leader> D v") 'describe-variable)
   (evil-define-key 'normal 'global (kbd "<leader> D k") 'describe-key)
 
-  ;; org-roam daily notes
-  (evil-define-key 'normal 'global (kbd "<leader> j t") #'my-org-roam-journal-open-today)
 
   (evil-define-key 'normal lsp-mode-map
     (kbd "gr") 'lsp-find-references
@@ -527,49 +524,49 @@
   :after magit
   :bind ("C-c r" . code-review-start))
 
- (defun my-review-commits-since (since)
-   "Review commits reachable from HEAD since SINCE."
-   (let* ((root (diff-review--root-here))
-          (commits (split-string
-                    (diff-review--git-at root
-                                         "rev-list"
-                                         (concat "--since=" since)
-                                         "--reverse"
-                                         "HEAD")
-                    "\n" t))
-          (oldest (car commits)))
-     (unless oldest
-       (user-error "No commits found since %s" since))
-     (condition-case nil
-         (diff-review--git-at root
-                              "rev-parse"
-                              "--verify"
-                              "--quiet"
-                              (concat oldest "^"))
-       (error (user-error "The oldest commit has no parent")))
-     (diff-review-find-file
-      (diff-review--range-file root oldest "HEAD")
-      root
-      (concat oldest "^")
-      "HEAD")))
+(defun my-review-commits-since (since)
+  "Review commits reachable from HEAD since SINCE."
+  (let* ((root (diff-review--root-here))
+         (commits (split-string
+                   (diff-review--git-at root
+                                        "rev-list"
+                                        (concat "--since=" since)
+                                        "--reverse"
+                                        "HEAD")
+                   "\n" t))
+         (oldest (car commits)))
+    (unless oldest
+      (user-error "No commits found since %s" since))
+    (condition-case nil
+        (diff-review--git-at root
+                             "rev-parse"
+                             "--verify"
+                             "--quiet"
+                             (concat oldest "^"))
+      (error (user-error "The oldest commit has no parent")))
+    (diff-review-find-file
+     (diff-review--range-file root oldest "HEAD")
+     root
+     (concat oldest "^")
+     "HEAD")))
 
- (defun my-review-last-commit ()
-   "Review changes from the last commit (HEAD~1..HEAD)."
-   (interactive)
-   (let ((root (diff-review--root-here)))
-     (diff-review-find-file
-      (diff-review--range-file root "HEAD~1" "HEAD")
-      root "HEAD~1" "HEAD")))
+(defun my-review-last-commit ()
+  "Review changes from the last commit (HEAD~1..HEAD)."
+  (interactive)
+  (let ((root (diff-review--root-here)))
+    (diff-review-find-file
+     (diff-review--range-file root "HEAD~1" "HEAD")
+     root "HEAD~1" "HEAD")))
 
- (defun my-review-last-hour ()
-   "Review commits from the last hour."
-   (interactive)
-   (my-review-commits-since "1 hour ago"))
+(defun my-review-last-hour ()
+  "Review commits from the last hour."
+  (interactive)
+  (my-review-commits-since "1 hour ago"))
 
- (defun my-review-last-day ()
-   "Review commits from the last day."
-   (interactive)
-   (my-review-commits-since "1 day ago"))
+(defun my-review-last-day ()
+  "Review commits from the last day."
+  (interactive)
+  (my-review-commits-since "1 day ago"))
 
   (use-package diff-review
     :straight (diff-review
@@ -861,86 +858,33 @@
                     (sgml-electric-tag-pair-mode 1)
                     (display-line-numbers-mode 1))))
 
-(use-package org
-  :ensure nil ;; all ready a part of emacs
+(require 'org)
+
+(use-package org-roam
+  :straight t
+  :after org
+  :init
+  (setq org-roam-directory (expand-file-name "~/orgjournal/")
+        org-roam-dailies-directory "./")
+  (make-directory org-roam-directory t)
   :config
+  (require 'org-roam-dailies)
+  (org-roam-db-autosync-mode 1))
+
+(defun my-org--enable-auto-fill ()
   (setq-local fill-column 80)
   (auto-fill-mode 1))
 
-(use-package org-roam
-  :ensure t
-  :demand t
-  :custom
-  (org-roam-directory (file-truename "~/orgjournal/"))
-  :config
-  (require 'ox-md)
-  (defun my-org-roam-journal--daily-file-p ()
-    "Return non-nil when the current buffer is an org-roam daily note."
-    (and (derived-mode-p 'org-mode)
-         buffer-file-name
-         (string=
-          (file-name-directory (file-truename buffer-file-name))
-          (file-name-as-directory (file-truename org-roam-directory)))
-         (string-match-p
-          "\\`[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\.org\\'"
-          (file-name-nondirectory buffer-file-name))))
+(defun my-org-roam-journal-open-today ()
+  "Open today's Org-roam daily note."
+  (interactive)
+  (org-roam-dailies-goto-today))
 
-  (defun my-org-roam-journal--export-on-save ()
-    "Export the current org-roam daily note to Markdown after saving."
-    (when (my-org-roam-journal--daily-file-p)
-      (let ((org-export-with-toc nil)
-            (org-export-with-author nil)
-            (org-export-with-date nil))
-        (make-directory "~/NOTES/daily/" t)
-        (org-export-to-file
-         'md
-         (expand-file-name
-          (concat (file-name-base buffer-file-name) ".md")
-          "~/NOTES/daily/"))))
+(add-hook 'org-mode-hook #'my-org--enable-auto-fill)
 
-  (defun my-org-roam-journal--enable-markdown-export ()
-    "Enable Markdown export for org-roam daily notes."
-    (when (my-org-roam-journal--daily-file-p)
-      (add-hook 'after-save-hook
-                #'my-org-roam-journal--export-on-save nil t)))
-
-  (defun my-org-roam-journal--import-markdown (md-file org-file)
-    "Convert MD-FILE to ORG-FILE with Pandoc."
-    (unless (executable-find "pandoc")
-      (user-error "Pandoc is required to import %s" md-file))
-    (make-directory (file-name-directory org-file) t)
-    (unless (zerop (call-process "pandoc" nil nil nil
-                                 "-f" "markdown"
-                                 "-t" "org"
-                                 "-o" org-file
-                                 md-file))
-      (user-error "Pandoc conversion failed for %s" md-file)))
-
-  (defun my-org-roam-journal-open-today ()
-    "Open today's org-roam daily note, importing newer Markdown when needed."
-    (interactive)
-    (let* ((date (format-time-string "%Y-%m-%d"))
-           (md-file (expand-file-name (concat date ".md")
-                                      "~/NOTES/daily/"))
-           (org-file (expand-file-name (concat date ".org")
-                                       org-roam-directory))
-           (org-exists (file-regular-p org-file))
-           (md-exists (file-regular-p md-file)))
-      (when (and md-exists
-                 (or (not org-exists)
-                     (time-less-p
-                      (file-attribute-modification-time
-                       (file-attributes org-file))
-                      (file-attribute-modification-time
-                       (file-attributes md-file)))))
-        (my-org-roam-journal--import-markdown md-file org-file))
-      (org-roam-dailies-goto-today)))
-
-  (add-hook 'org-mode-hook #'my-org-roam-journal--enable-markdown-export)
-  (make-directory org-roam-directory t)
-  (org-roam-db-autosync-mode)
-  (require 'org-roam-dailies)
-  (setq org-roam-dailies-directory "./"))
+(with-eval-after-load 'evil
+  (evil-define-key 'normal 'global (kbd "<leader> j t")
+    #'my-org-roam-journal-open-today))
 
 ;; todo: add make-custom with arguments memory.
 (defun my-c/make-clean ()
