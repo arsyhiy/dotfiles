@@ -951,18 +951,28 @@
                       (display-line-numbers-mode 1))))
 #+end_src
 ** org
-#+begin_src  emacs-lisp
+Открытие дневника: ~SPC j t~ или ~M-x my-org-roam-journal-open-today~.
+Org-файлы хранятся в =~/orgjournal/=; сохранение экспортирует дневник в
+=~/NOTES/daily/YYYY-MM-DD.md=. При открытии более свежий Markdown импортируется
+через Pandoc, который должен быть доступен в ~exec-path~.
+
+#+begin_src emacs-lisp
   (use-package org
     :ensure nil ;; all ready a part of emacs
-    :config
-    (setq-local fill-column 80)
-    (auto-fill-mode 1))
+    :hook
+    (org-mode . (lambda ()
+                  (setq-local fill-column 80)
+                  (auto-fill-mode 1))))
+
+  (defvar my-org-roam-journal-markdown-directory
+    (expand-file-name "~/NOTES/daily/"))
 
   (use-package org-roam
     :ensure t
     :demand t
     :custom
-    (org-roam-directory (file-truename "~/orgjournal/"))
+    (org-roam-directory (expand-file-name "~/orgjournal/"))
+    (org-roam-dailies-directory "./")
     :config
     (require 'ox-md)
     (defun my-org-roam-journal--daily-file-p ()
@@ -982,12 +992,12 @@
         (let ((org-export-with-toc nil)
               (org-export-with-author nil)
               (org-export-with-date nil))
-          (make-directory "~/NOTES/daily/" t)
+          (make-directory my-org-roam-journal-markdown-directory t)
           (org-export-to-file
            'md
            (expand-file-name
             (concat (file-name-base buffer-file-name) ".md")
-            "~/NOTES/daily/")))))
+            my-org-roam-journal-markdown-directory)))))
 
     (defun my-org-roam-journal--enable-markdown-export ()
       "Enable Markdown export for org-roam daily notes."
@@ -1012,7 +1022,7 @@
       (interactive)
       (let* ((date (format-time-string "%Y-%m-%d"))
              (md-file (expand-file-name (concat date ".md")
-                                        "~/NOTES/daily/"))
+                                       my-org-roam-journal-markdown-directory))
              (org-file (expand-file-name (concat date ".org")
                                          org-roam-directory))
              (org-exists (file-regular-p org-file))
@@ -1029,9 +1039,8 @@
 
     (add-hook 'org-mode-hook #'my-org-roam-journal--enable-markdown-export)
     (make-directory org-roam-directory t)
-    (org-roam-db-autosync-mode)
     (require 'org-roam-dailies)
-    (setq org-roam-dailies-directory "./"))
+    (org-roam-db-autosync-mode 1))
 #+end_src
 ** c/c++
 #+begin_src emacs-lisp
