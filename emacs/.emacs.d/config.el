@@ -292,6 +292,8 @@
   (evil-define-key 'normal 'global (kbd "<leader> x f") 'find-file)
   (evil-define-key 'normal 'global (kbd "<leader> m s") 'magit-status) (evil-define-key 'normal 'global (kbd "<leader> m l") 'magit-log-current) (evil-define-key 'normal 'global (kbd "<leader> m d") 'magit-diff-buffer-file)
   (evil-define-key 'normal 'global (kbd "<leader> m r") 'my-review-last-commit)
+  (evil-define-key 'normal 'global (kbd "<leader> m H") #'my-review-last-hour)
+  (evil-define-key 'normal 'global (kbd "<leader> m D") #'my-review-last-day)
   (evil-define-key 'normal 'global (kbd "<leader> d D") 'diff-hl-show-hunk)
   (evil-define-key 'normal 'global (kbd "<leader> v a") 'vc-annotate)
   
@@ -525,13 +527,49 @@
   :after magit
   :bind ("C-c r" . code-review-start)) ; или code-review-forge-pr-at-point
 
-(defun my-review-last-commit ()
-  "Review changes from the last commit (HEAD~1..HEAD)."
-  (interactive)
-  (let ((root (diff-review--root-here)))
-    (diff-review-find-file
-     (diff-review--range-file root "HEAD~1" "HEAD")
-     root "HEAD~1" "HEAD")))
+ (defun my-review-commits-since (since)
+   "Review commits reachable from HEAD since SINCE."
+   (let* ((root (diff-review--root-here))
+          (commits (split-string
+                    (diff-review--git-at root
+                                         "rev-list"
+                                         (concat "--since=" since)
+                                         "--reverse"
+                                         "HEAD")
+                    "\n" t))
+          (oldest (car commits)))
+     (unless oldest
+       (user-error "No commits found since %s" since))
+     (condition-case nil
+         (diff-review--git-at root
+                              "rev-parse"
+                              "--verify"
+                              "--quiet"
+                              (concat oldest "^"))
+       (error (user-error "The oldest commit has no parent")))
+     (diff-review-find-file
+      (diff-review--range-file root oldest "HEAD")
+      root
+      (concat oldest "^")
+      "HEAD")))
+
+ (defun my-review-last-commit ()
+   "Review changes from the last commit (HEAD~1..HEAD)."
+   (interactive)
+   (let ((root (diff-review--root-here)))
+     (diff-review-find-file
+      (diff-review--range-file root "HEAD~1" "HEAD")
+      root "HEAD~1" "HEAD")))
+
+ (defun my-review-last-hour ()
+   "Review commits from the last hour."
+   (interactive)
+   (my-review-commits-since "1 hour ago"))
+
+ (defun my-review-last-day ()
+   "Review commits from the last day."
+   (interactive)
+   (my-review-commits-since "1 day ago"))
 
   (use-package diff-review
     :straight (diff-review
