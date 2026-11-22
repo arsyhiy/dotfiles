@@ -877,19 +877,19 @@
 * languages
 ** languages all in one
 #+begin_src  emacs-lisp
-  (use-package css-ts-mode
-    :ensure nil
-    :mode "\\.css\\'"
-    :hook
-    (css-ts-mode . electric-pair-local-mode)
-    (css-ts-mode . (lambda ()
-                     (setq-local tab-width 2
-                                 css-indent-offset 2)))
-    :config
-    (add-to-list 'major-mode-remap-alist
-                 '(css-mode . css-ts-mode)))
-
-    ;;; TODO: REWRITE THIS SHIT
+  ;; (use-package css-ts-mode
+  ;;   :ensure nil
+  ;;   :mode "\\.css\\'"
+  ;;   :hook
+  ;;   (css-ts-mode . electric-pair-local-mode)
+  ;;   (css-ts-mode . (lambda ()
+  ;;                    (setq-local tab-width 2
+  ;;                                css-indent-offset 2)))
+  ;;   :config
+  ;;   (add-to-list 'major-mode-remap-alist
+  ;;                '(css-mode . css-ts-mode)))
+  ;; 
+  ;;   ;;; TODO: REWRITE THIS SHIT
   ;; (defun my-js-mode-setup ()
   ;;   "Setq-local vars for 'js-mode'."
   ;;   (setq-local js-indent-level 2
@@ -950,11 +950,11 @@
 #+end_src
 ** org
 #+begin_src emacs-lisp
-(use-package org
-  :ensure nil ;; all ready a part of emacs
-  :config
-  (setq-local fill-column 80)
-  (auto-fill-mode 1))
+  (use-package org
+    :ensure nil ;; all ready a part of emacs
+    :config
+    (setq-local fill-column 80)
+    (auto-fill-mode 1))
 #+end_src
 ** org-roam
 Заметки org-roam хранятся в =~/NOTES=, ежедневные — в =~/NOTES/daily/org/YYYY-MM-DD.org=.

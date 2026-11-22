@@ -791,19 +791,19 @@
         (html "https://github.com/tree-sitter/tree-sitter-html" "v0.23.2")
         (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.2")))
 
-(use-package css-ts-mode
-  :ensure nil
-  :mode "\\.css\\'"
-  :hook
-  (css-ts-mode . electric-pair-local-mode)
-  (css-ts-mode . (lambda ()
-                   (setq-local tab-width 2
-                               css-indent-offset 2)))
-  :config
-  (add-to-list 'major-mode-remap-alist
-               '(css-mode . css-ts-mode)))
-
-  ;;; TODO: REWRITE THIS SHIT
+;; (use-package css-ts-mode
+;;   :ensure nil
+;;   :mode "\\.css\\'"
+;;   :hook
+;;   (css-ts-mode . electric-pair-local-mode)
+;;   (css-ts-mode . (lambda ()
+;;                    (setq-local tab-width 2
+;;                                css-indent-offset 2)))
+;;   :config
+;;   (add-to-list 'major-mode-remap-alist
+;;                '(css-mode . css-ts-mode)))
+;; 
+;;   ;;; TODO: REWRITE THIS SHIT
 ;; (defun my-js-mode-setup ()
 ;;   "Setq-local vars for 'js-mode'."
 ;;   (setq-local js-indent-level 2
