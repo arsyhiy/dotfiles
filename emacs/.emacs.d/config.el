@@ -3,7 +3,6 @@
 (add-to-list 'load-path
              (expand-file-name "lisp" user-emacs-directory))
 
-(require 'my-journal)
 
 (use-package consult
   :ensure t
@@ -306,8 +305,8 @@
   (evil-define-key 'normal 'global (kbd "<leader> D v") 'describe-variable)
   (evil-define-key 'normal 'global (kbd "<leader> D k") 'describe-key)
 
-  ;; my-journal-mode
-  (evil-define-key 'normal 'global (kbd "<leader> j t") 'my-journal-open-today)
+  ;; org-roam daily notes
+  (evil-define-key 'normal 'global (kbd "<leader> j t") #'org-roam-dailies-goto-today)
 
   (evil-define-key 'normal lsp-mode-map
     (kbd "gr") 'lsp-find-references
@@ -828,6 +827,17 @@
   :config
   (setq-local fill-column 80)
   (auto-fill-mode 1))
+
+(use-package org-roam
+  :ensure t
+  :demand t
+  :custom
+  (org-roam-directory (file-truename "~/orgjournal/"))
+  :config
+  (make-directory org-roam-directory t)
+  (org-roam-db-autosync-mode)
+  (require 'org-roam-dailies)
+  (setq org-roam-dailies-directory "./"))
 
 ;; todo: add make-custom with arguments memory.
 (defun my-c/make-clean ()
