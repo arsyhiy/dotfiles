@@ -858,33 +858,11 @@
                     (sgml-electric-tag-pair-mode 1)
                     (display-line-numbers-mode 1))))
 
-(require 'org)
-
-(use-package org-roam
-  :straight t
-  :after org
-  :init
-  (setq org-roam-directory (expand-file-name "~/orgjournal/")
-        org-roam-dailies-directory "./")
-  (make-directory org-roam-directory t)
+(use-package org
+  :ensure nil ;; all ready a part of emacs
   :config
-  (require 'org-roam-dailies)
-  (org-roam-db-autosync-mode 1))
-
-(defun my-org--enable-auto-fill ()
   (setq-local fill-column 80)
   (auto-fill-mode 1))
-
-(defun my-org-roam-journal-open-today ()
-  "Open today's Org-roam daily note."
-  (interactive)
-  (org-roam-dailies-goto-today))
-
-(add-hook 'org-mode-hook #'my-org--enable-auto-fill)
-
-(with-eval-after-load 'evil
-  (evil-define-key 'normal 'global (kbd "<leader> j t")
-    #'my-org-roam-journal-open-today))
 
 ;; todo: add make-custom with arguments memory.
 (defun my-c/make-clean ()
