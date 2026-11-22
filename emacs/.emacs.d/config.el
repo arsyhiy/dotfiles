@@ -864,6 +864,35 @@
   (setq-local fill-column 80)
   (auto-fill-mode 1))
 
+(use-package org-roam
+  :ensure t
+  :after org
+  :demand t
+  :custom
+  (org-roam-directory (file-truename "~/NOTES"))
+  (org-roam-completion-everywhere t)
+  :bind
+  (("C-c n l" . org-roam-buffer-toggle)
+   ("C-c n f" . org-roam-node-find)
+   ("C-c n g" . org-roam-graph)
+   ("C-c n i" . org-roam-node-insert))
+  :config
+  (org-roam-db-autosync-mode 1))
+
+(use-package org-roam-dailies
+  :ensure nil
+  :straight nil
+  :after org-roam
+  :demand t
+  :custom
+  (org-roam-dailies-directory "daily/org/")
+  :bind
+  (("C-c n d n" . org-roam-dailies-capture-today)
+   ("C-c n d d" . org-roam-dailies-goto-date)
+   ("C-c n d t" . org-roam-dailies-goto-today)
+   ("C-c n d y" . org-roam-dailies-goto-yesterday)
+   ("C-c n d T" . org-roam-dailies-goto-tomorrow)))
+
 ;; todo: add make-custom with arguments memory.
 (defun my-c/make-clean ()
   "Run make clean in project root."

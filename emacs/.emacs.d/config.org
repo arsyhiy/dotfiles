@@ -956,6 +956,43 @@
   (setq-local fill-column 80)
   (auto-fill-mode 1))
 #+end_src
+** org-roam
+Заметки org-roam хранятся в =~/NOTES=, ежедневные — в =~/NOTES/daily/org/YYYY-MM-DD.org=.
+=C-c n f= ищет заметку, =C-c n i= вставляет ссылку, =C-c n l= открывает обратные ссылки.
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :after org
+    :demand t
+    :custom
+    (org-roam-directory (file-truename "~/NOTES"))
+    (org-roam-completion-everywhere t)
+    :bind
+    (("C-c n l" . org-roam-buffer-toggle)
+     ("C-c n f" . org-roam-node-find)
+     ("C-c n g" . org-roam-graph)
+     ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-db-autosync-mode 1))
+#+end_src
+** org-roam-dailies
+=C-c n d n= добавляет запись за сегодня, =C-c n d t= открывает сегодняшний файл.
+=C-c n d d= выбирает дату, =C-c n d y= открывает вчера, =C-c n d T= — завтра.
+#+begin_src emacs-lisp
+  (use-package org-roam-dailies
+    :ensure nil
+    :straight nil
+    :after org-roam
+    :demand t
+    :custom
+    (org-roam-dailies-directory "daily/org/")
+    :bind
+    (("C-c n d n" . org-roam-dailies-capture-today)
+     ("C-c n d d" . org-roam-dailies-goto-date)
+     ("C-c n d t" . org-roam-dailies-goto-today)
+     ("C-c n d y" . org-roam-dailies-goto-yesterday)
+     ("C-c n d T" . org-roam-dailies-goto-tomorrow)))
+#+end_src
 ** c/c++
 #+begin_src emacs-lisp
   ;; todo: add make-custom with arguments memory.
