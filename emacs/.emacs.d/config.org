@@ -319,6 +319,7 @@
     (evil-define-key 'normal 'global (kbd "<leader> d d") 'dired)
     (evil-define-key 'normal 'global (kbd "<leader> d j") 'dired-jump)
     (evil-define-key 'normal 'global (kbd "<leader> x f") 'find-file)
+
     (evil-define-key 'normal 'global (kbd "<leader> m s") 'magit-status) (evil-define-key 'normal 'global (kbd "<leader> m l") 'magit-log-current) (evil-define-key 'normal 'global (kbd "<leader> m d") 'magit-diff-buffer-file)
     (evil-define-key 'normal 'global (kbd "<leader> m r") #'my-review-last-commit)
     (evil-define-key 'normal 'global (kbd "<leader> m H") #'my-review-last-hour)
@@ -848,13 +849,13 @@
     :init
     (load-theme 'ef-bio t))
 #+end_src
-# ** caloriemate-theme
-# #+begin_src emacs-lisp
-#   ;; CalorieMate diet-bar palette; defined in lisp/caloriemate-theme.el
-#   (add-to-list 'custom-theme-load-path
-#                (expand-file-name "lisp" user-emacs-directory))
-#   (load-theme 'caloriemate t)
-# #+end_src
+** caloriemate-theme
+#+begin_src emacs-lisp
+  ;; ;; CalorieMate diet-bar palette; defined in lisp/caloriemate-theme.el
+  ;; (add-to-list 'custom-theme-load-path
+  ;;              (expand-file-name "lisp" user-emacs-directory))
+  ;; (load-theme 'caloriemate t)
+#+end_src
 ** treesitter
 #+begin_src emacs-lisp
   (use-package treesit-auto
@@ -877,25 +878,25 @@
 * languages
 ** languages all in one
 #+begin_src  emacs-lisp
-  ;; (use-package css-ts-mode
-  ;;   :ensure nil
-  ;;   :mode "\\.css\\'"
-  ;;   :hook
-  ;;   (css-ts-mode . electric-pair-local-mode)
-  ;;   (css-ts-mode . (lambda ()
-  ;;                    (setq-local tab-width 2
-  ;;                                css-indent-offset 2)))
-  ;;   :config
-  ;;   (add-to-list 'major-mode-remap-alist
-  ;;                '(css-mode . css-ts-mode)))
-  ;; 
-  ;;   ;;; TODO: REWRITE THIS SHIT
-  ;; (defun my-js-mode-setup ()
-  ;;   "Setq-local vars for 'js-mode'."
-  ;;   (setq-local js-indent-level 2
-  ;;               tab-width 2
-  ;;               treesit-font-lock-level 4))
-  ;; 
+(use-package css-ts-mode
+   :ensure nil
+   :mode "\\.css\\'"
+   :hook
+   (css-ts-mode . electric-pair-local-mode)
+   (css-ts-mode . (lambda ()
+                    (setq-local tab-width 2
+                                css-indent-offset 2)))
+   :config
+   (add-to-list 'major-mode-remap-alist
+                '(css-mode . css-ts-mode)))
+ 
+   ;;; TODO: REWRITE THIS SHIT
+ (defun my-js-mode-setup ()
+   "Setq-local vars for 'js-mode'."
+   (setq-local js-indent-level 2
+               tab-width 2
+               treesit-font-lock-level 4))
+ 
 
   (use-package js
     :mode "\\.js\\'"
@@ -957,8 +958,6 @@
     (auto-fill-mode 1))
 #+end_src
 ** org-roam
-Заметки org-roam хранятся в =~/NOTES=, ежедневные — в =~/NOTES/daily/org/YYYY-MM-DD.org=.
-=C-c n f= ищет заметку, =C-c n i= вставляет ссылку, =C-c n l= открывает обратные ссылки.
 #+begin_src emacs-lisp
   (use-package org-roam
     :ensure t
@@ -976,8 +975,6 @@
     (org-roam-db-autosync-mode 1))
 #+end_src
 ** org-roam-dailies
-=C-c n d n= добавляет запись за сегодня, =C-c n d t= открывает сегодняшний файл.
-=C-c n d d= выбирает дату, =C-c n d y= открывает вчера, =C-c n d T= — завтра.
 #+begin_src emacs-lisp
   (use-package org-roam-dailies
     :ensure nil

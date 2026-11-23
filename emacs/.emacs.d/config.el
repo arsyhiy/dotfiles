@@ -289,6 +289,7 @@
   (evil-define-key 'normal 'global (kbd "<leader> d d") 'dired)
   (evil-define-key 'normal 'global (kbd "<leader> d j") 'dired-jump)
   (evil-define-key 'normal 'global (kbd "<leader> x f") 'find-file)
+
   (evil-define-key 'normal 'global (kbd "<leader> m s") 'magit-status) (evil-define-key 'normal 'global (kbd "<leader> m l") 'magit-log-current) (evil-define-key 'normal 'global (kbd "<leader> m d") 'magit-diff-buffer-file)
   (evil-define-key 'normal 'global (kbd "<leader> m r") #'my-review-last-commit)
   (evil-define-key 'normal 'global (kbd "<leader> m H") #'my-review-last-hour)
@@ -774,6 +775,11 @@
   :init
   (load-theme 'ef-bio t))
 
+;; ;; CalorieMate diet-bar palette; defined in lisp/caloriemate-theme.el
+;; (add-to-list 'custom-theme-load-path
+;;              (expand-file-name "lisp" user-emacs-directory))
+;; (load-theme 'caloriemate t)
+
 (use-package treesit-auto
   :ensure t
   :custom
@@ -791,56 +797,56 @@
         (html "https://github.com/tree-sitter/tree-sitter-html" "v0.23.2")
         (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.2")))
 
-;; (use-package css-ts-mode
-;;   :ensure nil
-;;   :mode "\\.css\\'"
-;;   :hook
-;;   (css-ts-mode . electric-pair-local-mode)
-;;   (css-ts-mode . (lambda ()
-;;                    (setq-local tab-width 2
-;;                                css-indent-offset 2)))
-;;   :config
-;;   (add-to-list 'major-mode-remap-alist
-;;                '(css-mode . css-ts-mode)))
-;; 
-;;   ;;; TODO: REWRITE THIS SHIT
-;; (defun my-js-mode-setup ()
-;;   "Setq-local vars for 'js-mode'."
-;;   (setq-local js-indent-level 2
-;;               tab-width 2
-;;               treesit-font-lock-level 4))
-;; 
+(use-package css-ts-mode
+   :ensure nil
+   :mode "\\.css\\'"
+   :hook
+   (css-ts-mode . electric-pair-local-mode)
+   (css-ts-mode . (lambda ()
+                    (setq-local tab-width 2
+                                css-indent-offset 2)))
+   :config
+   (add-to-list 'major-mode-remap-alist
+                '(css-mode . css-ts-mode)))
+ 
+   ;;; TODO: REWRITE THIS SHIT
+ (defun my-js-mode-setup ()
+   "Setq-local vars for 'js-mode'."
+   (setq-local js-indent-level 2
+               tab-width 2
+               treesit-font-lock-level 4))
+ 
 
-(use-package js
-  :mode "\\.js\\'"
-  :hook
-  ((js-ts-mode . electric-pair-local-mode)))
+  (use-package js
+    :mode "\\.js\\'"
+    :hook
+    ((js-ts-mode . electric-pair-local-mode)))
 
-(use-package markdown-mode
-  :ensure nil
-  :defer t
-  :mode ("\\.md\\'" . gfm-mode)
-  :init
-  (setq markdown-command "multimarkdown"
-        fill-column 80)
-  :hook
-  (gfm-mode . auto-fill-mode))
+  (use-package markdown-mode
+    :ensure nil
+    :defer t
+    :mode ("\\.md\\'" . gfm-mode)
+    :init
+    (setq markdown-command "multimarkdown"
+          fill-column 80)
+    :hook
+    (gfm-mode . auto-fill-mode))
 
-(use-package rust-mode
-  :ensure nil
-  :mode "\\.rs\\'")
+  (use-package rust-mode
+    :ensure nil
+    :mode "\\.rs\\'")
 
-(add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
-(setenv "PATH"
-        (concat (expand-file-name "~/.cargo/bin") ":"
-                (getenv "PATH")))
+  (add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
+  (setenv "PATH"
+          (concat (expand-file-name "~/.cargo/bin") ":"
+                  (getenv "PATH")))
 
-(use-package typescript-mode
-  :init
-  (add-to-list 'major-mode-remap-alist
-               '(typescript-mode . typescript-ts-mode))
-  (add-to-list 'major-mode-remap-alist
-               '(js-mode . js-ts-mode)))
+  (use-package typescript-mode
+    :init
+    (add-to-list 'major-mode-remap-alist
+                 '(typescript-mode . typescript-ts-mode))
+    (add-to-list 'major-mode-remap-alist
+                 '(js-mode . js-ts-mode)))
 
 (use-package python
   :ensure nil
