@@ -573,73 +573,73 @@
 #+end_src
 *** diff-review
 #+begin_src emacs-lisp
-(defun my-review-commits-since (since)
-  "Review commits reachable from HEAD since SINCE."
-  (let* ((root (diff-review--root-here))
-         (commits (split-string
-                   (diff-review--git-at root
-                                        "rev-list"
-                                        (concat "--since=" since)
-                                        "--reverse"
-                                        "HEAD")
-                   "\n" t))
-         (oldest (car commits)))
-    (unless oldest
-      (user-error "No commits found since %s" since))
-    (condition-case nil
-        (diff-review--git-at root
-                             "rev-parse"
-                             "--verify"
-                             "--quiet"
-                             (concat oldest "^"))
-      (error (user-error "The oldest commit has no parent")))
-    (diff-review-find-file
-     (diff-review--range-file root oldest "HEAD")
-     root
-     (concat oldest "^")
-     "HEAD")))
+  (defun my-review-commits-since (since)
+    "Review commits reachable from HEAD since SINCE."
+    (let* ((root (diff-review--root-here))
+           (commits (split-string
+                     (diff-review--git-at root
+                                          "rev-list"
+                                          (concat "--since=" since)
+                                          "--reverse"
+                                          "HEAD")
+                     "\n" t))
+           (oldest (car commits)))
+      (unless oldest
+        (user-error "No commits found since %s" since))
+      (condition-case nil
+          (diff-review--git-at root
+                               "rev-parse"
+                               "--verify"
+                               "--quiet"
+                               (concat oldest "^"))
+        (error (user-error "The oldest commit has no parent")))
+      (diff-review-find-file
+       (diff-review--range-file root oldest "HEAD")
+       root
+       (concat oldest "^")
+       "HEAD")))
 
-(defun my-review-last-commit ()
-  "Review changes from the last commit (HEAD~1..HEAD)."
-  (interactive)
-  (let ((root (diff-review--root-here)))
-    (diff-review-find-file
-     (diff-review--range-file root "HEAD~1" "HEAD")
-     root "HEAD~1" "HEAD")))
+  (defun my-review-last-commit ()
+    "Review changes from the last commit (HEAD~1..HEAD)."
+    (interactive)
+    (let ((root (diff-review--root-here)))
+      (diff-review-find-file
+       (diff-review--range-file root "HEAD~1" "HEAD")
+       root "HEAD~1" "HEAD")))
 
-(defun my-review-last-hour ()
-  "Review commits from the last hour."
-  (interactive)
-  (my-review-commits-since "1 hour ago"))
+  (defun my-review-last-hour ()
+    "Review commits from the last hour."
+    (interactive)
+    (my-review-commits-since "1 hour ago"))
 
-(defun my-review-last-day ()
-  "Review commits from the last day."
-  (interactive)
-  (my-review-commits-since "1 day ago"))
+  (defun my-review-last-day ()
+    "Review commits from the last day."
+    (interactive)
+    (my-review-commits-since "1 day ago"))
 
-  (use-package diff-review
-    :straight (diff-review
-               :type git
-               :host github
-               :repo "xiaoxinghu/diff-review"
-               :files ("*.el" "test" "LICENSE" "README.md"))
+    (use-package diff-review
+      :straight (diff-review
+                 :type git
+                 :host github
+                 :repo "xiaoxinghu/diff-review"
+                 :files ("*.el" "test" "LICENSE" "README.md"))
 
-    :custom
-    (diff-review-command-prefix "C-c r")
-    (diff-review-sidebar-side 'right)
-    (diff-review-sidebar-width 40)
-    (diff-review-sidebar nil)
-    (diff-review-context 3)
-    (diff-review-inline-removed t)
-    (diff-review-fringe 'left)
-    (diff-review-author "arsyhiy")
+      :custom
+      (diff-review-command-prefix "C-c r")
+      (diff-review-sidebar-side 'right)
+      (diff-review-sidebar-width 40)
+      (diff-review-sidebar nil)
+      (diff-review-context 3)
+      (diff-review-inline-removed t)
+      (diff-review-fringe 'left)
+      (diff-review-author "arsyhiy")
 
-    :hook
-    ((diff-review-mode diff-review-sidebar-mode) . hl-line-mode)
+      :hook
+      ((diff-review-mode diff-review-sidebar-mode) . hl-line-mode)
 
-    :init
-    (with-eval-after-load 'magit
-      (diff-review-magit-mode)))
+      :init
+      (with-eval-after-load 'magit
+        (diff-review-magit-mode)))
 #+end_src
 ** ai
 *** agent-shell
