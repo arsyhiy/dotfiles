@@ -95,7 +95,7 @@ curl -fsSL https://omp.sh/install | sh
 printf "\n"
 printf "=== stow =======================================================================\n"
 
-sudo stow tmux vim zsh ghostty nvim
+sudo stow tmux vim zsh ghostty nvim emacs
 
 printf "\n"
 printf "=======================================================================\n"
