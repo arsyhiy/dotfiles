@@ -1,4 +1,3 @@
+# what is this repo?
 
-
-# TODO
-- написать версию  для windows macos linux
+this is repository is collection of my configurations files. main purposes is being easy to change and easy to use on other pc
