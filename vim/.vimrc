@@ -45,3 +45,4 @@ set noswapfile
 " Enable spellchecking
 "set spell
 
+set clipboard=unnamedplus

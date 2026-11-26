@@ -1,0 +1,75 @@
+# ===== user =====
+[user]
+    name = arsyhiy
+    email = arsyhiy32@gmail.com
+
+# ===== main settings =====
+[init]
+    defaultBranch = main
+
+[core]
+    editor = vim
+    autocrlf = input
+    excludesFile = ~/.gitignore_global
+    # safe.directory = *
+    # pager = less -FRX
+
+[color]
+    ui = auto
+
+# ===== aliases =====
+[alias]
+    st = status -sb
+    co = checkout
+    br = branch
+    ci = commit
+    cm = commit -m
+    ca = commit --amend
+    lg = log --oneline --graph --decorate --all
+    last = log -1 HEAD
+    unstage = reset HEAD --
+    undo = reset --soft HEAD~1
+    pushf = push --force-with-lease
+    df = diff
+    dfs = diff --staged
+    who = shortlog -sne
+
+# ===== Pull / Push =====
+[pull]
+    rebase = true
+
+[push]
+    default = simple
+    autoSetupRemote = true
+    followTags = true
+
+[fetch]
+    prune = true
+
+# ===== Merge / Rebase / Diff =====
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+    algorithm = histogram
+
+[rebase]
+    autosquash = true
+    autostash = true
+    updateRefs = true
+
+[branch]
+    autoSetupRebase = always
+
+# ===== encoding =====
+[i18n]
+    commitEncoding = utf-8
+
+[commit]
+    verbose = true
+    # gpgsign = true
+
+# ===== Credentials =====
+[credential]
+    helper = store

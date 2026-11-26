@@ -50,4 +50,3 @@ alias free='free -h'
 
 alias t='tmux'
 alias v='vim'
-alias n='nvim'
