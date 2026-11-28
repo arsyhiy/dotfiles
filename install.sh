@@ -37,6 +37,9 @@ packages=(
     tree
     file
     shellcheck
+
+    ranger
+    mc
 )
 
 log_file="packages.log"
