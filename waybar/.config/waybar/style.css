@@ -129,3 +129,15 @@ window#waybar.hidden {
     padding: 0 10px;
     margin: 0;
 }
+
+#custom-swayidle.disabled {
+    padding: 0 10px;
+    color: #141414;
+    background: #d08c1b;
+}
+
+#custom-swayidle.enabled {
+    padding: 0;
+    color: #cecece;
+    background: transparent;
+}

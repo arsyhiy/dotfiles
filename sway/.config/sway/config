@@ -47,6 +47,9 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit Sway?' -B 'Yes, exit Sway'
 # File manager
 #bindsym $mod+e exec thunar
 
+# swayidle
+bindsym $mod+Shift+i exec ~/.local/bin/swayidle-toggle toggle
+
 # Focus
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down

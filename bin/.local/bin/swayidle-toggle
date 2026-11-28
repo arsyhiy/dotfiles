@@ -1,0 +1,18 @@
+#!/bin/sh
+
+case "$1" in
+status)
+    if pgrep -x swayidle >/dev/null; then
+        echo '{"text":"","class":"enabled","tooltip":"swayidle включён"}'
+    else
+        echo '{"text":" IDLE ","class":"disabled","tooltip":"swayidle выключен"}'
+    fi
+    ;;
+    toggle)
+        if pgrep -x swayidle >/dev/null; then
+            pkill -x swayidle
+        else
+            swayidle -w -C "$HOME/.config/swayidle/config" &
+        fi
+        ;;
+esac

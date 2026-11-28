@@ -17,12 +17,12 @@
     "modules-center": ["clock"],
 
     "modules-right": [
+        "custom/swayidle",
         "sway/language",
         "pulseaudio",
         "network",
         "battery",
-        "battery#bat2",
-        "tray"
+        "clock"
     ],
 
     "sway/mode": {
@@ -118,5 +118,13 @@
                 ""
             ]
         }
-    }
+    },
+
+"custom/swayidle": {
+    "exec": "~/.local/bin/swayidle-toggle status",
+    "interval": 2,
+    "return-type": "json",
+    "on-click": "~/.local/bin/swayidle-toggle toggle"
+},
+
 }
