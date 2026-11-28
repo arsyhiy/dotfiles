@@ -1,0 +1,131 @@
+* {
+    font-family: Cantarell, Sans;
+    font-size: 11pt;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #141414;
+    color: #cecece;
+}
+
+window#waybar.hidden {
+    opacity: 0;
+}
+
+/* Workspaces */
+#workspaces {
+    margin-left: 4px;
+}
+
+#workspaces button {
+    padding: 0 6px;
+    margin: 0 2px;
+    color: #4e4e4e;
+    background: transparent;
+}
+
+#workspaces button.focused {
+    color: #141414;
+    background: #4ef3f3;
+}
+
+#workspaces button:hover {
+    color: #ffffff;
+    background: #4e4e4e;
+}
+
+#workspaces button.urgent {
+    background: #d03333;
+    color: #ffffff;
+}
+
+/* Mode */
+#mode {
+    padding: 0 6px;
+    color: #141414;
+    background: #d08c1b;
+}
+
+/* Window */
+#window {
+    padding: 0 6px;
+    color: #cecece;
+}
+
+/* Clock */
+#clock {
+    padding: 0 6px;
+    color: #cecece;
+    font-weight: bold;
+}
+
+/* System modules */
+#pulseaudio,
+#network,
+#battery,
+#battery#bat2,
+#language,
+#tray,
+#backlight,
+#idle_inhibitor,
+#mpd {
+    padding: 0 6px;
+    color: #cecece;
+}
+
+/* Tray */
+#tray {
+    margin-right: 4px;
+}
+
+/* Battery */
+#battery.charging {
+    color: #4edc4e;
+}
+
+@keyframes blink {
+    to {
+        background: #f3f34e;
+        color: #141414;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background: #d03333;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Network */
+#network.disconnected {
+    color: #d03333;
+}
+
+/* Idle inhibitor */
+#idle_inhibitor {
+    color: #cecece;
+    margin-right: 2px;
+    margin-left: 2px;
+}
+
+#idle_inhibitor.activated {
+    background: #1bd0d0;
+    color: #141414;
+    margin-right: 2px;
+    margin-left: 2px;
+}
+
+/* Power menu */
+#custom-powermenu {
+    color: #141414;
+    background: #d01bd0;
+    padding: 0 10px;
+    margin: 0;
+}

@@ -1,0 +1,8 @@
+width=500
+height=400
+location=center
+show=drun
+prompt=Run:
+allow_images=true
+insensitive=true
+hide_scroll=true

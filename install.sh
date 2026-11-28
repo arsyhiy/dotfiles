@@ -15,6 +15,8 @@ packages=(
     vim
 
     wl-clipboard
+    sway
+    waybar
     
     ncdu
     fzf
