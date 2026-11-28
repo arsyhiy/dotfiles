@@ -22,7 +22,6 @@
         "pulseaudio",
         "network",
         "battery",
-        "clock"
     ],
 
     "sway/mode": {
