@@ -5,12 +5,36 @@ set -u
 packages=(
     unzip
     curl
+    wget
     stow
+    build-essential
+
     emacs
     lazygit
     tmux
-    wl-clipboard
     vim
+
+    wl-clipboard
+    
+    ncdu
+    fzf
+    ripgrep
+    bat
+    fd-find
+    tealdeer
+    picom
+
+    vterm-dev
+    libvterm-dev
+    cmake
+    libtool-bin
+    texinfo
+
+    htop
+    btop
+    tree
+    file
+    shellcheck
 )
 
 log_file="packages.log"
@@ -35,8 +59,7 @@ if ! command -v flatpak >/dev/null 2>&1; then
     echo "Flatpak not found. Installing..."
 
     if ! sudo apt install -y flatpak; then
-        echo "flatpak failed" | tee -a "$log_file"
-    fi
+        echo "flatpak failed" | tee -a "$log_file" fi
 fi
 
 # Add Flathub

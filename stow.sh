@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-stow tmux zsh ghostty emacs
+stow tmux zsh ghostty emacs sway
