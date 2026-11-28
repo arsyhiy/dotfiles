@@ -1,4 +1,4 @@
- {
+{
     "layer": "top",
     "height": 32,
     "spacing": 4,
@@ -13,7 +13,9 @@
         "sway/scratchpad",
         "sway/window"
     ],
+
     "modules-center": ["clock"],
+
     "modules-right": [
         "sway/language",
         "pulseaudio",
@@ -62,23 +64,6 @@
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "   {:%H:%M}",
         "format-alt": "{:%Y-%m-%d}  "
-    },
-
-    "backlight": {
-        "device": "acpi_video1",
-        "scroll-step": 1,
-        "format": "{percent}% {icon}",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-        ]
     },
 
     "battery": {
